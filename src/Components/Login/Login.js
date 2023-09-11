@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="mx-auto flex w-full flex-col justify-center  sm:w-[350px]">
+      <div className="mx-auto flex w-full flex-col justify-center sm:w-[350px]">
         <div className="card w-96 bg-transparent border-purple-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
@@ -79,12 +79,30 @@ const Login = () => {
 
       <div className="mr-auto flex w-1/2 flex-col justify-center sm:w-[350px]">
         <div className="flex">
-          <img src={banner1} alt=""></img>
-          <img className="w-96" src={banner2} alt=""></img>
+          <img
+            className="w-full rounded-3xl pt-24 border-8 border-transparent"
+            src={banner1}
+            alt=""
+          ></img>
+
+          <img
+            className=" border-8 rounded-3xl border-transparent"
+            src={banner2}
+            alt=""
+          ></img>
         </div>
         <div className="flex">
-          <img src={banner3} alt=""></img>
-          <img src={banner4} alt=""></img>
+          <img
+            className="w-full rounded-3xl border-8 border-transparent"
+            src={banner3}
+            alt=""
+          ></img>
+
+          <img
+            className="w-96 rounded-3xl border-8 border-transparent pb-24"
+            src={banner4}
+            alt=""
+          ></img>
         </div>
       </div>
     </div>

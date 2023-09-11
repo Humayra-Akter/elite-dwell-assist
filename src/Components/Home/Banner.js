@@ -7,10 +7,10 @@ import banner3 from "../../images/maid.jpg";
 const Banner = () => {
   return (
     <div
-      style={{
-        background: `url(${banner})`,
-        backgroundSize: "cover",
-      }}
+      // style={{
+      //   background: `url(${banner})`,
+      //   backgroundSize: "cover",
+      // }}
       className="flex"
     >
       <div class=" py-7 carousel w-2/4">
