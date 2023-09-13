@@ -61,7 +61,7 @@ const Login = () => {
             <p className="text-center">
               <small className="font-semibold">
                 New to elite-dwell-assist?
-                <Link className="text-blue-700" to="/signup">
+                <Link className="text-blue-700" to="/register">
                   Create new account
                 </Link>
               </small>

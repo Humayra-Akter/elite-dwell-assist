@@ -5,6 +5,7 @@ import Navbar from "./Components/Shared/Navbar";
 import banner4 from "./images/serviceBG.jpg";
 import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
+import Register from "./Components/Login/Register";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <Footer></Footer>

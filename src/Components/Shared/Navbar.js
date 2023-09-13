@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = () => {
   return (
@@ -34,14 +35,40 @@ const Navbar = () => {
           </h1>
         </div>
         <div class="navbar-end">
-          <button class="btn btn-ghost text-sm font-sans">Services</button>
+          {/* <button class="btn btn-ghost text-sm font-sans">Services</button>
           <button class="btn btn-ghost text-sm font-sans">
             Appliance-repair
-          </button>
-          <button class="btn btn-ghost text-sm font-sans">
+          </button> */}
+          {/* <button class="btn btn-ghost text-sm font-sans">
             <Link to="/login">Login</Link>
+          </button> */}
+          <Link to="/login">
+            <button class="btn btn-ghost w-100 h-100 btn-circle">
+              <div class="indicator">
+                <svg
+                  viewBox="0 0 900 1000"
+                  fill="currentColor"
+                  height="1em"
+                  width="1em"
+                >
+                  <path d="M800 50c28 0 51.667 9.667 71 29s29 43 29 71v700c0 26.667-9.667 50-29 70s-43 30-71 30H350c-26.667 0-49.667-10-69-30s-29-43.333-29-70V750h98v100h450V150H350v150h-98V150c0-28 9.667-51.667 29-71s42.333-29 69-29h450M450 720V600H0V450h450V330l200 194-200 196" />
+                </svg>
+              </div>
+            </button>
+          </Link>
+          <button class="btn btn-ghost w-100 h-100 btn-circle">
+            <div class="indicator">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                height="1em"
+                width="1em"
+              >
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M21 8a2 2 0 012 2v4a2 2 0 01-2 2h-1.062A8.001 8.001 0 0112 23v-2a6 6 0 006-6V9A6 6 0 106 9v7H3a2 2 0 01-2-2v-4a2 2 0 012-2h1.062a8.001 8.001 0 0115.876 0H21zM7.76 15.785l1.06-1.696A5.972 5.972 0 0012 15a5.972 5.972 0 003.18-.911l1.06 1.696A7.963 7.963 0 0112 17a7.963 7.963 0 01-4.24-1.215z" />
+              </svg>
+            </div>
           </button>
-
           <div class="dropdown">
             <button>
               <label tabindex="0" class="btn btn-ghost btn-circle">
@@ -75,11 +102,11 @@ const Navbar = () => {
                     <Link to="/about">About</Link>
                   </button>
                 </li>
-                {/* <li>
+                <li>
                   <button>
-                    <Link to="/">Portfolio</Link>
+                    <Link to="/register">Register</Link>
                   </button>
-                </li> */}
+                </li>
               </ul>
             </button>
           </div>
