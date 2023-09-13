@@ -4,6 +4,7 @@ import Footer from "./Components/Shared/Footer";
 import Navbar from "./Components/Shared/Navbar";
 import banner4 from "./images/serviceBG.jpg";
 import Login from "./Components/Login/Login";
+import About from "./Components/About/About";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer></Footer>
     </div>
