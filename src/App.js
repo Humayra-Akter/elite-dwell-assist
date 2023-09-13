@@ -6,6 +6,7 @@ import banner4 from "./images/serviceBG.jpg";
 import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
+import Service from "./Components/Services/Service";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/service" element={<Service />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <Footer></Footer>

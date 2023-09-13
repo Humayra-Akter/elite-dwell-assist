@@ -72,13 +72,31 @@ const Register = () => {
                   </span>
                 </label>
                 <input
-                  type="contact"
+                  type="text"
                   placeholder="Your Contact number"
                   //   value={contact}
                   //   onChange={(e) => setContact(e.target.value)}
                   className="input input-bordered w-full "
                   required
                 />
+              </div>
+              {/* Gender field */}
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text text-left text-blue-700 font-bold text-xs">
+                    Gender
+                  </span>
+                </label>
+                <div className="input text-left w-full ">
+                  <select className="select" required>
+                    <option disabled selected>
+                      Select your gender
+                    </option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
               </div>
               {/* register as */}
               <div className="form-control">
@@ -87,7 +105,7 @@ const Register = () => {
                     Register as
                   </span>
                 </label>
-                <div className="input input-bordered w-full ">
+                <div className="input text-left w-full ">
                   <select className="select" onChange={handleRoleChange}>
                     <option disabled selected>
                       Choose your Role
@@ -99,7 +117,6 @@ const Register = () => {
                   </select>
                 </div>
               </div>
-
               {/* Conditional rendering of additional fields based on selected role */}
               {selectedRole === "Customer" && (
                 <div className="form-control w-full">
@@ -146,7 +163,6 @@ const Register = () => {
                   </div>
                 </div>
               )}
-
               {selectedRole === "Driver" && (
                 <div>
                   <div className="form-control w-full">
