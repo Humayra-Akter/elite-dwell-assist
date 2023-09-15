@@ -1,10 +1,12 @@
 import React from "react";
-import MaidService from "./Maid/MaidService";
+// import MaidService from "./Maid/MaidService";
+import Babysitter from "./Babysitter/Babysitter";
 
 const Service = () => {
   return (
     <div>
-      <MaidService></MaidService>
+      {/* <MaidService></MaidService> */}
+      <Babysitter></Babysitter>
     </div>
   );
 };

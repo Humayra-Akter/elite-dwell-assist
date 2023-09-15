@@ -1,8 +1,7 @@
 import React from "react";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
-import { TypeAnimation } from "react-type-animation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Navbar = () => {
   return (
@@ -18,20 +17,7 @@ const Navbar = () => {
             style={{ fontFamily: "algerian" }}
             className="text-4xl font-bold text-purple-950"
           >
-            <TypeAnimation
-              sequence={[
-                "Elite-Dwell-Assist",
-                2000,
-                "We serve for you",
-                2000,
-                "We ensure Employment for you",
-                2000,
-              ]}
-              speed={50}
-              className="text-blue-900"
-              wrapper="span"
-              repeat={Infinity}
-            />
+            Elite-Dwell-Assist
           </h1>
         </div>
         <div class="navbar-end">

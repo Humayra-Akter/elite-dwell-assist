@@ -3,6 +3,7 @@ import banner from "../../images/bannerBG.jpg";
 import banner1 from "../../images/babysitter.jpg";
 import banner2 from "../../images/driver.jpg";
 import banner3 from "../../images/maid.jpg";
+import { TypeAnimation } from "react-type-animation";
 
 const Banner = () => {
   return (
@@ -50,10 +51,23 @@ const Banner = () => {
       </div>
       <div className="mr-auto flex flex-col justify-center">
         <h1
-          className="text-4xl font-black text-purple-950  px-7"
           style={{ fontFamily: "algerian" }}
+          className="text-4xl ml-7 font-bold text-purple-950"
         >
-          ELITE DWELL ASSIST
+          <TypeAnimation
+            sequence={[
+              "Elite-Dwell-Assist",
+              2000,
+              "We serve for you",
+              2000,
+              "We ensure Employment for you",
+              2000,
+            ]}
+            speed={50}
+            className="text-blue-900"
+            wrapper="span"
+            repeat={Infinity}
+          />
         </h1>
         <p
           style={{ fontFamily: "abadi" }}

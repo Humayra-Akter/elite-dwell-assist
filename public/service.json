@@ -1,0 +1,352 @@
+[
+  {
+    "baby_sitter_id": "1",
+    "name": "Mayesha Tasnim",
+    "email": "mayesha@gmail.com",
+    "pass": "mayesha123",
+    "phone": "01111111111",
+    "img": "/images/profilePics/1.jpg",
+    "experience": 24,
+    "age_group_preferences": ["infants", "toddlers", "school-age"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["afternoon"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["evening"]
+      }
+    ],
+    "location": "Dhanmondi",
+    "nid_no": "123456789011",
+    "address": "123, Babysitter Lane, Dhanmondi",
+    "dob": "1995-05-20",
+    "gender": "female",
+    "education": "HSC pass",
+    "certifications": ["CPR", "First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["arts and crafts", "storytelling"],
+    "salary": "10000"
+  },
+  {
+    "baby_sitter_id": "2",
+    "name": "Humayra Akter",
+    "email": "humayra@gmail.com",
+    "pass": "humayra123",
+    "phone": "01222222222",
+    "img": "/images/profilePics/2.jpg",
+    "experience": 23,
+    "age_group_preferences": ["infants", "toddlers", "school-age"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["afternoon"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["evening"]
+      }
+    ],
+    "location": "Gulshan",
+    "nid_no": "123456789012",
+    "address": "165, dark ally, Gulshan",
+    "dob": "1996-04-25",
+    "gender": "female",
+    "education": "HSC pass",
+    "certifications": ["CPR", "First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["arts and crafts", "storytelling"],
+    "salary": "20000"
+  },
+  {
+    "baby_sitter_id": "3",
+    "name": "Nila jahan",
+    "email": "nila@gmail.com",
+    "pass": "nailaa123",
+    "phone": "01333333333",
+    "img": "/images/profilePics/3.jpg",
+    "experience": 20,
+    "age_group_preferences": ["infants", "toddlers"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "evening"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning", "evening"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning", "evening"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["afternoon"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["evening"]
+      }
+    ],
+    "location": "Banani",
+    "nid_no": "123456789013",
+    "address": "56/a, Babysitter Lane, Banani",
+    "dob": "1999-05-20",
+    "gender": "female",
+    "education": "BSC pass",
+    "certifications": ["CPR", "First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["storytelling"],
+    "salary": "5000"
+  },
+  {
+    "baby_sitter_id": "4",
+    "name": "Jhuma Begum",
+    "email": "jhuma@gmail.com",
+    "pass": "jhuma123",
+    "phone": "01444444444",
+    "img": "/images/profilePics/4.jpg",
+    "experience": 30,
+    "age_group_preferences": ["infants", "toddlers"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["evening", "afternoon"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["evening", "afternoon"]
+      }
+    ],
+    "location": "Mirpur",
+    "nid_no": "123456789014",
+    "address": "471, Babysitter Lane, Mirpur-12",
+    "dob": "2000-08-10",
+    "gender": "female",
+    "education": "HSC pass",
+    "certifications": ["CPR", "First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["arts and crafts", "storytelling"],
+    "salary": "20000"
+  },
+  {
+    "baby_sitter_id": "5",
+    "name": "Halima Akter",
+    "email": "halima@gmail.com",
+    "pass": "halima123",
+    "phone": "01555555555 ",
+    "img": "/images/profilePics/5.jpg",
+    "experience": 14,
+    "age_group_preferences": ["toddlers", "school-age"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["evening"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["afternoon"]
+      }
+    ],
+    "location": "Banani",
+    "nid_no": "123456789015",
+    "address": "123, raod-13, Banani",
+    "dob": "2001-05-20",
+    "gender": "female",
+    "education": "HSC pass",
+    "certifications": ["CPR", "First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["arts and crafts", "storytelling"],
+    "salary": "10000"
+  },
+  {
+    "baby_sitter_id": "6",
+    "name": "Khatima Begum",
+    "email": "khatima@gmail.com",
+    "pass": "khatima123",
+    "phone": "01666666666",
+    "img": "/images/profilePics/6.jpg",
+    "experience": 24,
+    "age_group_preferences": ["toddlers", "school-age"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning", "evening"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning", "evening"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["evening"]
+      }
+    ],
+    "location": "Motijheel",
+    "nid_no": "123456789016",
+    "address": "123, Babysitter Villa, Motijheel",
+    "dob": "1995-10-22",
+    "gender": "female",
+    "education": "HSC pass",
+    "certifications": ["First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["arts and crafts"],
+    "salary": "11000"
+  },
+  {
+    "baby_sitter_id": "7",
+    "name": "Roza Akter",
+    "email": "roza@gmail.com",
+    "pass": "roza123",
+    "phone": "01777777777",
+    "img": "/images/profilePics/7.jpg",
+    "experience": 12,
+    "age_group_preferences": ["infants", "toddlers"],
+    "availability": [
+      {
+        "day": "Sunday",
+        "slots": ["morning", "afternoon", "evening"]
+      },
+      {
+        "day": "Monday",
+        "slots": ["morning", "afternoon", "evening"]
+      },
+      {
+        "day": "Tuesday",
+        "slots": ["morning", "afternoon"]
+      },
+      {
+        "day": "Wednesday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Thursday",
+        "slots": ["morning"]
+      },
+      {
+        "day": "Friday",
+        "slots": ["afternoon", "evening"]
+      },
+      {
+        "day": "Saturday",
+        "slots": ["evening"]
+      }
+    ],
+    "location": "Banasree",
+    "nid_no": "123456789017",
+    "address": "22/a, road-12, Banasree",
+    "dob": "1995-05-20",
+    "gender": "female",
+    "education": "HSC pass",
+    "certifications": ["CPR", "First Aid"],
+    "languages_spoken": ["English", "Bengali"],
+    "special_skills": ["arts and crafts", "storytelling"],
+    "salary": "13000"
+  }
+]
