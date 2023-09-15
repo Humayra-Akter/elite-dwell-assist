@@ -39,6 +39,7 @@
       }
     ],
     "location": "Dhanmondi",
+    "religion": "Muslim",
     "nid_no": "123456789011",
     "address": "123, Babysitter Lane, Dhanmondi",
     "dob": "1995-05-20",
@@ -89,6 +90,7 @@
       }
     ],
     "location": "Gulshan",
+    "religion": "Muslim",
     "nid_no": "123456789012",
     "address": "165, dark ally, Gulshan",
     "dob": "1996-04-25",
@@ -139,6 +141,7 @@
       }
     ],
     "location": "Banani",
+    "religion": "Muslim",
     "nid_no": "123456789013",
     "address": "56/a, Babysitter Lane, Banani",
     "dob": "1999-05-20",
@@ -189,6 +192,7 @@
       }
     ],
     "location": "Mirpur",
+    "religion": "Muslim",
     "nid_no": "123456789014",
     "address": "471, Babysitter Lane, Mirpur-12",
     "dob": "2000-08-10",
@@ -239,6 +243,7 @@
       }
     ],
     "location": "Banani",
+    "religion": "Muslim",
     "nid_no": "123456789015",
     "address": "123, raod-13, Banani",
     "dob": "2001-05-20",
@@ -289,6 +294,7 @@
       }
     ],
     "location": "Motijheel",
+    "religion": "Muslim",
     "nid_no": "123456789016",
     "address": "123, Babysitter Villa, Motijheel",
     "dob": "1995-10-22",
@@ -339,6 +345,7 @@
       }
     ],
     "location": "Banasree",
+    "religion": "Muslim",
     "nid_no": "123456789017",
     "address": "22/a, road-12, Banasree",
     "dob": "1995-05-20",
