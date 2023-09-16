@@ -8,7 +8,7 @@ const MaidRegistrationForm = () => {
   //   const [selectedRole, setSelectedRole] = useState("");
   const [selectedExperience, setSelectedExperience] = useState([]);
   const [selectedExpertise, setSelectedExpertise] = useState([]);
-
+  const [selectedSalaries, setSelectedSalaries] = useState({});
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
 
@@ -22,16 +22,31 @@ const MaidRegistrationForm = () => {
     }, 0);
   }
 
+  const handleExpertiseChange = (selectedOptions) => {
+    setSelectedExpertise(selectedOptions);
+
+    // Initialize selected salaries for the newly selected expertise
+    const newSelectedSalaries = {};
+    selectedOptions.forEach((expertise) => {
+      newSelectedSalaries[expertise.value] =
+        expertiseSalaries[expertise.value][0];
+    });
+    setSelectedSalaries(newSelectedSalaries);
+  };
+
+  const handleSalaryChange = (expertise, salary) => {
+    setSelectedSalaries((prevSelectedSalaries) => ({
+      ...prevSelectedSalaries,
+      [expertise]: salary,
+    }));
+  };
+
   const handleExperienceChange = (selectedOptions) => {
     setSelectedExperience(selectedOptions);
   };
 
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
-  };
-
-  const handleExpertise = (selectedOptions) => {
-    setSelectedExpertise(selectedOptions);
   };
 
   const handleAvailability = (selectedOptions) => {
@@ -72,21 +87,20 @@ const MaidRegistrationForm = () => {
   ];
 
   const expertiseOptions = [
-    { value: "mopping", label: "mopping.........1000/-" },
-    { value: "cooking", label: "cooking.......2000/-" },
-    { value: "cloth_washing", label: "cloth_washing......1500/-" },
-    { value: "sweeping", label: "sweeping.......500/-" },
-    { value: "dish_washing", label: "dish_washing........1500/-" },
+    { value: "mopping", label: "Mopping" },
+    { value: "cooking", label: "Cooking" },
+    { value: "cloth_washing", label: "Cloth Washing" },
+    { value: "sweeping", label: "Sweeping" },
+    { value: "dish_washing", label: "Dish Washing" },
   ];
 
   const expertiseSalaries = {
-    mopping: 1000,
-    cooking: 2000,
-    cloth_washing: 1500,
-    sweeping: 500,
-    dish_washing: 1500,
+    mopping: [1000, 1500, 1200],
+    cooking: [2000, 1800, 2200],
+    cloth_washing: [1500, 1400, 1600],
+    sweeping: [500, 600, 550],
+    dish_washing: [1500, 1600, 1550],
   };
-
   return (
     <div className=" py-16">
       <div
@@ -216,25 +230,44 @@ const MaidRegistrationForm = () => {
                     }}
                   />
                 </div>
-
                 {/*expertise*/}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      Expertise{bengaliLabels.expertise}
+                      Expertise
                     </span>
                   </label>
                   <MultiSelect
                     options={expertiseOptions}
                     value={selectedExpertise}
-                    onChange={setSelectedExpertise}
+                    onChange={handleExpertiseChange}
                     labelledBy="Select expertise"
                   />
                 </div>
-                <span className="text-center text-blue-700 font-bold text-md">
-                  Total Salary: {calculateTotalCost(selectedExpertise)}
-                </span>
-
+                <div className="form-control w-full">
+                  {selectedExpertise.map((expertise) => (
+                    <div key={expertise.value} className="py-2">
+                      <label className="label">
+                        <span className="label-text text-blue-700 font-bold text-md">
+                          {expertise.label} Salary
+                        </span>
+                      </label>
+                      <select
+                        value={selectedSalaries[expertise.value]}
+                        onChange={(e) =>
+                          handleSalaryChange(expertise.value, e.target.value)
+                        }
+                        className="input input-bordered w-full"
+                      >
+                        {expertiseSalaries[expertise.value].map((salary) => (
+                          <option key={salary} value={salary}>
+                            {salary} /-
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                </div>
                 {/* availability */}
                 <div className="form-control w-full">
                   <label className="label">
