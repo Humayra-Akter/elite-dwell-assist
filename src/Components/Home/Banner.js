@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import banner from "../../images/bannerBG.jpg";
+import React, { useEffect, useRef, useState } from "react";
 import banner1 from "../../images/babysitter.jpg";
 import banner2 from "../../images/driver.jpg";
 import banner3 from "../../images/maid.jpg";
 import { TypeAnimation } from "react-type-animation";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Banner = () => {
+  const images = [banner1, banner2, banner3];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div
       // style={{
@@ -14,40 +26,17 @@ const Banner = () => {
       // }}
       className="container w-full p-16 gap-14 flex-col items-center justify-center grid grid-cols-2 "
     >
-      <div class="carousel border-purple-400 border-2 rounded-3xl">
-        <div id="slide1" class="carousel-item relative w-full">
-          <img src={banner1} alt="" class="w-full" />
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide3" class="btn btn-circle">
-              ❮
-            </a>
-            <a href="#slide2" class="btn btn-circle">
-              ❯
-            </a>
+      <div className="carousel w-full h-96 border-purple-400 border-2 rounded-3xl relative">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`carousel-item absolute w-full transition-opacity duration-1000 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img src={image} alt="" className="w-full h-auto" />
           </div>
-        </div>
-        <div id="slide2" class="carousel-item relative w-full">
-          <img src={banner2} alt="" class="w-full" />
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide1" class="btn btn-circle">
-              ❮
-            </a>
-            <a href="#slide3" class="btn btn-circle">
-              ❯
-            </a>
-          </div>
-        </div>
-        <div id="slide3" class="carousel-item relative w-full">
-          <img src={banner3} alt="" class="w-full" />
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide2" class="btn btn-circle">
-              ❮
-            </a>
-            <a href="#slide1" class="btn btn-circle">
-              ❯
-            </a>
-          </div>
-        </div>
+        ))}
       </div>
       <div className="mr-auto flex flex-col justify-center">
         <h1
@@ -71,7 +60,7 @@ const Banner = () => {
         </h1>
         <p
           style={{ fontFamily: "abadi" }}
-          className="text-justify font-serif text-base p-7"
+          className="text-justify text-xl font-serif p-7"
         >
           <li>
             <strong>Elite:</strong> Signifies a premium and high-quality
