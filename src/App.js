@@ -7,8 +7,15 @@ import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
 import Service from "./Components/Services/Service";
+import { useState } from "react";
 
 function App() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
   return (
     <div
       style={{
@@ -16,7 +23,7 @@ function App() {
         backgroundSize: "cover",
       }}
     >
-      <Navbar></Navbar>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

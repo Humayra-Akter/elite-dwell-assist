@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
-
 
 const Navbar = () => {
   return (
@@ -12,14 +11,14 @@ const Navbar = () => {
             <img className="w-20" src={logo} alt="" />
           </Link>
         </div>
-        <div className="navbar-center">
+        {/* <div className="navbar-center">
           <h1
             style={{ fontFamily: "algerian" }}
             className="text-4xl font-bold text-purple-950"
           >
             Elite-Dwell-Assist
           </h1>
-        </div>
+        </div> */}
         <div class="navbar-end">
           {/* <button class="btn btn-ghost text-sm font-sans">Services</button>
           <button class="btn btn-ghost text-sm font-sans">
@@ -57,6 +56,7 @@ const Navbar = () => {
               </div>
             </button>
           </Link>
+
           <div class="dropdown">
             <button>
               <label tabindex="0" class="btn btn-ghost btn-circle">
@@ -84,12 +84,7 @@ const Navbar = () => {
                   <button>
                     <Link to="/">Homepage</Link>
                   </button>
-                </li>
-                <li>
-                  <button>
-                    <Link to="/about">About</Link>
-                  </button>
-                </li>
+                </li>{" "}
                 <li>
                   <button>
                     <Link to="/register">Register</Link>
