@@ -50,6 +50,13 @@ const Login = () => {
                   required
                 />
               </div>
+              <p className="text-left">
+                <small className="font-semibold">
+                  <Link className="text-purple-700" to="/register">
+                    Forgot password?
+                  </Link>
+                </small>
+              </p>
               <button
                 className="btn w-full btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent "
                 type="submit"
@@ -66,13 +73,13 @@ const Login = () => {
                 </Link>
               </small>
             </p>
-            <div className="divider">OR</div>
+            {/* <div className="divider">OR</div>
             <button
               //   onClick={() => signInWithGoogle()}
               className="btn w-full btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent "
             >
               Continue with Google
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
