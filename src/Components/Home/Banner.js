@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import banner1 from "../../images/babysitter.jpg";
 import banner2 from "../../images/driver.jpg";
 import banner3 from "../../images/maid.jpg";
+import About from "../About/About";
 import { TypeAnimation } from "react-type-animation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,7 +39,7 @@ const Banner = () => {
           </div>
         ))}
       </div>
-      <div className="mr-auto flex flex-col justify-center">
+      <div className="mr-auto flex flex-col justify-center items-center">
         <h1
           style={{ fontFamily: "algerian" }}
           className="text-4xl ml-7 font-bold text-purple-950"
@@ -73,11 +74,8 @@ const Banner = () => {
             <strong>Assist:</strong> Highlights the support and assistance
             provided to both customers and service providers.
           </li>
-          The name <strong>"EliteDwell Assist"</strong> suggests a sophisticated
-          and top-tier platform that facilitates assistance and connection for
-          homes, while also fostering self-employment opportunities for service
-          providers.
         </p>
+        <About></About>
       </div>
     </div>
   );

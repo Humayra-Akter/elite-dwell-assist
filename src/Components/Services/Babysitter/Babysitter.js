@@ -10,8 +10,8 @@ const Babysitter = () => {
     fetch("service.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setBabysitters(data);
+        const babysitterData = data.babysitter;
+        setBabysitters(babysitterData);
       });
   }, []);
 

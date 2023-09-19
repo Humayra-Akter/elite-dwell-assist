@@ -4,9 +4,9 @@ const BabysitterCard = ({ babysitter, setBookBaby }) => {
   const { img, name, location, gender, salary } = babysitter;
   return (
     <div>
-      <div class="card w-96 bg-transparent border-2 shadow-xl">
+      <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
         <figure class="px-10 pt-7">
-          <img src={img} alt="Babysitter" class="rounded-xl h-72 w-80" />
+          <img src={img} alt="Babysitter" class="rounded-xl h-52 w-52" />
         </figure>
         <div class="card-body items-center text-center">
           <h2 class="card-title text-purple-900 font-bold">{name}</h2>

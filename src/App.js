@@ -7,7 +7,10 @@ import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
 import Service from "./Components/Services/Service";
+import MaidPerDay from "./Components/Services/Maid/MaidPerDay";
+import Babysitter from "./Components/Services/Babysitter/Babysitter";
 import { useState } from "react";
+import Error from "./Components/Error/Error";
 
 function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -29,7 +32,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/maidPerDay" element={<MaidPerDay />} />
+        <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<Error />} />
       </Routes>
       <Footer></Footer>
     </div>

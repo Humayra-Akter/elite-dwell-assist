@@ -12,9 +12,15 @@ const MaidPerDay = () => {
       >
         MAID PER DAY
       </h1>
-      <MaidPerDayCalender></MaidPerDayCalender>
+      <div className="grid grid-cols-2 gap-8">
+        <div>
+          <MaidPerDayCalender></MaidPerDayCalender>
+        </div>
+        <div>
+          <MaidServicePerDay></MaidServicePerDay>
+        </div>
+      </div>
       <MaidPerDayAddress></MaidPerDayAddress>
-      <MaidServicePerDay></MaidServicePerDay>
     </div>
   );
 };
