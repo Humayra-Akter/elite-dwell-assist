@@ -7,9 +7,7 @@
       "pass": "halima123",
       "phone": "01456170233",
       "img": "/images/maid/1.jpg",
-      "experience": {
-        "months": 50
-      },
+      "experience": 50,
       "expertise": [
         "mopping",
         "cooking",
@@ -37,9 +35,7 @@
       "pass": "lima123",
       "phone": "01757259623",
       "img": "/images/maid/2.jpg",
-      "experience": {
-        "months": 72
-      },
+      "experience": 72,
       "expertise": ["mopping", "cloth_washing", "sweeping", "dish_washing"],
       "salary": ["1000", "1500", "800", "1500"],
       "availability": ["08.00 AM - 11.00 AM", "05.00 PM - 08.00 PM"],
@@ -58,9 +54,7 @@
       "pass": "rabeya123",
       "phone": "01678170233",
       "img": "/images/maid/3.jpg",
-      "experience": {
-        "months": 50
-      },
+      "experience": 50,
       "task": ["cloth_washing", "dish_washing"],
       "salary": ["1500", "1500"],
       "availability": ["08.00 AM - 11.00 AM"],
@@ -79,9 +73,7 @@
       "pass": "afia123",
       "phone": "01965170233",
       "img": "/images/maid/4.jpg",
-      "experience": {
-        "months": 72
-      },
+      "experience": 72,
       "task": ["cooking"],
       "salary": ["4000"],
       "availability": ["08.00 AM - 11.00 AM"],
@@ -100,9 +92,7 @@
       "pass": "sara123",
       "phone": "01301495769",
       "img": "/images/maid/5.jpg",
-      "experience": {
-        "months": 5
-      },
+      "experience": 5,
       "task": ["mopping", "cloth_washing", "sweeping", "dish_washing"],
       "salary": ["1000", "1000", "500", "1000"],
       "availability": ["08.00 AM - 11.00 AM", "02.00 PM - 05.00 PM"],
@@ -121,9 +111,7 @@
       "pass": "mini123",
       "phone": "01301495100",
       "img": "/images/maid/6.jpg",
-      "experience": {
-        "months": 50
-      },
+      "experience": 50,
       "task": ["cloth_washing", "dish_washing"],
       "salary": ["1000", "1000"],
       "availability": [
@@ -146,9 +134,7 @@
       "pass": "minikkhi123",
       "phone": "01789695100",
       "img": "/images/maid/7.jpg",
-      "experience": {
-        "months": 80
-      },
+      "experience": 80,
       "task": ["cloth_washing", "dish_washing"],
       "salary": ["1000", "1000"],
       "availability": ["08.00 AM - 11.00 AM", "02.00 PM - 05.00 PM"],
@@ -169,9 +155,7 @@
       "pass": "hasan123",
       "phone": "01428596411",
       "img": "/images/driver/1.jpg",
-      "experience": {
-        "months": 112
-      },
+      "experience": 112,
       "vehicle_type": "car",
       "salary": "15000",
       "location": ["Dhanmondi", "Mohammadpur"],
@@ -189,9 +173,7 @@
       "pass": "monir123",
       "phone": "01789106411",
       "img": "/images/driver/2.jpg",
-      "experience": {
-        "months": 15
-      },
+      "experience": 15,
       "vehicle_type": "car",
       "salary": "20000",
       "location": ["Gulshan", "Savar"],
@@ -209,9 +191,7 @@
       "pass": "opar123",
       "phone": "01757259411",
       "img": "/images/driver/3.jpg",
-      "experience": {
-        "months": 32
-      },
+      "experience": 32,
       "vehicle_type": "car",
       "salary": "12000",
       "location": ["MOtijheel", "Uttara"],
@@ -230,9 +210,7 @@
       "pass": "istiak123",
       "phone": "01767694884",
       "img": "/images/driver/4.jpg",
-      "experience": {
-        "months": 112
-      },
+      "experience": 112,
       "vehicle_type": "car",
       "salary": "20000",
       "location": ["Mirpur", "Banani"],
@@ -612,9 +590,7 @@
       "pass": "shakil123",
       "phone": "01567899665",
       "img": "/images/vanTruck/1.jpg",
-      "experience": {
-        "months": 90
-      },
+      "experience": 90,
       "vehicle_type": ["truck", "van"],
       "availability": [
         {
@@ -662,9 +638,7 @@
       "pass": "ajij123",
       "phone": "01566159123",
       "img": "/images/vanTruck/2.jpg",
-      "experience": {
-        "months": 56
-      },
+      "experience": 56,
       "vehicle_type": ["van"],
       "availability": [
         {
@@ -719,9 +693,7 @@
       "pass": "raju123",
       "phone": "01715176041",
       "img": "/images/vanTruck/3.jpg",
-      "experience": {
-        "months": 45
-      },
+      "experience": 45,
       "vehicle_type": ["truck"],
       "availability": [
         {
@@ -769,9 +741,7 @@
       "pass": "sabbir123",
       "phone": "01715149041",
       "img": "/images/vanTruck/4.jpg",
-      "experience": {
-        "months": 45
-      },
+      "experience": 45,
       "vehicle_type": ["truck", "van"],
       "availability": [
         {
@@ -819,9 +789,7 @@
       "pass": "raju123",
       "phone": "01714996041",
       "img": "/images/vanTruck/5.jpg",
-      "experience": {
-        "months": 55
-      },
+      "experience": 55,
       "vehicle_type": ["truck"],
       "availability": [
         {

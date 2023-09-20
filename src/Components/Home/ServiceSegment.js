@@ -16,7 +16,7 @@ const ServiceSegment = () => {
       </h1>
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
+          <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <figure class="px-10 pt-10">
               <img src={banner1} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -35,7 +35,7 @@ const ServiceSegment = () => {
         </div>
 
         <div className="py-24">
-          <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
+          <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <figure class="px-10 pt-10">
               <img src={banner2} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -62,7 +62,7 @@ const ServiceSegment = () => {
               <p>Steering You Towards Safe and Reliable Transportation.</p>
               <div class="card-actions pt-9">
                 <Link to="/driverPerDay">
-                  <button className="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent">
+                  <button className="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent">
                     Know More
                   </button>
                 </Link>

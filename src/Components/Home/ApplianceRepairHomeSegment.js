@@ -15,7 +15,7 @@ const ApplianceRepairHomeSegment = () => {
       </h1>
       <div className="grid grid-cols-4 gap-4">
         <div>
-          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-l from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
+          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <figure class="px-3 pt-3">
               <img src={banner1} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -32,7 +32,7 @@ const ApplianceRepairHomeSegment = () => {
           </div>
         </div>
         <div className="py-24">
-          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-l from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
+          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <figure class="px-3 pt-3">
               <img src={banner2} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -48,7 +48,7 @@ const ApplianceRepairHomeSegment = () => {
           </div>
         </div>
         <div>
-          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-l from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
+          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <figure class="px-3 pt-3">
               <img src={banner3} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -66,7 +66,7 @@ const ApplianceRepairHomeSegment = () => {
           </div>
         </div>
         <div className="py-24">
-          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-l from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
+          <div class="card w-80 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <figure class="px-3 pt-3">
               <img src={banner4} alt="Babysitter" class="rounded-xl" />
             </figure>

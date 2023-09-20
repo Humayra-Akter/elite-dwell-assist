@@ -14,6 +14,7 @@ import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
 import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
 import { useState } from "react";
 import Error from "./Components/Error/Error";
+import ApplianceRepair from "./Components/Services/ApplianceRepair/ApplianceRepair";
 
 function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -39,7 +40,8 @@ function App() {
         <Route path="/maidPerMonth" element={<MaidPerMonth />} />
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
-        <Route path="/driverPerMonth" element={<DriverPerMonth />} />
+        <Route path="/driverPerMonth" element={<DriverPerMonth />} />{" "}
+        <Route path="/tvRepair" element={<ApplianceRepair />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />
       </Routes>
