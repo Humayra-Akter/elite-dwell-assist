@@ -24,7 +24,7 @@ const ServiceSegment = () => {
               <h2 class="card-title text-purple-900 font-bold">Maid</h2>
               <p>Your Home, Our Care: Where Cleanliness Meets Excellence!</p>
               <div class="card-actions pt-9">
-                <Link to="/maidPerday">
+                <Link to="/maidPerMonth">
                   <button className="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent">
                     Know More
                   </button>
@@ -61,7 +61,7 @@ const ServiceSegment = () => {
               <h2 class="card-title text-purple-900 font-bold">Driver</h2>
               <p>Steering You Towards Safe and Reliable Transportation.</p>
               <div class="card-actions pt-9">
-                <Link to="/driverPerDay">
+                <Link to="/driverPerMonth">
                   <button className="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent">
                     Know More
                   </button>
