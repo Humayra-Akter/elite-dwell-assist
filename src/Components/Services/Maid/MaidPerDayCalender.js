@@ -30,7 +30,7 @@ const MaidPerDayCalender = () => {
 
   return (
     <div className="mx-16 ">
-      <div className="flex  gap-5">
+      <div >
         <div className="time-slot-container pt-28">
           <strong className="text-lg font-bold text-justify text-purple-900">
             Select a Time Slot :
