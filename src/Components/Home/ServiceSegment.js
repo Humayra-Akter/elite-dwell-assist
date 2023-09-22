@@ -2,7 +2,6 @@ import React from "react";
 import banner2 from "../../images/babysitter.jpg";
 import banner3 from "../../images/driver.jpg";
 import banner1 from "../../images/maid.jpg";
-import banner from "../../images/bg.jpg";
 import { Link } from "react-router-dom";
 
 const ServiceSegment = () => {
@@ -10,7 +9,7 @@ const ServiceSegment = () => {
     <div className=" px-20 py-24">
       <h1
         style={{ fontFamily: "algerian" }}
-        className="text-3xl font-bold text-purple-950 text-center pb-20"
+        className="text-3xl font-bold text-purple-950 text-center pb-10"
       >
         Services
       </h1>

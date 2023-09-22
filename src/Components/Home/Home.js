@@ -3,14 +3,15 @@ import Banner from "./Banner";
 import ServiceSegment from "./ServiceSegment";
 import ApplianceRepairHomeSegment from "./ApplianceRepairHomeSegment";
 import Form from "./Form";
+import Footer from "../Shared/Footer";
 
 const Home = () => {
   return (
-    <div>
+    <div >
       <Banner></Banner>
-      <ServiceSegment></ServiceSegment>
+      {/* <ServiceSegment></ServiceSegment>
       <ApplianceRepairHomeSegment></ApplianceRepairHomeSegment>
-      <Form></Form>
+      <Form></Form> */}
     </div>
   );
 };

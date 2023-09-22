@@ -8,14 +8,14 @@ const About = () => {
         {/* <!-- Page content here --> */}
         <label
           for="my-drawer-4"
-          class="drawer-button btn btn-sm text-xs w-full border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+          class="drawer-button btn btn-sm rounded-full text-xs w-1/3 border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
         >
           About US
         </label>
       </div>
       <div class="drawer-side">
         <label for="my-drawer-4" class="drawer-overlay"></label>
-        <div class="menu p-4 w-96 min-h-full bg-purple-200 text-base-content">
+        <div class="menu p-4 w-96 min-h-full bg-purple-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
           <div>
             <h1
@@ -101,18 +101,7 @@ const About = () => {
                 Dashboard and Analytics:
               </strong>
               Offering user and service provider dashboards to track bookings,
-              earnings, and performance. <br />
-              <strong className="text-lg font-bold text-justify text-purple-900">
-                Privacy and Security:
-              </strong>
-              Implement robust security measures to protect user data and
-              payment information. Allow users to control their privacy settings
-              and choose what information is visible. <br />
-              <strong className="text-lg font-bold text-justify text-purple-900">
-                Admin Panel:
-              </strong>
-              Developing an admin panel to manage accounts, profiles, reviews,
-              and platform functionality.
+              earnings, and performance.
             </p>
             <h1
               className="text-xl font-black text-purple-900 text-center pt-9 "

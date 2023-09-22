@@ -17,7 +17,7 @@ const Form = () => {
   }, []);
 
   return (
-    <div className="container w-full mt-32 mb-44 mx-28 gap-14 flex-col items-center justify-center grid grid-cols-2 ">
+    <div className="container w-full mt-32 gap-14 flex-col items-center justify-center grid grid-cols-2 ">
       <div className="carousel w-full h-96 border-purple-400 border-2 rounded-3xl relative">
         {images.map((image, index) => (
           <div

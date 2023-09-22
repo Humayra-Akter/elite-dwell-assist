@@ -86,18 +86,7 @@ const BabysitterRegistrationForm = () => {
 
   return (
     <div className=" py-16">
-      <div
-        style={{
-          margin: "0px ",
-          width: "100%",
-          justifyItems: "center",
-          alignItems: "center",
-          backgroundColor: "transparent",
-          padding: "70px 300px",
-          textAlign: "center",
-        }}
-        // className="mx-auto w-[2000px]"
-      >
+      <div className="mx-auto max-w-4xl">
         <div className="card max-w-screen-lg bg-transparent border-purple-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
