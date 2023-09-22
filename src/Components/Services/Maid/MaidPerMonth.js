@@ -19,7 +19,7 @@ const MaidPerMonth = () => {
     <div>
       <h1
         className="text-2xl pt-20 text-center font-black text-purple-950  px-7"
-        style={{ fontFamily: "algerian" }}
+        style={{ fontFamily: "arial" }}
       >
         Maid
       </h1>

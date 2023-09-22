@@ -8,7 +8,8 @@ const About = () => {
         {/* <!-- Page content here --> */}
         <label
           for="my-drawer-4"
-          class="drawer-button btn btn-sm rounded-full text-xs w-1/3 border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+          className="drawer-button btn btn-sm rounded-full text-xs w-1/3 purple-500 text-purple-800 font-bold"
+          // class="drawer-button btn btn-sm rounded-full text-xs w-1/3 border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
         >
           About US
         </label>
@@ -20,7 +21,7 @@ const About = () => {
           <div>
             <h1
               className="text-3xl font-black text-purple-900 text-center px-7 pt-16 "
-              style={{ fontFamily: "algerian" }}
+              style={{ fontFamily: "arial" }}
             >
               About --- "ELITE DWELL ASSIST"
             </h1>
@@ -55,7 +56,7 @@ const About = () => {
             </p>
             <h1
               className="text-xl font-black text-purple-900 text-center px-7 pt-16 "
-              style={{ fontFamily: "algerian" }}
+              style={{ fontFamily: "arial" }}
             >
               Main Functionalities of the Application
             </h1>
@@ -105,7 +106,7 @@ const About = () => {
             </p>
             <h1
               className="text-xl font-black text-purple-900 text-center pt-9 "
-              style={{ fontFamily: "algerian" }}
+              style={{ fontFamily: "arial" }}
             >
               Developers
             </h1>

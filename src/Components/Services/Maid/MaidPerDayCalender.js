@@ -29,10 +29,10 @@ const MaidPerDayCalender = () => {
   };
 
   return (
-    <div className="mx-16 ">
-      <div >
+    <div className="ml-16">
+      <div>
         <div className="time-slot-container pt-28">
-          <strong className="text-lg font-bold text-justify text-purple-900">
+          <strong className="text-lg font-bold text-center text-purple-900">
             Select a Time Slot :
           </strong>
           <select value={selectedTimeSlot} onChange={handleTimeSlotSelect}>

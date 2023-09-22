@@ -8,7 +8,7 @@ const ApplianceRepairHomeSegment = () => {
   return (
     <div className=" px-20">
       <h1
-        style={{ fontFamily: "algerian" }}
+        style={{ fontFamily: "arial" }}
         className="text-3xl font-bold text-purple-950 text-center pb-20"
       >
         Appliance Repair

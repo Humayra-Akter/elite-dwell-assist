@@ -8,7 +8,7 @@ const DriverPerDay = () => {
     <div>
       <h1
         className="text-2xl py-16 text-center font-black text-purple-950  px-7"
-        style={{ fontFamily: "algerian" }}
+        style={{ fontFamily: "arial" }}
       >
         Van/Truck PER DAY
       </h1>

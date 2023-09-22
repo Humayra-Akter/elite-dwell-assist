@@ -23,7 +23,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             <label
               for="booking-maid"
               onClick={() => setBookMaid(maid)}
-              class="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              class="btn btn-sm w-full border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
             >
               Know More
             </label>

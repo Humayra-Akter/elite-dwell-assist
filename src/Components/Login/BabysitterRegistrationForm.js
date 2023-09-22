@@ -90,10 +90,10 @@ const BabysitterRegistrationForm = () => {
         <div className="card max-w-screen-lg bg-transparent border-purple-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
-              style={{ fontFamily: "algerian" }}
+              style={{ fontFamily: "arial" }}
               className="text-center text-2xl text-blue-700 font-extrabold"
             >
-              Register
+              Register as Babysitter
             </h1>
             {/* <form onSubmit={handleFormSubmit}> */}
             <form>

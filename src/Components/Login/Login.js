@@ -1,18 +1,20 @@
 import React from "react";
-import banner1 from "../../images/maid.jpg";
-import banner2 from "../../images/driver.jpg";
-import banner3 from "../../images/babysitter.jpg";
-import banner4 from "../../images/oven.jpg";
 import { Link } from "react-router-dom";
+import banner from "../../images/login.gif";
 
 const Login = () => {
   return (
-    <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="mx-auto flex w-full flex-col justify-center sm:w-[350px]">
+    <div
+      style={{
+        background: `url(${banner})`,
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="mx-auto py-28 flex w-full flex-col justify-center sm:w-[350px]">
         <div className="card w-96 bg-transparent border-purple-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
-              style={{ fontFamily: "algerian" }}
+              style={{ fontFamily: "arial" }}
               className="text-center text-2xl text-blue-700 font-extrabold"
             >
               LOGIN
@@ -81,35 +83,6 @@ const Login = () => {
               Continue with Google
             </button> */}
           </div>
-        </div>
-      </div>
-
-      <div className="mr-auto flex w-1/2 flex-col justify-center sm:w-[350px]">
-        <div className="flex">
-          <img
-            className="w-full rounded-3xl pt-24 border-8 border-transparent"
-            src={banner1}
-            alt=""
-          ></img>
-
-          <img
-            className=" border-8 rounded-3xl border-transparent"
-            src={banner2}
-            alt=""
-          ></img>
-        </div>
-        <div className="flex">
-          <img
-            className="w-full rounded-3xl border-8 border-transparent"
-            src={banner3}
-            alt=""
-          ></img>
-
-          <img
-            className="w-96 rounded-3xl border-8 border-transparent pb-24"
-            src={banner4}
-            alt=""
-          ></img>
         </div>
       </div>
     </div>

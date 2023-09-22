@@ -8,7 +8,7 @@ const ServiceSegment = () => {
   return (
     <div className=" px-20 py-24">
       <h1
-        style={{ fontFamily: "algerian" }}
+        style={{ fontFamily: "arial" }}
         className="text-3xl font-bold text-purple-950 text-center pb-10"
       >
         Services

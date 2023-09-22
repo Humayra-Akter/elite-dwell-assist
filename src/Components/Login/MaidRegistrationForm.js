@@ -107,7 +107,7 @@ const MaidRegistrationForm = () => {
         <div className="card bg-transparent border-purple-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
-              style={{ fontFamily: "algerian" }}
+              style={{ fontFamily: "arial" }}
               className="text-center text-2xl text-blue-700 font-extrabold"
             >
               Register as <strong>MAID</strong>

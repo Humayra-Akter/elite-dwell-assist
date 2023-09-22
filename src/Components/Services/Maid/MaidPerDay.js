@@ -2,6 +2,7 @@ import React from "react";
 import MaidPerDayCalender from "./MaidPerDayCalender";
 import MaidPerDayAddress from "./MaidPerDayAddress";
 import MaidServicePerDay from "./MaidServicePerDay";
+import Footer from "../../Shared/Footer";
 
 const MaidPerDay = () => {
   return (
@@ -23,6 +24,7 @@ const MaidPerDay = () => {
           <MaidPerDayAddress></MaidPerDayAddress>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

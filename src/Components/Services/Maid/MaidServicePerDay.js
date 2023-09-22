@@ -9,10 +9,10 @@ const MaidServicePerDay = () => {
   return (
     <div>
       {/* Sweeping */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-xl mx-auto px-7 py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7 py-4 my-5 bg-purple-50">
         <figure>
           <img
-            className="rounded-full h-32 w-32"
+            className="rounded-full h-24 w-24"
             src={banner1}
             alt="Sweeping"
           />
@@ -34,9 +34,9 @@ const MaidServicePerDay = () => {
         </div>
       </div>
       {/* Mopping */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-xl mx-auto px-7  py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7  py-4 my-5 bg-purple-50">
         <figure>
-          <img className="rounded-full h-32 w-32" src={banner2} alt="Mopping" />
+          <img className="rounded-full h-24 w-24" src={banner2} alt="Mopping" />
         </figure>
         <div className="card-body">
           <h2 className="font-bold text-center">Mopping</h2>
@@ -55,9 +55,9 @@ const MaidServicePerDay = () => {
         </div>
       </div>
       {/* Cooking */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-xl mx-auto px-7  py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7  py-4 my-5 bg-purple-50">
         <figure>
-          <img className="rounded-full h-32 w-32" src={banner3} alt="Cooking" />
+          <img className="rounded-full h-24 w-24" src={banner3} alt="Cooking" />
         </figure>
         <div className="card-body">
           <h2 className="font-bold text-center">Cooking</h2>
@@ -76,9 +76,9 @@ const MaidServicePerDay = () => {
         </div>
       </div>
       {/* Washing Clothes */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-xl mx-auto px-7  py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7  py-4 my-5 bg-purple-50">
         <figure>
-          <img className="rounded-full h-32 w-32" src={banner4} alt="Washing" />
+          <img className="rounded-full h-24 w-24" src={banner4} alt="Washing" />
         </figure>
         <div className="card-body">
           <h2 className="font-bold text-center">Washing Clothes</h2>
