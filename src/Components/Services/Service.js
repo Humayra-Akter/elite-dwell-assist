@@ -5,7 +5,9 @@ import banner1 from "../../images/maid.jpg";
 import { Link } from "react-router-dom";
 
 const Service = () => {
-  return <div></div>;
+  return <div>
+    
+  </div>;
 };
 
 export default Service;

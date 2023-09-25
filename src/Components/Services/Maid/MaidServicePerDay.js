@@ -8,8 +8,9 @@ import btn from "../../../images/bg.jpg";
 const MaidServicePerDay = () => {
   return (
     <div>
+      {" "}
       {/* Sweeping */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7 py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-72 card-side bg-transparent shadow-sm mx-auto px-7  py-2 my-5 bg-purple-50 transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
         <figure>
           <img
             className="rounded-full h-24 w-24"
@@ -21,11 +22,7 @@ const MaidServicePerDay = () => {
           <h2 className="font-bold text-center">Sweeping</h2>
           <div className="card-actions ">
             <button
-              style={{
-                background: `url(${btn})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary to-accent"
               type="submit"
             >
               BOOK
@@ -34,7 +31,7 @@ const MaidServicePerDay = () => {
         </div>
       </div>
       {/* Mopping */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7  py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-72 card-side bg-transparent shadow-sm mx-auto px-7  py-2 my-5 bg-purple-50 transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
         <figure>
           <img className="rounded-full h-24 w-24" src={banner2} alt="Mopping" />
         </figure>
@@ -42,11 +39,7 @@ const MaidServicePerDay = () => {
           <h2 className="font-bold text-center">Mopping</h2>
           <div className="card-actions ">
             <button
-              style={{
-                background: `url(${btn})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary to-accent"
               type="submit"
             >
               BOOK
@@ -55,7 +48,7 @@ const MaidServicePerDay = () => {
         </div>
       </div>
       {/* Cooking */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7  py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-72 card-side bg-transparent shadow-sm mx-auto px-7  py-2 my-5 bg-purple-50 transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
         <figure>
           <img className="rounded-full h-24 w-24" src={banner3} alt="Cooking" />
         </figure>
@@ -63,11 +56,7 @@ const MaidServicePerDay = () => {
           <h2 className="font-bold text-center">Cooking</h2>
           <div className="card-actions ">
             <button
-              style={{
-                background: `url(${btn})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary to-accent"
               type="submit"
             >
               BOOK
@@ -76,7 +65,7 @@ const MaidServicePerDay = () => {
         </div>
       </div>
       {/* Washing Clothes */}
-      <div className="card justify-end w-96 card-side bg-transparent shadow-lg mx-auto px-7  py-4 my-5 bg-purple-50">
+      <div className="card justify-end w-72 card-side bg-transparent shadow-sm mx-auto px-7  py-2 my-5 bg-purple-50 transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
         <figure>
           <img className="rounded-full h-24 w-24" src={banner4} alt="Washing" />
         </figure>
@@ -84,11 +73,7 @@ const MaidServicePerDay = () => {
           <h2 className="font-bold text-center">Washing Clothes</h2>
           <div className="card-actions ">
             <button
-              style={{
-                background: `url(${btn})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary to-accent "
               type="submit"
             >
               BOOK

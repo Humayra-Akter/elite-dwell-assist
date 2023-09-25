@@ -1,15 +1,11 @@
 import React from "react";
 import banner4 from "../../../images/bg.jpg";
-import banner1 from "../../../images/maid/5.jpeg";
-import banner2 from "../../../images/maid/3.jpeg";
-import banner3 from "../../../images/maid/4.jpg";
-import banner5 from "../../../images/maid/1.jpg";
 
 const MaidPerDayAddress = () => {
   return (
-    <div className="mx-20 pb-40">
+    <div className="mx-20p-8 pb-40">
       <div>
-        <div className="card w-full bg-transparent border-4 rounded-3xl border-purple-200 text-primary-content">
+        <div className="card w-full bg-transparent border-4 rounded-3xl border-blue-200 text-blue-800">
           <div className="card-body">
             <h2 className="card-title">Address</h2>
             <p>Expert will arrive at the address given below</p>
@@ -86,13 +82,9 @@ const MaidPerDayAddress = () => {
               </div>
             </form>
           </div>
-          <div className="justify-center items-center">
+          <div className="justify-center items-center px-7 pb-7">
             <button
-              style={{
-                background: `url(${banner4})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-1/2 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-full btn-sm border-blue-500 text-blue-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
               type="submit"
             >
               Book

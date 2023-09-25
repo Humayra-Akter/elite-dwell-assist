@@ -100,178 +100,57 @@ const DriverRegistrationForm = () => {
 
             {/* <form onSubmit={handleFormSubmit}> */}
             <form>
-              <div className="form-control pt-5 w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Name
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  //   value={name}
-                  //   onChange={(e) => setName(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-              {/* email field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Email
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  //   value={email}
-                  //   onChange={(e) => setEmail(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* contact field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Contact
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Contact number"
-                  //   value={contact}
-                  //   onChange={(e) => setContact(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* Gender field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-left text-blue-700 font-bold text-xs">
-                    Gender
-                  </span>
-                </label>
-                <div className="input text-left w-full ">
-                  <select className="select" required>
-                    <option disabled selected>
-                      Select your gender
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* {selectedRole === "Babysitter" && ( */}
-              <div>
-                {/* Education field */}
-                <div className="form-control w-full">
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* name field */}
+                <div className="form-control  w-full">
                   <label className="label">
-                    <span className="label-text text-left text-blue-700 font-bold text-xs">
-                      Education
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Name
                     </span>
                   </label>
-                  <div className="input text-left w-full ">
-                    <select className="select" required>
-                      <option disabled selected>
-                        Select your education
-                      </option>
-                      <option value="male">SSC pass</option>
-                      <option value="female">JSC pass</option>
-                    </select>
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    //   value={name}
+                    //   onChange={(e) => setName(e.target.value)}
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
                 </div>
-                {/* Experience dropdown */}
+                {/* email field */}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      Experience
+                      Email
                     </span>
                   </label>
-                  <MultiSelect
-                    options={experienceOptions}
-                    value={selectedExperience}
-                    onChange={handleExperienceChange}
-                    labelledBy={"Select"}
-                    overrideStrings={{
-                      selectSomeItems: "Select experiences",
-                    }}
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    //   value={email}
+                    //   onChange={(e) => setEmail(e.target.value)}
+                    className="input input-sm input-bordered w-full "
+                    required
                   />
                 </div>
-                {/*vehicleType*/}
+              </div>
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* contact field */}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      Vehicle Type
+                      Contact
                     </span>
                   </label>
-                  <MultiSelect
-                    options={vehicleTypeOptions}
-                    value={selectedVehicleType}
-                    onChange={handleVehicleTypeChange}
-                    labelledBy="Select vehicleType"
+                  <input
+                    type="text"
+                    placeholder="Your Contact number"
+                    //   value={contact}
+                    //   onChange={(e) => setContact(e.target.value)}
+                    className="input input-sm input-bordered w-full "
+                    required
                   />
                 </div>
-                <div className="form-control w-full">
-                  {selectedVehicleType.map((vehicleType) => (
-                    <div key={vehicleType.value} className="py-2">
-                      <label className="label">
-                        <span className="label-text text-blue-700 font-bold text-md">
-                          {vehicleType.label} Salary
-                        </span>
-                      </label>
-                      <select
-                        value={selectedSalaries[vehicleType.value]}
-                        onChange={(e) =>
-                          handleSalaryChange(vehicleType.value, e.target.value)
-                        }
-                        className="input input-bordered w-full"
-                      >
-                        {vehicleType.value === "car"
-                          ? vehicleTypeSalaries[vehicleType.value].map(
-                              (salary) => (
-                                <option key={salary} value={salary}>
-                                  {salary} bdt per month
-                                </option>
-                              )
-                            )
-                          : vehicleTypeSalaries[vehicleType.value].map(
-                              (salary) => (
-                                <option key={salary} value={salary}>
-                                  {salary} bdt per km/h
-                                </option>
-                              )
-                            )}
-                      </select>
-                    </div>
-                  ))}
-                </div>
-                {/* Conditionally render the "availability" field for van/truck */}
-                {selectedVehicleType.some((vehicleType) =>
-                  ["van", "truck"].includes(vehicleType.value)
-                ) && (
-                  <div className="form-control w-full">
-                    <label className="label">
-                      <span className="label-text text-blue-700 font-bold text-md">
-                        Availability
-                      </span>
-                    </label>
-                    <MultiSelect
-                      options={availabilityOptions}
-                      value={selectedAvailability}
-                      onChange={handleAvailability}
-                      labelledBy={"Select availability"}
-                      overrideStrings={{
-                        selectSomeItems: "Select availability",
-                      }}
-                    />
-                  </div>
-                )}
-
                 {/* location */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -289,32 +168,147 @@ const DriverRegistrationForm = () => {
                     }}
                   />
                 </div>
-
-                {/* nid_no */}
+              </div>
+              {/* Gender field */}
+              <div className="grid grid-cols-2 pt-5 gap-3">
                 <div className="form-control pt-5 w-full">
                   <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      NID_no
+                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                      Gender
                     </span>
                   </label>
-                  <input
-                    type="text"
-                    placeholder="eg : 1234567890111"
-                    className="input input-bordered w-full"
-                    required
+                  <div className="input  input-bordered text-left w-full ">
+                    <select className="select" required>
+                      <option disabled selected>
+                        Select your gender
+                      </option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                {/* Education field */}
+                <div className="form-control pt-5 w-full">
+                  <label className="label">
+                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                      Education
+                    </span>
+                  </label>
+                  <div className="input input-bordered text-left w-full ">
+                    <select className="select" required>
+                      <option disabled selected>
+                        Select your education
+                      </option>
+                      <option value="male">SSC pass</option>
+                      <option value="female">JSC pass</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* Experience dropdown */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Experience
+                    </span>
+                  </label>
+                  <MultiSelect
+                    className="input input-sm w-full"
+                    options={experienceOptions}
+                    value={selectedExperience}
+                    onChange={handleExperienceChange}
+                    labelledBy={"Select"}
+                    overrideStrings={{
+                      selectSomeItems: "Select experiences",
+                    }}
                   />
                 </div>
-                {/* Driving license */}
+                {/*vehicleType*/}
+                <div className="form-control  w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Vehicle Type
+                    </span>
+                  </label>
+                  <MultiSelect
+                    className="input input-sm w-full"
+                    options={vehicleTypeOptions}
+                    value={selectedVehicleType}
+                    onChange={handleVehicleTypeChange}
+                    labelledBy="Select vehicleType"
+                  />
+                </div>
+              </div>
+              <div className="form-control w-full">
+                {selectedVehicleType.map((vehicleType) => (
+                  <div key={vehicleType.value} className="py-2">
+                    <label className="label">
+                      <span className="label-text text-blue-700 font-bold text-md">
+                        {vehicleType.label} Salary
+                      </span>
+                    </label>
+                    <select
+                      value={selectedSalaries[vehicleType.value]}
+                      onChange={(e) =>
+                        handleSalaryChange(vehicleType.value, e.target.value)
+                      }
+                      className="input input-bordered w-full"
+                    >
+                      {vehicleType.value === "car"
+                        ? vehicleTypeSalaries[vehicleType.value].map(
+                            (salary) => (
+                              <option key={salary} value={salary}>
+                                {salary} bdt per month
+                              </option>
+                            )
+                          )
+                        : vehicleTypeSalaries[vehicleType.value].map(
+                            (salary) => (
+                              <option key={salary} value={salary}>
+                                {salary} bdt per km/h
+                              </option>
+                            )
+                          )}
+                    </select>
+                  </div>
+                ))}
+              </div>
+
+              {/* Conditionally render the "availability" field for van/truck */}
+              {selectedVehicleType.some((vehicleType) =>
+                ["van", "truck"].includes(vehicleType.value)
+              ) && (
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Availability
+                    </span>
+                  </label>
+                  <MultiSelect
+                    options={availabilityOptions}
+                    value={selectedAvailability}
+                    onChange={handleAvailability}
+                    labelledBy={"Select availability"}
+                    overrideStrings={{
+                      selectSomeItems: "Select availability",
+                    }}
+                  />
+                </div>
+              )}
+              <div className="grid grid-cols-2 gap-3">
+                {/* dob */}
                 <div className="form-control pt-5 w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      Driving license no
+                      Date of Birth
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="eg : DD-123456789"
-                    className="input input-bordered w-full"
+                    placeholder="Your dob"
+                    className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
@@ -328,28 +322,44 @@ const DriverRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your address"
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-                {/* dob */}
-                <div className="form-control pt-5 w-full">
-                  <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      Date of Birth
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your dob"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
               </div>
-              {/* )} */}
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* nid_no */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      NID_no
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="eg : 1234567890111"
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+                {/* Driving license */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Driving license no
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="eg : DD-123456789"
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+              </div>
+
               {/* password field */}
-              <div className="form-control w-full pb-11">
+              <div className="form-control pt-5 w-full pb-11">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-md">
                     Password
@@ -360,7 +370,7 @@ const DriverRegistrationForm = () => {
                   placeholder="Your Password"
                   //   value={password}
                   //   onChange={(e) => setPassword(e.target.value)}
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full"
                   required
                 />
               </div>

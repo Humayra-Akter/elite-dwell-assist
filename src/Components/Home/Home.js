@@ -4,10 +4,16 @@ import ServiceSegment from "./ServiceSegment";
 import ApplianceRepairHomeSegment from "./ApplianceRepairHomeSegment";
 import Form from "./Form";
 import Footer from "../Shared/Footer";
+import banner4 from "../../images/background.gif";
 
 const Home = () => {
   return (
-    <div >
+    <div
+      style={{
+        background: `url(${banner4})`,
+        backgroundSize: "cover",
+      }}
+    >
       <Banner></Banner>
       {/* <ServiceSegment></ServiceSegment>
       <ApplianceRepairHomeSegment></ApplianceRepairHomeSegment>

@@ -357,7 +357,7 @@ const MaidRegistrationForm = () => {
                   background: `url(${banner4})`,
                   backgroundSize: "cover",
                 }}
-                className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+                className="btn btn-sm text-xs w-full border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
                 type="submit"
               >
                 Go ahead

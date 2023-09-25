@@ -9,7 +9,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
           <img src={img} alt="maid" class="rounded-xl h-52 w-52" />
         </figure>
         <div class="card-body items-center text-center">
-          <h2 class="card-title text-purple-900 font-bold">{name}</h2>
+          <h2 class="card-title text-blue-900 font-bold">{name}</h2>
           <p>
             <strong>Location :</strong> {location}
           </p>
@@ -23,7 +23,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             <label
               for="booking-maid"
               onClick={() => setBookMaid(maid)}
-              class="btn btn-sm w-full border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              class="btn btn-sm w-full border-blue-500 text-blue-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
             >
               Know More
             </label>

@@ -52,14 +52,9 @@ const MaidPerDayCalender = () => {
         </div>
       </div>
       <button
-        style={{
-          background: `url(${banner4})`,
-          backgroundSize: "cover",
-          margin: "10px 30px",
-          marginBottom: "100px",
-        }}
+        
         onClick={handleBooking}
-        className="btn w-1/3 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+        className="btn w-2/3 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
         type="submit"
       >
         Book

@@ -26,70 +26,90 @@ const Register = () => {
     <div className="grid grid-cols-4 gap-4">
       <div className="px-20">
         <h1
-          style={{ fontFamily: "abadi" }}
-          className="text-3xl font-bold text-purple-950 text-left py-20"
+          style={{ fontFamily: "arial" }}
+          className="text-2xl font-bold text-purple-950 text-left pt-20 pb-7"
         >
           Select your role:
         </h1>
 
-        <div className="">
-          <div>
+        <div>
+          <div className="shadow-md my-3 rounded-full transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <div
-              className={`card w-48 bg-transparent border-2 shadow-xl ${
+              className={`card card-side py-7 w-48 bg-transparent ${
                 selectedRole === "customer" ? "border-purple-950" : ""
               }`}
               onClick={() => handleRoleChange("customer")}
             >
-              <figure class="px-3 pt-3">
-                <img src={banner1} alt="Customer" class="rounded-full" />
-              </figure>
-              <div class="card-body items-center text-center">
-                <h2 class="card-title text-purple-900 font-bold">Customer</h2>
+              {/* <figure className="px-3 pt-3"> */}
+              <img
+                src={banner1}
+                alt="Customer"
+                className="rounded-full w-28 h-28 px-3 pt-3"
+              />
+              {/* </figure> */}
+              <div className="items-center pt-7">
+                <h2 className="card-title text-purple-900 font-bold">
+                  Customer
+                </h2>
               </div>
             </div>
           </div>
-          <div>
+          <div className="shadow-md my-3 rounded-full transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <div
-              className={`card w-48 bg-transparent border-2 shadow-xl ${
+              className={`card card-side py-7 w-36 bg-transparent ${
                 selectedRole === "maid" ? "border-purple-950" : ""
               }`}
               onClick={() => handleRoleChange("maid")}
             >
-              <figure class="px-3 pt-3">
-                <img src={banner2} alt="Maid" class="rounded-xl" />
-              </figure>
-              <div class="card-body items-center text-center">
-                <h2 class="card-title text-purple-900 font-bold">Maid</h2>
+              {/* <figure className="px-3 pt-3"> */}
+              <img
+                src={banner2}
+                alt="Maid"
+                className="rounded-full w-28 h-28 px-3 pt-3"
+              />
+              {/* </figure> */}
+              <div className="items-center pt-7">
+                <h2 className="card-title text-purple-900 font-bold">Maid</h2>
               </div>
             </div>
           </div>
-          <div>
+          <div className="shadow-md my-3 rounded-full transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <div
-              className={`card w-48 bg-transparent border-2 shadow-xl ${
+              className={`card card-side py-7 w-36 bg-transparent  ${
                 selectedRole === "driver" ? "border-purple-950" : ""
               }`}
               onClick={() => handleRoleChange("driver")}
             >
-              <figure class="px-3 pt-3">
-                <img src={banner3} alt="Driver" class="rounded-xl" />
-              </figure>
-              <div class="card-body items-center text-center">
-                <h2 class="card-title text-purple-900 font-bold">Driver</h2>
+              {/* <figure className="px-3 pt-3"> */}
+              <img
+                src={banner3}
+                alt="Driver"
+                className="rounded-full w-28 h-28 px-3 pt-3"
+              />
+              {/* </figure> */}
+              <div className="items-center pt-7">
+                <h2 className="card-title text-purple-900 font-bold">Driver</h2>
               </div>
             </div>
           </div>
-          <div>
+          <div className="shadow-md my-3 rounded-full transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-primary from-10% via-secondary via-30% to-90% to-accent hover:shadow-lg">
             <div
-              className={`card w-48 bg-transparent border-2 shadow-xl ${
+              className={`card card-side py-7 w-36 bg-transparent  ${
                 selectedRole === "babysitter" ? "border-purple-950" : ""
               }`}
               onClick={() => handleRoleChange("babysitter")}
             >
-              <figure class="px-3 pt-3">
-                <img src={banner4} alt="Babysitter" class="rounded-xl" />
-              </figure>
-              <div class="card-body items-center text-center">
-                <h2 class="card-title text-purple-900 font-bold">Babysitter</h2>
+              {/* <figure className="px-3 pt-3"> */}
+              <img
+                src={banner4}
+                alt="Babysitter"
+                className="rounded-full w-28 h-28 px-3 pt-3"
+              />
+              {/* </figure> */}
+              <div className="items-center pt-7">
+                <h2 className="card-title text-purple-900 font-bold">
+                  Babysitter
+                </h2>
               </div>
             </div>
           </div>

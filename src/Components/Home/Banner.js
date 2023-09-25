@@ -5,7 +5,7 @@ import banner3 from "../../images/maid.jpg";
 import { TypeAnimation } from "react-type-animation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import banner4 from "../../images/background.gif";
+
 
 const Banner = () => {
   const images = [banner1, banner2, banner3];
@@ -21,10 +21,7 @@ const Banner = () => {
 
   return (
     <div
-      style={{
-        background: `url(${banner4})`,
-        backgroundSize: "cover",
-      }}
+     
       className="container w-full p-16 mt-16 gap-14 flex-col items-center justify-center grid grid-cols-2"
     >
       <div className="carousel h-96 border-purple-400 border-2 rounded-3xl relative">
