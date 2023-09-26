@@ -2,40 +2,34 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import banner4 from "../../../images/bg.jpg";
 
-const MaidPerDayCalender = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+const MaidPerDayCalender = ({
+  selectedDate,
+  setSelectedDate,
+  selectedTimeSlot,
+  setSelectedTimeSlot,
+}) => {
+  const handleTimeSlotSelect = (e) => {
+    setSelectedTimeSlot(e.target.value);
+  };
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
   };
 
-  const handleTimeSlotSelect = (e) => {
-    setSelectedTimeSlot(e.target.value);
-  };
-
-  const handleBooking = () => {
-    if (selectedDate && selectedTimeSlot) {
-      // Do something with the selected date and time slot
-      const formattedDate = format(selectedDate, "yyyy-MM-dd");
-      console.log("Selected Date:", formattedDate);
-      console.log("Selected Time Slot:", selectedTimeSlot);
-    } else {
-      // Handle validation or show an error message
-      console.error("Please select a date and time slot.");
-    }
-  };
 
   return (
-    <div className="ml-16">
+    <div className="ml-12">
       <div>
-        <div className="time-slot-container pt-28">
-          <strong className="text-lg font-bold text-center text-blue-900">
+        <div className="time-slot-container pt-20">
+          <strong className="text-lg mx-5 font-bold text-center text-primary">
             Select a Time Slot :
           </strong>
-          <select value={selectedTimeSlot} onChange={handleTimeSlotSelect}>
+          <select
+            className="input input-bordered input-sm"
+            value={selectedTimeSlot}
+            onChange={handleTimeSlotSelect}
+          >
             <option value="">Select</option>
             <option value="morning">Morning</option>
             <option value="afternoon">Afternoon</option>
@@ -43,7 +37,7 @@ const MaidPerDayCalender = () => {
           </select>
         </div>
         <div>
-          <h1 className="text-lg font-bold text-blue-900 text-center px-7 pt-11">
+          <h1 className="text-lg font-bold text-primary mx-5 pt-11">
             Select a Date and Time Slot
           </h1>
           <div className="calendar-container">
@@ -51,14 +45,6 @@ const MaidPerDayCalender = () => {
           </div>
         </div>
       </div>
-      <button
-        
-        onClick={handleBooking}
-        className="btn w-2/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
-        type="submit"
-      >
-        Book
-      </button>
     </div>
   );
 };

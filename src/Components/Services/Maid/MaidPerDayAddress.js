@@ -1,9 +1,8 @@
 import React from "react";
-import banner4 from "../../../images/bg.jpg";
 
 const MaidPerDayAddress = () => {
   return (
-    <div className="mx-20p-8 pb-40">
+    <div className="mx-20 pt-12 pb-40">
       <div>
         <div className="card w-full bg-transparent border-4 rounded-3xl border-blue-200 text-blue-800">
           <div className="card-body">
@@ -69,7 +68,7 @@ const MaidPerDayAddress = () => {
                     Area
                   </span>
                 </label>
-                <div className="input text-left  w-full ">
+                <div className="input input-bordered text-left w-full ">
                   <select className="select" required>
                     <option disabled selected>
                       Select your Area
@@ -80,15 +79,15 @@ const MaidPerDayAddress = () => {
                   </select>
                 </div>
               </div>
+              <div className="pl-36 pt-9">
+                <input
+                  className="btn w-2/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
+                  type="submit"
+                  value="Book"
+                >
+                </input>
+              </div>
             </form>
-          </div>
-          <div className="justify-center items-center px-7 pb-7">
-            <button
-              className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
-              type="submit"
-            >
-              Book
-            </button>
           </div>
         </div>
       </div>

@@ -12,10 +12,6 @@ const Register = () => {
   };
   return (
     <div
-      style={{
-        background: `url(${img})`,
-        backgroundSize: "cover",
-      }}
       className="pt-16 flex items-center justify-center"
     >
       <div

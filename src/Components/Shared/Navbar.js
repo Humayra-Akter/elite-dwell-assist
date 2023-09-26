@@ -5,7 +5,7 @@ import About from "../About/About";
 
 const Navbar = () => {
   return (
-    <div className="bg-gradient-to-b from-primary  to-accent py-2">
+    <div className="bg-gradient-to-b from-primary to-accent text-white font-bold py-2">
       <div class="navbar sticky">
         <div className="navbar-start">
           <Link to={"/"}>
@@ -21,7 +21,7 @@ const Navbar = () => {
             Elite-Dwell-Assist
           </h1>
         </div> */}
-        <div class="navbar">
+        <div class="navbar-center">
           <Link to="/login">
             <button class="btn btn-ghost w-100 h-100">
               <div class="indicator">
@@ -39,7 +39,7 @@ const Navbar = () => {
           </Link>
           <div class="dropdown pl-10">
             <button>
-              <label tabindex="0" class="btn btn-ghost btn-circle">
+              <label tabindex="0" class="btn btn-ghost">
                 {/* <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
