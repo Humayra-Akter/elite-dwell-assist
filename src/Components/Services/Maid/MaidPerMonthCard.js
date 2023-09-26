@@ -1,29 +1,50 @@
 import React from "react";
 
 const MaidPerMonthCard = ({ maid, setBookMaid }) => {
-  const { img, name, location, gender, salary } = maid;
+  const { img, name, task, location, gender, salary } = maid;
+
+  const handleKnowMoreClick = () => {
+    setBookMaid(maid);
+  };
   return (
     <div>
-      <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
-        <figure class="px-10 pt-7">
-          <img src={img} alt="maid" class="rounded-xl h-52 w-52" />
-        </figure>
-        <div class="card-body items-center text-center">
-          <h2 class="card-title text-blue-900 font-bold">{name}</h2>
+      <div className="w-96 h-80 rounded-3xl border-2 pb-[16.67%] text-black relative  bg-slate-100 m-4">
+        <div>
+          <figure className="absolute top-3 left-3 right-0 h-full">
+            <img src={img} alt="Maid" className="h-32 w-32 rounded-full" />
+          </figure>
+          <div className="p-7 text-right bg-gradient-to-b from-primary  text-black font-bold ">
+            <h2 className="text-xl font-bold">{name}</h2>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-right text-black">
           <p>
-            <strong>Location :</strong> {location}
+            <strong>Location:</strong>{" "}
+            {Array.isArray(location) ? location.join(", ") : location}
           </p>
           <p>
-            <strong>Gender :</strong> {gender}
+            <strong>Gender:</strong> {gender}
           </p>
           <p>
-            <strong>Salary :</strong> {salary},
+            <strong className="underline">Task </strong>
+            {task && salary ? (
+              <ul>
+                {task.map((taskName, index) => (
+                  <li key={index}>
+                    <strong>{taskName}: </strong>
+                    {salary[index]}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              "Salary information not available"
+            )}
           </p>
-          <div class="card-actions pt-5">
+          <div className="mt-4">
             <label
               for="booking-maid"
               onClick={() => setBookMaid(maid)}
-              class="btn btn-sm w-full border-blue-500 text-blue-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="px-4 btn-md mt-3 bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
             >
               Know More
             </label>

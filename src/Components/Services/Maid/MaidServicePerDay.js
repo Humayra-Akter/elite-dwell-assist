@@ -5,46 +5,42 @@ import banner3 from "../../../images/maid/3.jpeg";
 import banner4 from "../../../images/maid/4.jpg";
 import btn from "../../../images/bg.jpg";
 
-const MaidServicePerDay = ({ selectedTimeSlot, selectedDate }) => {
+const MaidServicePerDay = ({ selectedTimeSlot }) => {
   const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleServiceSelect = (service) => {
+    // Create a copy of the current selectedServices array
     const updatedServices = [...selectedServices];
-    if (updatedServices.includes(service)) {
-      updatedServices.splice(updatedServices.indexOf(service), 1);
+
+    // Check if the service is already selected
+    const serviceIndex = updatedServices.indexOf(service);
+
+    if (serviceIndex !== -1) {
+      // Service is already selected, so remove it
+      updatedServices.splice(serviceIndex, 1);
     } else {
+      // Service is not selected, so add it
       updatedServices.push(service);
     }
+
+    // Update the state with the updatedServices array
     setSelectedServices(updatedServices);
+  };
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
   };
 
   const isBookButtonDisabled = selectedServices.length === 0;
 
-  const displaySelectedInfo = () => {
-    let info = "";
-    if (selectedDate && selectedTimeSlot) {
-      info += `Selected Date: ${selectedDate.toDateString()}, Time Slot: ${selectedTimeSlot}`;
-    }
-
-    if (selectedServices.length > 0) {
-      info += " | Selected Services: " + selectedServices.join(", ");
-    }
-
-    return info;
-  };
-
   return (
     <div className="ml-10 mt-20">
-      {" "}
       {/* Sweeping */}
       <div className="bg-white p-4 rounded-lg shadow-md mb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img
-              src={banner1}
-              alt="Sweeping Icon"
-              className="w-12 h-12 rounded-full"
-            />
+            <img src={banner1} alt="Sweeping Icon" className="w-8 h-8" />
             <label className="text-lg font-medium">Sweeping</label>
           </div>
           <div className="flex items-center space-x-2">
@@ -67,11 +63,7 @@ const MaidServicePerDay = ({ selectedTimeSlot, selectedDate }) => {
       <div className="bg-white p-4 rounded-lg shadow-md mb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img
-              src={banner2}
-              alt="Mopping Icon"
-              className="w-12 h-12 rounded-full"
-            />
+            <img src={banner2} alt="Mopping Icon" className="w-8 h-8" />
             <label className="text-lg font-medium">Mopping</label>
           </div>
           <div className="flex items-center space-x-2">
@@ -94,11 +86,7 @@ const MaidServicePerDay = ({ selectedTimeSlot, selectedDate }) => {
       <div className="bg-white p-4 rounded-lg shadow-md mb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img
-              src={banner3}
-              alt="Cooking Icon"
-              className="w-12 h-12 rounded-full"
-            />
+            <img src={banner3} alt="Cooking Icon" className="w-8 h-8" />
             <label className="text-lg font-medium">Cooking</label>
           </div>
           <div className="flex items-center space-x-2">
@@ -112,7 +100,7 @@ const MaidServicePerDay = ({ selectedTimeSlot, selectedDate }) => {
               htmlFor="cooking"
               className="text-lg font-medium text-primary"
             >
-              $12
+              $10
             </label>
           </div>
         </div>
@@ -121,11 +109,7 @@ const MaidServicePerDay = ({ selectedTimeSlot, selectedDate }) => {
       <div className="bg-white w-80 p-4 rounded-lg shadow-md mb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img
-              src={banner4}
-              alt="Washing Clothes Icon"
-              className="w-12 h-12 rounded-full"
-            />
+            <img src={banner4} alt="Washing Clothes Icon" className="w-8 h-8" />
             <label className="text-lg font-medium">Washing Clothes</label>
           </div>
           <div className="flex items-center space-x-2">
@@ -133,13 +117,13 @@ const MaidServicePerDay = ({ selectedTimeSlot, selectedDate }) => {
               type="checkbox"
               id="washing-clothes"
               className="form-checkbox h-6 w-6 text-primary"
-              onChange={() => handleServiceSelect("Washing-clothes")}
+              onChange={() => handleServiceSelect("Washing Clothes")}
             />
             <label
               htmlFor="washing-clothes"
               className="text-lg font-medium text-primary"
             >
-              $15
+              $10
             </label>
           </div>
         </div>

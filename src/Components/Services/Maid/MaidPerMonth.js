@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BookingMaid from "./BookingMaid";
 import MaidPerMonthCard from "./MaidPerMonthCard";
+import Footer from "../../Shared/Footer";
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
@@ -18,7 +19,7 @@ const MaidPerMonth = () => {
   return (
     <div>
       <h1
-        className="text-2xl pt-20 text-center font-black text-purple-950  px-7"
+        className="text-2xl pt-12 text-center font-black text-primary  px-7"
         style={{ fontFamily: "arial" }}
       >
         Maid
@@ -33,6 +34,7 @@ const MaidPerMonth = () => {
         ))}
       </div>
       {bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>}
+      <Footer></Footer>
     </div>
   );
 };

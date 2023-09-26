@@ -13,6 +13,8 @@ import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
 import { useState } from "react";
 import Error from "./Components/Error/Error";
 import ApplianceRepair from "./Components/Services/ApplianceRepair/ApplianceRepair";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

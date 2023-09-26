@@ -77,7 +77,7 @@ const MaidPerDay = () => {
           {displaySelectedInfo()}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-7">
         <div className="flex">
           <MaidPerDayCalender
             selectedDate={selectedDate}
@@ -91,7 +91,7 @@ const MaidPerDay = () => {
           />
         </div>
         <div>
-          <MaidPerDayAddress />
+          <MaidPerDayAddress selectedServices={selectedServices} />
         </div>
       </div>
       {/* <button
