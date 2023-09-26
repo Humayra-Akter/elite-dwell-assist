@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import banner1 from "../../images/babysitter.jpg";
 import banner2 from "../../images/driver.jpg";
 import banner3 from "../../images/maid.jpg";
+import banner4 from "../../images/homeBanner.jpg";
 import { TypeAnimation } from "react-type-animation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const images = [banner1, banner2, banner3];
@@ -20,11 +21,9 @@ const Banner = () => {
   }, []);
 
   return (
-    <div
-     
-      className="container w-full p-16 mt-16 gap-14 flex-col items-center justify-center grid grid-cols-2"
-    >
-      <div className="carousel h-96 border-purple-400 border-2 rounded-3xl relative">
+  
+    <div className="container w-full px-16 mt-16 gap-14 flex-col items-center justify-center grid grid-cols-2">
+      <div className="carousel h-96 border-blue-400 border-2 rounded-3xl relative">
         {images.map((image, index) => (
           <div
             key={index}
@@ -51,12 +50,12 @@ const Banner = () => {
               2000,
             ]}
             speed={50}
-            className="text-purple-950 text-center "
+            className="text-blue-950 text-center "
             wrapper="span"
             repeat={Infinity}
           />
         </h1>
-        <p style={{ fontFamily: "abadi" }} className="text-xl p-7">
+        <p style={{ fontFamily: "arial" }} className="text-xl p-7">
           <li>
             <strong>Elite:</strong> Signifies a premium and high-quality
             service.
@@ -70,12 +69,16 @@ const Banner = () => {
           </li>
         </p>
         <div className="grid grid-cols-2 gap-5">
-          <button className="btn btn-sm text-xs w-full border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent">
-            Register
-          </button>
-          <button className="btn btn-sm text-xs w-full border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent">
-            Login
-          </button>
+          <Link to="/login">
+            <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
+              Register as Customer
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
+              Register as Service Provider
+            </button>
+          </Link>
         </div>
       </div>
     </div>

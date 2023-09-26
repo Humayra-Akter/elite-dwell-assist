@@ -5,7 +5,7 @@ import About from "../About/About";
 
 const Navbar = () => {
   return (
-    <div className="bg-gradient from-primary from-10% via-secondary via-30% to-90% to-accent py-2">
+    <div className="bg-gradient-to-b from-primary  to-accent py-2">
       <div class="navbar sticky">
         <div className="navbar-start">
           <Link to={"/"}>
@@ -16,7 +16,7 @@ const Navbar = () => {
         {/* <div className="navbar-center">
           <h1
             style={{ fontFamily: "arial" }}
-            className="text-4xl font-bold text-purple-950"
+            className="text-4xl font-bold text-blue-950"
           >
             Elite-Dwell-Assist
           </h1>

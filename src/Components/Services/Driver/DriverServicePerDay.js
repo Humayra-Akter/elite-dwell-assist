@@ -19,11 +19,7 @@ const DriverServicePerDay = () => {
           <h2 className="card-title">Van</h2>
           <div className="card-actions justify-end">
             <button
-              style={{
-                background: `url(${btn})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-1/3 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-1/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
               type="submit"
             >
               BOOK
@@ -40,11 +36,7 @@ const DriverServicePerDay = () => {
           <h2 className="card-title">Truck</h2>
           <div className="card-actions justify-end">
             <button
-              style={{
-                background: `url(${btn})`,
-                backgroundSize: "cover",
-              }}
-              className="btn w-1/3 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-1/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
               type="submit"
             >
               BOOK

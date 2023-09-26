@@ -32,7 +32,7 @@ const MaidPerDayCalender = () => {
     <div className="ml-16">
       <div>
         <div className="time-slot-container pt-28">
-          <strong className="text-lg font-bold text-center text-purple-900">
+          <strong className="text-lg font-bold text-center text-blue-900">
             Select a Time Slot :
           </strong>
           <select value={selectedTimeSlot} onChange={handleTimeSlotSelect}>
@@ -43,7 +43,7 @@ const MaidPerDayCalender = () => {
           </select>
         </div>
         <div>
-          <h1 className="text-lg font-bold text-purple-900 text-center px-7 pt-11">
+          <h1 className="text-lg font-bold text-blue-900 text-center px-7 pt-11">
             Select a Date and Time Slot
           </h1>
           <div className="calendar-container">
@@ -54,7 +54,7 @@ const MaidPerDayCalender = () => {
       <button
         
         onClick={handleBooking}
-        className="btn w-2/3 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+        className="btn w-2/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
         type="submit"
       >
         Book

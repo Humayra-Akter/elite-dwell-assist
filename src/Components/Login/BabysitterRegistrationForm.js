@@ -17,8 +17,8 @@ const BabysitterRegistrationForm = () => {
   //     setSelectedRole(e.target.value);
   //   };
 
-  const handleExperienceChange = (selectedOptions) => {
-    setSelectedExperience(selectedOptions);
+  const handleExperienceChange = (selected) => {
+    setSelectedExperience([selected[selected.length - 1]]);
   };
 
   const handleLocation = (selectedOptions) => {
@@ -87,7 +87,7 @@ const BabysitterRegistrationForm = () => {
   return (
     <div className=" py-16">
       <div className="mx-auto max-w-4xl">
-        <div className="card max-w-screen-lg bg-transparent border-purple-300 border-4 shadow-xl">
+        <div className="card max-w-screen-lg bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
               style={{ fontFamily: "arial" }}
@@ -97,74 +97,94 @@ const BabysitterRegistrationForm = () => {
             </h1>
             {/* <form onSubmit={handleFormSubmit}> */}
             <form>
-              <div className="form-control pt-5 w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Name
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  //   value={name}
-                  //   onChange={(e) => setName(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-              {/* email field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Email
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  //   value={email}
-                  //   onChange={(e) => setEmail(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* contact field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Contact
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Contact number"
-                  //   value={contact}
-                  //   onChange={(e) => setContact(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* Gender field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-left text-blue-700 font-bold text-xs">
-                    Gender
-                  </span>
-                </label>
-                <div className="input text-left w-full ">
-                  <select className="select" required>
-                    <option disabled selected>
-                      Select your gender
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
+              <div className="grid grid-cols-2 gap-3 pt-5">
+                {" "}
+                {/* name field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    //   value={name}
+                    //   onChange={(e) => setName(e.target.value)}
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+                {/* email field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Email
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    //   value={email}
+                    //   onChange={(e) => setEmail(e.target.value)}
+                    className="input input-sm input-bordered w-full "
+                    required
+                  />
                 </div>
               </div>
+              <div className="grid grid-cols-2 gap-3 pt-5">
+                {" "}
+                {/* contact field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Contact
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Contact number"
+                    //   value={contact}
+                    //   onChange={(e) => setContact(e.target.value)}
+                    className="input input-sm input-bordered w-full "
+                    required
+                  />
+                </div>
+                {/* address */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Address
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your address"
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-3 pt-5">
+                {/* Gender field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                      Gender
+                    </span>
+                  </label>
+                  <div className="input input-bordered text-left w-full ">
+                    <select className="select" required>
+                      <option disabled selected>
+                        Select your gender
+                      </option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
 
-              {/* {selectedRole === "Babysitter" && ( */}
-              <div>
                 {/* Education field */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -172,7 +192,7 @@ const BabysitterRegistrationForm = () => {
                       Education
                     </span>
                   </label>
-                  <div className="input text-left w-full ">
+                  <div className="input input-bordered text-left w-full ">
                     <select className="select" required>
                       <option disabled selected>
                         Select your education
@@ -195,11 +215,10 @@ const BabysitterRegistrationForm = () => {
                     value={selectedExperience}
                     onChange={handleExperienceChange}
                     labelledBy={"Select"}
-                    overrideStrings={{
-                      selectSomeItems: "Select experiences",
-                    }}
                   />
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 pt-5">
                 {/* Age group preferences */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -215,7 +234,23 @@ const BabysitterRegistrationForm = () => {
                     overrideStrings={{ selectSomeItems: "Select age groups" }}
                   />
                 </div>
+                {/* special_skills */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      special_skills
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your location"
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+              </div>
 
+              <div className="grid grid-cols-2 gap-3 pt-5">
                 {/* Language Spoken */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -249,6 +284,8 @@ const BabysitterRegistrationForm = () => {
                     }}
                   />
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 pt-5">
                 {/* availability */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -283,22 +320,11 @@ const BabysitterRegistrationForm = () => {
                     }}
                   />
                 </div>
-                {/* special_skills */}
-                <div className="form-control pt-5 w-full">
-                  <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      special_skills
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your location"
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 pt-5">
+                {" "}
                 {/* nid_no */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       NID_no
@@ -307,26 +333,12 @@ const BabysitterRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your nid_no"
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-                {/* address */}
-                <div className="form-control pt-5 w-full">
-                  <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      Address
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your address"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
                 {/* dob */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth
@@ -335,12 +347,11 @@ const BabysitterRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your dob"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
               </div>
-              {/* )} */}
               {/* password field */}
               <div className="form-control w-full pb-11">
                 <label className="label">
@@ -353,19 +364,15 @@ const BabysitterRegistrationForm = () => {
                   placeholder="Your Password"
                   //   value={password}
                   //   onChange={(e) => setPassword(e.target.value)}
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full"
                   required
                 />
               </div>
               <button
-                style={{
-                  background: `url(${banner4})`,
-                  backgroundSize: "cover",
-                }}
-                className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+                className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
                 type="submit"
               >
-                Go ahead
+                Register
               </button>
               {/* {loading && <div>Loading...</div>} */}
             </form>

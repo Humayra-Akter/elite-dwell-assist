@@ -84,7 +84,7 @@ const MaidPerDayAddress = () => {
           </div>
           <div className="justify-center items-center px-7 pb-7">
             <button
-              className="btn w-full btn-sm border-blue-500 text-blue-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
               type="submit"
             >
               Book

@@ -52,7 +52,7 @@ const ApplianceRepair = () => {
         <div className="absolute top-[160px] left-[34px] w-[233px] h-[54px]">
           <div className="absolute top-[0px] left-[7px]">House No.</div>
           <input
-            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgray"
+            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgrey"
             name="house_no"
             type="text"
           />
@@ -60,7 +60,7 @@ const ApplianceRepair = () => {
         <div className="absolute top-[310px] left-[326px] w-[233px] h-[54px]">
           <div className="absolute top-[0px] left-[7px]">Sector No.</div>
           <input
-            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgray"
+            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgrey"
             name="sector_no"
             type="text"
           />
@@ -68,7 +68,7 @@ const ApplianceRepair = () => {
         <div className="absolute top-[160px] left-[326px] w-[233px] h-[54px]">
           <div className="absolute top-[0px] left-[7px]">Road No.</div>
           <input
-            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgray"
+            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgrey"
             name="road_no"
             type="text"
           />
@@ -76,7 +76,7 @@ const ApplianceRepair = () => {
         <div className="absolute top-[310px] left-[34px] w-[233px] h-[54px]">
           <div className="absolute top-[0px] left-[7px]">Block No.</div>
           <input
-            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgray"
+            className="bg-[transparent] absolute top-[22px] left-[0px] rounded-lg box-border w-[233px] h-8 border-[1px] border-solid border-lightgrey"
             name="block_no"
             type="text"
           />

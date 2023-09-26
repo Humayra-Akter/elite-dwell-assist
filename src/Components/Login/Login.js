@@ -1,21 +1,33 @@
 import React from "react";
+import "./Login.css";
 import { Link } from "react-router-dom";
-import banner from "../../images/login.gif";
+import banner from "../../images/babysitter.jpg";
 
 const Login = () => {
   return (
-    <div
-      style={{
-        background: `url(${banner})`,
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="mx-auto py-28 flex w-full flex-col justify-center sm:w-[350px]">
-        <div className="card w-96 bg-transparent border-purple-300 border-4 shadow-xl">
+    <div>
+      <svg viewBox="0 0 500 200">
+        <path
+          d="M 0 50 C 150 150 300 0 500 80 L 500 0 L 0 0"
+          fill="rgb(91, 75, 210)"
+        ></path>
+        <path
+          d="M 0 50 C 150 150 330 -30 500 50 L 500 0 L 0 0"
+          fill="#0E7452"
+          opacity="0.8"
+        ></path>
+        <path
+          d="M 0 50 C 215 150 250 0 500 100 L 500 0 L 0 0"
+          fill="#5b4bd2"
+          opacity="0.5"
+        ></path>
+      </svg>
+      <div className="absolute top-52 left-1/3 w-full justify-center">
+        <div className="card w-96 bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
               style={{ fontFamily: "arial" }}
-              className="text-center text-2xl text-blue-700 font-extrabold"
+              className="text-center text-2xl text-white font-extrabold"
             >
               LOGIN
             </h1>
@@ -54,13 +66,13 @@ const Login = () => {
               </div>
               <p className="text-left">
                 <small className="font-semibold">
-                  <Link className="text-purple-700" to="/register">
+                  <Link className="text-blue-700" to="/register">
                     Forgot password?
                   </Link>
                 </small>
               </p>
               <button
-                className="btn btn-sm text-xs w-full border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+                className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
                 type="submit"
               >
                 Login
@@ -78,7 +90,7 @@ const Login = () => {
             {/* <div className="divider">OR</div>
             <button
               //   onClick={() => signInWithGoogle()}
-              className="btn w-full btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent "
+              className="btn w-full btn-sm border-blue-500 text-blue-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent "
             >
               Continue with Google
             </button> */}

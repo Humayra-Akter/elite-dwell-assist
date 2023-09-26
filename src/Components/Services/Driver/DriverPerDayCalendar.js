@@ -32,7 +32,7 @@ const DriverPerDayCalendar = () => {
     <div className="mx-16 ">
       <div className="flex  gap-5">
         <div className="time-slot-container pt-28">
-          <strong className="text-lg font-bold text-justify text-purple-900">
+          <strong className="text-lg font-bold text-justify text-blue-900">
             Select a Time Slot :
           </strong>
           <select value={selectedTimeSlot} onChange={handleTimeSlotSelect}>
@@ -43,7 +43,7 @@ const DriverPerDayCalendar = () => {
           </select>
         </div>
         <div>
-          <h1 className="text-lg font-bold text-purple-900 text-center px-7 pt-11">
+          <h1 className="text-lg font-bold text-blue-900 text-center px-7 pt-11">
             Select a Date and Time Slot
           </h1>
           <div className="calendar-container">
@@ -53,13 +53,11 @@ const DriverPerDayCalendar = () => {
       </div>
       <button
         style={{
-          background: `url(${banner4})`,
-          backgroundSize: "cover",
           margin: "10px 30px",
           marginBottom: "100px",
         }}
         onClick={handleBooking}
-        className="btn w-1/3 btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+        className="btn w-1/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
         type="submit"
       >
         Book

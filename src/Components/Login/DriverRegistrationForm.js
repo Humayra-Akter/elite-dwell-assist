@@ -89,7 +89,7 @@ const DriverRegistrationForm = () => {
   return (
     <div className=" py-16">
       <div className="mx-auto max-w-4xl">
-        <div className="card bg-transparent border-purple-300 border-4 shadow-xl">
+        <div className="card border-blue-200 border-4 shadow-xl">
           <div className="card-body">
             <h1
               style={{ fontFamily: "arial" }}
@@ -151,27 +151,24 @@ const DriverRegistrationForm = () => {
                     required
                   />
                 </div>
-                {/* location */}
+                {/* address */}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      Location
+                      Address
                     </span>
                   </label>
-                  <MultiSelect
-                    options={locationOptions}
-                    value={selectedLocation}
-                    onChange={handleLocation}
-                    labelledBy={"Select location"}
-                    overrideStrings={{
-                      selectSomeItems: "Select preferred location",
-                    }}
+                  <input
+                    type="text"
+                    placeholder="Your address"
+                    className="input input-sm input-bordered w-full"
+                    required
                   />
                 </div>
               </div>
               {/* Gender field */}
-              <div className="grid grid-cols-2 pt-5 gap-3">
-                <div className="form-control pt-5 w-full">
+              <div className="grid grid-cols-3 pt-5 gap-3">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-left text-blue-700 font-bold text-xs">
                       Gender
@@ -189,7 +186,7 @@ const DriverRegistrationForm = () => {
                   </div>
                 </div>
                 {/* Education field */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control  w-full">
                   <label className="label">
                     <span className="label-text text-left text-blue-700 font-bold text-xs">
                       Education
@@ -205,8 +202,6 @@ const DriverRegistrationForm = () => {
                     </select>
                   </div>
                 </div>
-              </div>
-              <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* Experience dropdown */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -215,7 +210,6 @@ const DriverRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
-                    className="input input-sm w-full"
                     options={experienceOptions}
                     value={selectedExperience}
                     onChange={handleExperienceChange}
@@ -225,6 +219,8 @@ const DriverRegistrationForm = () => {
                     }}
                   />
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 pt-5">
                 {/*vehicleType*/}
                 <div className="form-control  w-full">
                   <label className="label">
@@ -233,47 +229,46 @@ const DriverRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
-                    className="input input-sm w-full"
                     options={vehicleTypeOptions}
                     value={selectedVehicleType}
                     onChange={handleVehicleTypeChange}
                     labelledBy="Select vehicleType"
                   />
                 </div>
-              </div>
-              <div className="form-control w-full">
-                {selectedVehicleType.map((vehicleType) => (
-                  <div key={vehicleType.value} className="py-2">
-                    <label className="label">
-                      <span className="label-text text-blue-700 font-bold text-md">
-                        {vehicleType.label} Salary
-                      </span>
-                    </label>
-                    <select
-                      value={selectedSalaries[vehicleType.value]}
-                      onChange={(e) =>
-                        handleSalaryChange(vehicleType.value, e.target.value)
-                      }
-                      className="input input-bordered w-full"
-                    >
-                      {vehicleType.value === "car"
-                        ? vehicleTypeSalaries[vehicleType.value].map(
-                            (salary) => (
-                              <option key={salary} value={salary}>
-                                {salary} bdt per month
-                              </option>
+                <div className="form-control w-full">
+                  {selectedVehicleType.map((vehicleType) => (
+                    <div key={vehicleType.value} className="py-2">
+                      <label className="label">
+                        <span className="label-text text-blue-700 font-bold text-md">
+                          {vehicleType.label} Salary
+                        </span>
+                      </label>
+                      <select
+                        value={selectedSalaries[vehicleType.value]}
+                        onChange={(e) =>
+                          handleSalaryChange(vehicleType.value, e.target.value)
+                        }
+                        className="input input-sm input-bordered w-full"
+                      >
+                        {vehicleType.value === "car"
+                          ? vehicleTypeSalaries[vehicleType.value].map(
+                              (salary) => (
+                                <option key={salary} value={salary}>
+                                  {salary} bdt per month
+                                </option>
+                              )
                             )
-                          )
-                        : vehicleTypeSalaries[vehicleType.value].map(
-                            (salary) => (
-                              <option key={salary} value={salary}>
-                                {salary} bdt per km/h
-                              </option>
-                            )
-                          )}
-                    </select>
-                  </div>
-                ))}
+                          : vehicleTypeSalaries[vehicleType.value].map(
+                              (salary) => (
+                                <option key={salary} value={salary}>
+                                  {salary} bdt per km/h
+                                </option>
+                              )
+                            )}
+                      </select>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Conditionally render the "availability" field for van/truck */}
@@ -297,9 +292,9 @@ const DriverRegistrationForm = () => {
                   />
                 </div>
               )}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* dob */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth
@@ -312,18 +307,21 @@ const DriverRegistrationForm = () => {
                     required
                   />
                 </div>
-                {/* address */}
-                <div className="form-control pt-5 w-full">
+                {/* location */}
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      Address
+                      Location
                     </span>
                   </label>
-                  <input
-                    type="text"
-                    placeholder="Your address"
-                    className="input input-sm input-bordered w-full"
-                    required
+                  <MultiSelect
+                    options={locationOptions}
+                    value={selectedLocation}
+                    onChange={handleLocation}
+                    labelledBy={"Select location"}
+                    overrideStrings={{
+                      selectSomeItems: "Select preferred location",
+                    }}
                   />
                 </div>
               </div>
@@ -375,14 +373,10 @@ const DriverRegistrationForm = () => {
                 />
               </div>
               <button
-                style={{
-                  background: `url(${banner4})`,
-                  backgroundSize: "cover",
-                }}
-                className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+                className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
                 type="submit"
               >
-                Go ahead
+                REGISTER
               </button>
               {/* {loading && <div>Loading...</div>} */}
             </form>

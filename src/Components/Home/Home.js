@@ -15,9 +15,10 @@ const Home = () => {
       }}
     >
       <Banner></Banner>
-      {/* <ServiceSegment></ServiceSegment>
-      <ApplianceRepairHomeSegment></ApplianceRepairHomeSegment>
-      <Form></Form> */}
+      <ServiceSegment></ServiceSegment>
+      {/* <ApplianceRepairHomeSegment></ApplianceRepairHomeSegment> */}
+      <Form></Form>
+      <Footer></Footer>
     </div>
   );
 };

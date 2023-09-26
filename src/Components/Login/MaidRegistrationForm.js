@@ -7,6 +7,7 @@ import bengaliLabels from "../../bengaliText";
 const MaidRegistrationForm = () => {
   //   const [selectedRole, setSelectedRole] = useState("");
   const [selectedExperience, setSelectedExperience] = useState([]);
+  const [selectedGender, setSelectedGender] = useState([]);
   const [selectedExpertise, setSelectedExpertise] = useState([]);
   const [selectedSalaries, setSelectedSalaries] = useState({});
   const [selectedAvailability, setSelectedAvailability] = useState([]);
@@ -45,6 +46,10 @@ const MaidRegistrationForm = () => {
     setSelectedExperience(selectedOptions);
   };
 
+  const handleGender = (selected) => {
+    setSelectedGender([selected[selected.length - 1]]);
+  };
+
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
   };
@@ -65,6 +70,12 @@ const MaidRegistrationForm = () => {
     { label: "mohammadpur", value: "mohammadpur" },
     { label: "banani", value: "banani" },
     { label: "motijheel", value: "motijheel" },
+  ];
+
+  const genderOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
   ];
 
   const availabilityOptions = [
@@ -104,7 +115,7 @@ const MaidRegistrationForm = () => {
   return (
     <div className=" py-16">
       <div className="mx-auto max-w-4xl">
-        <div className="card bg-transparent border-purple-300 border-4 shadow-xl">
+        <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
               style={{ fontFamily: "arial" }}
@@ -112,100 +123,97 @@ const MaidRegistrationForm = () => {
             >
               Register as <strong>MAID</strong>
             </h1>
-            <p>{bengaliLabels.maid}</p>
+            <p className="text-center ">{bengaliLabels.maid}</p>
 
             {/* <form onSubmit={handleFormSubmit}> */}
             <form>
-              <div className="form-control pt-5 w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Name /{bengaliLabels.name}
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  //   value={name}
-                  //   onChange={(e) => setName(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-              {/* email field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Email/{bengaliLabels.email}
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  //   value={email}
-                  //   onChange={(e) => setEmail(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* contact field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Contact/ {bengaliLabels.contact}
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Contact number"
-                  //   value={contact}
-                  //   onChange={(e) => setContact(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* Gender field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-left text-blue-700 font-bold text-xs">
-                    Gender/{bengaliLabels.gender}
-                  </span>
-                </label>
-                <div className="input text-left w-full ">
-                  <select className="select" required>
-                    <option disabled selected>
-                      Select your gender
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {" "}
+                {/* name field */}
+                <div className="form-control  w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Name /{bengaliLabels.name}
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    //   value={name}
+                    //   onChange={(e) => setName(e.target.value)}
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+                {/* email field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Email/{bengaliLabels.email}
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    //   value={email}
+                    //   onChange={(e) => setEmail(e.target.value)}
+                    className="input input-sm input-bordered w-full "
+                    required
+                  />
                 </div>
               </div>
-
-              {/* {selectedRole === "Babysitter" && ( */}
-              <div>
-                {/* Education field */}
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {" "}
+                {/* address */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Address/{bengaliLabels.address}
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your address"
+                    className="input input-sm input-bordered w-full"
+                    required
+                  />
+                </div>
+                {/* contact field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Contact/ {bengaliLabels.contact}
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Contact number"
+                    //   value={contact}
+                    //   onChange={(e) => setContact(e.target.value)}
+                    className="input input-sm input-bordered w-full "
+                    required
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 pt-5 gap-3">
+                {/* Gender field */}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-left text-blue-700 font-bold text-xs">
-                      Education{bengaliLabels.education}
+                      Gender/{bengaliLabels.gender}
                     </span>
                   </label>
-                  <div className="input text-left w-full ">
-                    <select className="select" required>
-                      <option disabled selected>
-                        Select your education
-                      </option>
-                      <option value="male">none/ {bengaliLabels.none}</option>
-                      <option value="male">SSC pass</option>
-                      <option value="female">JSC pass</option>
-                    </select>
-                  </div>
+                  <MultiSelect
+                    options={genderOptions}
+                    value={selectedGender}
+                    onChange={handleGender}
+                    labelledBy={"Select"}
+                  />
                 </div>
                 {/* Experience dropdown */}
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
+                    <span className="label-text text-blue-700 font-bold text-sm">
                       Experience/{bengaliLabels.experience}
                     </span>
                   </label>
@@ -219,44 +227,65 @@ const MaidRegistrationForm = () => {
                     }}
                   />
                 </div>
-                {/*expertise*/}
+                {/* Education field */}
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      Expertise
+                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                      Education/{bengaliLabels.education}
                     </span>
                   </label>
-                  <MultiSelect
-                    options={expertiseOptions}
-                    value={selectedExpertise}
-                    onChange={handleExpertiseChange}
-                    labelledBy="Select expertise"
-                  />
+                  <div className="input input-bordered input-sm text-left w-full">
+                    <select className="select" required>
+                      <option disabled defaultValue="">
+                        Select your education
+                      </option>
+                      <option value="none">None/{bengaliLabels.none}</option>
+                      <option value="ssc">SSC pass</option>
+                      <option value="jsc">JSC pass</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="form-control w-full">
-                  {selectedExpertise.map((expertise) => (
-                    <div key={expertise.value} className="py-2">
-                      <label className="label">
-                        <span className="label-text text-blue-700 font-bold text-md">
-                          {expertise.label} Salary
-                        </span>
-                      </label>
-                      <select
-                        value={selectedSalaries[expertise.value]}
-                        onChange={(e) =>
-                          handleSalaryChange(expertise.value, e.target.value)
-                        }
-                        className="input input-bordered w-full"
-                      >
-                        {expertiseSalaries[expertise.value].map((salary) => (
-                          <option key={salary} value={salary}>
-                            {salary} /-
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  ))}
-                </div>
+              </div>
+
+              {/*expertise*/}
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text text-blue-700 font-bold text-md">
+                    Expertise
+                  </span>
+                </label>
+                <MultiSelect
+                  options={expertiseOptions}
+                  value={selectedExpertise}
+                  onChange={handleExpertiseChange}
+                  labelledBy="Select expertise"
+                />
+              </div>
+              <div className="form-control w-full">
+                {selectedExpertise.map((expertise) => (
+                  <div key={expertise.value} className="py-2">
+                    <label className="label">
+                      <span className="label-text text-blue-700 font-bold text-md">
+                        {expertise.label} Salary
+                      </span>
+                    </label>
+                    <select
+                      value={selectedSalaries[expertise.value]}
+                      onChange={(e) =>
+                        handleSalaryChange(expertise.value, e.target.value)
+                      }
+                      className="input input-bordered w-full"
+                    >
+                      {expertiseSalaries[expertise.value].map((salary) => (
+                        <option key={salary} value={salary}>
+                          {salary} /-
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* availability */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -291,9 +320,11 @@ const MaidRegistrationForm = () => {
                     }}
                   />
                 </div>
-
+              </div>
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {" "}
                 {/* nid_no */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       NID_no
@@ -302,26 +333,12 @@ const MaidRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="eg : 1234567890111"
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-                {/* address */}
-                <div className="form-control pt-5 w-full">
-                  <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      Address/{bengaliLabels.address}
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your address"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
                 {/* dob */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth/{bengaliLabels.dob}
@@ -330,12 +347,11 @@ const MaidRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your dob"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
               </div>
-              {/* )} */}
               {/* password field */}
               <div className="form-control w-full pb-11">
                 <label className="label">
@@ -348,19 +364,15 @@ const MaidRegistrationForm = () => {
                   placeholder="Your Password"
                   //   value={password}
                   //   onChange={(e) => setPassword(e.target.value)}
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full"
                   required
                 />
               </div>
               <button
-                style={{
-                  background: `url(${banner4})`,
-                  backgroundSize: "cover",
-                }}
-                className="btn btn-sm text-xs w-full border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+                className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
                 type="submit"
               >
-                Go ahead
+                REGISTER
               </button>
               {/* {loading && <div>Loading...</div>} */}
             </form>

@@ -5,11 +5,9 @@ const About = () => {
     <div class="drawer drawer-end">
       <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content">
-        {/* <!-- Page content here --> */}
         <label
           for="my-drawer-4"
           className="drawer-button btn btn-sm rounded-full text-xs w-1/3 purple-500 text-purple-800 font-bold"
-          // class="drawer-button btn btn-sm rounded-full text-xs w-1/3 border-purple-500 text-purple-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
         >
           About US
         </label>

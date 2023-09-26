@@ -7,7 +7,7 @@ const CustomerRegistrationForm = () => {
   return (
     <div className=" py-16">
       <div className="mx-auto max-w-4xl">
-        <div className="card bg-transparent border-purple-300 border-4 shadow-xl">
+        <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">
             <h1
               style={{ fontFamily: "arial" }}
@@ -131,14 +131,10 @@ const CustomerRegistrationForm = () => {
                 />
               </div>
               <button
-                style={{
-                  background: `url(${banner4})`,
-                  backgroundSize: "cover",
-                }}
-                className="btn w-full btn-sm border-purple-500 text-purple-950 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+                className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
                 type="submit"
               >
-                Go ahead
+                REGISTER
               </button>
               {/* {loading && <div>Loading...</div>} */}
             </form>

@@ -1,14 +1,8 @@
 import React from "react";
-import banner4 from "../../images/footer.jpg";
 
 const Footer = () => {
   return (
-    <div
-      style={{
-        background: `url(${banner4})`,
-        backgroundSize: "cover",
-      }}
-    >
+    <div className="bg-gradient-to-t from-secondary to accent">
       <footer className="footer p-10 text-base-content">
         <nav>
           <header className="footer-title text-purple-950">Services</header>
