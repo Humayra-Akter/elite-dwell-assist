@@ -7,7 +7,7 @@
       "pass": "halima123",
       "phone": "01456170233",
       "img": "/images/maid/1.jpg",
-      "experience": 50,
+      "experience": "2 year",
       "task": [
         "mopping",
         "cooking",
@@ -35,7 +35,7 @@
       "pass": "lima123",
       "phone": "01757259623",
       "img": "/images/maid/2.jpg",
-      "experience": 72,
+      "experience": "3 year",
       "task": ["mopping", "cloth_washing", "sweeping", "dish_washing"],
       "salary": ["1000", "1500", "800", "1500"],
       "availability": ["08.00 AM - 11.00 AM", "05.00 PM - 08.00 PM"],
@@ -43,7 +43,6 @@
       "nid_no": "5678967890111",
       "address": "116/3, shewrapara,mirpur 10,Dhaka",
       "dob": "1990-05-20",
-      "age": "27",
       "gender": "female",
       "education": "SSC pass"
     },
@@ -54,7 +53,7 @@
       "pass": "rabeya123",
       "phone": "01678170233",
       "img": "/images/maid/3.jpg",
-      "experience": 50,
+      "experience": "1 year",
       "task": ["cloth_washing", "dish_washing"],
       "salary": ["1500", "1500"],
       "availability": ["08.00 AM - 11.00 AM"],
@@ -62,7 +61,6 @@
       "nid_no": "1014567890111",
       "address": "116/3, motijheel 13,Dhaka",
       "dob": "1995-05-20",
-      "age": "27",
       "gender": "female",
       "education": "SSC pass"
     },
@@ -73,7 +71,7 @@
       "pass": "afia123",
       "phone": "01965170233",
       "img": "/images/maid/4.jpg",
-      "experience": 72,
+      "experience": "4 year",
       "task": ["cooking"],
       "salary": ["4000"],
       "availability": ["08.00 AM - 11.00 AM"],
@@ -81,7 +79,6 @@
       "nid_no": "1234567890123",
       "address": "116/3, banani 14,Dhaka",
       "dob": "1995-05-20",
-      "age": "27",
       "gender": "female",
       "education": "SSC pass"
     },
@@ -92,7 +89,7 @@
       "pass": "sara123",
       "phone": "01301495769",
       "img": "/images/maid/5.jpg",
-      "experience": 5,
+      "experience": "4 year",
       "task": ["mopping", "cloth_washing", "sweeping", "dish_washing"],
       "salary": ["1000", "1000", "500", "1000"],
       "availability": ["08.00 AM - 11.00 AM", "02.00 PM - 05.00 PM"],
@@ -100,7 +97,6 @@
       "nid_no": "9876543211012",
       "address": "56/2, Sultangonj,Rayer Bazar,Dhaka",
       "dob": "1995-05-20",
-      "age": "27",
       "gender": "female",
       "education": "SSC pass"
     },
@@ -111,7 +107,7 @@
       "pass": "mini123",
       "phone": "01301495100",
       "img": "/images/maid/6.jpg",
-      "experience": 50,
+      "experience": "5 year",
       "task": ["cloth_washing", "dish_washing"],
       "salary": ["1000", "1000"],
       "availability": [
@@ -123,7 +119,6 @@
       "nid_no": "9876578911012",
       "address": "98/2,Uttara sector 2,Dhaka",
       "dob": "1993-05-20",
-      "age": "29",
       "gender": "female",
       "education": "SSC pass"
     },
@@ -134,7 +129,7 @@
       "pass": "minikkhi123",
       "phone": "01789695100",
       "img": "/images/maid/7.jpg",
-      "experience": 80,
+      "experience": "7 year",
       "task": ["cloth_washing", "dish_washing"],
       "salary": ["1000", "1000"],
       "availability": ["08.00 AM - 11.00 AM", "02.00 PM - 05.00 PM"],
@@ -142,7 +137,6 @@
       "nid_no": "1234578911012",
       "address": "74/9,Uttara sector 2,Dhaka",
       "dob": "1993-10-20",
-      "age": "29",
       "gender": "female",
       "education": "SSC pass"
     }

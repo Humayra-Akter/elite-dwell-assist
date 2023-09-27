@@ -14,8 +14,8 @@ const Register = () => {
     <div className="bg-gradient-to-t from-primary 100vh">
       <div className="pb-48 pt-16 flex items-center justify-center">
         <div
-          className={`w-11/12  bg-transparent rounded-2xl flex overflow-hidden transition-transform ease-in-out transform ${
-            selectedRole ? "translate-x-10" : "translate-x-96"
+          className={`w-11/12  bg-transparent flex overflow-hidden transition-transform ease-in-out transform ${
+            selectedRole ? "translate-x-10" : "translate-x-1/3"
           }`}
         >
           <div className="w-1/4 bg-primary text-white p-8">

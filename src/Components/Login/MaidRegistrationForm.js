@@ -5,23 +5,29 @@ import { MultiSelect } from "react-multi-select-component";
 import bengaliLabels from "../../bengaliText";
 
 const MaidRegistrationForm = () => {
-  //   const [selectedRole, setSelectedRole] = useState("");
   const [selectedExperience, setSelectedExperience] = useState([]);
   const [selectedGender, setSelectedGender] = useState([]);
   const [selectedExpertise, setSelectedExpertise] = useState([]);
   const [selectedSalaries, setSelectedSalaries] = useState({});
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
-
-  //   const handleRoleChange = (e) => {
-  //     setSelectedRole(e.target.value);
-  //   };
+  const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
 
   function calculateTotalCost(selectedExpertise) {
     return selectedExpertise.reduce((total, expertise) => {
       return total + expertiseSalaries[expertise.value];
     }, 0);
   }
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
 
   const handleExpertiseChange = (selectedOptions) => {
     setSelectedExpertise(selectedOptions);
@@ -112,6 +118,66 @@ const MaidRegistrationForm = () => {
     sweeping: [500, 600, 550],
     dish_washing: [1500, 1600, 1550],
   };
+
+  const handleAddMaid = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const address = event.target.address.value;
+    const contact = event.target.contact.value;
+    const gender = selectedGender[0]?.value;
+    const experience = selectedExperience[0]?.label; // Assuming you want the label (e.g., "2 years") instead of the value
+    const education = event.target.education.value;
+    const availability = selectedAvailability.map((avail) => avail.value);
+    const location = selectedLocation.map((loc) => loc.value);
+    const nid = event.target.nid.value;
+    const dob = event.target.dob.value;
+
+    // Password field
+    const userPassword = password;
+
+    // Tasks (selectedExpertise)
+    const tasks = selectedExpertise.map((task) => task.value);
+
+    // Salary for each task
+    const salaryForTasks = {};
+    selectedExpertise.forEach((task) => {
+      salaryForTasks[task.value] = selectedSalaries[task.value];
+    });
+
+    // Construct the maid object
+    const maid = {
+      name,
+      email,
+      pass: userPassword,
+      phone: contact,
+      img: "/images/maid/1.jpg", // Assuming this is a static value
+      experience,
+      task: tasks,
+      salary: Object.values(salaryForTasks), // Extract salaries as an array
+      availability,
+      location,
+      nid_no: nid,
+      address,
+      dob,
+      gender,
+      education,
+    };
+
+    // Send the maid data to the backend
+    fetch("http://localhost:5000/maid", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(maid),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("success", data);
+      });
+  };
+
   return (
     <div>
       <div className="mx-auto max-w-4xl">
@@ -126,9 +192,8 @@ const MaidRegistrationForm = () => {
             <p className="text-center ">{bengaliLabels.maid}</p>
 
             {/* <form onSubmit={handleFormSubmit}> */}
-            <form>
+            <form onSubmit={handleAddMaid}>
               <div className="grid grid-cols-2 pt-5 gap-3">
-                {" "}
                 {/* name field */}
                 <div className="form-control  w-full">
                   <label className="label">
@@ -139,8 +204,7 @@ const MaidRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your Name"
-                    //   value={name}
-                    //   onChange={(e) => setName(e.target.value)}
+                    name="name"
                     className="input input-sm input-bordered w-full"
                     required
                   />
@@ -155,8 +219,7 @@ const MaidRegistrationForm = () => {
                   <input
                     type="email"
                     placeholder="Your email"
-                    //   value={email}
-                    //   onChange={(e) => setEmail(e.target.value)}
+                    name="email"
                     className="input input-sm input-bordered w-full "
                     required
                   />
@@ -174,6 +237,7 @@ const MaidRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your address"
+                    name="address"
                     className="input input-sm input-bordered w-full"
                     required
                   />
@@ -188,8 +252,7 @@ const MaidRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your Contact number"
-                    //   value={contact}
-                    //   onChange={(e) => setContact(e.target.value)}
+                    name="contact"
                     className="input input-sm input-bordered w-full "
                     required
                   />
@@ -204,6 +267,7 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
+                    name="gender"
                     options={genderOptions}
                     value={selectedGender}
                     onChange={handleGender}
@@ -218,6 +282,7 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
+                    name="experience"
                     options={experienceOptions}
                     value={selectedExperience}
                     onChange={handleExperienceChange}
@@ -235,7 +300,7 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <div className="input input-bordered input-sm text-left w-full">
-                    <select className="select" required>
+                    <select className="select" name="education" required>
                       <option disabled defaultValue="">
                         Select your education
                       </option>
@@ -255,6 +320,7 @@ const MaidRegistrationForm = () => {
                   </span>
                 </label>
                 <MultiSelect
+                  name="expertise"
                   options={expertiseOptions}
                   value={selectedExpertise}
                   onChange={handleExpertiseChange}
@@ -294,6 +360,7 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
+                    name="availability"
                     options={availabilityOptions}
                     value={selectedAvailability}
                     onChange={handleAvailability}
@@ -311,6 +378,7 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
+                    name="location"
                     options={locationOptions}
                     value={selectedLocation}
                     onChange={handleLocation}
@@ -332,6 +400,7 @@ const MaidRegistrationForm = () => {
                   </label>
                   <input
                     type="text"
+                    name="nid"
                     placeholder="eg : 1234567890111"
                     className="input input-sm input-bordered w-full"
                     required
@@ -346,13 +415,29 @@ const MaidRegistrationForm = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="Your dob"
+                    name="dob"
+                    placeholder="mm-dd-yyyy"
                     className="input input-sm input-bordered w-full"
                     required
                   />
                 </div>
               </div>
-              {/* password field */}
+              {/* Image upload field */}
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text text-blue-700 font-bold text-md">
+                    Upload Image
+                  </span>
+                </label>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  className="input input-sm w-full"
+                  onChange={handleImageChange}
+                />
+              </div>
+              {/* Password field */}
               <div className="form-control w-full pb-11">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-md">
@@ -362,8 +447,8 @@ const MaidRegistrationForm = () => {
                 <input
                   type="password"
                   placeholder="Your Password"
-                  //   value={password}
-                  //   onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  onChange={handlePasswordChange}
                   className="input input-sm input-bordered w-full"
                   required
                 />
