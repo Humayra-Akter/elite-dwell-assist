@@ -23,9 +23,6 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             {Array.isArray(location) ? location.join(", ") : location}
           </p>
           <p>
-            <strong>Gender:</strong> {gender}
-          </p>
-          <p>
             <strong className="underline">Task </strong>
             {task && salary ? (
               <ul>

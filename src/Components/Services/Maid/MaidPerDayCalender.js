@@ -17,7 +17,6 @@ const MaidPerDayCalender = ({
     setSelectedDate(date);
   };
 
-
   return (
     <div className="ml-12">
       <div>
@@ -37,8 +36,8 @@ const MaidPerDayCalender = ({
           </select>
         </div>
         <div>
-          <h1 className="text-lg font-bold text-primary mx-5 pt-11">
-            Select a Date and Time Slot
+          <h1 className="text-lg font-bold text-primary mx-5 pt-5 text-center">
+            Select a Date
           </h1>
           <div className="calendar-container">
             <DayPicker selected={selectedDate} onDayClick={handleDateSelect} />

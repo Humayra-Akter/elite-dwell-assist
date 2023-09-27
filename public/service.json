@@ -8,7 +8,7 @@
       "phone": "01456170233",
       "img": "/images/maid/1.jpg",
       "experience": 50,
-      "expertise": [
+      "task": [
         "mopping",
         "cooking",
         "cloth_washing",
@@ -36,7 +36,7 @@
       "phone": "01757259623",
       "img": "/images/maid/2.jpg",
       "experience": 72,
-      "expertise": ["mopping", "cloth_washing", "sweeping", "dish_washing"],
+      "task": ["mopping", "cloth_washing", "sweeping", "dish_washing"],
       "salary": ["1000", "1500", "800", "1500"],
       "availability": ["08.00 AM - 11.00 AM", "05.00 PM - 08.00 PM"],
       "location": ["Mirpur"],

@@ -87,7 +87,7 @@ const DriverRegistrationForm = () => {
     truck: [300, 500, 700],
   };
   return (
-    <div className=" py-16">
+    <div>
       <div className="mx-auto max-w-4xl">
         <div className="card border-blue-200 border-4 shadow-xl">
           <div className="card-body">

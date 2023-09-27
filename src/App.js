@@ -17,9 +17,30 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+
+  const openAboutModal = () => {
+    setIsAboutModalOpen(true);
+  };
+
+  const closeAboutModal = () => {
+    setIsAboutModalOpen(false);
+  };
+
   return (
-    <div className="rgb(240,240,240)">
-      <Navbar />
+    <div >
+      <Navbar openAboutModal={openAboutModal} />
+      {isAboutModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-primary w-1/2 p-9 rounded-3xl relative ">
+            <About />
+          </div>
+          <div
+            onClick={closeAboutModal}
+            className="fixed inset-0 bg-sky-100 opacity-20 cursor-pointer"
+          ></div>
+        </div>
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

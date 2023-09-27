@@ -113,7 +113,7 @@ const MaidRegistrationForm = () => {
     dish_washing: [1500, 1600, 1550],
   };
   return (
-    <div className=" py-16">
+    <div>
       <div className="mx-auto max-w-4xl">
         <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">

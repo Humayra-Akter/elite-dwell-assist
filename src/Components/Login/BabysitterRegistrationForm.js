@@ -85,7 +85,7 @@ const BabysitterRegistrationForm = () => {
   ];
 
   return (
-    <div className=" py-16">
+    <div>
       <div className="mx-auto max-w-4xl">
         <div className="card max-w-screen-lg bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ServiceSegment = () => {
   return (
-    <div className="pt-11 px-20">
+    <div className="pt-16 pb-16 px-20">
       <div className="grid grid-cols-4 gap-4">
         <div>
           <h1
@@ -21,7 +21,7 @@ const ServiceSegment = () => {
           </p>
         </div>
         <div>
-          <div class="card w-80  border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-sky-100 to-sky-50 hover:shadow-lg">
+          <div class="card w-80  border-2 border-blue-100 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-sky-100 to-sky-50 hover:shadow-lg">
             <figure class="px-10 pt-10">
               <img src={banner1} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -39,8 +39,8 @@ const ServiceSegment = () => {
           </div>
         </div>
 
-        <div className="py-24">
-          <div class="card w-80  border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-sky-100 to-sky-50  hover:shadow-lg">
+        <div>
+          <div class="card w-80  border-2 border-blue-100 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-sky-100 to-sky-50  hover:shadow-lg">
             <figure class="px-10 pt-10">
               <img src={banner2} alt="Babysitter" class="rounded-xl" />
             </figure>
@@ -58,7 +58,7 @@ const ServiceSegment = () => {
           </div>
         </div>
         <div>
-          <div class="card w-80  border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-sky-100 to-sky-50  hover:shadow-lg">
+          <div class="card w-80  border-2 border-blue-100 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-sky-100 to-sky-50  hover:shadow-lg">
             <figure class="px-10 pt-10">
               <img src={banner3} alt="Babysitter" class="rounded-xl" />
             </figure>

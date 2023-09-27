@@ -67,7 +67,7 @@ const MaidPerDay = () => {
   return (
     <div>
       <h1
-        className="text-2xl py-7 text-center font-black text-purple-950 px-7"
+        className="text-3xl py-7 text-center font-black text-blue-950 px-7"
         style={{ fontFamily: "arial" }}
       >
         MAID PER DAY
