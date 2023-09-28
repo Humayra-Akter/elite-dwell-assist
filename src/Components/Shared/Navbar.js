@@ -3,17 +3,31 @@ import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ openAboutModal }) => {
-  //service dropdown from 8-18
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  //service dropdown from 8-31
+  const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
+  const [isAppDropdownOpen, setIsAppDropdownOpen] = useState(false);
+
+  const toggleServiceDropdown = () => {
+    setIsServiceDropdownOpen(!isServiceDropdownOpen);
   };
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
+
+  const toggleAppDropdown = () => {
+    setIsAppDropdownOpen(!isAppDropdownOpen);
   };
+
+  const closeDropdowns = () => {
+    setIsServiceDropdownOpen(false);
+    setIsAppDropdownOpen(false);
+  };
+
   const handleServiceClick = (service) => {
     console.log(`Clicked on ${service}`);
-    closeDropdown();
+    closeDropdowns();
+  };
+
+  const handleAppServiceClick = (service) => {
+    console.log(`Clicked on ${service}`);
+    closeDropdowns();
   };
 
   return (
@@ -30,58 +44,113 @@ const Navbar = ({ openAboutModal }) => {
               <div class="indicator">Login</div>
             </button>
           </Link>
-
+          {/* Services */}
           <div className="relative inline-block text-right">
             <button
-              onClick={toggleDropdown}
+              onClick={toggleServiceDropdown}
               className="text-black font-black pr-7 hover:text-primary focus:outline-none"
             >
-              Services
+              Services 
             </button>
-            {isDropdownOpen && (
+            {isServiceDropdownOpen && (
               <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="origin-top-right absolute right-0 mt-2 w-36  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div
+                    className="py-1"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="options-menu"
+                  >
+                    <Link to="/maidPerDay">
+                      <button
+                        onClick={() => handleServiceClick("Service 1")}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                        role="menuitem"
+                      >
+                        Maid Per Day
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => handleServiceClick("Service 2")}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      <Link to="/maidPerMonth">Maid Per Month</Link>
+                    </button>
+                    <button
+                      onClick={() => handleServiceClick("Service 3")}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary  w-full text-left"
+                      role="menuitem"
+                    >
+                      <Link to="/babysitter">Babysitter</Link>
+                    </button>
+                    <button
+                      onClick={() => handleServiceClick("Service 4")}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      <Link to="/driverPerDay">Vehicle Service</Link>
+                    </button>
+                    <button
+                      onClick={() => handleServiceClick("Service 5")}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      <Link to="/driverPerMonth">Car Driver</Link>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Appliance-Repair */}
+          <div className="relative inline-block text-right">
+            <button
+              onClick={toggleAppDropdown}
+              className="text-black font-black pr-7 hover:text-primary focus:outline-none"
+            >
+              Appliance-Repair
+            </button>
+            {isAppDropdownOpen && (
+              <div className="origin-top-right absolute right-0 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div
                   className="py-1"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="options-menu"
                 >
-                  <Link to="/maidPerDay">
+                  <Link to="/tv-service">
                     <button
                       onClick={() => handleServiceClick("Service 1")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
                       role="menuitem"
                     >
-                      Maid Per Day
+                      TV service
                     </button>
                   </Link>
                   <button
                     onClick={() => handleServiceClick("Service 2")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary  w-full text-left"
                     role="menuitem"
                   >
-                    <Link to="/maidPerMonth">Maid Per Month</Link>
+                    <Link to="/oven-service">Oven Service</Link>
                   </button>
                   <button
                     onClick={() => handleServiceClick("Service 3")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
                     role="menuitem"
                   >
-                    <Link to="/babysitter">Babysitter</Link>
+                    <Link to="/washing-machine-service">
+                      Washing-Machine service
+                    </Link>
                   </button>
                   <button
-                    onClick={() => handleServiceClick("Service 3")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                    onClick={() => handleServiceClick("Service 4")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary  w-full text-left"
                     role="menuitem"
                   >
-                    <Link to="/driverPerDay">Driver Per Day</Link>
-                  </button>
-                  <button
-                    onClick={() => handleServiceClick("Service 3")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
-                    role="menuitem"
-                  >
-                    <Link to="/driverPerMonth">Car Driver</Link>
+                    <Link to="/refrigerator-service">Refrigerator Service</Link>
                   </button>
                 </div>
               </div>
@@ -109,7 +178,6 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             </button>
           </Link> */}
-
           <button class="btn btn-ghost text-xl font-black text-black btn-circle">
             <div class="indicator">
               <svg
