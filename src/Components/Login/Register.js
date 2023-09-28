@@ -14,7 +14,7 @@ const Register = () => {
     setSelectedRole(role);
   };
   return (
-    <div className="bg-gradient-to-t from-primary 100vh">
+    <div className="bg-slate-200 100vh">
       <div className="pb-12 pt-16 flex items-center justify-center">
         <div
           className={`w-11/12  bg-transparent flex overflow-hidden transition-transform ease-in-out transform ${
