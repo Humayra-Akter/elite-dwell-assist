@@ -8,12 +8,12 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
   };
   return (
     <div>
-      <div className="w-80 h-80 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-110 cursor-grab transition-all duration-300 ease-in-out">
+      <div className="w-80 h-80 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">
         <div>
           <figure className="absolute top-3 left-3 right-0 h-full">
             <img src={img} alt="Maid" className="h-32 w-32 rounded-full" />
           </figure>
-          <div className="p-7 text-right bg-gradient-to-b from-primary  text-black font-bold ">
+          <div className="p-7 text-right text-black font-bold ">
             <h2 className="text-xl font-bold">{name}</h2>
           </div>
         </div>

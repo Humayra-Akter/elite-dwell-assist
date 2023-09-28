@@ -10,21 +10,16 @@ const MaidServicePerDay = ({ selectedTimeSlot }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleServiceSelect = (service) => {
-    // Create a copy of the current selectedServices array
     const updatedServices = [...selectedServices];
 
-    // Check if the service is already selected
     const serviceIndex = updatedServices.indexOf(service);
 
     if (serviceIndex !== -1) {
-      // Service is already selected, so remove it
       updatedServices.splice(serviceIndex, 1);
     } else {
-      // Service is not selected, so add it
       updatedServices.push(service);
     }
 
-    // Update the state with the updatedServices array
     setSelectedServices(updatedServices);
   };
 

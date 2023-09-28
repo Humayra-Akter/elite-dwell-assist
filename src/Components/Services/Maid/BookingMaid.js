@@ -1,9 +1,10 @@
 import React from "react";
-import bg from "../../../images/bg.jpg";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/slices/CartSlices";
 
 const BookingMaid = ({ bookMaid }) => {
   const {
+    id,
     img,
     name,
     experience,
@@ -15,14 +16,11 @@ const BookingMaid = ({ bookMaid }) => {
     dob,
     salary,
   } = bookMaid;
+
+  const dispatch = useDispatch();
+
   return (
-    <div
-      style={{
-        background: `url(${bg})`,
-        backgroundSize: "cover",
-      }}
-      className=" bg-transparent"
-    >
+    <div className=" bg-transparent">
       <input type="checkbox" id="booking-maid" class="modal-toggle" />
       <div class="modal ">
         <div class="modal-box w-screen max-w-4xl">
@@ -84,18 +82,17 @@ const BookingMaid = ({ bookMaid }) => {
                 <strong className="text-purple-800">Salary :</strong> {salary}
               </p>
               <div class=" justify-end">
-                <Link to="/">
-                  <label
-                    style={{
-                      background: `url(${bg})`,
-                      backgroundSize: "cover",
-                    }}
-                    for="booking-maid"
-                    class="btn font-bold w-full btn-md"
-                  >
-                    Recruit
-                  </label>
-                </Link>
+                <button
+                  for="booking-maid"
+                  class="btn font-bold w-full btn-md"
+                  onClick={() => {
+                    dispatch(
+                      addToCart({ id, img, name, salary, task, qty: 1 })
+                    );
+                  }}
+                >
+                  Add To Cart
+                </button>
               </div>
             </div>
           </div>

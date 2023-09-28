@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-gradient-to-t from-secondary to accent">
+    <div className="bg-slate-100">
       <footer className="footer p-10 text-base-content">
         <nav>
           <header className="footer-title text-purple-950">Services</header>

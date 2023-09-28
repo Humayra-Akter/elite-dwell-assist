@@ -31,7 +31,7 @@ const Navbar = ({ openAboutModal }) => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-primary text-white font-bold ">
+    <div className="bg-primary text-white font-bold ">
       <div class="navbar sticky">
         <div className="navbar-start">
           <Link to={"/"}>
@@ -40,7 +40,7 @@ const Navbar = ({ openAboutModal }) => {
         </div>
         <div class="navbar-end pr-24">
           <Link to="/login">
-            <button className="text-black font-black hover:text-primary pr-7 focus:outline-none">
+            <button className="text-white font-black hover:text-black pr-7 ">
               <div class="indicator">Login</div>
             </button>
           </Link>
@@ -48,7 +48,7 @@ const Navbar = ({ openAboutModal }) => {
           <div className="relative inline-block text-right">
             <button
               onClick={toggleServiceDropdown}
-              className="text-black font-black pr-7 hover:text-primary focus:outline-none"
+              className="text-white font-black hover:text-black pr-7 "
             >
               Services
             </button>
@@ -108,7 +108,7 @@ const Navbar = ({ openAboutModal }) => {
           <div className="relative inline-block text-right">
             <button
               onClick={toggleAppDropdown}
-              className="text-black font-black pr-7 hover:text-primary focus:outline-none"
+              className="text-white font-black hover:text-black pr-7 "
             >
               Appliance-Repair
             </button>
@@ -158,7 +158,7 @@ const Navbar = ({ openAboutModal }) => {
           </div>
           <button
             onClick={openAboutModal}
-            className=" text-black font-black pr-7 hover:text-primary focus:outline-none"
+            className=" text-white font-black hover:text-black pr-7 "
           >
             About
           </button>
@@ -178,7 +178,7 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             </button>
           </Link> */}
-          <button class="btn btn-ghost pr-7 text-xl font-black text-black btn-circle">
+          <button class="text-white font-black hover:text-black pr-7 btn btn-ghost text-xl btn-circle">
             <div class="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -197,9 +197,9 @@ const Navbar = ({ openAboutModal }) => {
               <span class="badge badge-xs badge-primary indicator-item"></span>
             </div>
           </button>
-          <h3 className="text-xs font-bold text-black">
+          {/* <h3 className="text-xs font-bold text-white">
             {new Date().toUTCString().slice(0, 16)}
-          </h3>
+          </h3> */}
         </div>
       </div>
     </div>

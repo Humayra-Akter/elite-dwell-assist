@@ -3,10 +3,12 @@ import BookingMaid from "./BookingMaid";
 import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
 import Cart from "../../Cart/Cart";
+import { useSelector } from "react-redux";
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
   const [bookMaid, setBookMaid] = useState([]);
+  const selectedLocation = useSelector((state) => state.location.location); // Get the selected location from Redux
 
   useEffect(() => {
     fetch("http://localhost:5000/maid")
@@ -19,6 +21,14 @@ const MaidPerMonth = () => {
       });
   }, []);
 
+  const filteredMaids = maids.filter((maid) => {
+    if (selectedLocation === "All") {
+      return true; // Show all maids when "All" is selected
+    } else {
+      return maid.location === selectedLocation;
+    }
+  });
+
   return (
     <div>
       <h1
@@ -27,11 +37,19 @@ const MaidPerMonth = () => {
       >
         Maid
       </h1>
-
+      <div className="grid grid-cols-3 gap-5 p-11">
+        {filteredMaids.map((maid) => (
+          <MaidPerMonthCard
+            key={maid.id}
+            maid={maid}
+            setBookMaid={setBookMaid}
+          ></MaidPerMonthCard>
+        ))}
+      </div>
       <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard
-            key={maid.maid_id}
+            key={maid.id}
             maid={maid}
             setBookMaid={setBookMaid}
           ></MaidPerMonthCard>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ServiceSegment = () => {
   return (
-    <div className="pt-16 pb-16 px-20">
+    <div className="pb-16 px-20">
       <div className="grid grid-cols-4 gap-4">
         <div>
           <h1
