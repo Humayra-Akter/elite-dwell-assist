@@ -6,11 +6,14 @@ const BookingMaid = ({ bookMaid }) => {
   const {
     id,
     img,
+    email,
     name,
+    phone,
     experience,
     availability,
     location,
     gender,
+    address,
     education,
     task,
     dob,
@@ -23,77 +26,119 @@ const BookingMaid = ({ bookMaid }) => {
     <div className=" bg-transparent">
       <input type="checkbox" id="booking-maid" class="modal-toggle" />
       <div class="modal ">
-        <div class="modal-box w-screen max-w-4xl">
+        <div class="modal-box max-w-2xl w-screen">
           <label
             for="booking-maid"
             class="btn btn-sm btn-circle btn-ghost bg-red-500 absolute right-2 top-2"
           >
             ✕
           </label>
-          <div class="card card-side bg-transparent">
+          <div class="card bg-transparent">
             <figure>
-              <img className="w-80 h-72" src={img} alt="maid" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">
-                <strong className="text-purple-900">{name}</strong>for your Home
+              <img
+                className="w-24 h-24 rounded-full absolute top-0 left-5"
+                src={img}
+                alt="maid"
+              />
+              <h2 className="card-title">
+                <strong className="text-blue-900">{name}</strong> for your Home
               </h2>
-              <p class="pt-4">
-                <strong className="text-purple-800">Location :</strong>
-                {location}
-              </p>
-              <p class="pt-2">
-                <strong className="text-purple-800">Availability:</strong>
-                {availability ? (
-                  Array.isArray(availability) ? (
+            </figure>
+            <div class="card-body relative top-16">
+              <div className="grid grid-cols-2 gap-5">
+                <div>
+                  <p>
+                    <strong className="text-blue-800 underline">
+                      Location :
+                    </strong>
+                    <br />
+                    {location.join(", ")}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Availability:
+                    </strong>
                     <ul>
-                      {availability.map((daySlot) => (
-                        <li key={daySlot.day}>
-                          <strong>{daySlot.day}:</strong>{" "}
-                          {Array.isArray(daySlot.slots)
-                            ? daySlot.slots.join(", ")
-                            : "Slots data not available"}
+                      {availability?.map((daySlot, index) => (
+                        <li key={index}>
+                          <strong>{daySlot}</strong>
                         </li>
                       ))}
                     </ul>
-                  ) : (
-                    <p>Availability data is not in the expected format</p>
-                  )
-                ) : (
-                  <p>Availability data not available</p>
-                )}
-              </p>
-              <p class="pt-2">
-                <strong className="text-purple-800">Date of Birth :</strong>{" "}
-                {dob}
-              </p>
-              <p class="pt-2">
-                <strong className="text-purple-800">Experience :</strong>
-                {experience} months
-              </p>
-              <p class="pt-2">
-                <strong className="text-purple-800">Education :</strong>{" "}
-                {education}
-              </p>
-              <p class="pt-2">
-                <strong className="text-purple-800">Gender :</strong> {gender}
-              </p>
-              <p class="pt-2">
-                <strong className="text-purple-800">Salary :</strong> {salary}
-              </p>
-              <div class=" justify-end">
-                <button
-                  for="booking-maid"
-                  class="btn font-bold w-full btn-md"
-                  onClick={() => {
-                    dispatch(
-                      addToCart({ id, img, name, salary, task, qty: 1 })
-                    );
-                  }}
-                >
-                  Add To Cart
-                </button>
+                  </p>
+                  <div className="pt-3">
+                    <strong className="text-blue-800 underline">
+                      Task with Salary:
+                    </strong>
+                    {task && salary ? (
+                      <ul>
+                        {task.map((taskName, index) => (
+                          <li key={index}>
+                            <strong className="capitalize">{taskName}: </strong>
+                            {salary[index]}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "Salary information not available"
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">Email:</strong>{" "}
+                    {email}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">Phone:</strong>{" "}
+                    {phone}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Address:
+                    </strong>{" "}
+                    {address}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Date of Birth :
+                    </strong>{" "}
+                    {dob}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Experience :
+                    </strong>{" "}
+                    {experience}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Education :
+                    </strong>{" "}
+                    {education}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Gender :
+                    </strong>{" "}
+                    {gender}
+                  </p>
+                  {/* <p className="pt-2">
+                    <strong className="text-blue-800 underline">
+                      Salary :
+                    </strong>{" "}
+                    {salary.join(", ")}
+                  </p> */}
+                </div>
               </div>
+            </div>
+            <div class="flex items-end justify-end">
+              <button
+                for="booking-maid"
+                class="btn btn-sm text-white  font-bold w-1/3 btn-primary"
+              >
+                Add To Cart
+              </button>
             </div>
           </div>
         </div>

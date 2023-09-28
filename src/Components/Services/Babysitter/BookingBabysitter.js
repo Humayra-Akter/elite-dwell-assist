@@ -19,12 +19,7 @@ const BookingBabysitter = ({ bookBaby }) => {
     salary,
   } = bookBaby;
   return (
-    <div
-      style={{
-        background: `url(${bg})`,
-        backgroundSize: "cover",
-      }}
-      className=" bg-transparent"
+    <div className=" bg-transparent"
     >
       <input type="checkbox" id="booking-babysitter" class="modal-toggle" />
       <div class="modal ">
