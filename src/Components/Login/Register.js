@@ -3,6 +3,7 @@ import MaidRegistrationForm from "./MaidRegistrationForm";
 import DriverRegistrationForm from "./DriverRegistrationForm";
 import BabysitterRegistrationForm from "./BabysitterRegistrationForm";
 import img from "../../images/serviceBG.jpg";
+import Footer  from "../Shared/Footer";
 
 const Register = () => {
   const [selectedRole, setSelectedRole] = useState(null);
@@ -12,7 +13,7 @@ const Register = () => {
   };
   return (
     <div className="bg-gradient-to-t from-primary 100vh">
-      <div className="pb-48 pt-16 flex items-center justify-center">
+      <div className="pb-12 pt-16 flex items-center justify-center">
         <div
           className={`w-11/12  bg-transparent flex overflow-hidden transition-transform ease-in-out transform ${
             selectedRole ? "translate-x-10" : "translate-x-1/3"
@@ -61,6 +62,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

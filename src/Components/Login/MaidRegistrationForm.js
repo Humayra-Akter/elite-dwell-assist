@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import banner4 from "../../images/bg.jpg";
 import { MultiSelect } from "react-multi-select-component";
 import bengaliLabels from "../../bengaliText";
+import { toast } from "react-toastify";
+import Modal from "react-modal";
 
 const MaidRegistrationForm = () => {
   const [selectedExperience, setSelectedExperience] = useState([]);
@@ -12,7 +13,8 @@ const MaidRegistrationForm = () => {
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
   const [password, setPassword] = useState("");
-  const [image, setImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function calculateTotalCost(selectedExpertise) {
     return selectedExpertise.reduce((total, expertise) => {
@@ -20,13 +22,31 @@ const MaidRegistrationForm = () => {
     }, 0);
   }
 
+  const openSuccessModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Function to close the success modal
+  const closeSuccessModal = () => {
+    setIsModalOpen(false);
+  };
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    setImage(file);
+    if (!file) {
+      console.error("No file selected.");
+      return;
+    }
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      console.error("File size exceeds the limit.");
+      return;
+    }
+    setSelectedImage(file);
   };
 
   const handleExpertiseChange = (selectedOptions) => {
@@ -92,15 +112,16 @@ const MaidRegistrationForm = () => {
   ];
 
   const experienceOptions = [
-    { value: 6, label: "6 months" },
-    { value: 12, label: "12 months" },
-    { value: 24, label: "24 months" },
-    { value: 48, label: "48 months" },
-    { value: 52, label: "52 months" },
-    { value: 60, label: "60 months" },
-    { value: 90, label: "90 months" },
-    { value: 102, label: "102 months" },
-    { value: 114, label: "other" },
+    { value: 1, label: "1 year" },
+    { value: 2, label: "2 year" },
+    { value: 3, label: "3 year" },
+    { value: 4, label: "4 year" },
+    { value: 5, label: "5 year" },
+    { value: 6, label: "6 year" },
+    { value: 7, label: "7 year" },
+    { value: 8, label: "8 year" },
+    { value: 9, label: "9 year" },
+    { value: 10, label: "more than 10 year" },
   ];
 
   const expertiseOptions = [
@@ -126,13 +147,12 @@ const MaidRegistrationForm = () => {
     const address = event.target.address.value;
     const contact = event.target.contact.value;
     const gender = selectedGender[0]?.value;
-    const experience = selectedExperience[0]?.label; // Assuming you want the label (e.g., "2 years") instead of the value
+    const experience = selectedExperience[0]?.label;
     const education = event.target.education.value;
     const availability = selectedAvailability.map((avail) => avail.value);
     const location = selectedLocation.map((loc) => loc.value);
     const nid = event.target.nid.value;
     const dob = event.target.dob.value;
-
     // Password field
     const userPassword = password;
 
@@ -145,13 +165,13 @@ const MaidRegistrationForm = () => {
       salaryForTasks[task.value] = selectedSalaries[task.value];
     });
 
-    // Construct the maid object
+    // maid object
     const maid = {
       name,
       email,
       pass: userPassword,
       phone: contact,
-      img: "/images/maid/1.jpg", // Assuming this is a static value
+      img: selectedImage,
       experience,
       task: tasks,
       salary: Object.values(salaryForTasks), // Extract salaries as an array
@@ -175,6 +195,10 @@ const MaidRegistrationForm = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("success", data);
+        openSuccessModal(); // Open the success modal
+          setTimeout(() => {
+            closeSuccessModal(); // Close the success modal
+          }, 3000); 
       });
   };
 
@@ -226,7 +250,6 @@ const MaidRegistrationForm = () => {
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-5 gap-3">
-                {" "}
                 {/* address */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -250,12 +273,16 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <input
-                    type="text"
+                    type="tel"
+                    pattern="[0-9]*"
                     placeholder="Your Contact number"
                     name="contact"
-                    className="input input-sm input-bordered w-full "
+                    className="input input-sm input-bordered w-full"
                     required
                   />
+                  <p className="text-red-500 text-xs mt-1">
+                    Your Contact number should have 11 digits
+                  </p>
                 </div>
               </div>
               <div className="grid grid-cols-3 pt-5 gap-3">
@@ -390,7 +417,6 @@ const MaidRegistrationForm = () => {
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-5 gap-3">
-                {" "}
                 {/* nid_no */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -401,10 +427,13 @@ const MaidRegistrationForm = () => {
                   <input
                     type="text"
                     name="nid"
-                    placeholder="eg : 1234567890111"
+                    placeholder="eg: 1234567890111"
                     className="input input-sm input-bordered w-full"
                     required
                   />
+                  <p className="text-red-500 text-xs mt-1">
+                    Your NID number should have 13-digits
+                  </p>
                 </div>
                 {/* dob */}
                 <div className="form-control w-full">
@@ -420,6 +449,9 @@ const MaidRegistrationForm = () => {
                     className="input input-sm input-bordered w-full"
                     required
                   />
+                  <p className="text-red-500 text-xs mt-1">
+                    Follow mm-dd-yyyy format
+                  </p>
                 </div>
               </div>
               {/* Image upload field */}
@@ -472,6 +504,40 @@ const MaidRegistrationForm = () => {
           </div>
         </div>
       </div>
+      {/* Success Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeSuccessModal}
+        contentLabel="Success Modal"
+        // Add modal styles here (e.g., setting width, height, etc.)
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+          content: {
+            width: "500px", // Set the width as needed
+            height: "200px", // Set the height as needed
+            margin: "auto", // Center the modal
+          },
+        }}
+      >
+        <h1
+          className="text-3xl font-black text-primary text-center px-7"
+          style={{ fontFamily: "arial" }}
+        >
+          Success!
+        </h1>
+
+        <p className="text-lg italic font-bold text-blue-600 text-center py-5">
+          Data inserted successfully.
+        </p>
+        <button
+          className="btn btn-sm text-xs w-1/3 mt-5 ml-40 border-blue-500 text-white font-bold bg-primary"
+          // onClick={closeSuccessModal}
+        >
+          <Link to="/">Close</Link>
+        </button>
+      </Modal>
     </div>
   );
 };

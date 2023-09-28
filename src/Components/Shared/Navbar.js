@@ -17,11 +17,11 @@ const Navbar = ({ openAboutModal }) => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-primary to-accent text-white font-bold py-2">
+    <div className="bg-gradient-to-b from-primary text-white font-bold ">
       <div class="navbar sticky">
         <div className="navbar-start">
           <Link to={"/"}>
-            <img className="w-32" src={logo} alt="" />
+            <img className="ml-10 rounded-full w-20" src={logo} alt="" />
           </Link>
         </div>
         <div class="navbar-end pr-48">

@@ -10,11 +10,14 @@ const MaidPerMonth = () => {
   const maides = useSelector((state) => state.filteredMaids);
 
   useEffect(() => {
-    fetch("service.json")
+    fetch("http://localhost:5000/maid") // Make a GET request to your backend API
       .then((res) => res.json())
       .then((data) => {
-        const maidData = data.maid;
-        setMaids(maidData);
+        setMaids(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // Handle the error here
       });
   }, []);
 
@@ -26,19 +29,7 @@ const MaidPerMonth = () => {
       >
         Maid
       </h1>
-      <div className="grid grid-cols-3 gap-5 p-11">
-        {maides ? (
-          maides.map((maid) => (
-            <MaidPerMonthCard
-              key={maid.maid_id}
-              maid={maid}
-              setBookMaid={setBookMaid}
-            ></MaidPerMonthCard>
-          ))
-        ) : (
-          <p>No maids found.</p>
-        )}
-      </div>
+
       <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard
