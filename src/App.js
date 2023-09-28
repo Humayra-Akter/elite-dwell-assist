@@ -1,6 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./store/store";
 import Home from "./Components/Home/Home";
 import Navbar from "./Components/Shared/Navbar";
 import Login from "./Components/Login/Login";
@@ -31,7 +29,6 @@ function App() {
   };
 
   return (
-    <Provider store={store}>
       <div>
         <Navbar openAboutModal={openAboutModal} />
         {isAboutModalOpen && (
@@ -62,7 +59,6 @@ function App() {
         </Routes>
         <ToastContainer />
       </div>
-    </Provider>
   );
 }
 

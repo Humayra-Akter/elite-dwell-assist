@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import BookingMaid from "./BookingMaid";
 import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
+import Cart from "../../Cart/Cart";
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
   const [bookMaid, setBookMaid] = useState([]);
-  const maides = useSelector((state) => state.filteredMaids);
 
   useEffect(() => {
-    fetch("http://localhost:5000/maid") // Make a GET request to your backend API
+    fetch("http://localhost:5000/maid")
       .then((res) => res.json())
       .then((data) => {
         setMaids(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        // Handle the error here
       });
   }, []);
 
@@ -40,6 +38,7 @@ const MaidPerMonth = () => {
         ))}
       </div>
       {bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>}
+      <Cart></Cart>
       <Footer></Footer>
     </div>
   );

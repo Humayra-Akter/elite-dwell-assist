@@ -38,7 +38,7 @@ const Navbar = ({ openAboutModal }) => {
             <img className="ml-10 rounded-full w-20" src={logo} alt="" />
           </Link>
         </div>
-        <div class="navbar-end pr-48">
+        <div class="navbar-end pr-24">
           <Link to="/login">
             <button className="text-black font-black hover:text-primary pr-7 focus:outline-none">
               <div class="indicator">Login</div>
@@ -50,7 +50,7 @@ const Navbar = ({ openAboutModal }) => {
               onClick={toggleServiceDropdown}
               className="text-black font-black pr-7 hover:text-primary focus:outline-none"
             >
-              Services 
+              Services
             </button>
             {isServiceDropdownOpen && (
               <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -178,7 +178,7 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             </button>
           </Link> */}
-          <button class="btn btn-ghost text-xl font-black text-black btn-circle">
+          <button class="btn btn-ghost pr-7 text-xl font-black text-black btn-circle">
             <div class="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -197,6 +197,9 @@ const Navbar = ({ openAboutModal }) => {
               <span class="badge badge-xs badge-primary indicator-item"></span>
             </div>
           </button>
+          <h3 className="text-xs font-bold text-black">
+            {new Date().toUTCString().slice(0, 16)}
+          </h3>
         </div>
       </div>
     </div>

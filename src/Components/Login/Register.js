@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import MaidRegistrationForm from "./MaidRegistrationForm";
 import DriverRegistrationForm from "./DriverRegistrationForm";
 import BabysitterRegistrationForm from "./BabysitterRegistrationForm";
-import img from "../../images/serviceBG.jpg";
-import Footer  from "../Shared/Footer";
+import img1 from "../../images/icons/maid.png";
+import img2 from "../../images/icons/motherhood.png";
+import img3 from "../../images/icons/driver.png";
+import Footer from "../Shared/Footer";
 
 const Register = () => {
   const [selectedRole, setSelectedRole] = useState(null);
@@ -26,31 +28,35 @@ const Register = () => {
               <div
                 className={`cursor-pointer p-4 rounded-full ${
                   selectedRole === "maid"
-                    ? "bg-sky-300 text-black text-center font-extrabold"
-                    : "border-2 text-center font-extrabold"
+                    ? "bg-sky-300 text-black text-center font-extrabold flex gap-5"
+                    : "border-2 text-center flex gap-5 font-extrabold"
                 }`}
                 onClick={() => handleRoleSelect("maid")}
               >
+                <img className="w-8 ml-16" src={img1} alt="" />
                 Maid
               </div>
+
               <div
                 className={`cursor-pointer p-4 rounded-full ${
                   selectedRole === "babysitter"
-                    ? "bg-sky-300 text-black text-center font-extrabold"
-                    : " border-2 text-center font-extrabold"
+                    ? "bg-sky-300 text-black text-center font-extrabold flex gap-5"
+                    : "border-2 text-center flex gap-5 font-extrabold"
                 }`}
                 onClick={() => handleRoleSelect("babysitter")}
               >
+                <img className="w-8 ml-12" src={img2} alt="" />
                 Babysitter
               </div>
               <div
                 className={`cursor-pointer p-4 rounded-full ${
                   selectedRole === "driver"
-                    ? "bg-sky-300 text-black text-center font-extrabold"
-                    : " border-2 text-center font-extrabold"
+                    ? "bg-sky-300 text-black text-center font-extrabold flex gap-5"
+                    : "border-2 text-center flex gap-5 font-extrabold"
                 }`}
                 onClick={() => handleRoleSelect("driver")}
               >
+                <img className="w-8 ml-16" src={img3} alt="" />
                 Driver
               </div>
             </div>
