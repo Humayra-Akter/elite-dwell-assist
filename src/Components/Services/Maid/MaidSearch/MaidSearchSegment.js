@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaidPerMonth from "../MaidPerMonth";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocation } from "../../../../redux/slices/LocationSlice";
+import { setSelectedLocation } from "../../../../redux/slices/MaidSlice";
 
 const MaidSearchSegment = () => {
-  const selectedLocation = useSelector((state) => state.location.location);
+  const [maids, setMaids] = useState([]);
   const dispatch = useDispatch();
+  const selectedLocation = useSelector(
+    (state) => state.location.selectedLocation
+  );
 
-  const handleLocationChange = (e) => {
-    const newLocation = e.target.value;
-    dispatch(setLocation(newLocation));
-  };
+  useEffect(() => {
+    fetch("http://localhost:5000/maid")
+      .then((res) => res.json())
+      .then((data) => {
+        setMaids(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <div class="drawer lg:drawer-open">
@@ -22,11 +31,10 @@ const MaidSearchSegment = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-slate-100 text-base-content">
           <p className="mt-20">Search by location</p>
-
           <select
             className="select select-bordered select-primary"
             value={selectedLocation}
-            onChange={handleLocationChange}
+            onChange={(e) => dispatch(setSelectedLocation(e.target.value))}
           >
             <option value="All">Select Location</option>
             <option value="Dhanmondi">Dhanmondi</option>
@@ -42,7 +50,7 @@ const MaidSearchSegment = () => {
           <input
             type="range"
             min={0}
-            max={5000} // Set the max salary range as per your requirement
+            max={5000}
             className="range range-primary"
           />
 

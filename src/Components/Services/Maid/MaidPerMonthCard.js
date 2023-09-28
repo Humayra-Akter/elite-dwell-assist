@@ -6,6 +6,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
   const handleKnowMoreClick = () => {
     setBookMaid(maid);
   };
+
   return (
     <div>
       <div className="w-80 h-80 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">

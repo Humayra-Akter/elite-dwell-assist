@@ -14,10 +14,10 @@ const Cart = () => {
 
   return (
     <>
-      <FaShoppingCart
+      {/* <FaShoppingCart
         onClick={() => setActiveCart(!activeCart)}
         className="rounded-full shadow-md text-5xl p-3 fixed top-6 right-7"
-      />
+      /> */}
       <div
         className={`fixed right-0 top-0 w-full lg:w-[20vw] h-full p-5 bg-white mb-3 ${
           activeCart ? "translate-x-0" : "translate-x-full"
