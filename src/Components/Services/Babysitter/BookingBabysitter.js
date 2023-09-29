@@ -19,8 +19,7 @@ const BookingBabysitter = ({ bookBaby }) => {
     salary,
   } = bookBaby;
   return (
-    <div className=" bg-transparent"
-    >
+    <div className=" bg-transparent">
       <input type="checkbox" id="booking-babysitter" class="modal-toggle" />
       <div class="modal ">
         <div class="modal-box w-screen max-w-4xl">

@@ -29,36 +29,36 @@ function App() {
   };
 
   return (
-      <div>
-        <Navbar openAboutModal={openAboutModal} />
-        {isAboutModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-primary w-1/2 p-9 rounded-3xl relative ">
-              <About />
-            </div>
-            <div
-              onClick={closeAboutModal}
-              className="fixed inset-0 bg-sky-100 opacity-20 cursor-pointer"
-            ></div>
+    <div>
+      <Navbar openAboutModal={openAboutModal} />
+      {isAboutModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-primary w-1/2 p-9 rounded-3xl relative ">
+            <About />
           </div>
-        )}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/maidPerDay" element={<MaidPerDay />} />
-          {/* <Route path="/maidPerMonth" element={<MaidPerMonth />} /> */}
-          <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
-          <Route path="/babysitter" element={<Babysitter />} />
-          <Route path="/driverPerDay" element={<DriverPerDay />} />
-          <Route path="/driverPerMonth" element={<DriverPerMonth />} />{" "}
-          <Route path="/tvRepair" element={<ApplianceRepair />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <ToastContainer />
-      </div>
+          <div
+            onClick={closeAboutModal}
+            className="fixed inset-0 bg-sky-100 opacity-20 cursor-pointer"
+          ></div>
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/service" element={<Service />} />
+        <Route path="/maidPerDay" element={<MaidPerDay />} />
+        {/* <Route path="/maidPerMonth" element={<MaidPerMonth />} /> */}
+        <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
+        <Route path="/babysitter" element={<Babysitter />} />
+        <Route path="/driverPerDay" element={<DriverPerDay />} />
+        <Route path="/driverPerMonth" element={<DriverPerMonth />} />{" "}
+        <Route path="/tvRepair" element={<ApplianceRepair />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <ToastContainer />
+    </div>
   );
 }
 

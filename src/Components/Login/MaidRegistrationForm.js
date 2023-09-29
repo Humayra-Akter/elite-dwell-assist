@@ -7,27 +7,21 @@ import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 
 const MaidRegistrationForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const imageStorageKey = "81a2b36646ff008b714220192e61707d";
+
   const [selectedExperience, setSelectedExperience] = useState([]);
   const [selectedGender, setSelectedGender] = useState([]);
   const [selectedExpertise, setSelectedExpertise] = useState([]);
   const [selectedSalaries, setSelectedSalaries] = useState({});
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
-  const [password, setPassword] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-
-  function calculateTotalCost(selectedExpertise) {
-    return selectedExpertise.reduce((total, expertise) => {
-      return total + expertiseSalaries[expertise.value];
-    }, 0);
-  }
 
   const openSuccessModal = () => {
     setIsModalOpen(true);
@@ -36,24 +30,6 @@ const MaidRegistrationForm = () => {
   // Function to close the success modal
   const closeSuccessModal = () => {
     setIsModalOpen(false);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (!file) {
-      console.error("No file selected.");
-      return;
-    }
-    const maxSize = 10 * 1024 * 1024; // 10MB
-    if (file.size > maxSize) {
-      console.error("File size exceeds the limit.");
-      return;
-    }
-    setSelectedImage(file);
   };
 
   const handleExpertiseChange = (selectedOptions) => {
@@ -92,10 +68,7 @@ const MaidRegistrationForm = () => {
   };
 
   const locationOptions = [
-    {
-      label: "dhanmondi",
-      value: "dhanmondi",
-    },
+    { label: "dhanmondi", value: "dhanmondi" },
     { label: "mirpur", value: "mirpur" },
     { label: "savar", value: "savar" },
     { label: "uttora", value: "uttora" },
@@ -147,65 +120,66 @@ const MaidRegistrationForm = () => {
     dish_washing: [1500, 1600, 1550],
   };
 
-  const handleAddMaid = (event) => {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const address = event.target.address.value;
-    const contact = event.target.contact.value;
-    const gender = selectedGender[0]?.value;
-    const experience = selectedExperience[0]?.label;
-    const education = event.target.education.value;
-    const availability = selectedAvailability.map((avail) => avail.value);
-    const location = selectedLocation.map((loc) => loc.value);
-    const nid = event.target.nid.value;
-    const dob = event.target.dob.value;
-    // Password field
-    const userPassword = password;
+  //   const userPassword = password;
+  //   const tasks = selectedExpertise.map((task) => task.value);
+  //   const salaryForTasks = {};
+  //   selectedExpertise.forEach((task) => {
+  //     salaryForTasks[task.value] = selectedSalaries[task.value];
+  //     task: tasks,
+  //     salary: Object.values(salaryForTasks), // Extract salaries as an array
 
-    // Tasks (selectedExpertise)
-    const tasks = selectedExpertise.map((task) => task.value);
+  const handleAddMaid = (data) => {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
 
-    // Salary for each task
-    const salaryForTasks = {};
-    selectedExpertise.forEach((task) => {
-      salaryForTasks[task.value] = selectedSalaries[task.value];
-    });
-
-    // maid object
-    const maid = {
-      name,
-      email,
-      pass: userPassword,
-      phone: contact,
-      img: selectedImage,
-      experience,
-      task: tasks,
-      salary: Object.values(salaryForTasks), // Extract salaries as an array
-      availability,
-      location,
-      nid_no: nid,
-      address,
-      dob,
-      gender,
-      education,
-    };
-
-    // Send the maid data to the backend
-    fetch("http://localhost:5000/maid", {
+    fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(maid),
+      body: formData,
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log("success", data);
-        openSuccessModal(); // Open the success modal
-        setTimeout(() => {
-          closeSuccessModal(); // Close the success modal
-        }, 3000);
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const maid = {
+            name: data.name,
+            email: data.email,
+            specialty: data.specialty,
+            img: imgData.data.url,
+            address: data.address,
+            contact: data.contact,
+            gender: selectedGender[0]?.value,
+            experience: selectedExperience[0]?.value,
+            education: data.education,
+            availability: selectedAvailability.map((avail) => avail.value),
+            location: selectedLocation.map((loc) => loc.value),
+            nid: data.nid,
+            dob: data.dob,
+            password: data.password,
+            task: selectedExpertise.map((expertise) => expertise.value),
+            salary: selectedExpertise.map(
+              (expertise) => selectedSalaries[expertise.value]
+            ),
+          };
+          // save maid information to the database
+          fetch("http://localhost:5000/maid", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(maid),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              toast.success(`${data.name} is added successfully`);
+              openSuccessModal(); // Open the success modal
+              setTimeout(() => {
+                closeSuccessModal(); // Close the success modal
+              }, 3000);
+            });
+        }
       });
   };
 
@@ -223,7 +197,7 @@ const MaidRegistrationForm = () => {
             <p className="text-center ">{bengaliLabels.maid}</p>
 
             {/* <form onSubmit={handleFormSubmit}> */}
-            <form onSubmit={handleAddMaid}>
+            <form onSubmit={handleSubmit(handleAddMaid)}>
               <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* name field */}
                 <div className="form-control  w-full">
@@ -253,6 +227,7 @@ const MaidRegistrationForm = () => {
                   </label>
                 </div>
                 {/* email field */}
+
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
@@ -381,13 +356,13 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <MultiSelect
-                    name="gender"
                     options={genderOptions}
                     value={selectedGender}
                     onChange={handleGender}
                     labelledBy={"Select"}
                   />
                 </div>
+
                 {/* Experience dropdown */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -414,7 +389,7 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <div className="input input-bordered input-sm text-left w-full">
-                    <select className="select" name="education" required>
+                    <select className="select" name="education">
                       <option disabled defaultValue="">
                         Select your education
                       </option>
@@ -522,7 +497,7 @@ const MaidRegistrationForm = () => {
                         message: "nid is required",
                       },
                       pattern: {
-                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        value: /[0-9]*/,
                         message: "Provide a valid nid",
                       },
                     })}
@@ -579,19 +554,31 @@ const MaidRegistrationForm = () => {
                 </div>
               </div>
               {/* Image upload field */}
-              <div className="form-control w-full">
+              <div className="form-control  w-full">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-md">
-                    Upload Image
+                    photo
                   </span>
                 </label>
                 <input
                   type="file"
+                  placeholder="Your image"
                   name="image"
-                  accept="image/*"
-                  className="input input-sm w-full"
-                  onChange={handleImageChange}
+                  className="input input-sm input-bordered w-full"
+                  {...register("image", {
+                    required: {
+                      value: true,
+                      message: "image is required",
+                    },
+                  })}
                 />
+                <label>
+                  {errors.image?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.image.message}
+                    </span>
+                  )}
+                </label>
               </div>
               {/* Password field */}
               <div className="form-control w-full pb-11">
@@ -631,9 +618,9 @@ const MaidRegistrationForm = () => {
               </div>
               <input
                 className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+                value="register"
                 type="submit"
-                value="REGISTER"
-              ></input>
+              />
             </form>
             <p className="text-center">
               <small className="font-semibold">
@@ -646,7 +633,7 @@ const MaidRegistrationForm = () => {
           </div>
         </div>
       </div>
-      {/* Success Modal
+      {/* Success Modal */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeSuccessModal}
@@ -679,7 +666,7 @@ const MaidRegistrationForm = () => {
         >
           <Link to="/">Close</Link>
         </button>
-      </Modal> */}
+      </Modal>
     </div>
   );
 };

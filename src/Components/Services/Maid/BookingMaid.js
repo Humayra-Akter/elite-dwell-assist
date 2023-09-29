@@ -1,7 +1,24 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/slices/CartSlices";
+function calculateAge(dateOfBirth) {
+  const dob = new Date(dateOfBirth);
+  const currentDate = new Date();
+  const age = currentDate.getFullYear() - dob.getFullYear();
 
+  // Check if the birthday has already occurred this year
+  if (
+    currentDate.getMonth() < dob.getMonth() ||
+    (currentDate.getMonth() === dob.getMonth() &&
+      currentDate.getDate() < dob.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
+}
+
+// Your BookingMaid component remains the same
 const BookingMaid = ({ bookMaid }) => {
   const {
     id,
@@ -21,6 +38,9 @@ const BookingMaid = ({ bookMaid }) => {
   } = bookMaid;
 
   const dispatch = useDispatch();
+
+  // Calculate age using the calculateAge function
+  const age = calculateAge(dob);
 
   return (
     <div className=" bg-transparent">
@@ -49,10 +69,10 @@ const BookingMaid = ({ bookMaid }) => {
                 <div>
                   <p>
                     <strong className="text-blue-800 underline">
-                      Location :
+                      Location:
                     </strong>
                     <br />
-                    {location.join(", ")}
+                    {location ? location.join(", ") : "N/A"}
                   </p>
                   <p className="pt-2">
                     <strong className="text-blue-800 underline">
@@ -100,10 +120,8 @@ const BookingMaid = ({ bookMaid }) => {
                     {address}
                   </p>
                   <p className="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Date of Birth :
-                    </strong>{" "}
-                    {dob}
+                    <strong className="text-blue-800 underline">Age:</strong>{" "}
+                    {age}
                   </p>
                   <p className="pt-2">
                     <strong className="text-blue-800 underline">
@@ -135,9 +153,9 @@ const BookingMaid = ({ bookMaid }) => {
             <div class="flex items-end justify-end">
               <button
                 for="booking-maid"
-                class="btn btn-sm text-white  font-bold w-1/3 btn-primary"
+                class="btn btn-sm text-white  font-bold w-1/4 btn-primary"
               >
-                Add To Cart
+                Book
               </button>
             </div>
           </div>
