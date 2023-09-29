@@ -4,6 +4,7 @@ import { MultiSelect } from "react-multi-select-component";
 import bengaliLabels from "../../bengaliText";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
+import { useForm } from "react-hook-form";
 
 const MaidRegistrationForm = () => {
   const [selectedExperience, setSelectedExperience] = useState([]);
@@ -15,6 +16,12 @@ const MaidRegistrationForm = () => {
   const [password, setPassword] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
   function calculateTotalCost(selectedExpertise) {
     return selectedExpertise.reduce((total, expertise) => {
@@ -196,9 +203,9 @@ const MaidRegistrationForm = () => {
       .then((data) => {
         console.log("success", data);
         openSuccessModal(); // Open the success modal
-          setTimeout(() => {
-            closeSuccessModal(); // Close the success modal
-          }, 3000); 
+        setTimeout(() => {
+          closeSuccessModal(); // Close the success modal
+        }, 3000);
       });
   };
 
@@ -230,8 +237,20 @@ const MaidRegistrationForm = () => {
                     placeholder="Your Name"
                     name="name"
                     className="input input-sm input-bordered w-full"
-                    required
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "Name is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.name?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.name.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 {/* email field */}
                 <div className="form-control w-full">
@@ -245,8 +264,29 @@ const MaidRegistrationForm = () => {
                     placeholder="Your email"
                     name="email"
                     className="input input-sm input-bordered w-full "
-                    required
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                      pattern: {
+                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        message: "Provide a valid email",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.email?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-5 gap-3">
@@ -262,8 +302,20 @@ const MaidRegistrationForm = () => {
                     placeholder="Your address"
                     name="address"
                     className="input input-sm input-bordered w-full"
-                    required
+                    {...register("address", {
+                      required: {
+                        value: true,
+                        message: "Address is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.address?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.address.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 {/* contact field */}
                 <div className="form-control w-full">
@@ -273,16 +325,51 @@ const MaidRegistrationForm = () => {
                     </span>
                   </label>
                   <input
-                    type="tel"
-                    pattern="[0-9]*"
+                    type="digit"
                     placeholder="Your Contact number"
                     name="contact"
-                    className="input input-sm input-bordered w-full"
-                    required
+                    className="input input-sm input-bordered w-full "
+                    {...register("contact", {
+                      required: {
+                        value: true,
+                        message: "contact is required",
+                      },
+                      pattern: {
+                        value: /[0-9]*/,
+                        message: " Your Contact number should have digits only",
+                      },
+                      minLength: {
+                        value: 11,
+                        message: "Provide a valid contact",
+                      },
+                      maxLength: {
+                        value: 11,
+                        message: "Provide a valid contact",
+                      },
+                    })}
                   />
-                  <p className="text-red-500 text-xs mt-1">
-                    Your Contact number should have 11 digits
-                  </p>
+                  <label>
+                    {errors.contact?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "minLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "maxLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
               <div className="grid grid-cols-3 pt-5 gap-3">
@@ -426,14 +513,32 @@ const MaidRegistrationForm = () => {
                   </label>
                   <input
                     type="text"
-                    name="nid"
                     placeholder="eg: 1234567890111"
-                    className="input input-sm input-bordered w-full"
-                    required
+                    name="nid"
+                    className="input input-sm input-bordered w-full "
+                    {...register("nid", {
+                      required: {
+                        value: true,
+                        message: "nid is required",
+                      },
+                      pattern: {
+                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        message: "Provide a valid nid",
+                      },
+                    })}
                   />
-                  <p className="text-red-500 text-xs mt-1">
-                    Your NID number should have 13-digits
-                  </p>
+                  <label>
+                    {errors.nid?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.nid.message}
+                      </span>
+                    )}
+                    {errors.nid?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.nid.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 {/* dob */}
                 <div className="form-control w-full">
@@ -441,17 +546,36 @@ const MaidRegistrationForm = () => {
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth/{bengaliLabels.dob}
                     </span>
-                  </label>
+                  </label>{" "}
                   <input
                     type="text"
-                    name="dob"
                     placeholder="mm-dd-yyyy"
-                    className="input input-sm input-bordered w-full"
-                    required
+                    name="dob"
+                    className="input input-sm input-bordered w-full "
+                    {...register("dob", {
+                      required: {
+                        value: true,
+                        message: "DOB is required",
+                      },
+                      pattern: {
+                        value:
+                          /^(3[01]|[12][0-9]|0?[1-9])(\/|-)(1[0-2]|0?[1-9])\2([0-9]{2})?[0-9]{2}$/,
+                        message: "Follow mm-dd-yyyy format",
+                      },
+                    })}
                   />
-                  <p className="text-red-500 text-xs mt-1">
-                    Follow mm-dd-yyyy format
-                  </p>
+                  <label>
+                    {errors.dob?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.dob.message}
+                      </span>
+                    )}
+                    {errors.dob?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.dob.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
               {/* Image upload field */}
@@ -478,20 +602,38 @@ const MaidRegistrationForm = () => {
                 </label>
                 <input
                   type="password"
-                  placeholder="Your Password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="input input-sm input-bordered w-full"
-                  required
+                  placeholder="Password"
+                  name="password"
+                  className="input input-sm input-bordered w-full "
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "password is required",
+                    },
+                    minLength: {
+                      value: 6,
+                      message: "Must be 6 characters longer",
+                    },
+                  })}
                 />
+                <label>
+                  {errors.password?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </span>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </label>
               </div>
-              <button
+              <input
                 className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
                 type="submit"
-              >
-                REGISTER
-              </button>
-              {/* {loading && <div>Loading...</div>} */}
+                value="REGISTER"
+              ></input>
             </form>
             <p className="text-center">
               <small className="font-semibold">
@@ -504,7 +646,7 @@ const MaidRegistrationForm = () => {
           </div>
         </div>
       </div>
-      {/* Success Modal */}
+      {/* Success Modal
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeSuccessModal}
@@ -537,7 +679,7 @@ const MaidRegistrationForm = () => {
         >
           <Link to="/">Close</Link>
         </button>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
