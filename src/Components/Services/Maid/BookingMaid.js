@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/slices/CartSlices";
+
 function calculateAge(dateOfBirth) {
   const dob = new Date(dateOfBirth);
   const currentDate = new Date();
   const age = currentDate.getFullYear() - dob.getFullYear();
 
-  // Check if the birthday has already occurred this year
   if (
     currentDate.getMonth() < dob.getMonth() ||
     (currentDate.getMonth() === dob.getMonth() &&

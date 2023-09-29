@@ -120,14 +120,6 @@ const MaidRegistrationForm = () => {
     dish_washing: [1500, 1600, 1550],
   };
 
-  //   const userPassword = password;
-  //   const tasks = selectedExpertise.map((task) => task.value);
-  //   const salaryForTasks = {};
-  //   selectedExpertise.forEach((task) => {
-  //     salaryForTasks[task.value] = selectedSalaries[task.value];
-  //     task: tasks,
-  //     salary: Object.values(salaryForTasks), // Extract salaries as an array
-
   const handleAddMaid = (data) => {
     const image = data.image[0];
     const formData = new FormData();
@@ -524,7 +516,7 @@ const MaidRegistrationForm = () => {
                   </label>{" "}
                   <input
                     type="text"
-                    placeholder="mm-dd-yyyy"
+                    placeholder="yyyy--mm-dd"
                     name="dob"
                     className="input input-sm input-bordered w-full "
                     {...register("dob", {
@@ -534,8 +526,8 @@ const MaidRegistrationForm = () => {
                       },
                       pattern: {
                         value:
-                          /^(3[01]|[12][0-9]|0?[1-9])(\/|-)(1[0-2]|0?[1-9])\2([0-9]{2})?[0-9]{2}$/,
-                        message: "Follow mm-dd-yyyy format",
+                          /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                        message: "Follow yyyy--mm-dd format",
                       },
                     })}
                   />
