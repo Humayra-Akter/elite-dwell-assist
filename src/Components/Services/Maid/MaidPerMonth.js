@@ -3,11 +3,11 @@ import BookingMaid from "./BookingMaid";
 import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
 import Cart from "../../Cart/Cart";
+import { useSelector, useDispatch } from "react-redux";
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
   const [bookMaid, setBookMaid] = useState([]);
-
   useEffect(() => {
     fetch("http://localhost:5000/maid")
       .then((res) => res.json())
@@ -19,6 +19,28 @@ const MaidPerMonth = () => {
       });
   }, []);
 
+  const taskSalaryFilters = useSelector(
+    (state) => state.search.taskSalaryFilters
+  );
+  const timeSlotFilters = useSelector((state) => state.search.timeSlotFilters);
+
+  const filterMaidsBySalary = (maid) => {
+    // Filter maids by salary as before
+  };
+  const filterMaidsByTimeSlot = (maid) => {
+    // Check if any selected time slots match the maid's availability
+    for (const timeSlot in timeSlotFilters) {
+      if (timeSlotFilters[timeSlot] && maid.availability.includes(timeSlot)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const filteredMaids = maids.filter(
+    (maid) => filterMaidsBySalary(maid) && filterMaidsByTimeSlot(maid)
+  );
+
   return (
     <div>
       <h1
@@ -27,7 +49,14 @@ const MaidPerMonth = () => {
       >
         Maid
       </h1>
-
+      {filteredMaids.map((maid) => (
+        <MaidPerMonthCard
+          key={maid.id}
+          maid={maid}
+          setBookMaid={setBookMaid}
+        ></MaidPerMonthCard>
+      ))}
+      {/* General Maids */}
       <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard
