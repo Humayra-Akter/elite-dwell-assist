@@ -4,6 +4,8 @@ import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
 import Cart from "../../Cart/Cart";
 import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import RequireAuth from "../../Login/RequireAuth";
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
@@ -66,7 +68,11 @@ const MaidPerMonth = () => {
           ></MaidPerMonthCard>
         ))}
       </div>
-      {bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>}
+
+      <RequireAuth>
+        {bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>}
+      </RequireAuth>
+
       <Cart></Cart>
       <Footer></Footer>
     </div>

@@ -10,7 +10,7 @@ const About = () => {
         About --- "ELITE DWELL ASSIST"
       </h1>
 
-      <p className="text-lg italic font-bold text-white text-center py-5">
+      <p className="text-base italic font-bold text-white text-center py-5">
         a sophisticated and top-tier platform that facilitates assistance and
         connection for homes, while also fostering self-employment opportunities
         for service providers.

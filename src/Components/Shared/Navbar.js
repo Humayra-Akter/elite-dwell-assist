@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
 
 const Navbar = ({ openAboutModal }) => {
+  const [user, loading, error] = useAuthState(auth);
+
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
   const [isAppDropdownOpen, setIsAppDropdownOpen] = useState(false);
@@ -30,20 +35,26 @@ const Navbar = ({ openAboutModal }) => {
     closeDropdowns();
   };
 
+  const logout = () => {
+    signOut(auth);
+  };
+
   return (
     <div className="bg-primary text-white font-bold ">
       <div class="navbar sticky">
         <div className="navbar-start">
           <Link to={"/"}>
-            <img className="ml-10 rounded-full w-20" src={logo} alt="" />
+            <img className="ml-10 rounded-full w-16" src={logo} alt="" />
           </Link>
         </div>
         <div class="navbar-end pr-24">
-          <Link to="/login">
-            <button className="text-white font-black hover:text-black pr-7 ">
-              <div class="indicator">Login</div>
-            </button>
-          </Link>
+          <button
+            disabled
+            className="text-white font-black hover:text-black pr-7 "
+          >
+            {user?.displayName || ""}
+          </button>
+
           {/* Services */}
           <div className="relative inline-block text-right">
             <button
@@ -178,6 +189,20 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             </button>
           </Link> */}
+          {user ? (
+            <button
+              onClick={logout}
+              className="text-white font-black hover:text-black pr-7 "
+            >
+              <div class="indicator">Signout</div>
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="text-white font-black hover:text-black pr-7 ">
+                <div class="indicator">Login</div>
+              </button>
+            </Link>
+          )}
           <button class="text-white font-black hover:text-black pr-7 btn btn-ghost text-xl btn-circle">
             <div class="indicator">
               <svg

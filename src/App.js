@@ -16,6 +16,9 @@ import ApplianceRepair from "./Components/Services/ApplianceRepair/ApplianceRepa
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MaidSearchSegment from "./Components/Services/Maid/MaidSearch/MaidSearchSegment";
+import CustomerRegistrationForm from "./Components/Login/CustomerRegistrationForm";
+import RequireAuth from "./Components/Login/RequireAuth";
+import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -48,8 +51,19 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/service" element={<Service />} />
         <Route path="/maidPerDay" element={<MaidPerDay />} />
-        {/* <Route path="/maidPerMonth" element={<MaidPerMonth />} /> */}
+        <Route
+          path="/customer-register"
+          element={<CustomerRegistrationForm />}
+        />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
+        {/* <Route
+          path="/maidPerMonth"
+          element={
+            <RequireAuth>
+              <MaidPerMonth />
+            </RequireAuth>
+          }
+        /> */}
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
         <Route path="/driverPerMonth" element={<DriverPerMonth />} />{" "}

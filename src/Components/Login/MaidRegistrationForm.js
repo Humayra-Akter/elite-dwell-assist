@@ -188,7 +188,6 @@ const MaidRegistrationForm = () => {
             </h1>
             <p className="text-center ">{bengaliLabels.maid}</p>
 
-            {/* <form onSubmit={handleFormSubmit}> */}
             <form onSubmit={handleSubmit(handleAddMaid)}>
               <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* name field */}
@@ -219,7 +218,6 @@ const MaidRegistrationForm = () => {
                   </label>
                 </div>
                 {/* email field */}
-
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">

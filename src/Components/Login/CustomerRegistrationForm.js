@@ -1,11 +1,69 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import banner4 from "../../images/bg.jpg";
 import { MultiSelect } from "react-multi-select-component";
+import { useForm } from "react-hook-form";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const CustomerRegistrationForm = () => {
+  const [selectedGender, setSelectedGender] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const navigate = useNavigate();
+
+  let signInError;
+
+  if (loading || updating) {
+    return <Loading></Loading>;
+  }
+
+  if (error || updateError) {
+    signInError = (
+      <p className="text-red-500 text-xs mt-1">
+        {error?.message || updateError?.message}
+      </p>
+    );
+  }
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({
+      displayName: data.name,
+      address: data.address,
+      contact: data.contact,
+      password: data.password,
+      dob: data.dob,
+    });
+    console.log("update done");
+    navigate("/maidPerMonth");
+  };
+
+  const handleGender = (selected) => {
+    setSelectedGender([selected[selected.length - 1]]);
+  };
+
+  const genderOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
+  ];
+
   return (
-    <div>
+    <div className="bg-slate-100 pb-12 pt-16">
       <div className="mx-auto max-w-4xl">
         <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
           <div className="card-body">
@@ -16,76 +74,75 @@ const CustomerRegistrationForm = () => {
               Register as <strong>CUSTOMER</strong>
             </h1>
 
-            {/* <form onSubmit={handleFormSubmit}> */}
-            <form>
-              <div className="form-control pt-5 w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Name
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  //   value={name}
-                  //   onChange={(e) => setName(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-              {/* email field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Email
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  //   value={email}
-                  //   onChange={(e) => setEmail(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* contact field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Contact
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Contact number"
-                  //   value={contact}
-                  //   onChange={(e) => setContact(e.target.value)}
-                  className="input input-bordered w-full "
-                  required
-                />
-              </div>
-              {/* Gender field */}
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-left text-blue-700 font-bold text-xs">
-                    Gender
-                  </span>
-                </label>
-                <div className="input text-left w-full ">
-                  <select className="select" required>
-                    <option disabled selected>
-                      Select your gender
-                    </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* name field */}
+                <div className="form-control  w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    name="name"
+                    className="input input-sm input-bordered w-full"
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "Name is required",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.name?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.name.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                {/* email field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Email
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    name="email"
+                    className="input input-sm input-bordered w-full "
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                      pattern: {
+                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        message: "Provide a valid email",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.email?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
-              {/* address */}
-              <div>
-                <div className="form-control pt-5 w-full">
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* address */}
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Address
@@ -94,27 +151,132 @@ const CustomerRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your address"
-                    className="input input-bordered w-full"
-                    required
+                    name="address"
+                    className="input input-sm input-bordered w-full"
+                    {...register("address", {
+                      required: {
+                        value: true,
+                        message: "Address is required",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.address?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.address.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                {/* contact field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Contact
+                    </span>
+                  </label>
+                  <input
+                    type="digit"
+                    placeholder="Your Contact number"
+                    name="contact"
+                    className="input input-sm input-bordered w-full "
+                    {...register("contact", {
+                      required: {
+                        value: true,
+                        message: "contact is required",
+                      },
+                      pattern: {
+                        value: /[0-9]*/,
+                        message: " Your Contact number should have digits only",
+                      },
+                      minLength: {
+                        value: 11,
+                        message: "Provide a valid contact",
+                      },
+                      maxLength: {
+                        value: 11,
+                        message: "Provide a valid contact",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.contact?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "minLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "maxLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* Gender field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                      Gender
+                    </span>
+                  </label>
+                  <MultiSelect
+                    options={genderOptions}
+                    value={selectedGender}
+                    onChange={handleGender}
+                    labelledBy={"Select"}
                   />
                 </div>
                 {/* dob */}
-                <div className="form-control pt-5 w-full">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth
                     </span>
-                  </label>
+                  </label>{" "}
                   <input
                     type="text"
-                    placeholder="Your dob"
-                    className="input input-bordered w-full"
-                    required
+                    placeholder="yyyy--mm-dd"
+                    name="dob"
+                    className="input input-sm input-bordered w-full "
+                    {...register("dob", {
+                      required: {
+                        value: true,
+                        message: "DOB is required",
+                      },
+                      pattern: {
+                        value:
+                          /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                        message: "Follow yyyy--mm-dd format",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.dob?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.dob.message}
+                      </span>
+                    )}
+                    {errors.dob?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.dob.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
-              {/* )} */}
-              {/* password field */}
+              {/* Password field */}
               <div className="form-control w-full pb-11">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-md">
@@ -123,19 +285,39 @@ const CustomerRegistrationForm = () => {
                 </label>
                 <input
                   type="password"
-                  placeholder="Your Password"
-                  //   value={password}
-                  //   onChange={(e) => setPassword(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
+                  placeholder="Password"
+                  name="password"
+                  className="input input-sm input-bordered w-full "
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "password is required",
+                    },
+                    minLength: {
+                      value: 6,
+                      message: "Must be 6 characters longer",
+                    },
+                  })}
                 />
+                <label>
+                  {errors.password?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </span>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </label>
               </div>
-              <button
-                className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
+              {signInError}
+              <input
+                className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+                value="REGISTER"
                 type="submit"
-              >
-                REGISTER
-              </button>
+              />
               {/* {loading && <div>Loading...</div>} */}
             </form>
             <p className="text-center">

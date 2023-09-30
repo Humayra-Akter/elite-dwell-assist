@@ -68,7 +68,7 @@ const Banner = () => {
           </li>
         </p>
         <div className="grid grid-cols-2 gap-5">
-          <Link to="/login">
+          <Link to="/customer-register">
             <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
               Register as Customer
             </button>
