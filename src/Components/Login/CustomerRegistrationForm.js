@@ -9,6 +9,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import { toast } from "react-toastify";
 
 const CustomerRegistrationForm = () => {
   const [selectedGender, setSelectedGender] = useState([]);
@@ -38,7 +39,7 @@ const CustomerRegistrationForm = () => {
     );
   }
 
-  const onSubmit = async (data) => {
+  const handleAddCustomer = async (data) => {
     console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({
@@ -48,7 +49,29 @@ const CustomerRegistrationForm = () => {
       password: data.password,
       dob: data.dob,
     });
-    console.log("update done");
+    const customer = {
+      name: data.name,
+      email: data.email,
+      address: data.address,
+      contact: data.contact,
+      gender: selectedGender[0]?.value,
+      dob: data.dob,
+      password: data.password,
+    };
+
+    fetch("http://localhost:5000/customer", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(customer),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        toast.success(`${data.name} is added successfully`);
+      });
+
     navigate("/maidPerMonth");
   };
 
@@ -74,7 +97,7 @@ const CustomerRegistrationForm = () => {
               Register as <strong>CUSTOMER</strong>
             </h1>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleAddCustomer)}>
               <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* name field */}
                 <div className="form-control  w-full">

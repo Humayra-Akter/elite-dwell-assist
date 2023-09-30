@@ -148,15 +148,6 @@ const MaidServicePerDay = ({ selectedTimeSlot }) => {
           <p className="mt-4">Selected Date: {selectedDate.toDateString()}</p>
         )}
       </div>
-      {/* <button
-        className={`btn w-1/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary ${
-          isBookButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        type="submit"
-        disabled={isBookButtonDisabled}
-      >
-        Book
-      </button> */}
     </div>
   );
 };

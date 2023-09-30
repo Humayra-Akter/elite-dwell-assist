@@ -1,22 +1,54 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-const MaidPerDayAddress = ({ selectedServices }) => {
+const MaidPerDayAddress = ({
+  selectedServices,
+  selectedDate,
+  selectedTimeSlot,
+}) => {
   const [house, setHouse] = useState("");
   const [road, setRoad] = useState("");
   const [block, setBlock] = useState("");
   const [sector, setSector] = useState("");
   const [area, setArea] = useState("");
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const notify = () => {
-    console.log("selectedServices:", selectedServices);
-    if (selectedServices) {
-      toast.success("Thanks for your order!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+    if (
+      !errors.address &&
+      !errors.road &&
+      !errors.block &&
+      !errors.sector &&
+      area
+    ) {
+      const formattedDate = selectedDate.toDateString();
+      const formattedTime = selectedTimeSlot;
+      const servicesText = selectedServices.length
+        ? `Services: ${selectedServices.join(", ")}`
+        : "";
+
+      toast.success(
+        `Thanks for your order! Date: ${formattedDate}, Time Slot: ${formattedTime}, ${servicesText}`,
+        {
+          position: toast.POSITION.TOP_CENTER,
+          onClose: () => {
+            reset();
+          },
+        }
+      );
     } else {
-      toast.error("Please select at least one service.");
+      toast.error("Please fill out all required fields.");
     }
+  };
+
+  const onSubmit = (data) => {
+    notify();
   };
 
   return (
@@ -26,7 +58,7 @@ const MaidPerDayAddress = ({ selectedServices }) => {
           <div className="card-body">
             <h2 className="card-title">Address</h2>
             <p>Expert will arrive at the address given below</p>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control pt-5 w-full">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-xs">
@@ -37,10 +69,20 @@ const MaidPerDayAddress = ({ selectedServices }) => {
                   type="text"
                   placeholder="Your address"
                   className="input input-bordered input-xs w-full"
-                  required
-                  value={house}
-                  onChange={(e) => setHouse(e.target.value)}
+                  {...register("address", {
+                    required: {
+                      value: true,
+                      message: "Address is required",
+                    },
+                  })}
                 />
+                <label>
+                  {errors.address?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.address.message}
+                    </span>
+                  )}
+                </label>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="form-control pt-5 w-full">
@@ -53,10 +95,20 @@ const MaidPerDayAddress = ({ selectedServices }) => {
                     type="text"
                     placeholder="Road no"
                     className="input input-bordered input-xs w-full"
-                    required
-                    value={road}
-                    onChange={(e) => setRoad(e.target.value)}
+                    {...register("road", {
+                      required: {
+                        value: true,
+                        message: "Road no is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.road?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.road.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 <div className="form-control pt-5 w-full">
                   <label className="label">
@@ -68,10 +120,20 @@ const MaidPerDayAddress = ({ selectedServices }) => {
                     type="text"
                     placeholder="Block no"
                     className="input input-bordered input-xs w-full"
-                    required
-                    value={block}
-                    onChange={(e) => setBlock(e.target.value)}
+                    {...register("block", {
+                      required: {
+                        value: true,
+                        message: "Block is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.block?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.block.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -85,10 +147,20 @@ const MaidPerDayAddress = ({ selectedServices }) => {
                     type="text"
                     placeholder="Sector no"
                     className="input input-bordered input-xs w-full"
-                    required
-                    value={sector}
-                    onChange={(e) => setSector(e.target.value)}
+                    {...register("sector", {
+                      required: {
+                        value: true,
+                        message: "Sector is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.sector?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.sector.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 {/* area field */}
                 <div className="form-control pt-5  w-full">
@@ -117,9 +189,8 @@ const MaidPerDayAddress = ({ selectedServices }) => {
               <div className="pl-36 pt-9">
                 <input
                   className="btn w-2/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
-                  onClick={notify}
-                  type="button"
-                  value="Book"
+                  value="BOOK"
+                  type="submit"
                 />
               </div>
             </form>

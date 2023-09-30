@@ -1,7 +1,12 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import { Link } from "react-router-dom";
 
 const MaidPerMonthCard = ({ maid, setBookMaid }) => {
-  const { img, name, task, location, gender, salary } = maid;
+  const { img, name, task, location, gender, availability, salary } = maid;
+
+  const [user, loading, error] = useAuthState(auth);
 
   const handleKnowMoreClick = () => {
     setBookMaid(maid);
@@ -23,20 +28,15 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             <strong>Location:</strong>{" "}
             {Array.isArray(location) ? location.join(", ") : location}
           </p>
-          <p>
-            <strong className="underline">Task </strong>
-            {task && salary ? (
-              <ul>
-                {task.map((taskName, index) => (
-                  <li key={index}>
-                    <strong>{taskName}: </strong>
-                    {salary[index]}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              "Salary information not available"
-            )}
+          <p className="pt-2">
+            <strong className="text-blue-800 underline">Availability:</strong>
+            <ul>
+              {availability?.map((daySlot, index) => (
+                <li key={index}>
+                  <strong>{daySlot}</strong>
+                </li>
+              ))}
+            </ul>
           </p>
           <div className="mt-4">
             <label
@@ -46,6 +46,18 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             >
               Know More
             </label>
+            {user ? (
+              <p></p>
+            ) : (
+              <p>
+                <Link
+                  to="/login"
+                  className="text-red-500 text-xs font-bold rounded-full hover:bg-opacity-80 transition duration-300 px-2 btn-sm mt-1"
+                >
+                  Login for details
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       </div>

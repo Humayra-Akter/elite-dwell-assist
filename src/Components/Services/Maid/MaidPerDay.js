@@ -12,7 +12,6 @@ const MaidPerDay = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const [isBookButtonDisabled, setIsBookButtonDisabled] = useState(true);
-
   const handleServiceSelect = (service) => {
     const updatedServices = [...selectedServices];
     if (updatedServices.includes(service)) {
@@ -91,19 +90,13 @@ const MaidPerDay = () => {
           />
         </div>
         <div>
-          <MaidPerDayAddress selectedServices={selectedServices} />
+          <MaidPerDayAddress
+            selectedDate={selectedDate}
+            selectedTimeSlot={selectedTimeSlot}
+            selectedServices={selectedServices}
+          />
         </div>
       </div>
-      {/* <button
-        onClick={handleBooking}
-        className={`btn w-1/3 btn-sm border-blue-500 text-white text-xs font-bold bg-primary ${
-          isBookButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        type="submit"
-        disabled={isBookButtonDisabled}
-      >
-        Book
-      </button> */}
       <Footer />
     </div>
   );

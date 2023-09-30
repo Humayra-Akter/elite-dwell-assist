@@ -3,10 +3,16 @@ import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Notification from "./Notification";
 import { signOut } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { addNotification } from "../../redux/slices/notificationsSlice";
 
 const Navbar = ({ openAboutModal }) => {
   const [user, loading, error] = useAuthState(auth);
+  const [notificationIdCounter, setNotificationIdCounter] = useState(1);
+  const dispatch = useDispatch();
+  const notifications = useSelector((state) => state.notifications);
 
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
@@ -30,11 +36,6 @@ const Navbar = ({ openAboutModal }) => {
     closeDropdowns();
   };
 
-  const handleAppServiceClick = (service) => {
-    console.log(`Clicked on ${service}`);
-    closeDropdowns();
-  };
-
   const logout = () => {
     signOut(auth);
   };
@@ -47,19 +48,17 @@ const Navbar = ({ openAboutModal }) => {
             <img className="ml-10 rounded-full w-16" src={logo} alt="" />
           </Link>
         </div>
-        <div class="navbar-end pr-24">
-          <button
-            disabled
-            className="text-white font-black hover:text-black pr-7 "
-          >
-            {user?.displayName || ""}
-          </button>
-
+        {/* <div className="navbar-center">
+          <p disabled className="text-white font-bold cursor-none">
+            WELCOME "{user?.displayName || ""}"
+          </p>
+        </div> */}
+        <div class="navbar-end pr-10">
           {/* Services */}
           <div className="relative inline-block text-right">
             <button
               onClick={toggleServiceDropdown}
-              className="text-white font-black hover:text-black pr-7 "
+              className="text-white font-bold hover:text-black pr-7 "
             >
               Services
             </button>
@@ -119,7 +118,7 @@ const Navbar = ({ openAboutModal }) => {
           <div className="relative inline-block text-right">
             <button
               onClick={toggleAppDropdown}
-              className="text-white font-black hover:text-black pr-7 "
+              className="text-white font-bold hover:text-black pr-7 "
             >
               Appliance-Repair
             </button>
@@ -169,30 +168,14 @@ const Navbar = ({ openAboutModal }) => {
           </div>
           <button
             onClick={openAboutModal}
-            className=" text-white font-black hover:text-black pr-7 "
+            className=" text-white font-bold hover:text-black pr-7 "
           >
             About
           </button>
-          {/* <Link to="/service">
-            <button class="btn btn-ghost w-100 h-100 btn-circle ">
-              <div class="indicator">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  height="1em"
-                  width="1em"
-                >
-                  <path fill="none" d="M0 0h24v24H0z" />
-                  <path d="M21 8a2 2 0 012 2v4a2 2 0 01-2 2h-1.062A8.001 8.001 0 0112 23v-2a6 6 0 006-6V9A6 6 0 106 9v7H3a2 2 0 01-2-2v-4a2 2 0 012-2h1.062a8.001 8.001 0 0115.876 0H21zM7.76 15.785l1.06-1.696A5.972 5.972 0 0012 15a5.972 5.972 0 003.18-.911l1.06 1.696A7.963 7.963 0 0112 17a7.963 7.963 0 01-4.24-1.215z" />
-                </svg>
-                Services
-              </div>
-            </button>
-          </Link> */}
           {user ? (
             <button
               onClick={logout}
-              className="text-white font-black hover:text-black pr-7 "
+              className="text-white font-bold hover:text-black pr-7 "
             >
               <div class="indicator">Signout</div>
             </button>
@@ -203,28 +186,8 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           )}
-          <button class="text-white font-black hover:text-black pr-7 btn btn-ghost text-xl btn-circle">
-            <div class="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-              <span class="badge badge-xs badge-primary indicator-item"></span>
-            </div>
-          </button>
-          {/* <h3 className="text-xs font-bold text-white">
-            {new Date().toUTCString().slice(0, 16)}
-          </h3> */}
+
+          {user ? <Notification /> : <></>}
         </div>
       </div>
     </div>

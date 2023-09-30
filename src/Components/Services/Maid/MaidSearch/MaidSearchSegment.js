@@ -1,55 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MaidPerMonth from "../MaidPerMonth";
-import LocationDropdown from "./LocationDropdown";
-import SearchSlider from "./SearchSlider";
+import { useDispatch, useSelector } from "react-redux";
 
 const MaidSearchSegment = () => {
-  const [maids, setMaids] = useState([]);
+  const dispatch = useDispatch();
+  const { location, salaryRange, availability } = useSelector(
+    (state) => state.search
+  );
 
-  useEffect(() => {
-    fetch("http://localhost:5000/maid")
-      .then((res) => res.json())
-      .then((data) => {
-        setMaids(data);
-      });
-  }, []);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedSalaryRange, setSelectedSalaryRange] = useState(0);
+  const [selectedAvailability, setSelectedAvailability] = useState("");
 
-  const locations = [
-    "All",
-    "Dhanmondi",
-    "Mirpur",
-    "Savar",
-    "Uttara",
-    "Gulshan",
-    "Mohammadpur",
-    "Banani",
-    "Motijheel",
-  ];
+  const handleLocationChange = (e) => {
+    setSelectedLocation(e.target.value);
+  };
 
-  const minSalary = 0;
-  const maxSalary = 5000;
+  const handleSalaryRangeChange = (e) => {
+    setSelectedSalaryRange(e.target.value);
+  };
 
-  const availabilityOptions = [
-    "08.00 AM - 11.00 AM",
-    "02.00 PM - 05.00 PM",
-    "05.00 PM - 08.00 PM",
-  ];
+  const handleAvailabilityChange = (e) => {
+    setSelectedAvailability(e.target.value);
+  };
 
   return (
     <div class="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
-        <MaidPerMonth />
+      <div class="drawer-content flex flex-col items-center justify-center">
+        <MaidPerMonth
+          selectedLocation={selectedLocation}
+          selectedSalaryRange={selectedSalaryRange}
+          selectedAvailability={selectedAvailability}
+        />
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-slate-100 text-base-content">
-          <p className="mt-20">Search by Location</p>
-          <LocationDropdown locations={locations} />
+          <p className="mt-20">Search by location</p>
+          <select
+            value={selectedLocation}
+            onChange={handleLocationChange}
+            className="select select-bordered select-primary"
+          >
+            <option value="">Select Location</option>
+            <option value="Dhanmondi">Dhanmondi</option>
+            <option value="Mirpur">Mirpur</option>
+            <option value="Savar">Savar</option>
+            <option value="Uttara">Uttara</option>
+            <option value="Gulshan">Gulshan</option>
+            <option value="Mohammadpur">Mohammadpur</option>
+            <option value="Banani">Banani</option>
+            <option value="Motijheel">Motijheel</option>
+          </select>
 
-          <p className="mt-20">Search by Task Salary</p>
-          <p className="mt-20">Search by Availability</p>
-          <SearchSlider></SearchSlider>
+          <p className="mt-20">Search by task salary</p>
+          <input
+            type="range"
+            min={0}
+            max={5000} // Set the max salary range as per your requirement
+            value={selectedSalaryRange}
+            onChange={handleSalaryRangeChange}
+            className="range range-primary"
+          />
+
+          <p className="mt-20">Search by availability</p>
+          <select
+            value={selectedAvailability}
+            onChange={handleAvailabilityChange}
+            className="select select-bordered select-primary"
+          >
+            <option value="">Select Availability</option>
+            <option value="08.00 AM - 11.00 AM">08.00 AM - 11.00 AM</option>
+            <option value="02.00 PM - 05.00 PM">02.00 PM - 05.00 PM</option>
+            <option value="05.00 PM - 08.00 PM">05.00 PM - 08.00 PM</option>
+          </select>
         </ul>
       </div>
     </div>

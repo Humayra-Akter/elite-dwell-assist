@@ -6,10 +6,30 @@ import Cart from "../../Cart/Cart";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import RequireAuth from "../../Login/RequireAuth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import io from "socket.io-client";
+import { addNotification } from "../../../redux/slices/notificationsSlice";
+
+const socket = io("http://localhost:5000");
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
   const [bookMaid, setBookMaid] = useState([]);
+  const [user, loading, error] = useAuthState(auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    socket.on("notification", (data) => {
+      // Dispatch a notification to Redux when a new notification arrives
+      dispatch(addNotification(data));
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [dispatch]);
+
   useEffect(() => {
     fetch("http://localhost:5000/maid")
       .then((res) => res.json())
@@ -65,13 +85,16 @@ const MaidPerMonth = () => {
             key={maid.id}
             maid={maid}
             setBookMaid={setBookMaid}
+            user={user}
           ></MaidPerMonthCard>
         ))}
       </div>
 
-      <RequireAuth>
-        {bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>}
-      </RequireAuth>
+      {user ? (
+        bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>
+      ) : (
+        <div></div>
+      )}
 
       <Cart></Cart>
       <Footer></Footer>

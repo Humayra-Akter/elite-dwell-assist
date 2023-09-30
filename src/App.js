@@ -9,27 +9,27 @@ import MaidPerDay from "./Components/Services/Maid/MaidPerDay";
 import Babysitter from "./Components/Services/Babysitter/Babysitter";
 import DriverPerDay from "./Components/Services/Driver/DriverPerDay";
 import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
-// import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Error from "./Components/Error/Error";
 import ApplianceRepair from "./Components/Services/ApplianceRepair/ApplianceRepair";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MaidSearchSegment from "./Components/Services/Maid/MaidSearch/MaidSearchSegment";
 import CustomerRegistrationForm from "./Components/Login/CustomerRegistrationForm";
-import RequireAuth from "./Components/Login/RequireAuth";
-import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
+import { io } from "socket.io-client";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-
   const openAboutModal = () => {
     setIsAboutModalOpen(true);
   };
-
   const closeAboutModal = () => {
     setIsAboutModalOpen(false);
   };
+
+  useEffect(() => {
+    const socket = io("http://localhost:5000");
+  }, []);
 
   return (
     <div>
@@ -56,17 +56,9 @@ function App() {
           element={<CustomerRegistrationForm />}
         />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
-        {/* <Route
-          path="/maidPerMonth"
-          element={
-            <RequireAuth>
-              <MaidPerMonth />
-            </RequireAuth>
-          }
-        /> */}
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
-        <Route path="/driverPerMonth" element={<DriverPerMonth />} />{" "}
+        <Route path="/driverPerMonth" element={<DriverPerMonth />} />
         <Route path="/tvRepair" element={<ApplianceRepair />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />

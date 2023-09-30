@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MultiSelect } from "react-multi-select-component";
 import bengaliLabels from "../../bengaliText";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const MaidRegistrationForm = () => {
   const {
@@ -12,6 +18,11 @@ const MaidRegistrationForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const navigate = useNavigate();
+  let signInError;
 
   const imageStorageKey = "81a2b36646ff008b714220192e61707d";
 
@@ -31,6 +42,18 @@ const MaidRegistrationForm = () => {
   const closeSuccessModal = () => {
     setIsModalOpen(false);
   };
+
+  if (loading || updating) {
+    return <Loading></Loading>;
+  }
+
+  if (error || updateError) {
+    signInError = (
+      <p className="text-red-500 text-xs mt-1">
+        {error?.message || updateError?.message}
+      </p>
+    );
+  }
 
   const handleExpertiseChange = (selectedOptions) => {
     setSelectedExpertise(selectedOptions);
@@ -120,7 +143,15 @@ const MaidRegistrationForm = () => {
     dish_washing: [1500, 1600, 1550],
   };
 
-  const handleAddMaid = (data) => {
+  const handleAddMaid = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({
+      displayName: data.name,
+      address: data.address,
+      contact: data.contact,
+      password: data.password,
+      dob: data.dob,
+    });
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -173,6 +204,7 @@ const MaidRegistrationForm = () => {
             });
         }
       });
+    navigate("/");
   };
 
   return (
