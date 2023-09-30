@@ -167,6 +167,7 @@ const MaidRegistrationForm = () => {
           console.log(imgData.data.url);
           const maid = {
             name: data.name,
+            role: "maid",
             email: data.email,
             specialty: data.specialty,
             img: imgData.data.url,

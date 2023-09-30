@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -13,6 +13,8 @@ const Navbar = ({ openAboutModal }) => {
   const [notificationIdCounter, setNotificationIdCounter] = useState(1);
   const dispatch = useDispatch();
   const notifications = useSelector((state) => state.notifications);
+  const [maid, setMaid] = useState([]);
+  const [customer, setCustomer] = useState([]);
 
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
@@ -35,6 +37,35 @@ const Navbar = ({ openAboutModal }) => {
     console.log(`Clicked on ${service}`);
     closeDropdowns();
   };
+
+  useEffect(() => {
+    fetch("http://localhost:5000/customer")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          if (data[0].role === "customer") {
+            setCustomer(user);
+            // console.log(customer);
+          }
+        } else {
+          console.log("No user data found.");
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/maid")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          if (data[0].role === "maid") {
+            setMaid(user);
+          }
+        } else {
+          console.log("No user data found.");
+        }
+      });
+  }, []);
 
   const logout = () => {
     signOut(auth);
@@ -186,8 +217,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           )}
-
-          {user ? <Notification /> : <></>}
+          {maid ? <Notification /> : <></>}
         </div>
       </div>
     </div>

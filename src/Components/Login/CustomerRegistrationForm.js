@@ -44,6 +44,7 @@ const CustomerRegistrationForm = () => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({
       displayName: data.name,
+      role: "customer",
       address: data.address,
       contact: data.contact,
       password: data.password,
@@ -52,6 +53,7 @@ const CustomerRegistrationForm = () => {
     const customer = {
       name: data.name,
       email: data.email,
+      role: "customer",
       address: data.address,
       contact: data.contact,
       gender: selectedGender[0]?.value,

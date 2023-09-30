@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import banner1 from "../../images/babysitter.jpg";
 import banner2 from "../../images/driver.jpg";
 import banner3 from "../../images/maid.jpg";
-import banner4 from "../../images/homeBanner.jpg";
 import { TypeAnimation } from "react-type-animation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
