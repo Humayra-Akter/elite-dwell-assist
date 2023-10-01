@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import io from "socket.io-client";
 import { addNotification } from "../../../redux/slices/notificationsSlice";
+import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const socket = io("http://localhost:5000");
 
@@ -40,54 +45,18 @@ const BookingMaid = ({ bookMaid, user }) => {
   } = bookMaid;
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const dispatch = useDispatch();
-  const [maid, setMaid] = useState(null);
-  const [customer, setCustomer] = useState(null);
   const [notificationIdCounter, setNotificationIdCounter] = useState(1);
+  const form = useRef();
+  const [gUser, loading, error] = useAuthState(auth);
+
   // Function to close the success modal
   const closeSuccessModal = () => {
     setBookingSuccess(false);
   };
 
-  // const handleBooking = async () => {
-  //   if (!bookingSuccess && customer) {
-  //     try {
-  //       // Make a POST request to your server to create the booking
-  //       const response = await fetch("http://localhost:5000/booking", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ customer, maid }),
-  //       });
-
-  //       if (response.ok) {
-  //         const bookingData = await response.json();
-
-  //         const bookingId = bookingData._id;
-  //         const maidResponse = await fetch(`http://localhost:5000/getMaidId/${bookingId}`);
-  //         const maidData = await maidResponse.json();
-
-  //         // Create a new notification with the maidId and customerId
-  //         const newNotification = {
-  //           id: /* Unique ID for the notification */,
-  //           maidId: maidData.maidId,
-  //           customerId: customer._id,
-  //           message: `New booking from customer ${customer.name}`,
-  //         };
-
-  //         dispatch(addNotification(newNotification));
-  //         setBookingSuccess(true);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error creating booking:", error);
-  //     }
-  //   }
-  // };
-
   const handleBooking = () => {
     if (!bookingSuccess) {
       setBookingSuccess(true);
-      // Notify the maid when a booking is successful
       socket.emit("notification", {
         to: bookMaid.id,
         message: `You have a new booking request from ${user?.displayName}`,
@@ -99,6 +68,30 @@ const BookingMaid = ({ bookMaid, user }) => {
       dispatch(addNotification(newNotification));
       setNotificationIdCounter(notificationIdCounter + 1);
     }
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // if (!isCustomer) {
+    //   toast.error("You are not authorized to send emails.");
+    //   return;
+    // }
+
+    emailjs
+      .sendForm(
+        "service_rw6lyri",
+        "template_7fqei6a",
+        e.target,
+        "rDDtyeV8TTthfS19_"
+      )
+      .then((res) => {
+        toast.success("Email sent successfully:", res.text);
+        closeSuccessModal();
+      })
+      .catch((error) => {
+        toast.error("Email failed to send:", error);
+      });
   };
 
   const age = calculateAge(dob);
@@ -229,8 +222,9 @@ const BookingMaid = ({ bookMaid, user }) => {
             },
             content: {
               width: "500px",
-              height: "200px",
+              height: "550px",
               margin: "auto",
+              padding: "32px",
             },
           }}
         >
@@ -238,18 +232,75 @@ const BookingMaid = ({ bookMaid, user }) => {
             className="text-3xl font-black text-primary text-center px-7"
             style={{ fontFamily: "arial" }}
           >
-            Booking Successful!
+            Send booking Email to {bookMaid.name}!
           </h1>
 
-          <p className="text-lg text-center py-5">
-            Your booking has been notified to
-            <span className="text-lg italic uppercase font-bold text-blue-600 text-center pl-2 py-5">
+          <form ref={form} onSubmit={sendEmail}>
+            {/* Name */}
+            <div className="form-control w-full pb-2">
+              <label className="label">
+                <span className="label-text text-blue-700 font-bold text-md">
+                  Name
+                </span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Name"
+                name="user_name"
+                required
+                disabled
+                value={gUser?.displayName || ""}
+                className="input input-sm input-bordered w-full "
+              />
+            </div>
+            {/* Email */}
+            <div className="form-control w-full pb-2">
+              <label className="label">
+                <span className="label-text text-blue-700 font-bold text-md">
+                  Email
+                </span>
+              </label>
+              <input
+                type="email"
+                placeholder="Your email"
+                name="user_email"
+                required
+                disabled
+                value={gUser?.email || ""}
+                className="input input-sm input-bordered w-full "
+              />
+            </div>{" "}
+            {/* Message */}
+            <div className="form-control w-full pb-4">
+              <label className="label">
+                <span className="label-text text-blue-700 font-bold text-md">
+                  Message
+                </span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Message"
+                name="message"
+                required
+                className="input input-lg input-bordered w-full "
+              />
+            </div>
+            <input
+              className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+              type="submit"
+              value="Send"
+            />
+          </form>
+
+          <p className="text-xs text-center py-5">
+            You are booking for
+            <span className="text-xs italic uppercase font-bold text-blue-600 text-center pl-2 py-5">
               {bookMaid.name}
             </span>
           </p>
           <button
             onClick={closeSuccessModal}
-            className="btn btn-sm text-xs w-1/3 mt-5 ml-40 border-blue-500
+            className="btn btn-sm text-xs w-1/4 ml-40 border-blue-500
               text-white font-bold bg-primary"
           >
             Close

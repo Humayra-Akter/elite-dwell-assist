@@ -69,6 +69,7 @@ const Navbar = ({ openAboutModal }) => {
 
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem("userRole");
   };
 
   return (

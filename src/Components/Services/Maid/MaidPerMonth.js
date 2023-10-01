@@ -4,8 +4,6 @@ import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
 import Cart from "../../Cart/Cart";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import RequireAuth from "../../Login/RequireAuth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import io from "socket.io-client";
@@ -18,13 +16,12 @@ const MaidPerMonth = () => {
   const [bookMaid, setBookMaid] = useState([]);
   const [user, loading, error] = useAuthState(auth);
   const dispatch = useDispatch();
+  const [customer, setCustomer] = useState([]);
 
   useEffect(() => {
     socket.on("notification", (data) => {
-      // Dispatch a notification to Redux when a new notification arrives
       dispatch(addNotification(data));
     });
-
     return () => {
       socket.disconnect();
     };
@@ -34,34 +31,38 @@ const MaidPerMonth = () => {
     fetch("http://localhost:5000/maid")
       .then((res) => res.json())
       .then((data) => {
-        setMaids(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
+        if (data.length > 0) {
+          // Assuming you have retrieved the user's role from the backend
+          const userRole = data[0].role;
+          if (userRole === "maid") {
+            setMaids(data); // Set the user as a customer
+            localStorage.setItem("userRole", userRole);
+          }
+        } else {
+          console.log("No user data found.");
+        }
       });
   }, []);
 
-  const taskSalaryFilters = useSelector(
-    (state) => state.search.taskSalaryFilters
-  );
-  const timeSlotFilters = useSelector((state) => state.search.timeSlotFilters);
+  useEffect(() => {
+    // Check if the user is a customer
+    fetch("http://localhost:5000/customer")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          // Assuming you have retrieved the user's role from the backend
+          const userRole = data[0].role;
+          if (userRole === "customer") {
+            setCustomer(user); // Set the user as a customer
+            localStorage.setItem("userRole", userRole);
+          }
+        } else {
+          console.log("No user data found.");
+        }
+      });
+  }, []);
 
-  const filterMaidsBySalary = (maid) => {
-    // Filter maids by salary as before
-  };
-  const filterMaidsByTimeSlot = (maid) => {
-    // Check if any selected time slots match the maid's availability
-    for (const timeSlot in timeSlotFilters) {
-      if (timeSlotFilters[timeSlot] && maid.availability.includes(timeSlot)) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const filteredMaids = maids.filter(
-    (maid) => filterMaidsBySalary(maid) && filterMaidsByTimeSlot(maid)
-  );
+  const userRole = localStorage.getItem("userRole");
 
   return (
     <div>
@@ -71,14 +72,27 @@ const MaidPerMonth = () => {
       >
         Maid
       </h1>
-      {filteredMaids.map((maid) => (
-        <MaidPerMonthCard
-          key={maid.id}
-          maid={maid}
-          setBookMaid={setBookMaid}
-        ></MaidPerMonthCard>
-      ))}
+
       {/* General Maids */}
+      {userRole !== "customer" ? (
+        <div>
+          <p className="text-red-500 text-xs text-center mt-1">
+            You do not have permission to access this page.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-5 p-11">
+          {maids.map((maid) => (
+            <MaidPerMonthCard
+              key={maid.id}
+              maid={maid}
+              setBookMaid={setBookMaid}
+              user={user}
+            ></MaidPerMonthCard>
+          ))}
+        </div>
+      )}
+
       <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard
@@ -90,7 +104,7 @@ const MaidPerMonth = () => {
         ))}
       </div>
 
-      {user ? (
+      {userRole === "customer" ? (
         bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>
       ) : (
         <div></div>
