@@ -81,15 +81,15 @@ const MaidPerMonth = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-5 p-11">
-          {maids.map((maid) => (
+        <div>
+          {/* {maids.map((maid) => (
             <MaidPerMonthCard
               key={maid.id}
               maid={maid}
               setBookMaid={setBookMaid}
               user={user}
             ></MaidPerMonthCard>
-          ))}
+          ))} */}
         </div>
       )}
 
