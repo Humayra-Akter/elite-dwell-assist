@@ -45,10 +45,10 @@ const Navbar = ({ openAboutModal }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
-          // Assuming you have retrieved the user's role from the backend
           const userRole = data[0].role;
+          console.log(userRole);
           if (userRole === "customer") {
-            setCustomer(user); // Set the user as a customer
+            setCustomer(data);
             localStorage.setItem("userRole", userRole);
           }
         } else {
@@ -62,7 +62,6 @@ const Navbar = ({ openAboutModal }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
-          // Assuming you have retrieved the user's role from the backend
           const userRole = data[0].role;
           if (userRole === "maid") {
             setMaid(data); // Set the user as a maid
@@ -77,8 +76,8 @@ const Navbar = ({ openAboutModal }) => {
   const userRole = localStorage.getItem("userRole");
 
   const logout = () => {
-    signOut(auth);
     localStorage.removeItem("userRole");
+    signOut(auth);
   };
 
   return (
@@ -207,8 +206,20 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             )}
           </div>
+          {/* maid dashboard */}
           {userRole === "maid" ? (
             <Link to="/maidDashboard">
+              <button className="text-white font-bold hover:text-black pr-7 ">
+                <div class="indicator">Dashboard</div>
+              </button>
+            </Link>
+          ) : (
+            <div></div>
+          )}
+
+          {/* customer dashboard */}
+          {userRole === "customer" ? (
+            <Link to="/customerDashboard">
               <button className="text-white font-bold hover:text-black pr-7 ">
                 <div class="indicator">Dashboard</div>
               </button>

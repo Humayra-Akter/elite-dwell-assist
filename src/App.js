@@ -20,6 +20,9 @@ import { io } from "socket.io-client";
 import MaidDashboard from "./Components/MaidDashboard/MaidDashboard";
 import MaidNotifications from "./Components/MaidDashboard/MaidNotifications";
 import MaidProfile from "./Components/MaidDashboard/MaidProfile";
+import CustomerDashboard from "./Components/CustomerDashboard/CustomerDashboard";
+import CustomerNotification from "./Components/CustomerDashboard/CustomerNotification";
+import CustomerProfile from "./Components/CustomerDashboard/CustomerProfile";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -62,6 +65,10 @@ function App() {
         <Route path="/maidDashboard" element={<MaidDashboard />}>
           <Route index element={<MaidNotifications />}></Route>
           <Route path="maidProfile" element={<MaidProfile />}></Route>
+        </Route>
+        <Route path="/customerDashboard" element={<CustomerDashboard />}>
+          <Route index element={<CustomerNotification />}></Route>
+          <Route path="customerProfile" element={<CustomerProfile />}></Route>
         </Route>
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
