@@ -57,6 +57,33 @@ const BookingMaid = ({ bookMaid, user }) => {
   const handleBooking = () => {
     if (!bookingSuccess) {
       setBookingSuccess(true);
+
+      const bookingData = {
+        maidId: bookMaid.id,
+        maidName: bookMaid.name,
+        customerEmail: gUser?.email || "", // Assuming you have user authentication
+      };
+
+      fetch("http://localhost:5000/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.success);
+          if (data.message === "Booking created successfully") {
+            sendEmail(bookMaid);
+            toast.success(`Booking created successfully for ${bookMaid.name}`);
+          }
+        })
+        .catch((error) => {
+          console.error("Error creating booking:", error);
+          toast.error("Failed to create booking");
+        });
+
       socket.emit("notification", {
         to: bookMaid.id,
         message: `You have a new booking request from ${user?.displayName}`,
@@ -72,12 +99,6 @@ const BookingMaid = ({ bookMaid, user }) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    // if (!isCustomer) {
-    //   toast.error("You are not authorized to send emails.");
-    //   return;
-    // }
-
     emailjs
       .sendForm(
         "service_rw6lyri",
@@ -221,86 +242,26 @@ const BookingMaid = ({ bookMaid, user }) => {
               backgroundColor: "rgba(0, 0, 0, 0.5)",
             },
             content: {
-              width: "500px",
-              height: "550px",
+              width: "400px",
+              height: "200px",
               margin: "auto",
-              padding: "32px",
             },
           }}
         >
           <h1
-            className="text-3xl font-black text-primary text-center px-7"
+            className="text-2xl font-black text-primary text-center py-2 px-7"
             style={{ fontFamily: "arial" }}
           >
-            Send booking Email to {bookMaid.name}!
-          </h1>
-
-          <form ref={form} onSubmit={sendEmail}>
-            {/* Name */}
-            <div className="form-control w-full pb-2">
-              <label className="label">
-                <span className="label-text text-blue-700 font-bold text-md">
-                  Name
-                </span>
-              </label>
-              <input
-                type="text"
-                placeholder="Your Name"
-                name="user_name"
-                required
-                disabled
-                value={gUser?.displayName || ""}
-                className="input input-sm input-bordered w-full "
-              />
-            </div>
-            {/* Email */}
-            <div className="form-control w-full pb-2">
-              <label className="label">
-                <span className="label-text text-blue-700 font-bold text-md">
-                  Email
-                </span>
-              </label>
-              <input
-                type="email"
-                placeholder="Your email"
-                name="user_email"
-                required
-                disabled
-                value={gUser?.email || ""}
-                className="input input-sm input-bordered w-full "
-              />
-            </div>{" "}
-            {/* Message */}
-            <div className="form-control w-full pb-4">
-              <label className="label">
-                <span className="label-text text-blue-700 font-bold text-md">
-                  Message
-                </span>
-              </label>
-              <input
-                type="text"
-                placeholder="Your Message"
-                name="message"
-                required
-                className="input input-lg input-bordered w-full "
-              />
-            </div>
-            <input
-              className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
-              type="submit"
-              value="Send"
-            />
-          </form>
-
-          <p className="text-xs text-center py-5">
-            You are booking for
-            <span className="text-xs italic uppercase font-bold text-blue-600 text-center pl-2 py-5">
+            Booking sent to{" "}
+            <span className="text-3xl italic uppercase font-bold text-blue-600 text-center pl-2 py-5">
               {bookMaid.name}
             </span>
-          </p>
+            !
+          </h1>
+
           <button
             onClick={closeSuccessModal}
-            className="btn btn-sm text-xs w-1/4 ml-40 border-blue-500
+            className="btn btn-sm text-xs w-1/4 ml-32 mt-10 border-blue-500
               text-white font-bold bg-primary"
           >
             Close
@@ -312,3 +273,60 @@ const BookingMaid = ({ bookMaid, user }) => {
 };
 
 export default BookingMaid;
+
+// <form ref={form} onSubmit={sendEmail}>
+//   {/* Name */}
+//   <div className="form-control w-full pb-2">
+//     <label className="label">
+//       <span className="label-text text-blue-700 font-bold text-md">
+//         Name
+//       </span>
+//     </label>
+//     <input
+//       type="text"
+//       placeholder="Your Name"
+//       name="user_name"
+//       required
+//       disabled
+//       value={gUser?.displayName || ""}
+//       className="input input-sm input-bordered w-full "
+//     />
+//   </div>
+//   {/* Email */}
+//   <div className="form-control w-full pb-2">
+//     <label className="label">
+//       <span className="label-text text-blue-700 font-bold text-md">
+//         Email
+//       </span>
+//     </label>
+//     <input
+//       type="email"
+//       placeholder="Your email"
+//       name="user_email"
+//       required
+//       disabled
+//       value={gUser?.email || ""}
+//       className="input input-sm input-bordered w-full "
+//     />
+//   </div>{" "}
+//   {/* Message */}
+//   <div className="form-control w-full pb-4">
+//     <label className="label">
+//       <span className="label-text text-blue-700 font-bold text-md">
+//         Message
+//       </span>
+//     </label>
+//     <input
+//       type="text"
+//       placeholder="Your Message"
+//       name="message"
+//       required
+//       className="input input-lg input-bordered w-full "
+//     />
+//   </div>
+//   <input
+//     className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+//     type="submit"
+//     value="Send"
+//   />
+// </form>;

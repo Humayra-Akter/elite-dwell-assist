@@ -17,6 +17,9 @@ import "react-toastify/dist/ReactToastify.css";
 import MaidSearchSegment from "./Components/Services/Maid/MaidSearch/MaidSearchSegment";
 import CustomerRegistrationForm from "./Components/Login/CustomerRegistrationForm";
 import { io } from "socket.io-client";
+import MaidDashboard from "./Components/MaidDashboard/MaidDashboard";
+import MaidNotifications from "./Components/MaidDashboard/MaidNotifications";
+import MaidProfile from "./Components/MaidDashboard/MaidProfile";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -56,6 +59,10 @@ function App() {
           element={<CustomerRegistrationForm />}
         />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
+        <Route path="/maidDashboard" element={<MaidDashboard />}>
+          <Route index element={<MaidNotifications />}></Route>
+          <Route path="maidProfile" element={<MaidProfile />}></Route>
+        </Route>
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
         <Route path="/driverPerMonth" element={<DriverPerMonth />} />

@@ -7,6 +7,7 @@ import Notification from "./Notification";
 import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { addNotification } from "../../redux/slices/notificationsSlice";
+import userEvent from "@testing-library/user-event";
 
 const Navbar = ({ openAboutModal }) => {
   const [user, loading, error] = useAuthState(auth);
@@ -34,18 +35,21 @@ const Navbar = ({ openAboutModal }) => {
   };
 
   const handleServiceClick = (service) => {
-    console.log(`Clicked on ${service}`);
+    // console.log(`Clicked on ${service}`);
     closeDropdowns();
   };
 
   useEffect(() => {
+    // Check if the user is a customer
     fetch("http://localhost:5000/customer")
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
-          if (data[0].role === "customer") {
-            setCustomer(user);
-            // console.log(customer);
+          // Assuming you have retrieved the user's role from the backend
+          const userRole = data[0].role;
+          if (userRole === "customer") {
+            setCustomer(user); // Set the user as a customer
+            localStorage.setItem("userRole", userRole);
           }
         } else {
           console.log("No user data found.");
@@ -58,14 +62,19 @@ const Navbar = ({ openAboutModal }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
-          if (data[0].role === "maid") {
-            setMaid(user);
+          // Assuming you have retrieved the user's role from the backend
+          const userRole = data[0].role;
+          if (userRole === "maid") {
+            setMaid(data); // Set the user as a maid
+            localStorage.setItem("userRole", userRole);
           }
         } else {
           console.log("No user data found.");
         }
       });
   }, []);
+
+  const userRole = localStorage.getItem("userRole");
 
   const logout = () => {
     signOut(auth);
@@ -198,6 +207,16 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             )}
           </div>
+          {userRole === "maid" ? (
+            <Link to="/maidDashboard">
+              <button className="text-white font-bold hover:text-black pr-7 ">
+                <div class="indicator">Dashboard</div>
+              </button>
+            </Link>
+          ) : (
+            <div></div>
+          )}
+
           <button
             onClick={openAboutModal}
             className=" text-white font-bold hover:text-black pr-7 "
@@ -213,7 +232,7 @@ const Navbar = ({ openAboutModal }) => {
             </button>
           ) : (
             <Link to="/login">
-              <button className="text-white font-black hover:text-black pr-7 ">
+              <button className="text-white font-bold hover:text-black pr-7 ">
                 <div class="indicator">Login</div>
               </button>
             </Link>
