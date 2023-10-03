@@ -16,7 +16,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MaidSearchSegment from "./Components/Services/Maid/MaidSearch/MaidSearchSegment";
 import CustomerRegistrationForm from "./Components/Login/CustomerRegistrationForm";
-import { io } from "socket.io-client";
 import MaidDashboard from "./Components/MaidDashboard/MaidDashboard";
 import MaidNotifications from "./Components/MaidDashboard/MaidNotifications";
 import MaidProfile from "./Components/MaidDashboard/MaidProfile";

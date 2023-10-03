@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { addNotification } from "../../../redux/slices/notificationsSlice";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
 
 function calculateAge(dateOfBirth) {
   const dob = new Date(dateOfBirth);
@@ -84,10 +84,10 @@ const BookingMaid = ({ bookMaid, user }) => {
           toast.error("Failed to create booking");
         });
 
-      socket.emit("notification", {
-        to: bookMaid.id,
-        message: `You have a new booking request from ${user?.displayName}`,
-      });
+      // socket.emit("notification", {
+      //   to: bookMaid.id,
+      //   message: `You have a new booking request from ${user?.displayName}`,
+      // });
       const newNotification = {
         id: notificationIdCounter,
         message: `You have a new booking from ${bookMaid.name}`,

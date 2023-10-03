@@ -6,10 +6,10 @@ import Cart from "../../Cart/Cart";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { addNotification } from "../../../redux/slices/notificationsSlice";
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
 
 const MaidPerMonth = () => {
   const [maids, setMaids] = useState([]);
@@ -18,14 +18,14 @@ const MaidPerMonth = () => {
   const dispatch = useDispatch();
   const [customer, setCustomer] = useState([]);
 
-  useEffect(() => {
-    socket.on("notification", (data) => {
-      dispatch(addNotification(data));
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, [dispatch]);
+  // useEffect(() => {
+  //   socket.on("notification", (data) => {
+  //     dispatch(addNotification(data));
+  //   });
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, [dispatch]);
 
   useEffect(() => {
     fetch("http://localhost:5000/maid")

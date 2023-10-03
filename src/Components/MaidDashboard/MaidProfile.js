@@ -8,10 +8,10 @@ const MaidProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         setMaid(data);
-        console.log(data);
+        // console.log(data);
       });
   }, [maid]);
-  console.log(maid);
+  // console.log(maid?.email);
 
   return (
     <div className="absolute bg-white p-4 shadow rounded-lg">

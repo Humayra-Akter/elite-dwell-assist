@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { addNotification } from "../../redux/slices/notificationsSlice";
 import userEvent from "@testing-library/user-event";
+import { toast } from "react-toastify";
 
 const Navbar = ({ openAboutModal }) => {
   const [user, loading, error] = useAuthState(auth);
@@ -46,13 +47,12 @@ const Navbar = ({ openAboutModal }) => {
       .then((data) => {
         if (data.length > 0) {
           const userRole = data[0].role;
-          console.log(userRole);
           if (userRole === "customer") {
             setCustomer(data);
             localStorage.setItem("userRole", userRole);
           }
         } else {
-          console.log("No user data found.");
+          toast.log("No user data found.");
         }
       });
   }, []);
@@ -68,7 +68,7 @@ const Navbar = ({ openAboutModal }) => {
             localStorage.setItem("userRole", userRole);
           }
         } else {
-          console.log("No user data found.");
+          toast.log("No user data found.");
         }
       });
   }, []);

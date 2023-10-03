@@ -6,8 +6,13 @@ const MaidDashboard = () => {
     <div>
       <div class="drawer lg:drawer-open">
         <input id="maid-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col items-center justify-center">
-          <h1>Dashboard</h1>
+        <div class="drawer-content  p-11">
+          <h1
+            style={{ fontFamily: "arial" }}
+            className="text-4xl text-primary font-black text-left pb-11"
+          >
+            DASHBOARD
+          </h1>
           <Outlet />
           <label
             for="maid-drawer"
