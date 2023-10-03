@@ -266,6 +266,7 @@ const MaidRegistrationForm = () => {
                         value: true,
                         message: "Email is required",
                       },
+                      unique: { value: true },
                       pattern: {
                         value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
                         message: "Provide a valid email",
@@ -331,6 +332,7 @@ const MaidRegistrationForm = () => {
                         value: true,
                         message: "contact is required",
                       },
+                      unique: { value: true },
                       pattern: {
                         value: /[0-9]*/,
                         message: " Your Contact number should have digits only",
@@ -518,6 +520,7 @@ const MaidRegistrationForm = () => {
                         value: true,
                         message: "nid is required",
                       },
+                      unique: { value: true },
                       pattern: {
                         value: /[0-9]*/,
                         message: "Provide a valid nid",

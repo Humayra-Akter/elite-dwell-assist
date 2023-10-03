@@ -182,6 +182,11 @@ const MaidPerDayAddress = ({
                       <option value="mirpur">Mirpur</option>
                       <option value="mohammadpur">Mohammadpur</option>
                       <option value="gulshan">Gulshan</option>
+                      <option value="dhanmondi">Dhanmondi</option>
+                      <option value="banani">Banani</option>
+                      <option value="savar">Savar</option>
+                      <option value="motijheel">Motijheel</option>
+                      <option value="uttora">Uttora</option>
                     </select>
                   </div>
                 </div>

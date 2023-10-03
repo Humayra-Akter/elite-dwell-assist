@@ -25,10 +25,12 @@ const MaidDashboard = () => {
           <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              <Link to="/maidDashboard">Maid Notification</Link>
+              <Link to="/maidDashboard">Maid Profile</Link>
             </li>
             <li>
-              <Link to="/maidDashboard/maidProfile">Maid Profile</Link>
+              <Link to="/maidDashboard/maidNotification">
+                Maid Notification
+              </Link>
             </li>
           </ul>
         </div>

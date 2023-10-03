@@ -49,7 +49,30 @@ const MaidServicePerDay = ({ selectedTimeSlot }) => {
               htmlFor="sweeping"
               className="text-lg font-medium text-primary"
             >
-              $10
+              BDT 150
+            </label>
+          </div>
+        </div>
+      </div>{" "}
+      {/* Washing_dishes */}
+      <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <img src={banner1} alt="Washing_dishes Icon" className="w-8 h-8" />
+            <label className="text-lg font-medium">Washing Dishes</label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="washing_dishes"
+              className="form-checkbox h-6 w-6 text-primary"
+              onChange={() => handleServiceSelect("Washing_dishes")}
+            />
+            <label
+              htmlFor="washing_dishes"
+              className="text-lg font-medium text-primary"
+            >
+              BDT 100
             </label>
           </div>
         </div>
@@ -72,7 +95,7 @@ const MaidServicePerDay = ({ selectedTimeSlot }) => {
               htmlFor="mopping"
               className="text-lg font-medium text-primary"
             >
-              $20
+              BDT 200
             </label>
           </div>
         </div>
@@ -95,7 +118,7 @@ const MaidServicePerDay = ({ selectedTimeSlot }) => {
               htmlFor="cooking"
               className="text-lg font-medium text-primary"
             >
-              $10
+              BDT 120
             </label>
           </div>
         </div>
@@ -118,7 +141,7 @@ const MaidServicePerDay = ({ selectedTimeSlot }) => {
               htmlFor="washing-clothes"
               className="text-lg font-medium text-primary"
             >
-              $10
+              BDT 100
             </label>
           </div>
         </div>

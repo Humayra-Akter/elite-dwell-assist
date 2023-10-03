@@ -214,7 +214,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           ) : (
-            <div></div>
+            <></>
           )}
 
           {/* customer dashboard */}
@@ -225,7 +225,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           ) : (
-            <div></div>
+            <></>
           )}
 
           <button
@@ -248,7 +248,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           )}
-          {maid ? <Notification /> : <></>}
+          {userRole === "maid" ? <Notification /> : <></>}
         </div>
       </div>
     </div>

@@ -25,11 +25,11 @@ const CustomerDashboard = () => {
           <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              <Link to="/customerDashboard">Customer Notification</Link>
+              <Link to="/customerDashboard">Customer Profile</Link>
             </li>
             <li>
-              <Link to="/customerDashboard/customerProfile">
-                Customer Profile
+              <Link to="/customerDashboard/customerNotification">
+                Customer Notification
               </Link>
             </li>
           </ul>

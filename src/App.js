@@ -23,6 +23,7 @@ import MaidProfile from "./Components/MaidDashboard/MaidProfile";
 import CustomerDashboard from "./Components/CustomerDashboard/CustomerDashboard";
 import CustomerNotification from "./Components/CustomerDashboard/CustomerNotification";
 import CustomerProfile from "./Components/CustomerDashboard/CustomerProfile";
+import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -33,9 +34,9 @@ function App() {
     setIsAboutModalOpen(false);
   };
 
-  useEffect(() => {
-    const socket = io("http://localhost:5000");
-  }, []);
+  // useEffect(() => {
+  //   const socket = io("http://localhost:5000");
+  // }, []);
 
   return (
     <div>
@@ -63,12 +64,18 @@ function App() {
         />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
         <Route path="/maidDashboard" element={<MaidDashboard />}>
-          <Route index element={<MaidNotifications />}></Route>
-          <Route path="maidProfile" element={<MaidProfile />}></Route>
+          <Route index element={<MaidProfile />}></Route>
+          <Route
+            path="maidNotification"
+            element={<MaidNotifications />}
+          ></Route>
         </Route>
         <Route path="/customerDashboard" element={<CustomerDashboard />}>
-          <Route index element={<CustomerNotification />}></Route>
-          <Route path="customerProfile" element={<CustomerProfile />}></Route>
+          <Route index element={<CustomerProfile />}></Route>
+          <Route
+            path="customerNotification"
+            element={<CustomerNotification />}
+          ></Route>
         </Route>
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
