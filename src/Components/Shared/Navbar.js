@@ -7,7 +7,6 @@ import Notification from "./Notification";
 import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { addNotification } from "../../redux/slices/notificationsSlice";
-import userEvent from "@testing-library/user-event";
 import { toast } from "react-toastify";
 
 const Navbar = ({ openAboutModal }) => {
@@ -17,6 +16,12 @@ const Navbar = ({ openAboutModal }) => {
   const notifications = useSelector((state) => state.notifications);
   const [maid, setMaid] = useState([]);
   const [customer, setCustomer] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      // window.location.reload();
+    }, 10000);
+  }, []);
 
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
@@ -36,7 +41,6 @@ const Navbar = ({ openAboutModal }) => {
   };
 
   const handleServiceClick = (service) => {
-    // console.log(`Clicked on ${service}`);
     closeDropdowns();
   };
 
@@ -52,6 +56,7 @@ const Navbar = ({ openAboutModal }) => {
             localStorage.setItem("userRole", userRole);
           }
         } else {
+          localStorage.removeItem("userRole");
           toast.log("No user data found.");
         }
       });
@@ -64,21 +69,22 @@ const Navbar = ({ openAboutModal }) => {
         if (data.length > 0) {
           const userRole = data[0].role;
           if (userRole === "maid") {
-            setMaid(data); // Set the user as a maid
+            setMaid(data);
             localStorage.setItem("userRole", userRole);
           }
         } else {
+          localStorage.removeItem("userRole");
           toast.log("No user data found.");
         }
       });
   }, []);
 
-  const userRole = localStorage.getItem("userRole");
-
   const logout = () => {
     localStorage.removeItem("userRole");
     signOut(auth);
   };
+
+  const userRole = localStorage.getItem("userRole");
 
   return (
     <div className="bg-primary text-white font-bold ">
@@ -88,11 +94,11 @@ const Navbar = ({ openAboutModal }) => {
             <img className="ml-10 rounded-full w-16" src={logo} alt="" />
           </Link>
         </div>
-        {/* <div className="navbar-center">
+        <div className="navbar-center">
           <p disabled className="text-white font-bold cursor-none">
-            WELCOME "{user?.displayName || ""}"
+            {user?.photoURL || ""}
           </p>
-        </div> */}
+        </div>
         <div class="navbar-end pr-10">
           {/* Services */}
           <div className="relative inline-block text-right">
@@ -153,7 +159,6 @@ const Navbar = ({ openAboutModal }) => {
               </div>
             )}
           </div>
-
           {/* Appliance-Repair */}
           <div className="relative inline-block text-right">
             <button
@@ -216,9 +221,8 @@ const Navbar = ({ openAboutModal }) => {
           ) : (
             <></>
           )}
-
           {/* customer dashboard */}
-          {userRole === "customer" ? (
+          {/* {userRole === "customer" ? (
             <Link to="/customerDashboard">
               <button className="text-white font-bold hover:text-black pr-7 ">
                 <div class="indicator">Dashboard</div>
@@ -226,7 +230,7 @@ const Navbar = ({ openAboutModal }) => {
             </Link>
           ) : (
             <></>
-          )}
+          )} */}
 
           <button
             onClick={openAboutModal}
@@ -234,6 +238,7 @@ const Navbar = ({ openAboutModal }) => {
           >
             About
           </button>
+
           {user ? (
             <button
               onClick={logout}
@@ -248,7 +253,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           )}
-          {userRole === "maid" ? <Notification /> : <></>}
+          {/* {userRole === "maid" ? <Notification /> : <></>} */}
         </div>
       </div>
     </div>

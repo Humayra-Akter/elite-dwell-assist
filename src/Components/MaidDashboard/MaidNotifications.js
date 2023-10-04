@@ -20,6 +20,11 @@ const MaidNotifications = () => {
         });
       });
   }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.location.reload();
+  //   }, 10000);
+  // }, []);
 
   useEffect(() => {
     if (user) {
@@ -38,7 +43,7 @@ const MaidNotifications = () => {
                 `Notifications for ${user?.displayName} from ${data?.customerEmail}`
               );
             } else {
-              toast.warning("Maid name does not match, not loading booking.");
+              toast.warning(`No notifications for ${user?.displayName}`);
             }
           } else {
             console.error(

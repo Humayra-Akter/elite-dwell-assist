@@ -196,7 +196,7 @@ const MaidRegistrationForm = () => {
           })
             .then((res) => res.json())
             .then((result) => {
-              toast.success(`${data.name} is added successfully`);
+              toast.success(`${data.name} thanks for your registration`);
               openSuccessModal(); // Open the success modal
               setTimeout(() => {
                 closeSuccessModal(); // Close the success modal
