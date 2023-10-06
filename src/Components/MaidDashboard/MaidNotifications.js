@@ -64,7 +64,7 @@ const MaidNotifications = () => {
   }
 
   if (error) {
-    console.error("Authentication error:", error);
+    toast.error("Authentication error:", error);
     return <div>Error: {error.message}</div>;
   }
 
@@ -83,9 +83,12 @@ const MaidNotifications = () => {
                 </h2>
                 <button
                   onClick={clearNotifications}
-                  className="btn btn-sm rounded-full absolute w-1/6 top-5 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-primary   "
+                  className="btn btn-sm rounded-full absolute w-1/6 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600   "
                 >
                   Clear Notifications
+                </button>
+                <button className="btn btn-sm rounded-full absolute w-1/6 top-11 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600   ">
+                  Send Confirmation
                 </button>
               </div>
             </div>

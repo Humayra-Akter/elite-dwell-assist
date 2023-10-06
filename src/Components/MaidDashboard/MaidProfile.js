@@ -1,63 +1,87 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { Link } from "react-router-dom";
 
 const MaidProfile = () => {
-  const [maid, setMaid] = useState(null);
+  const [user] = useAuthState(auth);
+  const [loggedUser, setLoggedUser] = useState([]);
   useEffect(() => {
-    // Fetch maid data from the API
-    fetch("http://localhost:5000/maid")
-      .then((res) => res.json())
-      .then((data) => {
-        setMaid(data);
-        // console.log(data);
-      });
-  }, [maid]);
-  // console.log(maid?.email);
+    if (user) {
+      fetch(`http://localhost:5000/maid?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.length > 0) {
+            setLoggedUser(data[0]);
+          }
+        });
+    }
+  }, [user]);
+  console.log(loggedUser);
 
   return (
     <div className="absolute bg-white p-4 shadow rounded-lg">
-      <div className="flex items-center">
-        <img className="w-24 h-24 rounded-full" src={maid?.img} alt="maid" />
-        <div>
-          <h2 className="text-2xl font-semibold">{maid?.name}</h2>
-          <p className="text-gray-600">Email: {maid?.email}</p>
-          <p className="text-gray-600">Phone: {maid?.contact}</p>
+      <div className="flex gap-10 items-center">
+        <img
+          className="w-24 h-24 rounded-full"
+          src={loggedUser?.img}
+          alt="user"
+        />
+        <div class="text-center">
+          <p class="text-2xl font-semibold">
+            {loggedUser?.name}
+            <span class="font-weight-light">, 27</span>
+          </p>
+          <div class="h5 font-weight-300">
+            <i class="fa fa-home mr-2"></i>
+            {loggedUser?.address}
+          </div>
         </div>
       </div>
+
       <hr className="my-4" />
       <div>
         <h3 className="text-lg font-semibold">Profile Details</h3>
         <p className="text-gray-600">
-          Gender: {maid?.gender} | Date of Birth: {maid?.dob}
+          Gender: {loggedUser?.gender} | Date of Birth: {loggedUser?.dob}
         </p>
-        <p className="text-gray-600">Address: {maid?.address}</p>
-        <p className="text-gray-600">NID: {maid?.nid}</p>
-        <p className="text-gray-600">Experience: {maid?.experience} years</p>
+        <p className="text-gray-600">Address: {loggedUser?.address}</p>
+        <p className="text-gray-600">NID: {loggedUser?.nid}</p>
         <p className="text-gray-600">
-          Location: {maid?.location ? maid?.location.join(", ") : ""}
+          Experience: {loggedUser?.experience} years
+        </p>
+        <p className="text-gray-600">
+          Location:{" "}
+          {loggedUser?.location ? loggedUser?.location.join(", ") : ""}
         </p>
       </div>
       <hr className="my-4" />
       <div>
-        <h3 className="text-lg font-semibold">Skills</h3>
+        <strong className=" text-blue-800 underline">Skills</strong>
+
         <ul className="list-disc list-inside text-gray-600">
-          {maid?.task &&
-            maid?.task.map((task, index) => <li key={index}>{task}</li>)}
+          {loggedUser?.task && loggedUser?.salary ? (
+            <ul>
+              {loggedUser?.task.map((taskName, index) => (
+                <li key={index}>
+                  <strong className="capitalize">{taskName}: </strong>
+                  {loggedUser?.salary[index]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            "Salary information not available"
+          )}
         </ul>
       </div>
       <hr className="my-4" />
-      <div>
-        <h3 className="text-lg font-semibold">Salary</h3>
-        <ul className="list-disc list-inside text-gray-600">
-          {maid?.salary &&
-            maid?.salary.map((salary, index) => <li key={index}>${salary}</li>)}
-        </ul>
-      </div>
+
       <hr className="my-4" />
       <div>
         <p className="pt-2">
           <strong className="text-blue-800 underline">Availability:</strong>
           <ul>
-            {maid?.availability?.map((daySlot, index) => (
+            {loggedUser?.availability?.map((daySlot, index) => (
               <li key={index}>
                 <strong>{daySlot}</strong>
               </li>
