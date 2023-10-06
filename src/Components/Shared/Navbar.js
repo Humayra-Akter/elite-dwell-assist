@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 const Navbar = ({ openAboutModal }) => {
   const [user] = useAuthState(auth);
-  const [userType, setUserType] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {

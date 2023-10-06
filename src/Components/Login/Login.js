@@ -113,7 +113,7 @@ const Login = () => {
               <div className="form-control w-full pb-4">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-md">
-                    Role
+                    Select your Role
                   </span>
                 </label>
                 <select
