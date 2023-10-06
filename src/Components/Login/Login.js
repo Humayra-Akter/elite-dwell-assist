@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import banner from "../../images/babysitter.jpg";
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -14,9 +14,17 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const [loggedUser, setLoggedUser] = useState([]);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-
+  const [selectedRole, setSelectedRole] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:5000/user")
+      .then((res) => res.json())
+      .then((data) => {
+        setLoggedUser(data);
+      });
+  }, []);
   let signInError;
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,8 +44,21 @@ const Login = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data);
-    signInWithEmailAndPassword(data.email, data.password);
+    const userExists = loggedUser.some(
+      (user) => user.email === data.email && user.role === data.role
+    );
+
+    if (userExists) {
+      signInWithEmailAndPassword(data.email, data.password, data.role);
+      localStorage.setItem("userRole", data.role);
+    } else {
+      toast.error(
+        `${data.email} or ${data.role} is invalid. Please check it again`,
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
+    }
   };
 
   return (
@@ -85,6 +106,37 @@ const Login = () => {
                   {errors.email?.type === "pattern" && (
                     <span className="text-red-500 text-xs mt-1">
                       {errors.email.message}
+                    </span>
+                  )}
+                </label>
+              </div>
+              <div className="form-control w-full pb-4">
+                <label className="label">
+                  <span className="label-text text-blue-700 font-bold text-md">
+                    Role
+                  </span>
+                </label>
+                <select
+                  name="role"
+                  className="input input-sm input-bordered w-full"
+                  {...register("role", {
+                    required: {
+                      value: true,
+                      message: "Role is required",
+                    },
+                  })}
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                >
+                  <option value="customer">Customer</option>
+                  <option value="maid">Maid</option>
+                  <option value="driver">Driver</option>
+                  <option value="babysitter">Babysitter</option>
+                </select>
+                <label>
+                  {errors.role?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.role.message}
                     </span>
                   )}
                 </label>
@@ -152,13 +204,6 @@ const Login = () => {
                 </Link>
               </small>
             </p>
-            {/* <div className="divider">OR</div>
-            <button
-              //   onClick={() => signInWithGoogle()}
-              className="btn w-full btn-sm border-blue-500 text-blue-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent "
-            >
-              Continue with Google
-            </button> */}
           </div>
         </div>
       </div>

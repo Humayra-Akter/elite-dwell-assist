@@ -164,7 +164,6 @@ const MaidRegistrationForm = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData.data.url);
           const maid = {
             name: data.name,
             role: "maid",
@@ -186,6 +185,14 @@ const MaidRegistrationForm = () => {
               (expertise) => selectedSalaries[expertise.value]
             ),
           };
+          const user = {
+            name: data.name,
+            email: data.email,
+            role: "maid",
+            img: imgData.data.url,
+            dob: data.dob,
+            password: data.password, // Add any other user-specific data you want to save
+          };
           // save maid information to the database
           fetch("http://localhost:5000/maid", {
             method: "POST",
@@ -202,9 +209,20 @@ const MaidRegistrationForm = () => {
                 closeSuccessModal(); // Close the success modal
               }, 3000);
             });
+          fetch("http://localhost:5000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success(`${data.name} welcome to Elite-Dwell-Assist`);
+            });
         }
       });
-    navigate("/");
+    navigate("/maidDashboard");
   };
 
   return (

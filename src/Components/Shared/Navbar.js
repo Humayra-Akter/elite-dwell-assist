@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Notification from "./Notification";
 import { signOut } from "firebase/auth";
-import { useSelector, useDispatch } from "react-redux";
-import { addNotification } from "../../redux/slices/notificationsSlice";
 import { toast } from "react-toastify";
 
 const Navbar = ({ openAboutModal }) => {
-  const [user, loading, error] = useAuthState(auth);
-  const [notificationIdCounter, setNotificationIdCounter] = useState(1);
-  const dispatch = useDispatch();
-  const notifications = useSelector((state) => state.notifications);
-  const [maid, setMaid] = useState([]);
-  const [customer, setCustomer] = useState([]);
+  const [user] = useAuthState(auth);
+  const [userType, setUserType] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -44,48 +39,14 @@ const Navbar = ({ openAboutModal }) => {
     closeDropdowns();
   };
 
-  useEffect(() => {
-    // Check if the user is a customer
-    fetch("http://localhost:5000/customer")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.length > 0) {
-          const userRole = data[0].role;
-          if (userRole === "customer") {
-            setCustomer(data);
-            localStorage.setItem("userRole", userRole);
-          }
-        } else {
-          localStorage.removeItem("userRole");
-          toast.log("No user data found.");
-        }
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/maid")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.length > 0) {
-          const userRole = data[0].role;
-          if (userRole === "maid") {
-            setMaid(data);
-            localStorage.setItem("userRole", userRole);
-          }
-        } else {
-          localStorage.removeItem("userRole");
-          toast.log("No user data found.");
-        }
-      });
-  }, []);
-
   const logout = () => {
     localStorage.removeItem("userRole");
     signOut(auth);
+    navigate("/");
   };
 
   const userRole = localStorage.getItem("userRole");
-
+  console.log(userRole);
   return (
     <div className="bg-primary text-white font-bold ">
       <div class="navbar sticky">
@@ -222,7 +183,7 @@ const Navbar = ({ openAboutModal }) => {
             <></>
           )}
           {/* customer dashboard */}
-          {/* {userRole === "customer" ? (
+          {userRole === "customer" ? (
             <Link to="/customerDashboard">
               <button className="text-white font-bold hover:text-black pr-7 ">
                 <div class="indicator">Dashboard</div>
@@ -230,7 +191,7 @@ const Navbar = ({ openAboutModal }) => {
             </Link>
           ) : (
             <></>
-          )} */}
+          )}
 
           <button
             onClick={openAboutModal}
@@ -253,7 +214,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           )}
-          {/* {userRole === "maid" ? <Notification /> : <></>} */}
+          {userRole === "maid" ? <Notification /> : <></>}
         </div>
       </div>
     </div>

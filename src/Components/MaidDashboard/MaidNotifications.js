@@ -20,11 +20,6 @@ const MaidNotifications = () => {
         });
       });
   }, []);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     window.location.reload();
-  //   }, 10000);
-  // }, []);
 
   useEffect(() => {
     if (user) {
