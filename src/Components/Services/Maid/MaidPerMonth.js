@@ -33,9 +33,14 @@ const MaidPerMonth = () => {
         className="text-2xl pt-12 text-center font-black text-primary  px-7"
         style={{ fontFamily: "arial" }}
       >
-        Maid
+        Your Home's Best Friend
+      </h1>{" "}
+      <h1
+        className="text-xl pt-12 text-center font-black text-primary  px-7"
+        style={{ fontFamily: "arial" }}
+      >
+        "Your Home, Our Expertise"
       </h1>
-
       {/* General Maids */}
       {userRole !== "customer" ? (
         <div>
@@ -65,7 +70,6 @@ const MaidPerMonth = () => {
           ))}
         </div>
       )}
-
       {/* <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard
@@ -76,13 +80,11 @@ const MaidPerMonth = () => {
           ></MaidPerMonthCard>
         ))}
       </div> */}
-
       {userRole === "customer" ? (
         bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>
       ) : (
         <div></div>
       )}
-
       <Cart></Cart>
       <Footer></Footer>
     </div>

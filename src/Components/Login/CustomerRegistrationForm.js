@@ -81,17 +81,17 @@ const CustomerRegistrationForm = () => {
         console.log(result);
         toast.success(`${data.name} thanks for your registration`);
       });
-      fetch("http://localhost:5000/user", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          toast.success(`${data.name} welcome to Elite-Dwell-Assist`);
-        });
+    fetch("http://localhost:5000/user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        toast.success(`${data.name} welcome to Elite-Dwell-Assist`);
+      });
 
     navigate("/maidPerMonth");
   };

@@ -175,7 +175,7 @@ const BookingMaid = ({ bookMaid, user }) => {
                 <div>
                   <p>
                     <strong className="text-blue-800 underline">
-                      Location:
+                      Preferred Location:
                     </strong>
 
                     {location ? location.join(", ") : "N/A"}

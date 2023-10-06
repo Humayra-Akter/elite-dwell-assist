@@ -14,7 +14,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
 
   return (
     <div>
-      <div className="w-80 h-80 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">
+      <div className="w-80 h-96 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">
         <div>
           <figure className="absolute top-3 left-3 right-0 h-full">
             <img src={img} alt="Maid" className="h-32 w-32 rounded-full" />
@@ -25,7 +25,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-4 text-right text-black">
           <p>
-            <strong>Location:</strong>{" "}
+            <strong>Preferred Location:</strong>{" "}
             {Array.isArray(location) ? location.join(", ") : location}
           </p>
           <p className="pt-2">

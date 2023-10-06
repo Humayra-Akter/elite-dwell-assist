@@ -423,6 +423,7 @@ const MaidRegistrationForm = () => {
                     }}
                   />
                 </div>
+
                 {/* Education field */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -430,17 +431,28 @@ const MaidRegistrationForm = () => {
                       Education/{bengaliLabels.education}
                     </span>
                   </label>
-                  <div className="input input-bordered input-sm text-left w-full">
-                    <select className="select" name="education">
-                      <option disabled defaultValue="">
-                        Select your education
-                      </option>
-                      <option value="none">None/{bengaliLabels.none}</option>
-                      <option value="ssc">SSC pass</option>
-                      <option value="jsc">JSC pass</option>
-                    </select>
-                  </div>
+                  <select
+                    className="input select input-sm input-bordered w-full"
+                    name="education"
+                    {...register("education", {
+                      required: {
+                        value: true,
+                        message: "Education is required",
+                      },
+                    })}
+                  >
+                    <option value="none">None/{bengaliLabels.none}</option>
+                    <option value="ssc">SSC pass</option>
+                    <option value="jsc">JSC pass</option>
+                  </select>
                 </div>
+                <label>
+                  {errors.education?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.education.message}
+                    </span>
+                  )}
+                </label>
               </div>
 
               {/*expertise*/}

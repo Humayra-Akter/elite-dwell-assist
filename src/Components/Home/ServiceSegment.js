@@ -13,11 +13,22 @@ const ServiceSegment = () => {
             style={{ fontFamily: "arial" }}
             className="text-3xl font-bold text-primary text-center pt-32"
           >
-            Services
+            Elevate Your Home
           </h1>
-          <p>
-            Choose your need from us and make others self-employed. Let's work
-            together.
+          <h1
+            style={{ fontFamily: "arial" }}
+            className="text-3xl font-bold text-primary text-center pt-2"
+          >
+            Elevate Your Life
+          </h1>
+          <p className="text-justify font-semibold pt-2">
+            Dedicated to Your Home's Happiness.We are Cherishing Every Home,
+            Every Service, Where Quality Meets Home-care.We are creating Home
+            Magic, Task by Task.Because we believe
+            <span className="font-bold text-primary">
+              {" "}
+              Your Home, Our Pride
+            </span>
           </p>
         </div>
         <div>
