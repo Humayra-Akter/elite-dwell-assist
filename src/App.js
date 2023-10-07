@@ -5,7 +5,6 @@ import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
 import Service from "./Components/Services/Service";
-import MaidPerDay from "./Components/Services/Maid/MaidPerDay";
 import Babysitter from "./Components/Services/Babysitter/Babysitter";
 import DriverPerDay from "./Components/Services/Driver/DriverPerDay";
 import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
@@ -22,7 +21,7 @@ import MaidProfile from "./Components/MaidDashboard/MaidProfile";
 import CustomerDashboard from "./Components/CustomerDashboard/CustomerDashboard";
 import CustomerNotification from "./Components/CustomerDashboard/CustomerNotification";
 import CustomerProfile from "./Components/CustomerDashboard/CustomerProfile";
-import MaidPerMonth from "./Components/Services/Maid/MaidPerMonth";
+import PerDay from "./Components/Services/Maid/PerDay";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -56,7 +55,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/service" element={<Service />} />
-        <Route path="/maidPerDay" element={<MaidPerDay />} />
         <Route
           path="/customer-register"
           element={<CustomerRegistrationForm />}
@@ -76,6 +74,7 @@ function App() {
             element={<CustomerNotification />}
           ></Route>
         </Route>
+        <Route path="/maidPerDay" element={<PerDay />} />
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
         <Route path="/driverPerMonth" element={<DriverPerMonth />} />
