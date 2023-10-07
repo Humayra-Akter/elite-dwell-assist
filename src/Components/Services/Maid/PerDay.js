@@ -110,31 +110,28 @@ const PerDay = () => {
       selectedDate,
       selectedTimeSlot,
       selectedServices,
+
       address: {
-        house,
-        road,
-        block,
-        sector,
+        house: data.house,
+        road: data.road,
+        block: data.block,
+        sector: data.sector,
         area,
       },
-      userId: user.id,
     };
 
     try {
-      const response = await fetch("http://localhost:5000/perDayMaidBookings", {
+      await fetch("http://localhost:5000/perDayMaidBookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(bookingData),
-      });
-
-      if (response.ok) {
-        notify();
-        console.log("Booking successful");
-      } else {
-        console.error("Booking error:", response.statusText);
-      }
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          notify();
+        });
     } catch (error) {
       console.error("Network error:", error.message);
     }
@@ -354,22 +351,22 @@ const PerDay = () => {
                           House
                         </span>
                       </label>
-
                       <input
                         type="text"
+                        name="house"
                         placeholder="Your address"
                         className="input input-bordered input-xs w-full"
-                        {...register("address", {
+                        {...register("house", {
                           required: {
                             value: true,
-                            message: "Address is required",
+                            message: "House is required",
                           },
                         })}
                       />
                       <label>
-                        {errors.address?.type === "required" && (
+                        {errors.house?.type === "required" && (
                           <span className="text-red-500 text-xs mt-1">
-                            {errors.address.message}
+                            {errors.house.message}
                           </span>
                         )}
                       </label>
@@ -397,6 +394,7 @@ const PerDay = () => {
                         <input
                           type="text"
                           placeholder="Road no"
+                          name="road"
                           className="input input-bordered input-xs w-full"
                           {...register("road", {
                             required: {
@@ -421,6 +419,7 @@ const PerDay = () => {
                         </label>
                         <input
                           type="text"
+                          name="block"
                           placeholder="Block no"
                           className="input input-bordered input-xs w-full"
                           {...register("block", {
@@ -448,6 +447,7 @@ const PerDay = () => {
                         </label>
                         <input
                           type="text"
+                          name="sector"
                           placeholder="Sector no"
                           className="input input-bordered input-xs w-full"
                           {...register("sector", {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MaidPerMonth from "../MaidPerMonth";
 
 const MaidSearchSegment = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,11 @@ const MaidSearchSegment = () => {
     <div class="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col items-center justify-center">
-        
+        <MaidPerMonth
+          selectedLocation={selectedLocation}
+          selectedSalaryRange={selectedSalaryRange}
+          selectedAvailability={selectedAvailability}
+        />
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -61,7 +66,6 @@ const MaidSearchSegment = () => {
           <p className="mt-20 mb-3 text-md font-medium text-primary">
             Search by availability
           </p>
-
 
           {/* shokal */}
           <div className="bg-white px-12 py-2  rounded-lg shadow-md mb-4">

@@ -222,7 +222,7 @@ const MaidRegistrationForm = () => {
             });
         }
       });
-    navigate("/maidDashboard");
+    navigate("/");
   };
 
   return (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { Link } from "react-router-dom";
 
 const MaidProfile = () => {
   const [user] = useAuthState(auth);
@@ -12,12 +11,16 @@ const MaidProfile = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
-            setLoggedUser(data[0]);
+            const matchingUser = data.find(
+              (userData) => userData.email === user.email
+            );
+            if (matchingUser) {
+              setLoggedUser(matchingUser);
+            }
           }
         });
     }
   }, [user]);
-  console.log(loggedUser);
 
   return (
     <div className="absolute bg-white p-4 shadow rounded-lg">
