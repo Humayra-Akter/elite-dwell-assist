@@ -48,7 +48,7 @@ const Login = () => {
     const matchingUser = loggedUser.find(
       (sysUser) => sysUser.email === data.email && sysUser.role === data.role
     );
-    console.log(matchingUser);
+    console.log(data);
     if (matchingUser) {
       signInWithEmailAndPassword(data.email, data.password);
       localStorage.setItem("userRole", data.role);
@@ -85,8 +85,7 @@ const Login = () => {
                     <input
                       type="radio"
                       name="role"
-                      value="customer"
-                      className="hidden "
+                      className="hidden"
                       {...register("role", {
                         required: {
                           value: true,
@@ -112,8 +111,7 @@ const Login = () => {
                     <input
                       type="radio"
                       name="role"
-                      value="maid"
-                      className="hidden "
+                      className="hidden"
                       {...register("role", {
                         required: {
                           value: true,
@@ -139,7 +137,6 @@ const Login = () => {
                     <input
                       type="radio"
                       name="role"
-                      value="driver"
                       className="hidden"
                       {...register("role", {
                         required: {
@@ -166,7 +163,6 @@ const Login = () => {
                     <input
                       type="radio"
                       name="role"
-                      value="babysitter"
                       className="hidden"
                       {...register("role", {
                         required: {
@@ -207,7 +203,7 @@ const Login = () => {
                 </h1>
 
                 {/* email field */}
-                <div className="form-control w-full pb-4">
+                <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Email
@@ -242,9 +238,39 @@ const Login = () => {
                     )}
                   </label>
                 </div>
-
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Select your Role
+                    </span>
+                  </label>
+                  <select
+                    name="role"
+                    className="input input-sm input-bordered w-full"
+                    {...register("role", {
+                      required: {
+                        value: true,
+                        message: "Role is required",
+                      },
+                    })}
+                    value={selectedRole}
+                    onChange={(e) => setSelectedRole(e.target.value)}
+                  >
+                    <option value="customer">Customer</option>
+                    <option value="maid">Maid</option>
+                    <option value="driver">Driver</option>
+                    <option value="babysitter">Babysitter</option>
+                  </select>
+                  <label>
+                    {errors.role?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.role.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
                 {/* Password field */}
-                <div className="form-control w-full pb-7">
+                <div className="form-control w-full pb-4">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
                       Password
