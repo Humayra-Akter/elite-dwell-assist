@@ -13,7 +13,7 @@ import Error from "./Components/Error/Error";
 import ApplianceRepair from "./Components/Services/ApplianceRepair/ApplianceRepair";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MaidSearchSegment from "./Components/Services/Maid/MaidSearch/MaidSearchSegment";
+import MaidSearchSegment from "./Components/Services/Maid/MaidSearchSegment";
 import CustomerRegistrationForm from "./Components/Login/CustomerRegistrationForm";
 import MaidDashboard from "./Components/MaidDashboard/MaidDashboard";
 import MaidNotifications from "./Components/MaidDashboard/MaidNotifications";

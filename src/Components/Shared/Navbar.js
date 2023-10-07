@@ -45,7 +45,7 @@ const Navbar = ({ openAboutModal }) => {
   };
 
   const userRole = localStorage.getItem("userRole");
-  console.log(userRole);
+  // console.log(userRole);
   return (
     <div className="bg-primary text-white font-bold ">
       <div class="navbar sticky">

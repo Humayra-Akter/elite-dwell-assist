@@ -20,7 +20,6 @@ const MaidPerMonth = () => {
   }, []);
 
   const userRole = localStorage.getItem("userRole");
-  console.log(userRole);
   return (
     <div>
       <h1
@@ -28,7 +27,7 @@ const MaidPerMonth = () => {
         style={{ fontFamily: "arial" }}
       >
         Your Home's Best Friend
-      </h1>{" "}
+      </h1>
       {/* General Maids */}
       {userRole !== "customer" ? (
         <div>

@@ -26,6 +26,7 @@ const MaidNotifications = () => {
       if (bookingId) {
         setLoggedInMaidEmail(`${user?.displayName}`);
       }
+      console.log(user?.displayName);
       console.log(bookingId);
       fetch(`http://localhost:5000/bookings/${bookingId}`)
         .then((res) => res.json())

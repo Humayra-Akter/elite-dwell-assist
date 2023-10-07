@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MaidPerMonth from "../MaidPerMonth";
+import MaidPerMonth from "./MaidPerMonth";
 
 const MaidSearchSegment = () => {
   const dispatch = useDispatch();

@@ -65,144 +65,18 @@ const Login = () => {
 
   return (
     <div className="bg-slate-100 pb-56 pt-28">
-      <div className="mx-auto max-w-2xl">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
-            <div className="flex">
-              <div
-                style={{
-                  background: `url(${imggg})`,
-                  backgroundSize: "cover",
-                }}
+      <div className="mx-auto max-w-md">
+        <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
+          <div>
+            <div className="card-body">
+              <h1
+                style={{ fontFamily: "arial" }}
+                className="text-center text-2xl text-primary font-extrabold"
               >
-                <div className="form-control flex items-center justify-center w-80  mt-20 ">
-                  <label className="label">
-                    <span className="label-text mb-3 text-white font-bold text-md">
-                      Select your Role
-                    </span>
-                  </label>
-                  {/* Customer Role */}
-                  <label className="cursor-pointer">
-                    <input
-                      type="radio"
-                      name="role"
-                      className="hidden"
-                      {...register("role", {
-                        required: {
-                          value: true,
-                          message: "Role is required",
-                        },
-                      })}
-                      checked={selectedRole === "customer"}
-                      onChange={() => setSelectedRole("customer")}
-                    />
-                    <div
-                      className={`p-2 rounded-lg ${
-                        selectedRole === "customer"
-                          ? "bg-sky-300 text-black w-48 text-center font-extrabold gap-5"
-                          : "btn btn-sm text-xs w-48 text-white font-bold bg-primary border-blue-500"
-                      }`}
-                    >
-                      <i className="fa fa-user text-black mr-2"></i>Customer
-                    </div>
-                  </label>
+                LOGIN
+              </h1>
 
-                  {/* Maid Role */}
-                  <label className="cursor-pointer my-2 ">
-                    <input
-                      type="radio"
-                      name="role"
-                      className="hidden"
-                      {...register("role", {
-                        required: {
-                          value: true,
-                          message: "Role is required",
-                        },
-                      })}
-                      checked={selectedRole === "maid"}
-                      onChange={() => setSelectedRole("maid")}
-                    />
-                    <div
-                      className={`p-2 rounded-lg ${
-                        selectedRole === "maid"
-                          ? "bg-sky-300 text-black w-48 text-center font-extrabold  gap-5"
-                          : "btn btn-sm text-xs w-48 text-white font-bold bg-primary border-blue-500"
-                      }`}
-                    >
-                      <i className="fa fa-broom text-black mr-2"></i>Maid
-                    </div>
-                  </label>
-
-                  {/* Driver Role */}
-                  <label className="cursor-pointer">
-                    <input
-                      type="radio"
-                      name="role"
-                      className="hidden"
-                      {...register("role", {
-                        required: {
-                          value: true,
-                          message: "Role is required",
-                        },
-                      })}
-                      checked={selectedRole === "driver"}
-                      onChange={() => setSelectedRole("driver")}
-                    />
-                    <div
-                      className={`p-2 rounded-lg ${
-                        selectedRole === "driver"
-                          ? "bg-sky-300 text-black w-48 text-center font-extrabold  gap-5"
-                          : "btn btn-sm text-xs w-48 text-white font-bold bg-primary border-blue-500"
-                      }`}
-                    >
-                      <i className="fa fa-car text-black mr-2"></i>Driver
-                    </div>
-                  </label>
-
-                  {/* Babysitter Role */}
-                  <label className="cursor-pointer my-2 ">
-                    <input
-                      type="radio"
-                      name="role"
-                      className="hidden"
-                      {...register("role", {
-                        required: {
-                          value: true,
-                          message: "Role is required",
-                        },
-                      })}
-                      checked={selectedRole === "babysitter"}
-                      onChange={() => setSelectedRole("babysitter")}
-                    />
-                    <div
-                      className={`p-2 rounded-lg ${
-                        selectedRole === "babysitter"
-                          ? "bg-sky-300 text-black w-48 text-center font-extrabold  gap-5"
-                          : "btn btn-sm text-xs w-48 text-white font-bold bg-primary border-blue-500"
-                      }`}
-                    >
-                      <i className="fa fa-child text-black mr-2"></i>
-                      Babysitter
-                    </div>
-                  </label>
-
-                  <label>
-                    {errors.role?.type === "required" && (
-                      <span className="text-red-500 text-xs mt-1">
-                        {errors.role.message}
-                      </span>
-                    )}
-                  </label>
-                </div>
-              </div>
-              <div className="card-body">
-                <h1
-                  style={{ fontFamily: "arial" }}
-                  className="text-center text-2xl text-primary font-extrabold"
-                >
-                  LOGIN
-                </h1>
-
+              <form onSubmit={handleSubmit(onSubmit)}>
                 {/* email field */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -332,10 +206,10 @@ const Login = () => {
                     </Link>
                   </small>
                 </p>
-              </div>
+              </form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
