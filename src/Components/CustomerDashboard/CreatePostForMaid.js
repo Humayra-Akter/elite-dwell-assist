@@ -237,7 +237,7 @@ const CreatePostForMaid = ({ onSearch }) => {
                 value="Sweeping"
                 checked={selectedServices.includes("Sweeping")}
                 onChange={handleServiceChange}
-              />{" "}
+              />
               Sweeping
               <br />
               <input
