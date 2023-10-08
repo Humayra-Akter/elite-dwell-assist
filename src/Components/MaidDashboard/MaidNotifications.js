@@ -24,16 +24,16 @@ const MaidNotifications = () => {
   useEffect(() => {
     if (user) {
       if (bookingId) {
-        setLoggedInMaidEmail(`${user?.displayName}`);
+        setLoggedInMaidEmail(`${user?.displayName.toLowerCase()}`);
       }
-      console.log(user?.displayName);
-      console.log(bookingId);
       fetch(`http://localhost:5000/bookings/${bookingId}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Fetched Data:", data);
           if (data && typeof data === "object") {
-            if (data.maidName === user.displayName) {
+            if (
+              data.maidName.toLowerCase() === user.displayName.toLowerCase()
+            ) {
               setNotifications([data]);
               toast.success(
                 `Notifications for ${user?.displayName} from ${data?.customerEmail}`

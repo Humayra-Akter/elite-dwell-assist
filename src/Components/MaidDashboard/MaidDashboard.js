@@ -6,7 +6,7 @@ const MaidDashboard = () => {
     <div>
       <div class="drawer lg:drawer-open">
         <input id="maid-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content  p-11">
+        <div class="drawer-content p-11">
           <h1
             style={{ fontFamily: "arial" }}
             className="text-4xl text-primary font-black text-left pb-11"

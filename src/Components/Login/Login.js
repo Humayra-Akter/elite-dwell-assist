@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "./Login.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -60,7 +60,8 @@ const Login = () => {
         }
       );
     }
-    navigate("/maidDashboard");
+    const userRole = localStorage.getItem("userRole");
+    navigate(`/${userRole}Dashboard`);
   };
 
   return (
@@ -135,6 +136,7 @@ const Login = () => {
                     <option value="maid">Maid</option>
                     <option value="driver">Driver</option>
                     <option value="babysitter">Babysitter</option>
+                    <option value="admin">Admin</option>
                   </select>
                   <label>
                     {errors.role?.type === "required" && (

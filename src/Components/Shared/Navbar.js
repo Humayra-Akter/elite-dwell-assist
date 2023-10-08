@@ -181,6 +181,16 @@ const Navbar = ({ openAboutModal }) => {
           ) : (
             <></>
           )}
+          {/* admin dashboard */}
+          {userRole === "admin" ? (
+            <Link to="/adminDashboard">
+              <button className="text-white font-bold hover:text-black pr-7 ">
+                <div class="indicator">Dashboard</div>
+              </button>
+            </Link>
+          ) : (
+            <></>
+          )}
           {/* customer dashboard */}
           {userRole === "customer" ? (
             <Link to="/customerDashboard">

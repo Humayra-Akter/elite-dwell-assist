@@ -94,7 +94,7 @@ const MaidSearchSegment = () => {
                 <input
                   type="checkbox"
                   id="dupur"
-                  value=" 02.00 PM - 05.00 PM"
+                  value="11.00 AM - 02.00 PM"
                   className="form-checkbox h-6 w-6 text-primary"
                 />
                 <label
@@ -113,7 +113,7 @@ const MaidSearchSegment = () => {
                 <input
                   type="checkbox"
                   id="bikal"
-                  value=" 02.00 PM - 05.00 PM"
+                  value="02.00 PM - 05.00 PM"
                   className="form-checkbox h-6 w-6 text-primary"
                 />
                 <label

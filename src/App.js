@@ -22,6 +22,11 @@ import CustomerDashboard from "./Components/CustomerDashboard/CustomerDashboard"
 import CustomerNotification from "./Components/CustomerDashboard/CustomerNotification";
 import CustomerProfile from "./Components/CustomerDashboard/CustomerProfile";
 import PerDay from "./Components/Services/Maid/PerDay";
+import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
+import AdminProfile from "./Components/AdminDashboard/AdminProfile";
+import AdminCreate from "./Components/AdminDashboard/AdminCreate";
+import AdminMaidPerDayBookings from "./Components/AdminDashboard/AdminMaidPerDayBookings";
+import CreatePostForMaid from "./Components/CustomerDashboard/CreatePostForMaid";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -60,6 +65,14 @@ function App() {
           element={<CustomerRegistrationForm />}
         />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
+        <Route path="/adminDashboard" element={<AdminDashboard />}>
+          <Route index element={<AdminProfile />}></Route>
+          <Route
+            path="adminMaidPerDayBookings"
+            element={<AdminMaidPerDayBookings />}
+          ></Route>
+          <Route path="adminCreate" element={<AdminCreate />}></Route>
+        </Route>
         <Route path="/maidDashboard" element={<MaidDashboard />}>
           <Route index element={<MaidProfile />}></Route>
           <Route
@@ -72,6 +85,10 @@ function App() {
           <Route
             path="customerNotification"
             element={<CustomerNotification />}
+          ></Route>{" "}
+          <Route
+            path="createPostForMaid"
+            element={<CreatePostForMaid />}
           ></Route>
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />

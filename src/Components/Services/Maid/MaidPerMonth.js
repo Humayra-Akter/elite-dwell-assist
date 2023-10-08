@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BookingMaid from "./BookingMaid";
 import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
-import Cart from "../../Cart/Cart";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
@@ -72,7 +71,6 @@ const MaidPerMonth = () => {
       ) : (
         <div></div>
       )}
-      <Cart></Cart>
       <Footer></Footer>
     </div>
   );
