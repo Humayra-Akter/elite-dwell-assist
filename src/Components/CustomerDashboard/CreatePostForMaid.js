@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 
 const CreatePostForMaid = ({ onSearch }) => {
   // Define state variables for form fields
-  const [location, setLocation] = useState("");
-  const [availabilityDate, setAvailabilityDate] = useState("");
-  const [availabilityMonth, setAvailabilityMonth] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const [gender, setGender] = useState("");
@@ -41,90 +41,118 @@ const CreatePostForMaid = ({ onSearch }) => {
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-3 pt-5 gap-3">
-          {/* Location */}
+          {/* Email */}
           <div className="form-control mt-3 w-full">
-            <label className="text-primary font-bold text-md">Location</label>
+            <label className="text-primary font-bold text-md">Email</label>
+            <input
+              type="email"
+              placeholder="Your email"
+              value={email}
+              name="email"
+              className="input input-sm input-bordered w-full"
+              onChange={(e) => setEmail(e.target.value)}
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Email is required",
+                },
+                unique: { value: true },
+                pattern: {
+                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                  message: "Provide a valid email",
+                },
+              })}
+            />
+            <label>
+              {errors.email?.type === "required" && (
+                <span className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </span>
+              )}
+            </label>{" "}
+            {errors.email?.type === "pattern" && (
+              <span className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+          {/* Phone */}
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text text-blue-700 font-bold text-md">
+                Contact
+              </span>
+            </label>
+            <input
+              type="digit"
+              placeholder="Your Contact number"
+              name="contact"
+              className="input input-sm input-bordered w-full "
+              {...register("contact", {
+                required: {
+                  value: true,
+                  message: "contact is required",
+                },
+                unique: { value: true },
+                pattern: {
+                  value: /[0-9]*/,
+                  message: " Your Contact number should have digits only",
+                },
+                minLength: {
+                  value: 11,
+                  message: "Provide a valid contact",
+                },
+                maxLength: {
+                  value: 11,
+                  message: "Provide a valid contact",
+                },
+              })}
+            />
+            <label>
+              {errors.contact?.type === "required" && (
+                <span className="text-red-500 text-xs mt-1">
+                  {errors.contact.message}
+                </span>
+              )}
+              {errors.contact?.type === "pattern" && (
+                <span className="text-red-500 text-xs mt-1">
+                  {errors.contact.message}
+                </span>
+              )}
+              {errors.contact?.type === "minLength" && (
+                <span className="text-red-500 text-xs mt-1">
+                  {errors.contact.message}
+                </span>
+              )}
+              {errors.contact?.type === "maxLength" && (
+                <span className="text-red-500 text-xs mt-1">
+                  {errors.contact.message}
+                </span>
+              )}
+            </label>
+          </div>
+
+          {/* Address */}
+          <div className="form-control mt-3 w-full">
+            <label className="text-primary font-bold text-md">Address</label>
             <input
               type="text"
-              placeholder="Your Location"
-              value={location}
-              name="location"
+              placeholder="Your Address"
+              value={address}
+              name="address"
               className="input input-sm input-bordered w-full"
-              onChange={(e) => setLocation(e.target.value)}
-              {...register("location", {
+              onChange={(e) => setAddress(e.target.value)}
+              {...register("address", {
                 required: {
                   value: true,
-                  message: "Location is required",
+                  message: "Address is required",
                 },
               })}
             />
             <label>
-              {errors.location?.type === "required" && (
+              {errors.address?.type === "required" && (
                 <span className="text-red-500 text-xs mt-1">
-                  {errors.location.message}
-                </span>
-              )}
-            </label>
-          </div>
-          {/* Availability Date */}
-          <div className="form-control mt-3  w-full">
-            <label className="text-primary font-bold text-md">
-              Availability Date
-            </label>
-            <input
-              type="date"
-              value={availabilityDate}
-              name="availabilityDate"
-              className="input input-sm input-bordered w-full"
-              onChange={(e) => setAvailabilityDate(e.target.value)}
-              {...register("availabilityDate", {
-                required: {
-                  value: true,
-                  message: "availabilityDate is required",
-                },
-              })}
-            />
-            <label>
-              {errors.availabilityDate?.type === "required" && (
-                <span className="text-red-500 text-xs mt-1">
-                  {errors.availabilityDate.message}
-                </span>
-              )}
-            </label>
-          </div>
-          {/* Availability Date */}
-          <div className="form-control mt-3  w-full">
-            <label className="text-primary font-bold text-md">
-              Availability Month
-            </label>
-            <input
-              type="number"
-              value={availabilityMonth}
-              name="availabilityMonth"
-              className="input input-sm input-bordered w-full"
-              onChange={(e) => setAvailabilityMonth(e.target.value)}
-              {...register("availabilityMonth", {
-                required: {
-                  value: true,
-                  message: "availabilityMonth is required",
-                },
-                pattern: {
-                  value: Number,
-                  message: "Only number is accepted",
-                },
-              })}
-            />
-            <label>
-              {errors.availabilityMonth?.type === "required" && (
-                <span className="text-red-500 text-xs mt-1">
-                  {errors.availabilityMonth.message}
-                </span>
-              )}
-            </label>
-            <label>
-              {errors.availabilityMonth?.type === "pattern" && (
-                <span className="text-red-500 text-xs mt-1">
-                  {errors.availabilityMonth.message}
+                  {errors.address.message}
                 </span>
               )}
             </label>
@@ -148,7 +176,9 @@ const CreatePostForMaid = ({ onSearch }) => {
           </div>
           {/* Budget */}
           <div className="form-control mt-3  w-full">
-            <label className="text-primary font-bold text-md">Budget</label>
+            <label className="text-primary font-bold text-md">
+              Offered amount
+            </label>
             <input
               type="number"
               placeholder="Your Budget"

@@ -321,14 +321,6 @@ const PerDay = () => {
                   <h2 className="text-lg font-bold text-primary">
                     Selected Services:
                   </h2>
-                  {/* <p className="mt-4">
-                {selectedDate && (
-                  <span>Selected Date: {selectedDate.toDateString()}</span>
-                )}
-                {selectedDate && selectedTimeSlot && (
-                  <span>, Time Slot: {selectedTimeSlot}</span>
-                )}
-              </p> */}
                   {selectedServices.length === 0 ? (
                     <p className="text-red-500">Select at least one service</p>
                   ) : (
@@ -338,12 +330,6 @@ const PerDay = () => {
                       ))}
                     </ul>
                   )}
-
-                  {/* {selectedDate && (
-                <p className="mt-4">
-                  Selected Date: {selectedDate.toDateString()}
-                </p>
-              )} */}
                 </div>
               </div>
             </div>
@@ -356,22 +342,37 @@ const PerDay = () => {
                       <p>Expert will arrive at the address given below</p>
                       <form onSubmit={handleSubmit(onSubmit)}>
                         {userRole === "customer" && (
-                          <>
-                            <input
-                              type="text"
-                              placeholder="Email"
-                              className="input input-bordered input-xs w-full"
-                              value={user?.email}
-                              disabled
-                            />
-                            <input
-                              type="text"
-                              placeholder="Display Name"
-                              className="input input-bordered input-xs w-full"
-                              value={user?.displayName}
-                              disabled
-                            />
-                          </>
+                          <div className="form-control grid grid-cols-2 gap-5 pt-5 w-full">
+                            <div>
+                              <label className="label">
+                                <span className="label-text text-blue-700 font-bold text-xs">
+                                  Name
+                                </span>
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Display Name"
+                                className="input input-bordered input-xs w-full"
+                                value={user?.displayName}
+                                disabled
+                              />
+                            </div>
+                            <div>
+                              {" "}
+                              <label className="label">
+                                <span className="label-text text-blue-700 font-bold text-xs">
+                                  Email
+                                </span>
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Email"
+                                className="input input-bordered input-xs w-full"
+                                value={user?.email}
+                                disabled
+                              />{" "}
+                            </div>
+                          </div>
                         )}
                         <div className="form-control pt-5 w-full">
                           <label className="label">
@@ -548,7 +549,7 @@ const PerDay = () => {
             Your Home-Our Expertise
           </h1>
           <p className="text-red-500 text-xs text-center mt-1">
-            You do not have permission to access this page.
+            You do not have permission to access this page. Please login first.
           </p>
           <div className="bg-white p-4 mt-7 mx-96 rounded-lg shadow-md mb-4">
             <p className="text-lg text-center text-black font-semibold">

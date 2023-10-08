@@ -127,7 +127,7 @@ const AdminCreate = () => {
                 style={{ fontFamily: "arial" }}
                 className="text-left text-2xl text-blue-700 font-extrabold"
               >
-                Create <strong>ADMIN</strong>
+                ADD <strong>ADMIN</strong>
               </h1>
 
               <form onSubmit={handleSubmit(handleAddAdmin)}>

@@ -21,7 +21,7 @@ const AdminMaidPerDayBookings = () => {
         {dayBookings.map((booking) => (
           <div
             key={booking._id}
-            className="card border-2 my-6 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-blue-200 to-blue-50 hover:shadow-lg"
+            className="card border-2 my-6 shadow-xl transform transition-transform hover:scale-95 hover:bg-gradient-to-t from-blue-200 to-blue-50 hover:shadow-lg"
           >
             <div className="card-title py-7 bg-sky-100">
               <p className="font-sm  mx-auto  text-center">
