@@ -7,12 +7,6 @@ const MaidDashboard = () => {
       <div class="drawer lg:drawer-open">
         <input id="maid-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content p-11">
-          <h1
-            style={{ fontFamily: "arial" }}
-            className="text-4xl text-primary font-black text-left pb-11"
-          >
-            DASHBOARD
-          </h1>
           <Outlet />
           <label
             for="maid-drawer"
@@ -33,7 +27,7 @@ const MaidDashboard = () => {
             <ul className="mt-20">
               <li>
                 <Link
-                  className="text-primary text-xl font-bold hover:text-black"
+                  className="text-primary mt-3 text-base font-bold hover:text-black"
                   to="/maidDashboard"
                 >
                   <i class="fa fa-desktop"></i>
@@ -42,11 +36,20 @@ const MaidDashboard = () => {
               </li>{" "}
               <li>
                 <Link
-                  className="text-primary text-xl font-bold hover:text-black"
+                  className="text-primary mt-3 text-base font-bold hover:text-black"
                   to="/maidDashboard/maidNotification"
                 >
                   <i class="fa fa-bell"></i>
                   Notification
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-primary mt-3 text-base font-bold hover:text-black"
+                  to="/maidDashboard/searchJob"
+                >
+                  <i class="fa fa-search"></i>
+                  Search Job
                 </Link>
               </li>
             </ul>

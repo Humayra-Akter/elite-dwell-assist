@@ -1,15 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
-// import io from "socket.io-client";
 import { addNotification } from "../../../redux/slices/notificationsSlice";
-import { Link } from "react-router-dom";
-import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-
-// const socket = io("http://localhost:5000");
 
 function calculateAge(dateOfBirth) {
   const dob = new Date(dateOfBirth);
@@ -46,7 +41,6 @@ const BookingMaid = ({ bookMaid, user }) => {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const dispatch = useDispatch();
   const [notificationIdCounter, setNotificationIdCounter] = useState(1);
-  const form = useRef();
   const [gUser, loading, error] = useAuthState(auth);
 
   // Function to close the success modal
@@ -60,9 +54,13 @@ const BookingMaid = ({ bookMaid, user }) => {
 
       const bookingData = {
         maidId: bookMaid.id,
+        customerName: gUser?.displayName || "",
         maidName: bookMaid.name,
-        customerEmail: gUser?.email || "", // Assuming you have user authentication
+        maidEmail: bookMaid.email,
+        customerEmail: gUser?.email || "",
+        availability: bookMaid.availability,
       };
+      console.log(bookMaid);
 
       fetch("http://localhost:5000/bookings", {
         method: "POST",
@@ -75,19 +73,13 @@ const BookingMaid = ({ bookMaid, user }) => {
         .then((data) => {
           console.log(data.success);
           if (data.message === "Booking created successfully") {
-            sendEmail(bookMaid);
             toast.success(`Booking created successfully for ${bookMaid.name}`);
           }
         })
         .catch((error) => {
-          console.error("Error creating booking:", error);
           toast.error("Failed to create booking");
         });
 
-      // socket.emit("notification", {
-      //   to: bookMaid.id,
-      //   message: `You have a new booking request from ${user?.displayName}`,
-      // });
       const newNotification = {
         id: notificationIdCounter,
         message: `You have a new booking from ${bookMaid.name}`,
@@ -95,24 +87,6 @@ const BookingMaid = ({ bookMaid, user }) => {
       dispatch(addNotification(newNotification));
       setNotificationIdCounter(notificationIdCounter + 1);
     }
-  };
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_rw6lyri",
-        "template_7fqei6a",
-        e.target,
-        "rDDtyeV8TTthfS19_"
-      )
-      .then((res) => {
-        toast.success("Email sent successfully:", res.text);
-        closeSuccessModal();
-      })
-      .catch((error) => {
-        toast.error("Email failed to send:", error);
-      });
   };
 
   const age = calculateAge(dob);
@@ -249,11 +223,11 @@ const BookingMaid = ({ bookMaid, user }) => {
           }}
         >
           <h1
-            className="text-2xl font-black text-primary text-center py-2 px-7"
+            className="text-2xl font-bold text-primary text-center py-2 px-7"
             style={{ fontFamily: "arial" }}
           >
             Booking sent to{" "}
-            <span className="text-3xl italic uppercase font-bold text-blue-600 text-center pl-2 py-5">
+            <span className="text-2xl italic uppercase font-black text-primary text-center pl-2 py-5">
               {bookMaid.name}
             </span>
             !
@@ -273,60 +247,3 @@ const BookingMaid = ({ bookMaid, user }) => {
 };
 
 export default BookingMaid;
-
-// <form ref={form} onSubmit={sendEmail}>
-//   {/* Name */}
-//   <div className="form-control w-full pb-2">
-//     <label className="label">
-//       <span className="label-text text-blue-700 font-bold text-md">
-//         Name
-//       </span>
-//     </label>
-//     <input
-//       type="text"
-//       placeholder="Your Name"
-//       name="user_name"
-//       required
-//       disabled
-//       value={gUser?.displayName || ""}
-//       className="input input-sm input-bordered w-full "
-//     />
-//   </div>
-//   {/* Email */}
-//   <div className="form-control w-full pb-2">
-//     <label className="label">
-//       <span className="label-text text-blue-700 font-bold text-md">
-//         Email
-//       </span>
-//     </label>
-//     <input
-//       type="email"
-//       placeholder="Your email"
-//       name="user_email"
-//       required
-//       disabled
-//       value={gUser?.email || ""}
-//       className="input input-sm input-bordered w-full "
-//     />
-//   </div>{" "}
-//   {/* Message */}
-//   <div className="form-control w-full pb-4">
-//     <label className="label">
-//       <span className="label-text text-blue-700 font-bold text-md">
-//         Message
-//       </span>
-//     </label>
-//     <input
-//       type="text"
-//       placeholder="Your Message"
-//       name="message"
-//       required
-//       className="input input-lg input-bordered w-full "
-//     />
-//   </div>
-//   <input
-//     className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
-//     type="submit"
-//     value="Send"
-//   />
-// </form>;

@@ -27,6 +27,7 @@ import AdminProfile from "./Components/AdminDashboard/AdminProfile";
 import AdminCreate from "./Components/AdminDashboard/AdminCreate";
 import AdminMaidPerDayBookings from "./Components/AdminDashboard/AdminMaidPerDayBookings";
 import CreatePostForMaid from "./Components/CustomerDashboard/CreatePostForMaid";
+import MaidSearchJob from "./Components/MaidDashboard/MaidSearchJob";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -36,10 +37,6 @@ function App() {
   const closeAboutModal = () => {
     setIsAboutModalOpen(false);
   };
-
-  // useEffect(() => {
-  //   const socket = io("http://localhost:5000");
-  // }, []);
 
   return (
     <div>
@@ -79,6 +76,7 @@ function App() {
             path="maidNotification"
             element={<MaidNotifications />}
           ></Route>
+          <Route path="searchJob" element={<MaidSearchJob />}></Route>
         </Route>
         <Route path="/customerDashboard" element={<CustomerDashboard />}>
           <Route index element={<CustomerProfile />}></Route>

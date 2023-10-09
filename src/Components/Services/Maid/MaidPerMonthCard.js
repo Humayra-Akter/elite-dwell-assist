@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { Link } from "react-router-dom";
 
 const MaidPerMonthCard = ({ maid, setBookMaid }) => {
   const { img, name, task, location, gender, availability, salary } = maid;
+  const [bookedMaids, setBookedMaids] = useState([]);
 
   const [user, loading, error] = useAuthState(auth);
 
   const handleKnowMoreClick = () => {
-    setBookMaid(maid);
+    if (!bookedMaids.includes(maid)) {
+      setBookedMaids([...bookedMaids, maid]);
+      setBookMaid(maid);
+    }
   };
 
   return (
@@ -40,12 +44,13 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
           </p>
           <div className="mt-4">
             <label
-              for="booking-maid"
-              onClick={() => setBookMaid(maid)}
+              htmlFor="booking-maid"
+              onClick={handleKnowMoreClick}
               className="px-4 btn-md mt-3 bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
             >
               Know More
             </label>
+
             {user ? (
               <p></p>
             ) : (

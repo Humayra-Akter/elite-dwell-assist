@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
-const CreatePostForMaid = ({ onSearch }) => {
-  // Define state variables for form fields
-  const [name, setName] = useState("");
+const CreatePostForMaid = () => {
+  const [user] = useAuthState(auth);
+  const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const [gender, setGender] = useState("");
   const [budget, setBudget] = useState("");
+  const userRole = localStorage.getItem("userRole");
   const [additionalPreferences, setAdditionalPreferences] = useState("");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -26,11 +31,42 @@ const CreatePostForMaid = ({ onSearch }) => {
     }
   };
 
-  // Handle form submission
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const handleTimeSlotChange = (e) => {
+    const selectedValue = e.target.value;
+    if (timeSlot.includes(selectedValue)) {
+      setTimeSlot(timeSlot.filter((item) => item !== selectedValue));
+    } else {
+      setTimeSlot([...timeSlot, selectedValue]);
+    }
   };
 
+  const onSubmit = async (data) => {
+    const bookingData = {
+      userName: user?.displayName,
+      userEmail: user?.email,
+      contact: data.contact,
+      address: data.address,
+      budget: data.budget,
+      additionalPreferences: data.additionalPreferences,
+      timeSlot,
+    };
+    try {
+      await fetch("http://localhost:5000/maidSearchPost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          toast.success("You have successfully posted your requirement");
+          reset();
+        });
+    } catch (error) {
+      console.error("Network error:", error.message);
+    }
+  };
   return (
     <div className="card-body bg-transparent border-2 shadow-md">
       <h1
@@ -47,7 +83,7 @@ const CreatePostForMaid = ({ onSearch }) => {
             <input
               type="email"
               placeholder="Your email"
-              value={email}
+              value={user?.email}
               name="email"
               className="input input-sm input-bordered w-full"
               onChange={(e) => setEmail(e.target.value)}
@@ -87,6 +123,7 @@ const CreatePostForMaid = ({ onSearch }) => {
               type="digit"
               placeholder="Your Contact number"
               name="contact"
+              onChange={(e) => setContact(e.target.value)}
               className="input input-sm input-bordered w-full "
               {...register("contact", {
                 required: {
@@ -131,14 +168,12 @@ const CreatePostForMaid = ({ onSearch }) => {
               )}
             </label>
           </div>
-
           {/* Address */}
           <div className="form-control mt-3 w-full">
             <label className="text-primary font-bold text-md">Address</label>
             <input
               type="text"
               placeholder="Your Address"
-              value={address}
               name="address"
               className="input input-sm input-bordered w-full"
               onChange={(e) => setAddress(e.target.value)}
@@ -164,14 +199,14 @@ const CreatePostForMaid = ({ onSearch }) => {
             <label className="text-primary font-bold text-md">Time Slot</label>
             <select
               value={timeSlot}
-              onChange={(e) => setTimeSlot(e.target.value)}
+              onChange={handleTimeSlotChange}
               className="input input-sm input-bordered w-full"
             >
               <option value="">Select Time Slot</option>
-              <option value="morning">08.00 AM - 11.00 AM</option>
-              <option value="afternoon">11.00 AM - 02.00 PM</option>
-              <option value="evening"> 02.00 PM - 05.00 PM</option>
-              <option value="night">05.00 PM - 08.00 PM</option>
+              <option value="08.00 AM - 11.00 AM">08.00 AM - 11.00 AM</option>
+              <option value="11.00 AM - 02.00 PM">11.00 AM - 02.00 PM</option>
+              <option value="02.00 PM - 05.00 PM"> 02.00 PM - 05.00 PM</option>
+              <option value="05.00 PM - 08.00 PM">05.00 PM - 08.00 PM</option>
             </select>
           </div>
           {/* Budget */}
@@ -182,7 +217,6 @@ const CreatePostForMaid = ({ onSearch }) => {
             <input
               type="number"
               placeholder="Your Budget"
-              value={budget}
               name="budget"
               className="input input-sm input-bordered w-full"
               onChange={(e) => setBudget(e.target.value)}
@@ -220,7 +254,6 @@ const CreatePostForMaid = ({ onSearch }) => {
             <input
               type="text"
               placeholder="Your Additional Preferences, if no, then write N/A"
-              value={additionalPreferences}
               name="additionalPreferences"
               className="input input-sm input-bordered w-full"
               onChange={(e) => setAdditionalPreferences(e.target.value)}
