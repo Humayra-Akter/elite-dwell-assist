@@ -204,10 +204,6 @@ const MaidRegistrationForm = () => {
             .then((res) => res.json())
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
-              openSuccessModal(); // Open the success modal
-              setTimeout(() => {
-                closeSuccessModal(); // Close the success modal
-              }, 3000);
             });
           fetch("http://localhost:5000/user", {
             method: "POST",
@@ -671,6 +667,7 @@ const MaidRegistrationForm = () => {
                   )}
                 </label>
               </div>
+              {signInError}
               <input
                 className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
                 value="register"
@@ -688,40 +685,6 @@ const MaidRegistrationForm = () => {
           </div>
         </div>
       </div>
-      {/* Success Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeSuccessModal}
-        contentLabel="Success Modal"
-        // Add modal styles here (e.g., setting width, height, etc.)
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          },
-          content: {
-            width: "500px", // Set the width as needed
-            height: "200px", // Set the height as needed
-            margin: "auto", // Center the modal
-          },
-        }}
-      >
-        <h1
-          className="text-3xl font-black text-primary text-center px-7"
-          style={{ fontFamily: "arial" }}
-        >
-          Success!
-        </h1>
-
-        <p className="text-lg italic font-bold text-blue-600 text-center py-5">
-          Data inserted successfully.
-        </p>
-        <button
-          className="btn btn-sm text-xs w-1/3 mt-5 ml-40 border-blue-500 text-white font-bold bg-primary"
-          // onClick={closeSuccessModal}
-        >
-          <Link to="/">Close</Link>
-        </button>
-      </Modal>
     </div>
   );
 };

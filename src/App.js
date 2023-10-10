@@ -10,7 +10,6 @@ import DriverPerDay from "./Components/Services/Driver/DriverPerDay";
 import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
 import { useEffect, useState } from "react";
 import Error from "./Components/Error/Error";
-import ApplianceRepair from "./Components/Services/ApplianceRepair/ApplianceRepair";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MaidSearchSegment from "./Components/Services/Maid/MaidSearchSegment";
@@ -28,6 +27,10 @@ import AdminCreate from "./Components/AdminDashboard/AdminCreate";
 import AdminMaidPerDayBookings from "./Components/AdminDashboard/AdminMaidPerDayBookings";
 import CreatePostForMaid from "./Components/CustomerDashboard/CreatePostForMaid";
 import MaidSearchJob from "./Components/MaidDashboard/MaidSearchJob";
+import TVBill from "./Components/Services/ApplianceRepair/TVBill";
+import RFBill from "./Components/Services/ApplianceRepair/RFBill";
+import WMBill from "./Components/Services/ApplianceRepair/WMBill";
+import OvenBill from "./Components/Services/ApplianceRepair/OvenBill";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -93,7 +96,10 @@ function App() {
         <Route path="/babysitter" element={<Babysitter />} />
         <Route path="/driverPerDay" element={<DriverPerDay />} />
         <Route path="/driverPerMonth" element={<DriverPerMonth />} />
-        <Route path="/tvRepair" element={<ApplianceRepair />} />
+        <Route path="/tvBill" element={<TVBill />} />
+        <Route path="/rfBill" element={<RFBill />} />
+        <Route path="/wmBill" element={<WMBill />} />
+        <Route path="/ovenBill" element={<OvenBill />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />
       </Routes>

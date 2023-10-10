@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Notification from "./Notification";
 import { signOut } from "firebase/auth";
-import { toast } from "react-toastify";
 
 const Navbar = ({ openAboutModal }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-
+  const serviceDropdownRef = useRef(null);
   useEffect(() => {
     setTimeout(() => {
       // window.location.reload();
@@ -19,27 +18,15 @@ const Navbar = ({ openAboutModal }) => {
 
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
-  const [isAppDropdownOpen, setIsAppDropdownOpen] = useState(false);
-
   const toggleServiceDropdown = () => {
     setIsServiceDropdownOpen(!isServiceDropdownOpen);
   };
-  const scrollToApplianceRepair = () => {
-    const applianceRepairSection = document.getElementById("applianceRepair");
-    if (applianceRepairSection) {
-      applianceRepairSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const closeDropdowns = () => {
     setIsServiceDropdownOpen(false);
-    setIsAppDropdownOpen(false);
   };
-
   const handleServiceClick = (service) => {
     closeDropdowns();
   };
-
   const logout = () => {
     localStorage.removeItem("userRole");
     signOut(auth);
@@ -47,7 +34,6 @@ const Navbar = ({ openAboutModal }) => {
   };
 
   const userRole = localStorage.getItem("userRole");
-  // console.log(userRole);
   return (
     <div className="bg-primary text-white font-bold ">
       <div class="navbar sticky">
@@ -83,34 +69,42 @@ const Navbar = ({ openAboutModal }) => {
                         Maid Per Day
                       </button>
                     </Link>
-                    <button
-                      onClick={() => handleServiceClick("Service 2")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                      role="menuitem"
-                    >
-                      <Link to="/maidPerMonth">Maid Per Month</Link>
-                    </button>
-                    <button
-                      onClick={() => handleServiceClick("Service 3")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary  w-full text-left"
-                      role="menuitem"
-                    >
-                      <Link to="/babysitter">Babysitter</Link>
-                    </button>
-                    <button
-                      onClick={() => handleServiceClick("Service 4")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                      role="menuitem"
-                    >
-                      <Link to="/driverPerDay">Vehicle Service</Link>
-                    </button>
-                    <button
-                      onClick={() => handleServiceClick("Service 5")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                      role="menuitem"
-                    >
-                      <Link to="/driverPerMonth">Car Driver</Link>
-                    </button>
+                    <Link to="/maidPerMonth">
+                      <button
+                        onClick={() => handleServiceClick("Service 2")}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                        role="menuitem"
+                      >
+                        Maid Per Month
+                      </button>
+                    </Link>{" "}
+                    <Link to="/babysitter">
+                      <button
+                        onClick={() => handleServiceClick("Service 3")}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary  w-full text-left"
+                        role="menuitem"
+                      >
+                        Babysitter
+                      </button>
+                    </Link>{" "}
+                    <Link to="/driverPerDay">
+                      <button
+                        onClick={() => handleServiceClick("Service 4")}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                        role="menuitem"
+                      >
+                        Vehicle Service
+                      </button>
+                    </Link>
+                    <Link to="/driverPerMonth">
+                      <button
+                        onClick={() => handleServiceClick("Service 5")}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                        role="menuitem"
+                      >
+                        Car Driver
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

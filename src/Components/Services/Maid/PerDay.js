@@ -29,7 +29,6 @@ const PerDay = () => {
 
   const handleServiceSelect = (service) => {
     const updatedServices = [...selectedServices];
-
     const serviceIndex = updatedServices.indexOf(service);
 
     if (serviceIndex !== -1) {
@@ -37,7 +36,6 @@ const PerDay = () => {
     } else {
       updatedServices.push(service);
     }
-
     setSelectedServices(updatedServices);
     setIsBookButtonDisabled(updatedServices.length === 0);
   };
@@ -733,14 +731,6 @@ const PerDay = () => {
                   <h2 className="text-lg font-bold text-primary">
                     Selected Services:
                   </h2>
-                  {/* <p className="mt-4">
-                {selectedDate && (
-                  <span>Selected Date: {selectedDate.toDateString()}</span>
-                )}
-                {selectedDate && selectedTimeSlot && (
-                  <span>, Time Slot: {selectedTimeSlot}</span>
-                )}
-              </p> */}
                   {selectedServices.length === 0 ? (
                     <p className="text-red-500">Select at least one service</p>
                   ) : (
@@ -750,12 +740,6 @@ const PerDay = () => {
                       ))}
                     </ul>
                   )}
-
-                  {/* {selectedDate && (
-                <p className="mt-4">
-                  Selected Date: {selectedDate.toDateString()}
-                </p>
-              )} */}
                 </div>
               </div>
             </div>

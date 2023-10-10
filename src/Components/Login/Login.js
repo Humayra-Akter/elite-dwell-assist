@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 import { toast } from "react-toastify";
-import imggg from "../../images/bg.jpg";
 
 const Login = () => {
   const {
@@ -19,6 +18,7 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [selectedRole, setSelectedRole] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/user")
@@ -31,6 +31,10 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+  
   let from = location.state?.from?.pathname || "/";
 
   if (loading) {
@@ -153,22 +157,35 @@ const Login = () => {
                       Password
                     </span>
                   </label>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    className="input input-sm input-bordered w-full "
-                    {...register("password", {
-                      required: {
-                        value: true,
-                        message: "password is required",
-                      },
-                      minLength: {
-                        value: 6,
-                        message: "Must be 6 characters longer",
-                      },
-                    })}
-                  />
+                  <div className="relative">
+                    <input
+                      type={passwordVisible ? "text" : "password"}
+                      placeholder="Password"
+                      name="password"
+                      className="input input-sm input-bordered w-full"
+                      {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Password is required",
+                        },
+                        minLength: {
+                          value: 6,
+                          message: "Must be 6 characters or longer",
+                        },
+                      })}
+                    />
+                    <button
+                      type="button"
+                      className="absolute top-1/2 right-4 transform -translate-y-1/2 focus:outline-none"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {passwordVisible ? (
+                        <i className="fa fa-eye-slash text-gray-500"></i>
+                      ) : (
+                        <i className="fa fa-eye text-gray-500"></i>
+                      )}
+                    </button>
+                  </div>
                   <label>
                     {errors.password?.type === "required" && (
                       <span className="text-red-500 text-xs mt-1">
