@@ -87,7 +87,7 @@ const Navbar = ({ openAboutModal }) => {
                         Babysitter
                       </button>
                     </Link>{" "}
-                    <Link to="/driverPerDay">
+                    {/* <Link to="/driverPerDay">
                       <button
                         onClick={() => handleServiceClick("Service 4")}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
@@ -95,14 +95,14 @@ const Navbar = ({ openAboutModal }) => {
                       >
                         Vehicle Service
                       </button>
-                    </Link>
+                    </Link> */}
                     <Link to="/driverPerMonth">
                       <button
                         onClick={() => handleServiceClick("Service 5")}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
                         role="menuitem"
                       >
-                        Car Driver
+                        Driver
                       </button>
                     </Link>
                   </div>
