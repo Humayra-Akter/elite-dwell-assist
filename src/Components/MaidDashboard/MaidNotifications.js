@@ -20,35 +20,6 @@ const MaidNotifications = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     fetch("http://localhost:5000/bookings")
-  //       .then((res) => res.json())
-  //       .then((bookingsData) => {
-  //         const loggedInMaidName = user.displayName;
-  //         const loggedInMaidEmail = user.email;
-  //         const filteredNotifications = bookingsData.filter((booking) => {
-  //           const isBookingForLoggedInMaid =
-  //             booking.maidName === loggedInMaidName ||
-  //             booking.customerEmail === loggedInMaidEmail;
-  //           return isBookingForLoggedInMaid;
-  //         });
-
-  //         // Set notifications state with filtered data
-  //         setNotifications(filteredNotifications);
-
-  //         if (filteredNotifications.length > 0) {
-  //           toast.success(`Notifications for ${loggedInMaidName}`);
-  //         } else {
-  //           toast.warning(`No notifications for ${loggedInMaidName}`);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching notifications:", error);
-  //       });
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     if (user) {
       if (bookingId) {
@@ -74,10 +45,13 @@ const MaidNotifications = () => {
     }
   }, [user]);
 
-  const clearNotifications = () => {
-    alert("you want to clear notification?");
-    setNotifications([]);
-    toast.success("Notifications cleared successfully");
+  // Function to clear a specific notification by ID
+  const clearNotification = (notificationId) => {
+    const updatedNotifications = notifications.filter(
+      (notification) => notification._id !== notificationId
+    );
+    setNotifications(updatedNotifications);
+    toast.success("Notification cleared successfully");
   };
 
   if (loading) {
@@ -108,7 +82,7 @@ const MaidNotifications = () => {
                   </span>
                 </h2>
                 <button
-                  onClick={clearNotifications}
+                  onClick={() => clearNotification(notification._id)}
                   className="btn btn-sm rounded-full absolute w-1/5 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600"
                 >
                   Clear Notifications
@@ -125,36 +99,6 @@ const MaidNotifications = () => {
       )}
     </div>
   );
-
-  // return (
-  //   <div>
-  //     <div>
-  //       {notifications.map((notification) => (
-  //         <div key={notification._id}>
-  //           <div className="card w-full border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-blue-200 to-blue-50 hover:shadow-lg">
-  //             <div class="card-body">
-  //               <h2 class="text-lg text-blue-900 font-bold">
-  //                 Booking Notifications for you: {user?.displayName}
-  //               </h2>
-  //               <h2 class="text-lg text-blue-900 font-bold">
-  //                 Customer Email: {notification.customerEmail}
-  //               </h2>
-  //               <button
-  //                 onClick={clearNotifications}
-  //                 className="btn btn-sm rounded-full absolute w-1/6 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600   "
-  //               >
-  //                 Clear Notifications
-  //               </button>
-  //               <button className="btn btn-sm rounded-full absolute w-1/6 top-11 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600   ">
-  //                 Send Confirmation
-  //               </button>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </div>
-  // );
 };
 
 export default MaidNotifications;

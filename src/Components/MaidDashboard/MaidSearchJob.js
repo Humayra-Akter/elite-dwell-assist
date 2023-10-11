@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const MaidSearchJob = () => {
   const [dayBookings, setDayBookings] = useState([]);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
     fetch("http://localhost:5000/maidSearchPost")
@@ -10,6 +15,34 @@ const MaidSearchJob = () => {
         setDayBookings(data);
       });
   }, []);
+
+  const handleBooking = (booking) => {
+    if (!bookingSuccess) {
+      setBookingSuccess(true);
+      const bookingData = {
+        maidName: user?.displayName,
+        maidEmail: user?.email,
+        bookingInfo: booking,
+      };
+      console.log(bookingData);
+      fetch("http://localhost:5000/customerBooked", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message === "Booking created successfully") {
+            toast.success(`Request sent to${bookingData.name}`);
+          }
+        })
+        .catch((error) => {
+          toast.error("Failed to create booking");
+        });
+    }
+  };
 
   return (
     <div>
@@ -29,8 +62,14 @@ const MaidSearchJob = () => {
                   {booking.userName}
                 </span>
               </p>{" "}
-              <button className="btn btn-sm rounded-full absolute w-1/8 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600">
-                Interested
+              <button
+                onClick={() => handleBooking(booking)}
+                className={`  btn btn-sm rounded-full absolute w-1/8 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600  w-1/4 btn-primary ${
+                  bookingSuccess ? "disabled" : ""
+                }`}
+                disabled={bookingSuccess}
+              >
+                {bookingSuccess ? "Interested" : "Request sent"}
               </button>
             </div>
             <div className="card-body">
