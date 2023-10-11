@@ -31,6 +31,7 @@ import TVBill from "./Components/Services/ApplianceRepair/TVBill";
 import RFBill from "./Components/Services/ApplianceRepair/RFBill";
 import WMBill from "./Components/Services/ApplianceRepair/WMBill";
 import OvenBill from "./Components/Services/ApplianceRepair/OvenBill";
+import DriverDashboard from "./Components/DriverDashboard/DriverDashboard";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -72,7 +73,8 @@ function App() {
             element={<AdminMaidPerDayBookings />}
           ></Route>
           <Route path="adminCreate" element={<AdminCreate />}></Route>
-        </Route>
+        </Route>{" "}
+        <Route path="/driverDashboard" element={<DriverDashboard />}></Route>
         <Route path="/maidDashboard" element={<MaidDashboard />}>
           <Route index element={<MaidProfile />}></Route>
           <Route

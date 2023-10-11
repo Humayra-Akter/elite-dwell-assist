@@ -149,6 +149,16 @@ const Navbar = ({ openAboutModal }) => {
           ) : (
             <></>
           )}
+          {/* driver dashboard */}
+          {userRole === "driver" ? (
+            <Link to="/driverDashboard">
+              <button className="text-white font-bold hover:text-black pr-7 ">
+                <div class="indicator">Dashboard</div>
+              </button>
+            </Link>
+          ) : (
+            <></>
+          )}
 
           <button
             onClick={openAboutModal}

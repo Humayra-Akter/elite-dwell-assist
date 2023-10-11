@@ -1,15 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import banner4 from "../../images/bg.jpg";
+import { Link, useNavigate } from "react-router-dom";
 import { MultiSelect } from "react-multi-select-component";
+import { useForm } from "react-hook-form";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 
 const DriverRegistrationForm = () => {
   //   const [selectedRole, setSelectedRole] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const navigate = useNavigate();
+  let signInError;
+
+  const imageStorageKey = "81a2b36646ff008b714220192e61707d";
   const [selectedExperience, setSelectedExperience] = useState([]);
   const [selectedVehicleType, setSelectedVehicleType] = useState([]);
+  const [selectedGender, setSelectedGender] = useState([]);
   const [selectedSalaries, setSelectedSalaries] = useState({});
-  const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
+  const [selectedExpertise, setSelectedExpertise] = useState([]);
+
+  const handleGender = (selected) => {
+    setSelectedGender([selected[selected.length - 1]]);
+  };
 
   const handleVehicleTypeChange = (selectedOptions) => {
     setSelectedVehicleType(selectedOptions);
@@ -29,17 +52,12 @@ const DriverRegistrationForm = () => {
       [vehicleType]: salary,
     }));
   };
-
   const handleExperienceChange = (selectedOptions) => {
     setSelectedExperience(selectedOptions);
   };
 
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
-  };
-
-  const handleAvailability = (selectedOptions) => {
-    setSelectedAvailability(selectedOptions);
   };
 
   const locationOptions = [
@@ -56,11 +74,10 @@ const DriverRegistrationForm = () => {
     { label: "motijheel", value: "motijheel" },
   ];
 
-  const availabilityOptions = [
-    { label: "08.00 AM - 11.00 AM", value: "08.00 AM - 11.00 AM" },
-    { label: "11.00 AM - 02.00 PM", value: "11.00 AM - 02.00 PM" },
-    { label: "02.00 PM - 05.00 PM", value: "02.00 PM - 05.00 PM" },
-    { label: "05.00 PM - 08.00 PM", value: "05.00 PM - 08.00 PM" },
+  const genderOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
   ];
 
   const experienceOptions = [
@@ -82,10 +99,91 @@ const DriverRegistrationForm = () => {
   ];
 
   const vehicleTypeSalaries = {
-    car: [10000, 15000, 2000],
+    car: [10000, 15001, 2000],
     van: [200, 400, 500],
     truck: [300, 500, 700],
   };
+
+  const handleAddDriver = async (data) => {
+    console.log(data);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({
+      displayName: data.name,
+      address: data.address,
+      contact: data.contact,
+      password: data.password,
+      dob: data.dob,
+    });
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const driver = {
+            name: data.name,
+            role: "driver",
+            email: data.email,
+            img: imgData.data.url,
+            address: data.address,
+            contact: data.contact,
+            gender: selectedGender[0]?.value,
+            experience: selectedExperience[0]?.value,
+            education: data.education,
+            location: selectedLocation.map((loc) => loc.value),
+            nid: data.nid,
+            dob: data.dob,
+            license: data.license,
+            vehicleType: selectedVehicleType.map(
+              (expertise) => expertise.value
+            ),
+            salary: selectedVehicleType.map(
+              (expertise) => selectedSalaries[expertise.value]
+            ),
+            password: data.password,
+          };
+          const user = {
+            name: data.name,
+            email: data.email,
+            role: "driver",
+            img: imgData.data.url,
+            dob: data.dob,
+            password: data.password,
+          };
+          // save driver information to the database
+          fetch("http://localhost:5000/driver", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(driver),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success(`${data.name} thanks for your registration`);
+            });
+          fetch("http://localhost:5000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success(`${data.name} welcome to Elite-Dwell-Assist`);
+            });
+        }
+      });
+    navigate("/");
+  };
+
   return (
     <div>
       <div className="mx-auto max-w-4xl">
@@ -98,10 +196,8 @@ const DriverRegistrationForm = () => {
               Register as <strong>DRIVER</strong>
             </h1>
 
-            {/* <form onSubmit={handleFormSubmit}> */}
-            <form>
+            <form onSubmit={handleSubmit(handleAddDriver)}>
               <div className="grid grid-cols-2 pt-5 gap-3">
-                {/* name field */}
                 <div className="form-control  w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
@@ -111,12 +207,24 @@ const DriverRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your Name"
-                    //   value={name}
-                    //   onChange={(e) => setName(e.target.value)}
+                    name="name"
                     className="input input-sm input-bordered w-full"
-                    required
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "Name is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.name?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.name.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
+
                 {/* email field */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -127,11 +235,32 @@ const DriverRegistrationForm = () => {
                   <input
                     type="email"
                     placeholder="Your email"
-                    //   value={email}
-                    //   onChange={(e) => setEmail(e.target.value)}
+                    name="email"
                     className="input input-sm input-bordered w-full "
-                    required
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                      unique: { value: true },
+                      pattern: {
+                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        message: "Provide a valid email",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.email?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.email.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-5 gap-3">
@@ -143,13 +272,52 @@ const DriverRegistrationForm = () => {
                     </span>
                   </label>
                   <input
-                    type="text"
+                    type="digit"
                     placeholder="Your Contact number"
-                    //   value={contact}
-                    //   onChange={(e) => setContact(e.target.value)}
+                    name="contact"
                     className="input input-sm input-bordered w-full "
-                    required
+                    {...register("contact", {
+                      required: {
+                        value: true,
+                        message: "contact is required",
+                      },
+                      unique: { value: true },
+                      pattern: {
+                        value: /[0-9]*/,
+                        message: " Your Contact number should have digits only",
+                      },
+                      minLength: {
+                        value: 11,
+                        message: "Provide a valid contact",
+                      },
+                      maxLength: {
+                        value: 11,
+                        message: "Provide a valid contact",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.contact?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "minLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                    {errors.contact?.type === "maxLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.contact.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 {/* address */}
                 <div className="form-control w-full">
@@ -161,55 +329,49 @@ const DriverRegistrationForm = () => {
                   <input
                     type="text"
                     placeholder="Your address"
+                    name="address"
                     className="input input-sm input-bordered w-full"
-                    required
+                    {...register("address", {
+                      required: {
+                        value: true,
+                        message: "Address is required",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.address?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.address.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
-              {/* Gender field */}
               <div className="grid grid-cols-3 pt-5 gap-3">
+                {/* Gender field */}
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-left text-blue-700 font-bold text-xs">
                       Gender
                     </span>
                   </label>
-                  <div className="input  input-bordered text-left w-full ">
-                    <select className="select" required>
-                      <option disabled selected>
-                        Select your gender
-                      </option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
+                  <MultiSelect
+                    options={genderOptions}
+                    value={selectedGender}
+                    onChange={handleGender}
+                    labelledBy={"Select"}
+                  />
                 </div>
-                {/* Education field */}
-                <div className="form-control  w-full">
-                  <label className="label">
-                    <span className="label-text text-left text-blue-700 font-bold text-xs">
-                      Education
-                    </span>
-                  </label>
-                  <div className="input input-bordered text-left w-full ">
-                    <select className="select" required>
-                      <option disabled selected>
-                        Select your education
-                      </option>
-                      <option value="male">SSC pass</option>
-                      <option value="female">JSC pass</option>
-                    </select>
-                  </div>
-                </div>
+
                 {/* Experience dropdown */}
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
+                    <span className="label-text text-blue-700 font-bold text-sm">
                       Experience
                     </span>
                   </label>
                   <MultiSelect
+                    name="experience"
                     options={experienceOptions}
                     value={selectedExperience}
                     onChange={handleExperienceChange}
@@ -219,6 +381,36 @@ const DriverRegistrationForm = () => {
                     }}
                   />
                 </div>
+
+                {/* Education field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                      Education
+                    </span>
+                  </label>
+                  <select
+                    className="input select input-sm input-bordered w-full"
+                    name="education"
+                    {...register("education", {
+                      required: {
+                        value: true,
+                        message: "Education is required",
+                      },
+                    })}
+                  >
+                    <option value="none">None</option>
+                    <option value="ssc">SSC pass</option>
+                    <option value="jsc">JSC pass</option>
+                  </select>
+                </div>
+                <label>
+                  {errors.education?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.education.message}
+                    </span>
+                  )}
+                </label>
               </div>
               <div className="grid grid-cols-2 gap-3 pt-5">
                 {/*vehicleType*/}
@@ -272,26 +464,9 @@ const DriverRegistrationForm = () => {
               </div>
 
               {/* Conditionally render the "availability" field for van/truck */}
-              {selectedVehicleType.some((vehicleType) =>
+              {/* {selectedVehicleType.some((vehicleType) =>
                 ["van", "truck"].includes(vehicleType.value)
-              ) && (
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      Availability
-                    </span>
-                  </label>
-                  <MultiSelect
-                    options={availabilityOptions}
-                    value={selectedAvailability}
-                    onChange={handleAvailability}
-                    labelledBy={"Select availability"}
-                    overrideStrings={{
-                      selectSomeItems: "Select availability",
-                    }}
-                  />
-                </div>
-              )}
+              )} */}
               <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* dob */}
                 <div className="form-control w-full">
@@ -299,14 +474,38 @@ const DriverRegistrationForm = () => {
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth
                     </span>
-                  </label>
+                  </label>{" "}
                   <input
                     type="text"
-                    placeholder="Your dob"
-                    className="input input-sm input-bordered w-full"
-                    required
+                    placeholder="yyyy--mm-dd"
+                    name="dob"
+                    className="input input-sm input-bordered w-full "
+                    {...register("dob", {
+                      required: {
+                        value: true,
+                        message: "DOB is required",
+                      },
+                      pattern: {
+                        value:
+                          /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                        message: "Follow yyyy--mm-dd format",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.dob?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.dob.message}
+                      </span>
+                    )}
+                    {errors.dob?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.dob.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
+
                 {/* location */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -335,10 +534,33 @@ const DriverRegistrationForm = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="eg : 1234567890111"
-                    className="input input-sm input-bordered w-full"
-                    required
+                    placeholder="eg: 1234567890111"
+                    name="nid"
+                    className="input input-sm input-bordered w-full "
+                    {...register("nid", {
+                      required: {
+                        value: true,
+                        message: "nid is required",
+                      },
+                      unique: { value: true },
+                      pattern: {
+                        value: /[0-9]*/,
+                        message: "Provide a valid nid",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.nid?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.nid.message}
+                      </span>
+                    )}
+                    {errors.nid?.type === "pattern" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.nid.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 {/* Driving license */}
                 <div className="form-control w-full">
@@ -349,15 +571,63 @@ const DriverRegistrationForm = () => {
                   </label>
                   <input
                     type="text"
+                    name="license"
                     placeholder="eg : DD-123456789"
                     className="input input-sm input-bordered w-full"
-                    required
+                    {...register("license", {
+                      required: {
+                        value: true,
+                        message: "license is required",
+                      },
+                      unique: {
+                        value: true,
+                        message: "Provide a unique license",
+                      },
+                    })}
                   />
+                  <label>
+                    {errors.license?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.license.message}
+                      </span>
+                    )}
+                    {errors.license?.type === "unique" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.license.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
               </div>
-
+              {/* Image upload field */}
+              <div className="form-control  w-full">
+                <label className="label">
+                  <span className="label-text text-blue-700 font-bold text-md">
+                    photo
+                  </span>
+                </label>
+                <input
+                  type="file"
+                  placeholder="Your image"
+                  name="image"
+                  className="input input-sm input-bordered w-full"
+                  {...register("image", {
+                    required: {
+                      value: true,
+                      message: "image is required",
+                    },
+                  })}
+                />
+                <label>
+                  {errors.image?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.image.message}
+                    </span>
+                  )}
+                </label>
+              </div>
               {/* password field */}
-              <div className="form-control pt-5 w-full pb-11">
+              <div className="form-control w-full pb-11">
                 <label className="label">
                   <span className="label-text text-blue-700 font-bold text-md">
                     Password
@@ -365,20 +635,40 @@ const DriverRegistrationForm = () => {
                 </label>
                 <input
                   type="password"
-                  placeholder="Your Password"
-                  //   value={password}
-                  //   onChange={(e) => setPassword(e.target.value)}
-                  className="input input-sm input-bordered w-full"
-                  required
+                  placeholder="Password"
+                  name="password"
+                  className="input input-sm input-bordered w-full "
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "password is required",
+                    },
+                    minLength: {
+                      value: 6,
+                      message: "Must be 6 characters longer",
+                    },
+                  })}
                 />
+                <label>
+                  {errors.password?.type === "required" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </span>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </label>
               </div>
-              <button
-                className="btn w-full btn-sm border-blue-500 text-white text-xs font-bold bg-primary"
+              {signInError}
+              <input
+                className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+                value="register"
                 type="submit"
-              >
-                REGISTER
-              </button>
-              {/* {loading && <div>Loading...</div>} */}
+              />
+              {loading && <div>Loading...</div>}
             </form>
             <p className="text-center">
               <small className="font-semibold">

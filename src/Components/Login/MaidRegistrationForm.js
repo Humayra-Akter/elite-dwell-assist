@@ -77,19 +77,15 @@ const MaidRegistrationForm = () => {
   const handleExperienceChange = (selectedOptions) => {
     setSelectedExperience(selectedOptions);
   };
-
   const handleGender = (selected) => {
     setSelectedGender([selected[selected.length - 1]]);
   };
-
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
   };
-
   const handleAvailability = (selectedOptions) => {
     setSelectedAvailability(selectedOptions);
   };
-
   const locationOptions = [
     { label: "dhanmondi", value: "dhanmondi" },
     { label: "mirpur", value: "mirpur" },
@@ -100,20 +96,17 @@ const MaidRegistrationForm = () => {
     { label: "banani", value: "banani" },
     { label: "motijheel", value: "motijheel" },
   ];
-
   const genderOptions = [
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
     { label: "Other", value: "other" },
   ];
-
   const availabilityOptions = [
     { label: "08.00 AM - 11.00 AM", value: "08.00 AM - 11.00 AM" },
     { label: "11.00 AM - 02.00 PM", value: "11.00 AM - 02.00 PM" },
     { label: "02.00 PM - 05.00 PM", value: "02.00 PM - 05.00 PM" },
     { label: "05.00 PM - 08.00 PM", value: "05.00 PM - 08.00 PM" },
   ];
-
   const experienceOptions = [
     { value: 1, label: "1 year" },
     { value: 2, label: "2 year" },
@@ -126,7 +119,6 @@ const MaidRegistrationForm = () => {
     { value: 9, label: "9 year" },
     { value: 10, label: "more than 10 year" },
   ];
-
   const expertiseOptions = [
     { value: "mopping", label: "Mopping" },
     { value: "cooking", label: "Cooking" },
@@ -134,7 +126,6 @@ const MaidRegistrationForm = () => {
     { value: "sweeping", label: "Sweeping" },
     { value: "dish_washing", label: "Dish Washing" },
   ];
-
   const expertiseSalaries = {
     mopping: [1000, 1500, 1200],
     cooking: [2000, 1800, 2200],
@@ -142,7 +133,6 @@ const MaidRegistrationForm = () => {
     sweeping: [500, 600, 550],
     dish_washing: [1500, 1600, 1550],
   };
-
   const handleAddMaid = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({

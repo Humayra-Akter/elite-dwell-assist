@@ -5,7 +5,11 @@ import Footer from "../../Shared/Footer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
-const MaidPerMonth = () => {
+const MaidPerMonth = ({
+  selectedLocation,
+  selectedSalaryRange,
+  selectedAvailability,
+}) => {
   const [maids, setMaids] = useState([]);
   const [bookMaid, setBookMaid] = useState([]);
   const [user] = useAuthState(auth);
@@ -18,6 +22,16 @@ const MaidPerMonth = () => {
       });
   }, []);
 
+  const filteredMaids = (maids) => {
+    const filteredMaidList = maids.filter(
+      (maid) =>
+        maid.location.findIndex((loc) => loc.includes(selectedLocation)) !== -1
+    );
+    console.log(filteredMaidList);
+
+    return filteredMaidList;
+  };
+
   const userRole = localStorage.getItem("userRole");
   return (
     <div>
@@ -28,25 +42,14 @@ const MaidPerMonth = () => {
         Your Home's Best Friend
       </h1>
       {/* General Maids */}
-      {userRole !== "customer" ? (
-        <div>
+      <div>
+        {userRole !== "customer" && (
           <p className="text-red-500 text-xs text-center mt-1">
             You do not have permission to access this page.
           </p>
-          <div className="grid grid-cols-3 gap-5 p-11">
-            {maids.map((maid) => (
-              <MaidPerMonthCard
-                key={maid.id}
-                maid={maid}
-                setBookMaid={setBookMaid}
-                user={user}
-              ></MaidPerMonthCard>
-            ))}
-          </div>
-        </div>
-      ) : (
+        )}
         <div className="grid grid-cols-3 gap-5 p-11">
-          {maids.map((maid) => (
+          {filteredMaids(maids).map((maid) => (
             <MaidPerMonthCard
               key={maid.id}
               maid={maid}
@@ -55,7 +58,7 @@ const MaidPerMonth = () => {
             ></MaidPerMonthCard>
           ))}
         </div>
-      )}
+      </div>
       {/* <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard
