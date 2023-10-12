@@ -6,7 +6,8 @@ import auth from "../../firebase.init";
 const MaidSearchJob = () => {
   const [dayBookings, setDayBookings] = useState([]);
   const [bookingSuccess, setBookingSuccess] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
+  const [bookedOptions, setBookedOptions] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/maidSearchPost")
@@ -22,9 +23,11 @@ const MaidSearchJob = () => {
       const bookingData = {
         maidName: user?.displayName,
         maidEmail: user?.email,
+        customerEmail: booking.userEmail,
         bookingInfo: booking,
       };
       console.log(bookingData);
+
       fetch("http://localhost:5000/customerBooked", {
         method: "POST",
         headers: {
@@ -36,6 +39,7 @@ const MaidSearchJob = () => {
         .then((data) => {
           if (data.message === "Booking created successfully") {
             toast.success(`Request sent to${bookingData.name}`);
+            setBookedOptions([...bookedOptions, booking._id]);
           }
         })
         .catch((error) => {
@@ -69,7 +73,7 @@ const MaidSearchJob = () => {
                 }`}
                 disabled={bookingSuccess}
               >
-                {bookingSuccess ? "Interested" : "Request sent"}
+                {bookingSuccess ? "Request sent" : "Interested"}
               </button>
             </div>
             <div className="card-body">

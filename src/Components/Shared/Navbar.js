@@ -181,7 +181,7 @@ const Navbar = ({ openAboutModal }) => {
               </button>
             </Link>
           )}
-          {userRole === "maid" ? <Notification /> : <></>}
+          {/* {userRole === "maid" ? <Notification /> : <></>} */}
         </div>
       </div>
     </div>

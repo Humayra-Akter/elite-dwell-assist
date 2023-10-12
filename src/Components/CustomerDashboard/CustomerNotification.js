@@ -7,7 +7,6 @@ import Loading from "../Shared/Loading";
 const CustomerNotification = () => {
   const [user, loading, error] = useAuthState(auth);
   const [notifications, setNotifications] = useState([]);
-  const [loggedInMaidEmail, setLoggedInMaidEmail] = useState("");
   const [bookingId, setBookingId] = useState("");
 
   useEffect(() => {
@@ -22,9 +21,8 @@ const CustomerNotification = () => {
 
   useEffect(() => {
     if (user) {
-      if (bookingId) {
-        const loggedInMaidEmail = user?.email;
-      }
+      const loggedInMaidEmail = user?.email;
+      console.log(user);
       console.log(loggedInMaidEmail);
       fetch(`http://localhost:5000/customerBooked/${loggedInMaidEmail}`)
         .then((res) => res.json())
@@ -33,7 +31,7 @@ const CustomerNotification = () => {
           if (Array.isArray(data) && data.length > 0) {
             setNotifications(data);
             toast.success(
-              `Notifications for ${user?.displayName} from ${data[0]?.customerEmail}`
+              `Notifications for ${user?.displayName} from ${user?.email}`
             );
           } else {
             toast.warning(`No notifications for ${user?.displayName}`);

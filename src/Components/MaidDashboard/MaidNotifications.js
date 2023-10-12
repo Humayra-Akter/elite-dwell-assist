@@ -7,7 +7,6 @@ import Loading from "../Shared/Loading";
 const MaidNotifications = () => {
   const [user, loading, error] = useAuthState(auth);
   const [notifications, setNotifications] = useState([]);
-  const [loggedInMaidEmail, setLoggedInMaidEmail] = useState("");
   const [bookingId, setBookingId] = useState("");
 
   useEffect(() => {
@@ -22,6 +21,8 @@ const MaidNotifications = () => {
 
   useEffect(() => {
     if (user) {
+      const loggedInMaidEmail = user?.email;
+      console.log(loggedInMaidEmail);
       if (bookingId) {
         const loggedInMaidEmail = user?.email;
       }
