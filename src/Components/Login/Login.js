@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 import { toast } from "react-toastify";
+import eye from "../../images/eye-svgrepo-com.svg";
+import eyeClose from "../../images/eye-close-svgrepo-com.svg";
 
 const Login = () => {
   const {
@@ -34,7 +36,7 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  
+
   let from = location.state?.from?.pathname || "/";
 
   if (loading) {
@@ -180,9 +182,17 @@ const Login = () => {
                       onClick={togglePasswordVisibility}
                     >
                       {passwordVisible ? (
-                        <i className="fa fa-eye-slash text-gray-500"></i>
+                        <img
+                          className="fa fa-eye w-4 text-gray-500"
+                          src={eye}
+                          alt=""
+                        />
                       ) : (
-                        <i className="fa fa-eye text-gray-500"></i>
+                        <img
+                          className="fa fa-eye w-4 text-gray-500"
+                          src={eyeClose}
+                          alt=""
+                        />
                       )}
                     </button>
                   </div>

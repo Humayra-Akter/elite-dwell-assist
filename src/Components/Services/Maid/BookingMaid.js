@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { addNotification } from "../../../redux/slices/notificationsSlice";
@@ -47,7 +47,6 @@ const BookingMaid = ({ bookMaid, user }) => {
   const closeSuccessModal = () => {
     setBookingSuccess(false);
   };
-
 
   const handleBooking = () => {
     if (!bookingSuccess) {

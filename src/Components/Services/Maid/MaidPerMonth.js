@@ -22,17 +22,18 @@ const MaidPerMonth = ({
       });
   }, []);
 
-  const filteredMaids = (maids) => {
-    const filteredMaidList = maids.filter(
-      (maid) =>
-        maid.location.findIndex((loc) => loc.includes(selectedLocation)) !== -1
-    );
-    console.log(filteredMaidList);
-
-    return filteredMaidList;
-  };
-
   const userRole = localStorage.getItem("userRole");
+
+  const filteredMaids = maids.filter((maid) => {
+    const includesLocation = maid.location.includes(
+      selectedLocation.toLowerCase()
+    );
+    if (!selectedLocation) {
+      return maids;
+    }
+    return includesLocation;
+  });
+
   return (
     <div>
       <h1
@@ -49,7 +50,7 @@ const MaidPerMonth = ({
           </p>
         )}
         <div className="grid grid-cols-3 gap-5 p-11">
-          {filteredMaids(maids).map((maid) => (
+          {filteredMaids.map((maid) => (
             <MaidPerMonthCard
               key={maid.id}
               maid={maid}
@@ -59,6 +60,7 @@ const MaidPerMonth = ({
           ))}
         </div>
       </div>
+      {/* <div className="divider"></div> */}
       {/* <div className="grid grid-cols-3 gap-5 p-11">
         {maids.map((maid) => (
           <MaidPerMonthCard

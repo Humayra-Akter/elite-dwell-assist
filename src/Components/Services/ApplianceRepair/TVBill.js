@@ -16,9 +16,7 @@ const TVBill = () => {
   const [user] = useAuthState(auth);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-  const [selectedItems, setSelectedItems] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
-
   const [isBookButtonDisabled, setIsBookButtonDisabled] = useState(false);
   const [area, setArea] = useState("");
   const itemPrice = 1000;
@@ -36,80 +34,19 @@ const TVBill = () => {
     formState: { errors },
   } = useForm();
 
-  // const handleServiceSelect = (itemName, newCount, itemPrice) => {
-  //   // Use the newCount parameter to update the count for the selected item
-  //   switch (itemName) {
-  //     case "TV Power Supply Problem":
-  //       setPowerSupplyProblemCount(newCount);
-  //       break;
-  //     case "TV Mounting":
-  //       setMountingCount(newCount);
-  //       break;
-  //     case "TV Sound Problem":
-  //       setSoundProblemCount(newCount);
-  //       break;
-  //     case "TV Display":
-  //       setDisplayCount(newCount);
-  //       break;
-  //     default:
-  //     // Handle other items if needed
-  //   }
+  const handleServiceSelect = (service) => {
+    const updatedServices = [...selectedServices];
 
-  //   // Calculate the updated total based on the counts and prices of all selected items
-  //   const updatedTotal =
-  //     powerSupplyProblemCount * itemPrice +
-  //     mountingCount * itemPrice +
-  //     soundProblemCount * itemPrice +
-  //     displayCount * itemPrice;
-  //   const updatedItems = [
-  //     { name: "TV Power Supply Problem", count: powerSupplyProblemCount },
-  //     { name: "TV Mounting", count: mountingCount },
-  //     { name: "TV Sound Problem", count: soundProblemCount },
-  //     { name: "TV Display", count: displayCount },
-  //   ];
+    const serviceIndex = updatedServices.indexOf(service);
 
-  //   setSelectedItems(updatedItems);
-  // };
-  const handleServiceSelect = (itemName, newCount, itemPrice) => {
-    switch (itemName) {
-      case "TV Power Supply Problem":
-        setPowerSupplyProblemCount(newCount);
-        break;
-      case "TV Mounting":
-        setMountingCount(newCount);
-        break;
-      case "TV Sound Problem":
-        setSoundProblemCount(newCount);
-        break;
-      case "TV Display":
-        setDisplayCount(newCount);
-        break;
-      default:
-      // Handle other items if needed
+    if (serviceIndex !== -1) {
+      updatedServices.splice(serviceIndex, 1);
+    } else {
+      updatedServices.push(service);
     }
 
-    // Calculate the updated total based on the counts and prices of all selected items
-    const updatedTotal =
-      powerSupplyProblemCount * itemPrice +
-      mountingCount * itemPrice +
-      soundProblemCount * itemPrice +
-      displayCount * itemPrice;
-
-    // Create an array of selected items with counts
-    const selectedItemsArray = [
-      { name: "TV Power Supply Problem", count: powerSupplyProblemCount },
-      { name: "TV Mounting", count: mountingCount },
-      { name: "TV Sound Problem", count: soundProblemCount },
-      { name: "TV Display", count: displayCount },
-    ];
-
-    // Filter and create an array of selected items with counts greater than 0
-    const updatedItems = selectedItemsArray.filter((item) => item.count > 0);
-
-    // Update the selectedItems state with the filtered array
-    setSelectedItems(updatedItems);
-
-    // Now, you have the updatedItems array that represents the selected items with counts greater than 0.
+    setSelectedServices(updatedServices);
+    setIsBookButtonDisabled(updatedServices.length === 0);
   };
 
   const handleDateSelect = (date) => {
@@ -164,14 +101,9 @@ const TVBill = () => {
   };
 
   const onSubmit = async (data) => {
-    if (!selectedDate || !selectedTimeSlot) {
-      toast.error("Please fill out all required fields.");
-      return;
-    }
     const bookingData = {
       selectedDate,
       selectedTimeSlot,
-      selectedItems,
       selectedServices,
       userName: user?.displayName,
       userEmail: user?.email,
@@ -474,18 +406,10 @@ const TVBill = () => {
             <div className="absolute h-8 w-24 bottom-2 left-28 text-sm">
               <button
                 className="cursor-pointer absolute top-0 right-16 bottom-0 left-0 rounded-sm shadow-sm border-2"
-                // id="tv_power_minus"
-                // onClick={() =>
-                //   setPowerSupplyProblemCount(
-                //     Math.max(powerSupplyProblemCount - 1, 0)
-                //   )
-                // }
                 id="tv_power_minus"
                 onClick={() =>
-                  handleServiceSelect(
-                    "TV Power Supply Problem",
-                    Math.max(powerSupplyProblemCount - 1, 0),
-                    1000
+                  setPowerSupplyProblemCount(
+                    Math.max(powerSupplyProblemCount - 1, 0)
                   )
                 }
               >
@@ -497,17 +421,9 @@ const TVBill = () => {
               </div>
               <button
                 className="cursor-pointer absolute top-0 right-0 bottom-0 left-16 rounded-sm shadow-sm border-2"
-                // id="tv_power_plus"
-                // onClick={() =>
-                //   setPowerSupplyProblemCount(powerSupplyProblemCount + 1)
-                // }
                 id="tv_power_plus"
                 onClick={() =>
-                  handleServiceSelect(
-                    "TV Power Supply Problem",
-                    powerSupplyProblemCount + 1,
-                    1000
-                  )
+                  setPowerSupplyProblemCount(powerSupplyProblemCount + 1)
                 }
               >
                 <span className="text-2xl">+</span>
@@ -554,16 +470,8 @@ const TVBill = () => {
             <div className="absolute h-8 w-24 bottom-2 left-28 text-sm">
               <button
                 className="cursor-pointer absolute top-0 right-16 bottom-0 left-0 rounded-sm shadow-sm border-2"
-                // id="tv_mounting_minus"
-                // onClick={() => setMountingCount(Math.max(mountingCount - 1, 0))}
                 id="tv_mounting_minus"
-                onClick={() =>
-                  handleServiceSelect(
-                    "TV Mounting",
-                    Math.max(mountingCount - 1, 0),
-                    1000
-                  )
-                }
+                onClick={() => setMountingCount(Math.max(mountingCount - 1, 0))}
               >
                 <span className="text-2xl">-</span>
               </button>
@@ -573,12 +481,8 @@ const TVBill = () => {
               </div>
               <button
                 className="cursor-pointer absolute top-0 right-0 bottom-0 left-16 rounded-sm shadow-sm border-2"
-                // id="tv_mounting_plus"
-                // onClick={() => setMountingCount(mountingCount + 1)}
                 id="tv_mounting_plus"
-                onClick={() =>
-                  handleServiceSelect("TV Mounting", mountingCount + 1, 1000)
-                }
+                onClick={() => setMountingCount(mountingCount + 1)}
               >
                 <span className="text-2xl">+</span>
               </button>
@@ -625,17 +529,9 @@ const TVBill = () => {
             <div className="absolute h-8 w-24 bottom-2 left-28 text-sm">
               <button
                 className="cursor-pointer absolute top-0 right-16 bottom-0 left-0 rounded-sm shadow-sm border-2"
-                // id="tv_sound_minus"
-                // onClick={() =>
-                //   setSoundProblemCount(Math.max(soundProblemCount - 1, 0))
-                // }
                 id="tv_sound_minus"
                 onClick={() =>
-                  handleServiceSelect(
-                    "TV Sound Problem",
-                    Math.max(soundProblemCount - 1, 0),
-                    1000
-                  )
+                  setSoundProblemCount(Math.max(soundProblemCount - 1, 0))
                 }
               >
                 <span className="text-2xl">-</span>
@@ -646,16 +542,8 @@ const TVBill = () => {
               </div>
               <button
                 className="cursor-pointer absolute top-0 right-0 bottom-0 left-16 rounded-sm shadow-sm border-2"
-                // id="tv_sound_plus"
-                // onClick={() => setSoundProblemCount(soundProblemCount + 1)}
                 id="tv_sound_plus"
-                onClick={() =>
-                  handleServiceSelect(
-                    "TV Sound Problem",
-                    soundProblemCount + 1,
-                    1000
-                  )
-                }
+                onClick={() => setSoundProblemCount(soundProblemCount + 1)}
               >
                 <span className="text-2xl">+</span>
               </button>
@@ -705,16 +593,8 @@ const TVBill = () => {
             <div className="absolute h-8 w-24 bottom-2 left-28 text-sm">
               <button
                 className="cursor-pointer absolute top-0 right-16 bottom-0 left-0 rounded-sm shadow-sm border-2"
-                // id="tv_display_minus"
-                // onClick={() => setDisplayCount(Math.max(displayCount - 1, 0))}
                 id="tv_display_minus"
-                onClick={() =>
-                  handleServiceSelect(
-                    "TV Display",
-                    Math.max(displayCount - 1, 0),
-                    1000
-                  )
-                }
+                onClick={() => setDisplayCount(Math.max(displayCount - 1, 0))}
               >
                 <span className="text-2xl">-</span>
               </button>
@@ -724,12 +604,8 @@ const TVBill = () => {
               </div>
               <button
                 className="cursor-pointer absolute top-0 right-0 bottom-0 left-16 rounded-sm shadow-sm border-2"
-                // id="tv_display_plus"
-                // onClick={() => setDisplayCount(displayCount + 1)}
                 id="tv_display_plus"
-                onClick={() =>
-                  handleServiceSelect("TV Display", displayCount + 1, 1000)
-                }
+                onClick={() => setDisplayCount(displayCount + 1)}
               >
                 <span className="text-2xl">+</span>
               </button>

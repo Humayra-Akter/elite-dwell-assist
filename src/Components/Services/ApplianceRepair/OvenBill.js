@@ -466,7 +466,7 @@ const OvenBill = () => {
                 <img
                   className="absolute top-[23px] left-[18px] w-[71px] h-[94px] object-cover"
                   alt=""
-                  src="/image-29@2x.png"
+                  src="/Oven2.jpg"
                 />
               </div>
 
@@ -530,12 +530,12 @@ const OvenBill = () => {
                   />
                 </div>
                 <div className="absolute top-[calc(50%_-_46.5px)] left-[calc(50%_-_81px)] text-xl font-actor text-left inline-block w-[166px] h-[19px]">
-                  Oven Servicing
+                  Oven Checking
                 </div>
                 <img
                   className="absolute top-[23px] left-[19px] w-[71px] h-[93px] object-cover"
                   alt=""
-                  src="/image-28@2x.png"
+                  src="/Oven1.jpg"
                 />
               </div>
               <img
@@ -693,7 +693,7 @@ const OvenBill = () => {
                 <img
                   className="absolute top-[23px] left-[18px] w-[71px] h-[94px] object-cover"
                   alt=""
-                  src="/image-29@2x.png"
+                  src="/Oven2.jpg"
                 />
               </div>
 
@@ -762,7 +762,7 @@ const OvenBill = () => {
                 <img
                   className="absolute top-[23px] left-[19px] w-[71px] h-[93px] object-cover"
                   alt=""
-                  src="/image-28@2x.png"
+                  src="/Oven1.jpg"
                 />
               </div>
               <img

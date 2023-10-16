@@ -3,6 +3,7 @@ import banner1 from "../../images/oven.jpg";
 import banner2 from "../../images/tv.jpg";
 import banner3 from "../../images/refrigaretor.jpg";
 import banner4 from "../../images/washingmachine.jpg";
+import { Link } from "react-router-dom";
 
 const Form = () => {
   return (
@@ -30,7 +31,7 @@ const Form = () => {
                 Washing Machine Services
               </h2>
               <button className="btn btn-sm rounded-full absolute w-4 h-4 top-5 right-5 border-blue-500 text-white text-lg font-extrabold bg-primary ">
-                ↪
+                <Link to="/wmBill">↪</Link>
               </button>
             </div>
           </div>
@@ -45,7 +46,7 @@ const Form = () => {
             <div class="card-body pt-12 pl-28">
               <h2 class="text-lg text-blue-900 font-bold">Oven Services</h2>
               <button className="btn btn-sm rounded-full absolute w-4 h-4 top-5 right-5 border-blue-500 text-white text-lg font-extrabold bg-primary ">
-                ↪
+                <Link to="/ovenBill">↪</Link>
               </button>
             </div>
           </div>
@@ -61,7 +62,7 @@ const Form = () => {
               <h2 class="text-lg text-blue-900 font-bold">TV Services</h2>
 
               <button className="btn btn-sm rounded-full absolute w-4 h-4 top-5 right-5 border-blue-500 text-white text-lg font-extrabold bg-primary ">
-                ↪
+                <Link to="/tvBill">↪</Link>
               </button>
             </div>
           </div>
@@ -78,7 +79,7 @@ const Form = () => {
                 Refrigerator Services
               </h2>
               <button className="btn btn-sm rounded-full absolute w-4 h-4 top-5 right-5 border-blue-500 text-white text-lg font-extrabold bg-primary ">
-                ↪
+                <Link to="/rfBill">↪</Link>
               </button>
             </div>
           </div>

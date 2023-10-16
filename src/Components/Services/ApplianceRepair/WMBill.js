@@ -467,7 +467,7 @@ const WMBill = () => {
                 <img
                   className="absolute top-[23px] left-[18px] w-[71px] h-[94px] object-cover"
                   alt=""
-                  src="/image-29@2x.png"
+                  src="/WM3.jfif"
                 />
               </div>
 
@@ -536,7 +536,7 @@ const WMBill = () => {
                 <img
                   className="absolute top-[calc(50%_-_49.5px)] left-[calc(50%_-_167px)] w-[70px] h-[93px] object-cover"
                   alt=""
-                  src="/rectangle-4245@2x.png"
+                  src="/WM1.jpg"
                 />
               </div>
               <div className="absolute top-[29px] left-[27px] w-[376px] h-[137px]">
@@ -604,7 +604,7 @@ const WMBill = () => {
                 <img
                   className="absolute top-[23px] left-[19px] w-[71px] h-[93px] object-cover"
                   alt=""
-                  src="/image-28@2x.png"
+                  src="/WM2.jpg"
                 />
               </div>
               <img
@@ -958,7 +958,7 @@ const WMBill = () => {
                 <img
                   className="absolute top-[23px] left-[18px] w-[71px] h-[94px] object-cover"
                   alt=""
-                  src="/image-29@2x.png"
+                  src="/WM3.jfif"
                 />
               </div>
               <div className="absolute top-[333px] left-[27px] w-[376px] h-[137px]">
@@ -1026,7 +1026,7 @@ const WMBill = () => {
                 <img
                   className="absolute top-[calc(50%_-_49.5px)] left-[calc(50%_-_167px)] w-[70px] h-[93px] object-cover"
                   alt=""
-                  src="/rectangle-4245@2x.png"
+                  src="/WM1.jpg"
                 />
               </div>
               <div className="absolute top-[29px] left-[27px] w-[376px] h-[137px]">
@@ -1094,7 +1094,7 @@ const WMBill = () => {
                 <img
                   className="absolute top-[23px] left-[19px] w-[71px] h-[93px] object-cover"
                   alt=""
-                  src="/image-28@2x.png"
+                  src="/WM2.jpg"
                 />
               </div>
               <img

@@ -466,7 +466,7 @@ const RFBill = () => {
                 <img
                   className="absolute top-[23px] left-[18px] w-[71px] h-[94px] object-cover"
                   alt=""
-                  src="/image-29@2x.png"
+                  src="/RF1.jpg"
                 />
               </div>
 
@@ -535,7 +535,7 @@ const RFBill = () => {
                 <img
                   className="absolute top-[calc(50%_-_49.5px)] left-[calc(50%_-_167px)] w-[70px] h-[93px] object-cover"
                   alt=""
-                  src="/rectangle-4245@2x.png"
+                  src="/RF3.png"
                 />
               </div>
               <div className="absolute top-[29px] left-[27px] w-[376px] h-[137px]">
@@ -603,7 +603,7 @@ const RFBill = () => {
                 <img
                   className="absolute top-[23px] left-[19px] w-[71px] h-[93px] object-cover"
                   alt=""
-                  src="/image-28@2x.png"
+                  src="/RF2.jpeg"
                 />
               </div>
               <img
@@ -954,7 +954,7 @@ const RFBill = () => {
                 <img
                   className="absolute top-[23px] left-[18px] w-[71px] h-[94px] object-cover"
                   alt=""
-                  src="/image-29@2x.png"
+                  src="/RF1.jpg"
                 />
               </div>
 
@@ -1023,7 +1023,7 @@ const RFBill = () => {
                 <img
                   className="absolute top-[calc(50%_-_49.5px)] left-[calc(50%_-_167px)] w-[70px] h-[93px] object-cover"
                   alt=""
-                  src="/rectangle-4245@2x.png"
+                  src="/RF3.png"
                 />
               </div>
               <div className="absolute top-[29px] left-[27px] w-[376px] h-[137px]">
@@ -1091,7 +1091,7 @@ const RFBill = () => {
                 <img
                   className="absolute top-[23px] left-[19px] w-[71px] h-[93px] object-cover"
                   alt=""
-                  src="/image-28@2x.png"
+                  src="/RF2.jpeg"
                 />
               </div>
               <img
