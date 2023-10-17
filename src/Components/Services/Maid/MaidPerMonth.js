@@ -28,6 +28,7 @@ const MaidPerMonth = ({
     const includesLocation =
       !selectedLocation ||
       maid.location.includes(selectedLocation.toLowerCase());
+      
     const includesAvailability =
       !selectedAvailability || maid.availability.includes(selectedAvailability);
 

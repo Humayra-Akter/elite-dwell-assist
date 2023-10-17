@@ -32,6 +32,7 @@ import RFBill from "./Components/Services/ApplianceRepair/RFBill";
 import WMBill from "./Components/Services/ApplianceRepair/WMBill";
 import OvenBill from "./Components/Services/ApplianceRepair/OvenBill";
 import DriverDashboard from "./Components/DriverDashboard/DriverDashboard";
+import Admin from "./Components/Shared/Admin";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -58,6 +59,7 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/service" element={<Service />} />
