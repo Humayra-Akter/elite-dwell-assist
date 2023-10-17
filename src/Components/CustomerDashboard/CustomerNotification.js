@@ -22,12 +22,12 @@ const CustomerNotification = () => {
   useEffect(() => {
     if (user) {
       const loggedInMaidEmail = user?.email;
-      console.log(user);
-      console.log(loggedInMaidEmail);
+      // console.log(user);
+      // console.log(loggedInMaidEmail);
       fetch(`http://localhost:5000/customerBooked/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("Fetched Data:", data);
+          // console.log("Fetched Data:", data);
           if (Array.isArray(data) && data.length > 0) {
             setNotifications(data);
             toast.success(
@@ -51,10 +51,35 @@ const CustomerNotification = () => {
     toast.success("Notification cleared successfully");
   };
 
+  const acceptRequest = (notificationId, maidEmail) => {
+    console.log("accepted", notificationId, maidEmail);
+
+    fetch(`/accept-request/${notificationId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ maidEmail }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          const updatedNotifications = notifications.filter(
+            (notification) => notification._id !== notificationId
+          );
+          setNotifications(updatedNotifications);
+        } else {
+          console.error("Failed to accept the request");
+        }
+      })
+      .catch((error) => {
+        console.error("Error accepting the request:", error);
+      });
+  };
+
   if (loading) {
     return <Loading />;
   }
-  console.log(notifications.maidName);
+  // console.log(notifications.maidName);
   if (error) {
     toast.error("Authentication error:", error);
     return <div>Error: {error.message}</div>;
@@ -84,8 +109,13 @@ const CustomerNotification = () => {
                 >
                   Clear Notifications
                 </button>
-                <button className="btn btn-sm rounded-full absolute w-1/5 top-11 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600">
-                  Send Confirmation
+                <button
+                  onClick={() =>
+                    acceptRequest(notification._id, notification.maidEmail)
+                  }
+                  className="btn btn-sm rounded-full absolute w-1/5 top-11 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
+                >
+                  Accept
                 </button>
               </div>
             </div>

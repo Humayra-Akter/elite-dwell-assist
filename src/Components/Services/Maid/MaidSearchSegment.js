@@ -22,7 +22,12 @@ const MaidSearchSegment = () => {
   };
 
   const handleAvailabilityChange = (e) => {
-    setSelectedAvailability(e.target.value);
+    const value = e.target.value;
+    if (e.target.checked) {
+      setSelectedAvailability(value);
+    } else {
+      setSelectedAvailability("");
+    }
   };
 
   return (
@@ -59,12 +64,30 @@ const MaidSearchSegment = () => {
             <p className="mt-20">Search by task salary</p>
             <input
               type="range"
-              min={0}
-              max={5000} // Set the max salary range as per your requirement
+              min={400}
+              max={2000}
+              step={100}
               value={selectedSalaryRange}
-              onChange={handleSalaryRangeChange}
+              onChange={(e) => {
+                // Define your allowed salary values
+                const allowedValues = [
+                  400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400,
+                  1500, 1600, 1700, 1800, 1900, 2000,
+                ];
+
+                // Find the nearest allowed value to the current value
+                const nearestValue = allowedValues.reduce((prev, curr) =>
+                  Math.abs(curr - e.target.value) <
+                  Math.abs(prev - e.target.value)
+                    ? curr
+                    : prev
+                );
+
+                setSelectedSalaryRange(nearestValue);
+              }}
               className="range range-primary"
             />
+
             <p className="mt-20 mb-3 text-md font-medium text-primary">
               Search by availability
             </p>
@@ -77,6 +100,7 @@ const MaidSearchSegment = () => {
                     type="checkbox"
                     id="shokal"
                     value="08.00 AM - 11.00 AM"
+                    onChange={handleAvailabilityChange}
                     className="form-checkbox h-6 w-6 text-primary"
                   />
                   <label
@@ -97,6 +121,7 @@ const MaidSearchSegment = () => {
                     type="checkbox"
                     id="dupur"
                     value="11.00 AM - 02.00 PM"
+                    onChange={handleAvailabilityChange}
                     className="form-checkbox h-6 w-6 text-primary"
                   />
                   <label
@@ -116,6 +141,7 @@ const MaidSearchSegment = () => {
                     type="checkbox"
                     id="bikal"
                     value="02.00 PM - 05.00 PM"
+                    onChange={handleAvailabilityChange}
                     className="form-checkbox h-6 w-6 text-primary"
                   />
                   <label
@@ -135,6 +161,7 @@ const MaidSearchSegment = () => {
                     type="checkbox"
                     id="raat"
                     value="05.00 PM - 08.00 PM"
+                    onChange={handleAvailabilityChange}
                     className="form-checkbox h-6 w-6 text-primary"
                   />
                   <label

@@ -17,7 +17,7 @@ const Form = () => {
             Appliance Repair
           </h1>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div data-aos="fade-right" className="grid grid-cols-4 gap-4">
           <div className="card card-side w-80 border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-blue-200 to-blue-50 hover:shadow-lg">
             <figure class="px-3 pt-3">
               <img

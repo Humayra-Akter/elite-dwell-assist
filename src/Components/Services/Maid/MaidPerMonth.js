@@ -25,13 +25,19 @@ const MaidPerMonth = ({
   const userRole = localStorage.getItem("userRole");
 
   const filteredMaids = maids.filter((maid) => {
-    const includesLocation = maid.location.includes(
-      selectedLocation.toLowerCase()
-    );
-    if (!selectedLocation) {
-      return maids;
-    }
-    return includesLocation;
+    const includesLocation =
+      !selectedLocation ||
+      maid.location.includes(selectedLocation.toLowerCase());
+    const includesAvailability =
+      !selectedAvailability || maid.availability.includes(selectedAvailability);
+
+    const includesSalary =
+      !selectedSalaryRange ||
+      maid.salary.some((salary) => salary === selectedSalaryRange);
+
+    console.log(includesSalary);
+
+    return includesLocation && includesAvailability && includesSalary;
   });
 
   return (

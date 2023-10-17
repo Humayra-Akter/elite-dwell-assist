@@ -3,11 +3,13 @@ import banner2 from "../../images/babysitter.jpg";
 import banner3 from "../../images/driver.jpg";
 import banner1 from "../../images/maid.jpg";
 import { Link } from "react-router-dom";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 const ServiceSegment = () => {
   return (
     <div className="pb-16 px-20">
-      <div className="grid grid-cols-4 gap-4">
+      <div data-aos="fade-left" className="grid grid-cols-4 gap-4">
         <div>
           <h1
             style={{ fontFamily: "arial" }}
