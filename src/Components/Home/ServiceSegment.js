@@ -9,7 +9,11 @@ AOS.init();
 const ServiceSegment = () => {
   return (
     <div className="pb-16 px-20">
-      <div data-aos="fade-left" className="grid grid-cols-4 gap-4">
+      <div
+        data-aos="fade-left"
+        data-aos-duration="2000"
+        className="grid grid-cols-4 gap-4"
+      >
         <div>
           <h1
             style={{ fontFamily: "arial" }}

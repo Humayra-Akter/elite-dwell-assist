@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import frwrd from "../../images/forward.png";
 import rewrd from "../../images/rewind.png";
+import ban1 from "../../images/notification.png";
+import ban2 from "../../images/job-search.png";
+import ban4 from "../../images/avatar.png";
 
 const CustomerDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -44,15 +47,17 @@ const CustomerDashboard = () => {
             aria-label="close sidebar"
             class="drawer-overlay"
           ></label>
-          <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <ul class="menu pl-4 pt-10 w-80 min-h-full bg-sky-50 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
               <Link
-                className="text-primary text-base font-bold hover:text-black"
+                className="text-primary mt-3 text-base font-bold hover:text-black"
                 to="/customerDashboard"
               >
-                <i class="fa fa-desktop"></i>
-                Customer Profile
+                <span className="flex gap-4">
+                  <img className="w-6" src={ban4} alt="" />
+                  Profile
+                </span>
               </Link>
             </li>
             <li>
@@ -60,7 +65,10 @@ const CustomerDashboard = () => {
                 className="text-primary mt-3 text-base font-bold hover:text-black"
                 to="/customerDashboard/customerNotification"
               >
-                <i class="fa fa-bell"></i>Customer Notification
+                <span className="flex gap-4">
+                  <img className="w-6" src={ban1} alt="" />
+                  Notification
+                </span>
               </Link>
             </li>
             <li>
@@ -68,8 +76,10 @@ const CustomerDashboard = () => {
                 className="text-primary mt-3 text-base font-bold hover:text-black"
                 to="/customerDashboard/createPostForMaid"
               >
-                <i class="fa fa-upload"></i>
-                Create Post For Home-service
+                <span className="flex gap-4">
+                  <img className="w-6" src={ban2} alt="" />
+                  Create Post For Home-service
+                </span>
               </Link>
             </li>
           </ul>

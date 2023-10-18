@@ -8,6 +8,7 @@ const CustomerNotification = () => {
   const [user, loading, error] = useAuthState(auth);
   const [notifications, setNotifications] = useState([]);
   const [bookingId, setBookingId] = useState("");
+  const [selectedMaids, setSelectedMaids] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:5000/customerBooked")
@@ -22,12 +23,9 @@ const CustomerNotification = () => {
   useEffect(() => {
     if (user) {
       const loggedInMaidEmail = user?.email;
-      // console.log(user);
-      // console.log(loggedInMaidEmail);
       fetch(`http://localhost:5000/customerBooked/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log("Fetched Data:", data);
           if (Array.isArray(data) && data.length > 0) {
             setNotifications(data);
             toast.success(
@@ -42,6 +40,20 @@ const CustomerNotification = () => {
         });
     }
   }, [user]);
+
+  const fetchMaidDetails = (maidEmail, notificationId) => {
+    fetch(`http://localhost:5000/maid/${maidEmail}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSelectedMaids((prevSelectedMaids) => ({
+          ...prevSelectedMaids,
+          [notificationId]: data,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching maid details:", error);
+      });
+  };
 
   const clearNotification = (notificationId) => {
     const updatedNotifications = notifications.filter(
@@ -76,10 +88,11 @@ const CustomerNotification = () => {
       });
   };
 
+  console.log(selectedMaids);
+
   if (loading) {
     return <Loading />;
   }
-  // console.log(notifications.maidName);
   if (error) {
     toast.error("Authentication error:", error);
     return <div>Error: {error.message}</div>;
@@ -97,25 +110,42 @@ const CustomerNotification = () => {
                     {notification?.maidName}
                   </span>
                 </h2>
-                <h2 className="text-md font-bold">
-                  Contact via Email:{" "}
-                  <span className="text-lg text-blue-900 font-bold">
-                    {notification.maidEmail}
-                  </span>
-                </h2>
+
+                {selectedMaids[notification._id] && (
+                  <div className="maid-details">
+                    <h2 className="text-md font-bold text-primary mb-3">
+                      Maid Details:
+                    </h2>{" "}
+                    <p className="text-sm pb-1 text-blue-900 font-bold">
+                      <span className="underline">Name:</span>{" "}
+                      {selectedMaids[notification._id].name}
+                    </p>
+                    <p className="text-sm pb-1 text-blue-900 font-bold">
+                      <span className="underline">Email:</span>
+                      {selectedMaids[notification._id].email}
+                    </p>
+                    <p className="text-sm pb-1 text-blue-900 font-bold">
+                      <span className="underline">Contact:</span>
+                      {selectedMaids[notification._id].contact}
+                    </p>
+                    {/* Display other maid details as needed */}
+                  </div>
+                )}
+
                 <button
                   onClick={() => clearNotification(notification._id)}
-                  className="btn btn-sm rounded-full absolute w-1/5 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600"
+                  className="btn btn-sm rounded-full absolute w-1/8 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600"
                 >
-                  Clear Notifications
+                  Clear Notification
                 </button>
+
                 <button
-                  onClick={() =>
-                    acceptRequest(notification._id, notification.maidEmail)
-                  }
-                  className="btn btn-sm rounded-full absolute w-1/5 top-11 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
+                  onClick={() => {
+                    fetchMaidDetails(notification.maidEmail, notification._id);
+                  }}
+                  className="btn btn-sm rounded-full absolute w-1/8 top-0 right-48 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
                 >
-                  Accept
+                  View Details
                 </button>
               </div>
             </div>
