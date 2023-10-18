@@ -4,6 +4,7 @@ import ServiceSegment from "./ServiceSegment";
 import Form from "./Form";
 import Footer from "../Shared/Footer";
 import banner4 from "../../images/background.gif";
+import ScrollToTop from "../Shared/ScrollToTop";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         backgroundSize: "cover",
       }}
     >
+      <ScrollToTop />
       <Banner></Banner>
       <ServiceSegment></ServiceSegment>
       <Form></Form>

@@ -167,7 +167,7 @@ const Navbar = ({ openAboutModal }) => {
             About
           </button>
 
-          {user ? (
+          {userRole ? (
             <button
               onClick={logout}
               className="text-white font-bold hover:text-black pr-7 "

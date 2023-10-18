@@ -6,21 +6,6 @@ import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
-// function calculateAge(dateOfBirth) {
-//   const dob = new Date(dateOfBirth);
-//   const currentDate = new Date();
-//   const age = currentDate.getFullYear() - dob.getFullYear();
-
-//   if (
-//     currentDate.getMonth() < dob.getMonth() ||
-//     (currentDate.getMonth() === dob.getMonth() &&
-//       currentDate.getDate() < dob.getDate())
-//   ) {
-//     age--;
-//   }
-
-//   return age;
-// }
 const BookingMaid = ({ bookMaid, user }) => {
   const {
     id,
@@ -42,10 +27,30 @@ const BookingMaid = ({ bookMaid, user }) => {
   const dispatch = useDispatch();
   const [notificationIdCounter, setNotificationIdCounter] = useState(1);
   const [gUser, loading, error] = useAuthState(auth);
-
+  const availabilityOptions = [
+    { label: "08.00 AM - 11.00 AM", value: "sokal" },
+    { label: "11.00 AM - 02.00 PM", value: "dupur" },
+    { label: "02.00 PM - 05.00 PM", value: "bikal" },
+    { label: "05.00 PM - 08.00 PM", value: "raat" },
+  ];
   // Function to close the success modal
   const closeSuccessModal = () => {
     setBookingSuccess(false);
+  };
+  const calculateAge = (dob) => {
+    const birthDate = new Date(dob);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+    // Adjust age if the birthday hasn't occurred yet this year
+    if (
+      currentDate.getMonth() < birthDate.getMonth() ||
+      (currentDate.getMonth() === birthDate.getMonth() &&
+        currentDate.getDate() < birthDate.getDate())
+    ) {
+      return age - 1;
+    }
+    return age;
   };
 
   const handleBooking = () => {
@@ -123,7 +128,13 @@ const BookingMaid = ({ bookMaid, user }) => {
                     <ul>
                       {availability?.map((daySlot, index) => (
                         <li key={index}>
-                          <strong>{daySlot}</strong>
+                          <strong>
+                            {
+                              availabilityOptions.find(
+                                (option) => option.value === daySlot
+                              )?.label
+                            }
+                          </strong>
                         </li>
                       ))}
                     </ul>
@@ -151,13 +162,18 @@ const BookingMaid = ({ bookMaid, user }) => {
                     <strong className="text-blue-800 underline">
                       Preferred Location:
                     </strong>
-
-                    {location ? location.join(", ") : "N/A"}
+                    {Array.isArray(location)
+                      ? location
+                          .map(
+                            (loc) =>
+                              loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                          )
+                          .join(", ")
+                      : location}
                   </p>
-
                   <p className="pt-2">
                     <strong className="text-blue-800 underline">Age:</strong>{" "}
-                    {dob}
+                    {calculateAge(dob)} years
                   </p>
                   <p className="pt-2">
                     <strong className="text-blue-800 underline">
@@ -165,18 +181,19 @@ const BookingMaid = ({ bookMaid, user }) => {
                     </strong>{" "}
                     {experience}
                   </p>
-                  <p className="pt-2">
+                  <p className="pt-2 flex">
                     <strong className="text-blue-800 underline">
                       Education :
                     </strong>{" "}
-                    {education}
+                    <p className="uppercase">{education}</p>
                   </p>
-                  <p className="pt-2">
+                  <p className="pt-2 flex">
                     <strong className="text-blue-800 underline">
                       Gender :
                     </strong>{" "}
-                    {gender}
-                  </p>
+                    <p className="capitalize"> {gender}</p>
+                  </p>{" "}
+                  
                 </div>
               </div>
               <div class="flex items-end justify-end">

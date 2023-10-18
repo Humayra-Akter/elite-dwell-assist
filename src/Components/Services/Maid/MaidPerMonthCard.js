@@ -34,8 +34,16 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-4 text-right text-black">
           <p>
-            <strong>Preferred Location:</strong>{" "}
-            {Array.isArray(location) ? location.join(", ") : location}
+            <strong className="text-blue-800 underline">
+              Preferred Location:
+            </strong>
+            {Array.isArray(location)
+              ? location
+                  .map(
+                    (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                  )
+                  .join(", ")
+              : location}
           </p>
           <p className="pt-2">
             <strong className="text-blue-800 underline">Availability:</strong>

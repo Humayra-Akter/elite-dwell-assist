@@ -24,40 +24,39 @@ const MaidPerMonth = ({
 
   const userRole = localStorage.getItem("userRole");
 
-  const filteredMaidsByLocation = maids.filter((maid) => {
+  const filteredMaids = maids.filter((maid) => {
     const includesLocation = maid.location.includes(
       selectedLocation.toLowerCase()
     );
     if (!selectedLocation) {
-      return true; // Keep the maid if no location is selected
+      return true;
     }
     return includesLocation;
   });
 
-  const filteredMaidsByTask = maids.filter((maid) => {
-    const includesTask = maid.task.includes(selectedTask.toLowerCase());
-    if (!selectedTask) {
-      return true; // Keep the maid if no task is selected
-    }
-    return includesTask;
-  });
-  const filteredMaidsByAvailability = maids.filter((maid) => {
-    const includesAvailability = maid.task.includes(
-      selectedAvailability.toLowerCase()
-    );
-    if (!selectedAvailability) {
-      return true; // Keep the maid if no task is selected
-    }
-    return includesAvailability;
-  });
+  // const filteredMaidsByTask = maids.filter((maid) => {
+  //   const includesTask = maid.task.includes(selectedTask.toLowerCase());
+  //   if (!selectedTask) {
+  //     return true;
+  //   }
+  //   return includesTask;
+  // });
+  // const filteredMaidsByAvailability = maids.filter((maid) => {
+  //   const includesAvailability =
+  //     maid.availability.includes(selectedAvailability);
+  //   if (!selectedAvailability) {
+  //     return true;
+  //   }
+  //   return includesAvailability;
+  // });
 
-  const filteredMaids = [
-    ...new Set([
-      ...filteredMaidsByLocation,
-      ...filteredMaidsByTask,
-      ...filteredMaidsByAvailability,
-    ]),
-  ];
+  // const filteredMaids = [
+  //   ...new Set([
+  //     ...filteredMaidsByLocation,
+  //     ...filteredMaidsByTask,
+  //     ...filteredMaidsByAvailability,
+  //   ]),
+  // ];
 
   return (
     <div>
