@@ -7,7 +7,7 @@ import auth from "../../../firebase.init";
 
 const MaidPerMonth = ({
   selectedLocation,
-  selectedSalaryRange,
+  selectedTask,
   selectedAvailability,
 }) => {
   const [maids, setMaids] = useState([]);
@@ -24,22 +24,40 @@ const MaidPerMonth = ({
 
   const userRole = localStorage.getItem("userRole");
 
-  const filteredMaids = maids.filter((maid) => {
-    const includesLocation =
-      !selectedLocation ||
-      maid.location.includes(selectedLocation.toLowerCase());
-      
-    const includesAvailability =
-      !selectedAvailability || maid.availability.includes(selectedAvailability);
-
-    const includesSalary =
-      !selectedSalaryRange ||
-      maid.salary.some((salary) => salary === selectedSalaryRange);
-
-    console.log(includesSalary);
-
-    return includesLocation && includesAvailability && includesSalary;
+  const filteredMaidsByLocation = maids.filter((maid) => {
+    const includesLocation = maid.location.includes(
+      selectedLocation.toLowerCase()
+    );
+    if (!selectedLocation) {
+      return true; // Keep the maid if no location is selected
+    }
+    return includesLocation;
   });
+
+  const filteredMaidsByTask = maids.filter((maid) => {
+    const includesTask = maid.task.includes(selectedTask.toLowerCase());
+    if (!selectedTask) {
+      return true; // Keep the maid if no task is selected
+    }
+    return includesTask;
+  });
+  const filteredMaidsByAvailability = maids.filter((maid) => {
+    const includesAvailability = maid.task.includes(
+      selectedAvailability.toLowerCase()
+    );
+    if (!selectedAvailability) {
+      return true; // Keep the maid if no task is selected
+    }
+    return includesAvailability;
+  });
+
+  const filteredMaids = [
+    ...new Set([
+      ...filteredMaidsByLocation,
+      ...filteredMaidsByTask,
+      ...filteredMaidsByAvailability,
+    ]),
+  ];
 
   return (
     <div>

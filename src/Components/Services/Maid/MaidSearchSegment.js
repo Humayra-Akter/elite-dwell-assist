@@ -4,18 +4,18 @@ import MaidPerMonth from "./MaidPerMonth";
 
 const MaidSearchSegment = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedSalaryRange, setSelectedSalaryRange] = useState(0);
+  const [selectedTask, setSelectedTask] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState("");
 
   const handleLocationChange = (e) => {
-    setSelectedAvailability(e.target.value);
-  };
-  const handleAvailabilityChange = (e) => {
     setSelectedLocation(e.target.value);
   };
+  const handleAvailabilityChange = (e) => {
+    setSelectedAvailability(e.target.value);
+  };
 
-  const handleSalaryRangeChange = (e) => {
-    setSelectedSalaryRange(e.target.value);
+  const handleTaskChange = (e) => {
+    setSelectedTask(e.target.value);
   };
 
   return (
@@ -25,7 +25,7 @@ const MaidSearchSegment = () => {
         <div class="drawer-content flex flex-col items-center justify-center">
           <MaidPerMonth
             selectedLocation={selectedLocation}
-            selectedSalaryRange={selectedSalaryRange}
+            selectedTask={selectedTask}
             selectedAvailability={selectedAvailability}
           />
         </div>
@@ -51,43 +51,30 @@ const MaidSearchSegment = () => {
 
             <p className="mt-20"> Search by availability</p>
             <select
-              value={selectedLocation}
+              value={selectedAvailability}
               onChange={handleAvailabilityChange}
               className="select select-bordered select-primary"
             >
               <option value="">Select Availability</option>
-              <option value="08.00 AM-11.00 AM"> 08.00 AM - 11.00 AM</option>
-              <option value="11.00 AM-02.00 PM">11.00 AM - 02.00 PM</option>
-              <option value="02.00 PM-05.00 PM">02.00 PM - 05.00 PM</option>
-              <option value="05.00 PM-08.00 PM"> 05.00 PM - 08.00 PM</option>
+              <option value="sokal"> 08.00 AM - 11.00 AM</option>
+              <option value="dupur">11.00 AM - 02.00 PM</option>
+              <option value="bikal">02.00 PM - 05.00 PM</option>
+              <option value="raat"> 05.00 PM - 08.00 PM</option>
             </select>
 
-            <p className="mt-20">Search by task salary</p>
-            <input
-              type="range"
-              min={400}
-              max={2000}
-              step={100}
-              value={selectedSalaryRange}
-              onChange={(e) => {
-                // Define your allowed salary values
-                const allowedValues = [
-                  400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400,
-                  1500, 1600, 1700, 1800, 1900, 2000,
-                ];
-
-                // Find the nearest allowed value to the current value
-                const nearestValue = allowedValues.reduce((prev, curr) =>
-                  Math.abs(curr - e.target.value) <
-                  Math.abs(prev - e.target.value)
-                    ? curr
-                    : prev
-                );
-
-                setSelectedSalaryRange(nearestValue);
-              }}
-              className="range range-primary"
-            />
+            <p className="mt-20"> Search by task</p>
+            <select
+              value={selectedTask}
+              onChange={handleTaskChange}
+              className="select select-bordered select-primary"
+            >
+              <option value="">Select Task</option>
+              <option value="mopping">Mopping</option>
+              <option value="cooking">Cooking</option>
+              <option value="cloth_washing">Cloth Washing</option>
+              <option value="sweeping">Sweeping</option>
+              <option value="dish_washing">Dish Washing</option>
+            </select>
           </ul>
         </div>
       </div>

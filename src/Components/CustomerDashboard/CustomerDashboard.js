@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import frwrd from "../../images/forward.png";
+import rewrd from "../../images/rewind.png";
 
 const CustomerDashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div>
-      <div class="drawer lg:drawer-open">
+      <div className={`drawer ${isSidebarOpen ? "lg:drawer-open" : ""}`}>
         <input id="customer-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content p-11">
           <Outlet />
@@ -14,6 +22,21 @@ const CustomerDashboard = () => {
           >
             Open drawer
           </label>
+          {isSidebarOpen ? (
+            <button
+              className="btn absolute rounded-full top-2 left-2 z-10 btn-secondary btn-sm"
+              onClick={toggleSidebar}
+            >
+              <img className="w-4" src={rewrd} alt="" />
+            </button>
+          ) : (
+            <button
+              className="btn absolute top-0 rounded-full left-0 btn-secondary btn-sm"
+              onClick={toggleSidebar}
+            >
+              <img className="w-4" src={frwrd} alt="" />
+            </button>
+          )}
         </div>
         <div class="drawer-side">
           <label

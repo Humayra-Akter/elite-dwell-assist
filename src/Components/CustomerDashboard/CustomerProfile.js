@@ -23,48 +23,41 @@ const CustomerProfile = () => {
   }, [user]);
 
   return (
-    <div>
-      {" "}
-      <div className="bg-white p-4 shadow rounded-lg">
-        <div class="text-center">
-          <p class="text-2xl uppercase font-semibold">
-            {loggedUser?.name}
-            <span class="font-weight-light">, 27</span>
-          </p>
-          <div class="h5 font-weight-300">
-            <i class="fa fa-home mr-2"></i>
-            {loggedUser?.address}
-          </div>
-        </div>
+    <div className="bg-white p-4 shadow rounded-lg">
+      <div className="text-center">
+        <h2 className="text-3xl text-primary font-bold">{loggedUser?.name}</h2>
+      </div>
 
-        <hr className="my-4" />
-        <div>
-          <h3 className="text-lg text-primary font-semibold">
-            Profile Details
-          </h3>
-          <p className="font-medium mt-2">
-            Gender{" "}
-            <span className="ml-20 font-bold capitalize">
+      <hr className="my-4" />
+
+      <div>
+        <h3 className="text-2xl text-primary font-semibold">Profile Details</h3>
+        <ul className="mt-4">
+          <li className="mb-2">
+            <span className="text-lg font-medium text-primary">Gender:</span>
+            <span className="ml-4 font-bold capitalize">
               {loggedUser?.gender}
-            </span>{" "}
-          </p>
-          <p className="font-medium mt-2">
-            Date of Birth{" "}
-            <span className="ml-10 font-bold">{loggedUser?.dob}</span>{" "}
-          </p>{" "}
-          <p className="font-medium mt-2">
-            Address
-            <span className="ml-20 font-bold">{loggedUser?.address}</span>{" "}
-          </p>{" "}
-          <p className="font-medium mt-2">
-            Email
-            <span className="ml-24 font-bold">{loggedUser?.email}</span>{" "}
-          </p>
-          <p className="font-medium mt-2">
-            Contact
-            <span className="ml-20 font-bold">{loggedUser?.contact}</span>{" "}
-          </p>{" "}
-        </div>
+            </span>
+          </li>
+          <li className="mb-2">
+            <span className="text-lg font-medium text-primary">
+              Date of Birth:
+            </span>
+            <span className="ml-4 font-bold">{loggedUser?.dob}</span>
+          </li>
+          <li className="mb-2">
+            <span className="text-lg font-medium text-primary">Address:</span>
+            <span className="ml-4 font-bold">{loggedUser?.address}</span>
+          </li>
+          <li className="mb-2">
+            <span className="text-lg font-medium text-primary">Email:</span>
+            <span className="ml-4 font-bold">{loggedUser?.email}</span>
+          </li>
+          <li className="mb-2">
+            <span className="text-lg font-medium text-primary">Contact:</span>
+            <span className="ml-4 font-bold">{loggedUser?.contact}</span>
+          </li>
+        </ul>
       </div>
     </div>
   );

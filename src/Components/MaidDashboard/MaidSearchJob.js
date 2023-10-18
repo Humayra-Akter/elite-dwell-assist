@@ -5,9 +5,8 @@ import auth from "../../firebase.init";
 
 const MaidSearchJob = () => {
   const [dayBookings, setDayBookings] = useState([]);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
   const [user] = useAuthState(auth);
-  const [bookedOptions, setBookedOptions] = useState([]);
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/maidSearchPost")
@@ -18,28 +17,31 @@ const MaidSearchJob = () => {
   }, []);
 
   const handleBooking = (booking) => {
-    if (!bookingSuccess) {
-      setBookingSuccess(true);
+    if (!booking.bookingSuccess) {
+      const updatedBooking = {
+        ...booking,
+        bookingSuccess: true,
+      };
+
       const bookingData = {
         maidName: user?.displayName,
         maidEmail: user?.email,
         customerEmail: booking.userEmail,
-        bookingInfo: booking,
+        bookingInfo: updatedBooking,
       };
-      console.log(bookingData);
-
+      document.getElementById(`button-${booking._id}`).disabled = true;
       fetch("http://localhost:5000/customerBooked", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
         },
         body: JSON.stringify(bookingData),
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data.message === "Booking created successfully") {
-            toast.success(`Request sent to${bookingData.name}`);
-            setBookedOptions([...bookedOptions, booking._id]);
+          if (data) {
+            toast.success(`Request sent to ${booking.userName}`);
+            setSelectedJobId(booking);
           }
         })
         .catch((error) => {
@@ -47,6 +49,10 @@ const MaidSearchJob = () => {
         });
     }
   };
+
+  const job = dayBookings.includes(
+    (booking) => booking[0]?._id === selectedJobId?._id
+  );
 
   return (
     <div>
@@ -67,13 +73,12 @@ const MaidSearchJob = () => {
                 </span>
               </p>{" "}
               <button
+                id={`button-${booking._id}`}
                 onClick={() => handleBooking(booking)}
-                className={`  btn btn-sm rounded-full absolute w-1/8 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600  w-1/4 btn-primary ${
-                  bookingSuccess ? "disabled" : ""
-                }`}
-                disabled={bookingSuccess}
+                className={`btn btn-sm rounded-full absolute w-1/8 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600 w-1/4 btn-primary`}
+                disabled={selectedJobId === booking._id}
               >
-                {bookingSuccess ? "Request sent" : "Interested"}
+                {selectedJobId === booking._id ? "Request Sent" : "Interested"}
               </button>
             </div>
             <div className="card-body">

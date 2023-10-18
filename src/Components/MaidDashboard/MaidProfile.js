@@ -5,7 +5,12 @@ import auth from "../../firebase.init";
 const MaidProfile = () => {
   const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState([]);
-
+  const availabilityOptions = [
+    { label: "08.00 AM - 11.00 AM", value: "sokal" },
+    { label: "11.00 AM - 02.00 PM", value: "dupur" },
+    { label: "02.00 PM - 05.00 PM", value: "bikal" },
+    { label: "05.00 PM - 08.00 PM", value: "raat" },
+  ];
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:5000/maid?email=${user.email}`)
@@ -88,7 +93,13 @@ const MaidProfile = () => {
               <ul>
                 {loggedUser?.availability?.map((daySlot, index) => (
                   <li key={index}>
-                    <strong>{daySlot}</strong>
+                    <strong>
+                      {
+                        availabilityOptions.find(
+                          (option) => option.value === daySlot
+                        )?.label
+                      }
+                    </strong>
                   </li>
                 ))}
               </ul>

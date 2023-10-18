@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { MultiSelect } from "react-multi-select-component";
 import bengaliLabels from "../../bengaliText";
 import { toast } from "react-toastify";
-import Modal from "react-modal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import {
   useCreateUserWithEmailAndPassword,
@@ -33,7 +34,7 @@ const MaidRegistrationForm = () => {
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [selectedDate, setSelectedDate] = React.useState(null);
   const openSuccessModal = () => {
     setIsModalOpen(true);
   };
@@ -102,10 +103,10 @@ const MaidRegistrationForm = () => {
     { label: "Other", value: "other" },
   ];
   const availabilityOptions = [
-    { label: "08.00 AM - 11.00 AM", value: "08.00 AM - 11.00 AM" },
-    { label: "11.00 AM - 02.00 PM", value: "11.00 AM - 02.00 PM" },
-    { label: "02.00 PM - 05.00 PM", value: "02.00 PM - 05.00 PM" },
-    { label: "05.00 PM - 08.00 PM", value: "05.00 PM - 08.00 PM" },
+    { label: "08.00 AM - 11.00 AM", value: "sokal" },
+    { label: "11.00 AM - 02.00 PM", value: "dupur" },
+    { label: "02.00 PM - 05.00 PM", value: "bikal" },
+    { label: "05.00 PM - 08.00 PM", value: "raat" },
   ];
   const experienceOptions = [
     { value: 1, label: "1 year" },
@@ -133,14 +134,24 @@ const MaidRegistrationForm = () => {
     sweeping: [500, 600, 550],
     dish_washing: [1500, 1600, 1550],
   };
+
   const handleAddMaid = async (data) => {
+    const formattedDob = selectedDate
+      ? `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${selectedDate
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`
+      : "";
+
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({
       displayName: data.name,
       address: data.address,
       contact: data.contact,
       password: data.password,
-      dob: data.dob,
+      dob: formattedDob,
     });
     const image = data.image[0];
     const formData = new FormData();
@@ -168,7 +179,7 @@ const MaidRegistrationForm = () => {
             availability: selectedAvailability.map((avail) => avail.value),
             location: selectedLocation.map((loc) => loc.value),
             nid: data.nid,
-            dob: data.dob,
+            dob: formattedDob,
             password: data.password,
             task: selectedExpertise.map((expertise) => expertise.value),
             salary: selectedExpertise.map(
@@ -562,36 +573,14 @@ const MaidRegistrationForm = () => {
                     <span className="label-text text-blue-700 font-bold text-md">
                       Date of Birth/{bengaliLabels.dob}
                     </span>
-                  </label>{" "}
-                  <input
-                    type="text"
-                    placeholder="yyyy--mm-dd"
-                    name="dob"
-                    className="input input-sm input-bordered w-full "
-                    {...register("dob", {
-                      required: {
-                        value: true,
-                        message: "DOB is required",
-                      },
-                      pattern: {
-                        value:
-                          /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
-                        message: "Follow yyyy--mm-dd format",
-                      },
-                    })}
-                  />
-                  <label>
-                    {errors.dob?.type === "required" && (
-                      <span className="text-red-500 text-xs mt-1">
-                        {errors.dob.message}
-                      </span>
-                    )}
-                    {errors.dob?.type === "pattern" && (
-                      <span className="text-red-500 text-xs mt-1">
-                        {errors.dob.message}
-                      </span>
-                    )}
                   </label>
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    className="input input-sm input-bordered w-full"
+                    placeholderText="yyyy-MM-dd"
+                  />
                 </div>
               </div>
               {/* Image upload field */}

@@ -6,21 +6,21 @@ import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
-function calculateAge(dateOfBirth) {
-  const dob = new Date(dateOfBirth);
-  const currentDate = new Date();
-  const age = currentDate.getFullYear() - dob.getFullYear();
+// function calculateAge(dateOfBirth) {
+//   const dob = new Date(dateOfBirth);
+//   const currentDate = new Date();
+//   const age = currentDate.getFullYear() - dob.getFullYear();
 
-  if (
-    currentDate.getMonth() < dob.getMonth() ||
-    (currentDate.getMonth() === dob.getMonth() &&
-      currentDate.getDate() < dob.getDate())
-  ) {
-    age--;
-  }
+//   if (
+//     currentDate.getMonth() < dob.getMonth() ||
+//     (currentDate.getMonth() === dob.getMonth() &&
+//       currentDate.getDate() < dob.getDate())
+//   ) {
+//     age--;
+//   }
 
-  return age;
-}
+//   return age;
+// }
 const BookingMaid = ({ bookMaid, user }) => {
   const {
     id,
@@ -89,7 +89,7 @@ const BookingMaid = ({ bookMaid, user }) => {
     }
   };
 
-  const age = calculateAge(dob);
+  // const age = calculateAge(dob);
 
   return (
     <div className=" bg-transparent">
@@ -154,23 +154,10 @@ const BookingMaid = ({ bookMaid, user }) => {
 
                     {location ? location.join(", ") : "N/A"}
                   </p>
-                  <p className="pt-2">
-                    <strong className="text-blue-800 underline">Email:</strong>{" "}
-                    {email}
-                  </p>
-                  <p className="pt-2">
-                    <strong className="text-blue-800 underline">Phone:</strong>{" "}
-                    {phone}
-                  </p>
-                  <p className="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Address:
-                    </strong>{" "}
-                    {address}
-                  </p>
+
                   <p className="pt-2">
                     <strong className="text-blue-800 underline">Age:</strong>{" "}
-                    {age}
+                    {dob}
                   </p>
                   <p className="pt-2">
                     <strong className="text-blue-800 underline">
