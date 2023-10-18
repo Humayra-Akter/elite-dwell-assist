@@ -6,7 +6,12 @@ import { Link } from "react-router-dom";
 const MaidPerMonthCard = ({ maid, setBookMaid }) => {
   const { img, name, task, location, gender, availability, salary } = maid;
   const [bookedMaids, setBookedMaids] = useState([]);
-
+  const availabilityOptions = [
+    { label: "08.00 AM - 11.00 AM", value: "sokal" },
+    { label: "11.00 AM - 02.00 PM", value: "dupur" },
+    { label: "02.00 PM - 05.00 PM", value: "bikal" },
+    { label: "05.00 PM - 08.00 PM", value: "raat" },
+  ];
   const [user, loading, error] = useAuthState(auth);
 
   const handleKnowMoreClick = () => {
@@ -37,7 +42,13 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             <ul>
               {availability?.map((daySlot, index) => (
                 <li key={index}>
-                  <strong>{daySlot}</strong>
+                  <strong>
+                    {
+                      availabilityOptions.find(
+                        (option) => option.value === daySlot
+                      )?.label
+                    }
+                  </strong>
                 </li>
               ))}
             </ul>

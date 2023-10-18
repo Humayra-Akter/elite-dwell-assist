@@ -33,6 +33,7 @@ import WMBill from "./Components/Services/ApplianceRepair/WMBill";
 import OvenBill from "./Components/Services/ApplianceRepair/OvenBill";
 import DriverDashboard from "./Components/DriverDashboard/DriverDashboard";
 import Admin from "./Components/Shared/Admin";
+import CustomerInformation from "./Components/AdminDashboard/CustomerInformation";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -75,7 +76,8 @@ function App() {
             element={<AdminMaidPerDayBookings />}
           ></Route>
           <Route path="adminCreate" element={<AdminCreate />}></Route>
-        </Route>{" "}
+          <Route path="customer" element={<CustomerInformation />}></Route>
+        </Route>
         <Route path="/driverDashboard" element={<DriverDashboard />}></Route>
         <Route path="/maidDashboard" element={<MaidDashboard />}>
           <Route index element={<MaidProfile />}></Route>

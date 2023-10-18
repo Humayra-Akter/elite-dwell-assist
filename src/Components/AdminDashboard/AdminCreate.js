@@ -118,14 +118,14 @@ const AdminCreate = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-3/5 px-4">
-        <div className="card bg-transparent border-4 shadow-md">
+    <div className="lg:flex">
+      <div className="lg:w-4/5 px-4 sm:my-16">
+        <div className="card bg-transparent border-2 shadow-md">
           <div className="card bg-transparent border-4 shadow-md">
             <div className="card-body">
               <h1
                 style={{ fontFamily: "arial" }}
-                className="text-left text-2xl text-blue-700 font-extrabold"
+                className="text-center text-2xl text-blue-700 font-extrabold"
               >
                 ADD <strong>ADMIN</strong>
               </h1>
@@ -289,16 +289,16 @@ const AdminCreate = () => {
           </div>
         </div>
       </div>
-      <div className="w-2/5 bg-gray-100 p-4">
-        <h2 className="text-lg text-blue-700 font-bold">Existing Admins</h2>
+      <div className="lg:w-2/5 bg-base-200 shadow-lg h-screen p-4">
+        <h2 className="text-lg text-primary text-center font-bold">
+          Existing Admins
+        </h2>
         <table className="table-auto mt-4 mx-auto">
           <tbody>
             {admins.map((admin) => (
               <tr key={admin._id}>
                 <td className="border px-4 py-2">
-                  <span className="uppercase font-medium font-semibold">
-                    {admin.name}
-                  </span>
+                  <span className="uppercase font-semibold">{admin.name}</span>
                   <br /> {admin.email}
                 </td>
                 <td className="border px-4 py-2">
