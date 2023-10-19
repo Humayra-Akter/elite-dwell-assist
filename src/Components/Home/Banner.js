@@ -20,8 +20,8 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="container w-full px-16 py-16 gap-14 flex-col items-center justify-center grid grid-cols-2">
-      <div className="carousel h-96 border-blue-400 border-2 rounded-3xl relative">
+    <div className="container w-full px-16 py-16 gap-14 flex-col items-center justify-center grid lg:grid-cols-2">
+      <div className="carousel h-96 border-blue-400 rounded-3xl relative">
         {images.map((image, index) => (
           <div
             key={index}
@@ -29,7 +29,7 @@ const Banner = () => {
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            <img src={image} alt="" className="w-full h-auto" />
+            <img src={image} alt="" className="w-full lg:h-auto sm:max-h-80 " />
           </div>
         ))}
       </div>

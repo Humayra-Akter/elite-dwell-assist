@@ -76,7 +76,7 @@ const CreatePostForMaid = () => {
         Discover Home Services Tailored to You
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-3 pt-5 gap-3">
+        <div className="grid lg:grid-cols-3 pt-5 gap-3">
           {/* Email */}
           <div className="form-control mt-3 w-full">
             <label className="text-primary font-bold text-md">Email</label>
@@ -193,7 +193,7 @@ const CreatePostForMaid = () => {
             </label>
           </div>
         </div>
-        <div className="grid grid-cols-3 pt-5 gap-3">
+        <div className="grid lg:grid-cols-3 pt-5 gap-3">
           {/* Time Slot */}
           <div className="form-control mt-3  w-full">
             <label className="text-primary font-bold text-md">Time Slot</label>

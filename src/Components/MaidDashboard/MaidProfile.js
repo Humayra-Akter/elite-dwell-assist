@@ -67,7 +67,7 @@ const MaidProfile = () => {
           </p>
         </div>
         <hr className="my-4" />
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid lg:grid-cols-3 md:grid-cols-3 gap-5">
           <div className="col-span-2">
             <strong className="text-blue-800 underline">Skills</strong>
 

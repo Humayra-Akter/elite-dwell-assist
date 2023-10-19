@@ -68,14 +68,14 @@ const MaidNotifications = () => {
       {notifications.length > 0 ? (
         notifications.map((notification) => (
           <div key={notification._id} className="my-4">
-            <div className="card w-2/3 my-4 border-2 shadow-xl transform transition-transform hover:scale-95 hover:bg-gradient-to-t from-blue-100 to-blue-50 hover:shadow-lg">
+            <div className="card lg:w-2/3 my-4 border-2 shadow-xl transform transition-transform hover:scale-95 hover:bg-gradient-to-t from-blue-100 to-blue-50 hover:shadow-lg">
               <div className="card-body">
-                <h2 className="text-md font-bold">
-                  Booking Notifications for you:
+                {/* <h2 className="text-md font-bold">
+                  Hello
                   <span className="text-lg text-blue-900 font-bold">
                     {user?.displayName}
                   </span>
-                </h2>
+                </h2> */}
                 <h2 className="text-md font-bold">
                   Customer Email:{" "}
                   <span className="text-lg text-blue-900 font-bold">
@@ -84,11 +84,11 @@ const MaidNotifications = () => {
                 </h2>
                 <button
                   onClick={() => clearNotification(notification._id)}
-                  className="btn btn-sm rounded-full absolute w-1/5 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600"
+                  className="btn btn-sm rounded-full absolute lg:w-1/5 top-0 right-5 my-3 text-xs border-blue-500 text-white font-bold bg-red-600"
                 >
                   Clear Notifications
                 </button>
-                <button className="btn btn-sm rounded-full absolute w-1/5 top-11 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600">
+                <button className="btn btn-sm rounded-full absolute lg:w-1/5 top-9 right-5 my-3 text-xs border-blue-500 text-white font-bold bg-green-600">
                   Send Confirmation
                 </button>
               </div>

@@ -131,7 +131,7 @@ const AdminCreate = () => {
               </h1>
 
               <form onSubmit={handleSubmit(handleAddAdmin)}>
-                <div className="grid grid-cols-2 pt-5 gap-3">
+                <div className="grid lg:grid-cols-2 pt-5 gap-3">
                   {/* name field */}
                   <div className="form-control w-full">
                     <label className="label">
@@ -197,7 +197,7 @@ const AdminCreate = () => {
                     </label>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 pt-5 gap-3">
+                <div className="grid lg:grid-cols-2 pt-5 gap-3">
                   {/* Gender field */}
                   <div className="form-control w-full">
                     <label className="label">

@@ -12,7 +12,7 @@ const ServiceSegment = () => {
       <div
         data-aos="fade-left"
         data-aos-duration="2000"
-        className="grid grid-cols-4 gap-4"
+        className="grid lg:grid-cols-4 md:grid-cols-2 lg:gap-4 md:gap-6"
       >
         <div>
           <h1

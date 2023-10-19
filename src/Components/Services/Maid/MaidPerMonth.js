@@ -4,6 +4,7 @@ import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import ScrollToTop from '../../Shared/ScrollToTop'
 
 const MaidPerMonth = ({
   selectedLocation,
@@ -73,7 +74,8 @@ const MaidPerMonth = ({
             You do not have permission to access this page.
           </p>
         )}
-        <div className="grid grid-cols-3 gap-5 p-11">
+        <ScrollToTop />
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 p-11">
           {filteredMaids.map((maid) => (
             <MaidPerMonthCard
               key={maid.id}

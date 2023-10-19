@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import MaidPerMonth from "./MaidPerMonth";
+import { Outlet } from "react-router-dom";
 
 const MaidSearchSegment = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -21,16 +22,24 @@ const MaidSearchSegment = () => {
   return (
     <div>
       <div class="drawer lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <input id="maid-month-drawer" type="checkbox" class="drawer-toggle" />
+
         <div class="drawer-content flex flex-col items-center justify-center">
+          <label
+            htmlFor="maid-month-drawer"
+            class="btn btn-primary btn-sm absolute top-0 right-0 mt-2  drawer-button lg:hidden"
+          >
+            Open Search Option
+          </label>
           <MaidPerMonth
             selectedLocation={selectedLocation}
             selectedTask={selectedTask}
             selectedAvailability={selectedAvailability}
-          />
+          />{" "}
+          <Outlet />
         </div>
         <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <label htmlFor="maid-month-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-slate-100 text-base-content">
             <p className="mt-20">Search by location</p>
             <select

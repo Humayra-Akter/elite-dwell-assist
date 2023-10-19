@@ -22,7 +22,7 @@ const AdminDashboard = () => {
           <Outlet />
           <label
             for="admin-drawer"
-            class="btn btn-primary drawer-button lg:hidden"
+            class="btn btn-sm absolute top-0 right-0 mt-2 drawer-button lg:hidden"
           >
             Open drawer
           </label>{" "}

@@ -237,7 +237,7 @@ const MaidRegistrationForm = () => {
             <p className="text-center ">{bengaliLabels.maid}</p>
 
             <form onSubmit={handleSubmit(handleAddMaid)}>
-              <div className="grid grid-cols-2 pt-5 gap-3">
+              <div className="grid lg:grid-cols-2 pt-5 gap-3">
                 {/* name field */}
                 <div className="form-control  w-full">
                   <label className="label">
@@ -303,7 +303,7 @@ const MaidRegistrationForm = () => {
                   </label>
                 </div>
               </div>
-              <div className="grid grid-cols-2 pt-5 gap-3">
+              <div className="grid lg:grid-cols-2 pt-5 gap-3">
                 {/* address */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -387,7 +387,7 @@ const MaidRegistrationForm = () => {
                   </label>
                 </div>
               </div>
-              <div className="grid grid-cols-3 pt-5 gap-3">
+              <div className="grid lg:grid-cols-3 pt-5 gap-3">
                 {/* Gender field */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -492,7 +492,7 @@ const MaidRegistrationForm = () => {
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-2 pt-5 gap-3">
+              <div className="grid lg:grid-cols-2 pt-5 gap-3">
                 {/* availability */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -530,7 +530,7 @@ const MaidRegistrationForm = () => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 pt-5 gap-3">
+              <div className="grid lg:grid-cols-2 pt-5 gap-3">
                 {/* nid_no */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -611,7 +611,7 @@ const MaidRegistrationForm = () => {
                   )}
                 </label>
               </div>
-              <div className="grid grid-cols-2 pt-5 gap-3">
+              <div className="grid lg:grid-cols-2 pt-5 gap-3">
                 {/* Password field */}
                 <div className="form-control w-full">
                   <label className="label">

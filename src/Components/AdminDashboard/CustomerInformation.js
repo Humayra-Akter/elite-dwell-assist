@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CustomerRow from "./CustomerRow";
+import up from "../../images/up-arrow-svgrepo-com.svg";
+import down from "../../images/down-arrow-svgrepo-com.svg";
 
 const CustomerInformation = () => {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
     fetch("http://localhost:5000/customer")
@@ -30,10 +34,48 @@ const CustomerInformation = () => {
       setPage(page - 1);
     }
   };
+
+  const handleSort = (columnName) => {
+    if (sortColumn === columnName) {
+      // Toggle the sort direction
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // Set the new column for sorting
+      setSortColumn(columnName);
+      setSortDirection("asc");
+    }
+  };
+
+  const sortedUsersToDisplay = [...users.slice(startIndex, endIndex)].sort(
+    (a, b) => {
+      const valueA = a[sortColumn] || "";
+      const valueB = b[sortColumn] || "";
+
+      if (sortDirection === "asc") {
+        return valueA.localeCompare(valueB);
+      } else {
+        return valueB.localeCompare(valueA);
+      }
+    }
+  );
+
   const handleItemsPerPageChange = (event) => {
     const selectedItemsPerPage = parseInt(event.target.value, 10);
     setItemsPerPage(selectedItemsPerPage);
     setPage(1); // Reset to the first page when changing items per page
+  };
+
+  const renderSortArrow = (columnName) => {
+    return (
+      <span>
+        {sortColumn === columnName && sortDirection === "asc" && (
+          <img className="w-3" src={up} alt="Ascending" />
+        )}
+        {sortColumn === columnName && sortDirection === "desc" && (
+          <img className="w-3" src={down} alt="Descending" />
+        )}
+      </span>
+    );
   };
 
   const handleSearch = () => {
@@ -92,36 +134,67 @@ const CustomerInformation = () => {
           <table id="myTable" className="table">
             <thead>
               <tr>
-                <th className="uppercase underline lg:text-lg text-primary lg:font-extrabold text-left">
-                  ID
+                <th
+                  className="uppercase underline lg:text-lg text-primary lg:font-extrabold text-left"
+                  onClick={() => handleSort("id")}
+                >
+                  ID ↕{renderSortArrow("id")}
                 </th>
-                <th className="uppercase underline text-lg text-primary font-extrabold text-left">
-                  name
+
+                <th
+                  className="uppercase underline text-lg text-primary font-extrabold text-left"
+                  onClick={() => handleSort("name")}
+                >
+                  Name ↕
+                  {sortColumn === "name" &&
+                    (sortDirection === "asc" ? (
+                      <img className="w-3" src={up} alt="Ascending" />
+                    ) : (
+                      <img className="w-3" src={down} alt="Descending" />
+                    ))}
                 </th>
-                <th className="uppercase underline text-lg text-primary font-extrabold text-left">
-                  email
+                <th
+                  className="uppercase underline text-lg text-primary font-extrabold text-left"
+                  onClick={() => handleSort("email")}
+                >
+                  Email ↕
+                  {sortColumn === "email" &&
+                    (sortDirection === "asc" ? (
+                      <img className="w-3" src={up} alt="Ascending" />
+                    ) : (
+                      <img className="w-3" src={down} alt="Descending" />
+                    ))}
                 </th>
-                <th className="uppercase underline text-lg text-primary font-extrabold text-left">
-                  address
+                <th
+                  className="uppercase underline text-lg text-primary font-extrabold text-left"
+                  onClick={() => handleSort("address")}
+                >
+                  Address ↕
+                  {sortColumn === "address" &&
+                    (sortDirection === "asc" ? (
+                      <img className="w-3" src={up} alt="Ascending" />
+                    ) : (
+                      <img className="w-3" src={down} alt="Descending" />
+                    ))}
                 </th>
-                <th className="uppercase underline text-lg text-primary font-extrabold text-left">
-                  phone
+                <th
+                  className="uppercase underline text-lg text-primary font-extrabold text-left"
+                  onClick={() => handleSort("contact")}
+                >
+                  Phone ↕
+                  {sortColumn === "contact" &&
+                    (sortDirection === "asc" ? (
+                      <img className="w-3" src={up} alt="Ascending" />
+                    ) : (
+                      <img className="w-3" src={down} alt="Descending" />
+                    ))}
                 </th>
               </tr>
             </thead>
             <tbody>
-              {usersToDisplay.map(
-                (
-                  user,
-                  index // Pass index here
-                ) => (
-                  <CustomerRow
-                    key={user.id}
-                    user={user}
-                    index={index}
-                  ></CustomerRow>
-                )
-              )}
+              {sortedUsersToDisplay.map((user, index) => (
+                <CustomerRow key={user.id} user={user} index={index} />
+              ))}
             </tbody>
           </table>
           <button className="btn btn-primary mt-16 btn-sm drawer-button lg:hidden">

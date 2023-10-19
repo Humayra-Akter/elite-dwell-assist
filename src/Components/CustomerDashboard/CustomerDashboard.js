@@ -21,9 +21,9 @@ const CustomerDashboard = () => {
           <Outlet />
           <label
             for="customer-drawer"
-            class="btn btn-primary drawer-button lg:hidden"
+            class="btn btn-sm absolute top-0 right-0 drawer-button lg:hidden"
           >
-            Open drawer
+            See menu
           </label>
           {isSidebarOpen ? (
             <button
