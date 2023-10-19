@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import scroll from "../../images/scrollToTOp.svg";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,10 +28,10 @@ const ScrollToTop = () => {
     <div>
       {isVisible && (
         <button
-          className="scroll-to-top fixed bottom-20 right-30 left-10 z-50 bg-primary text-white font-bold cursor-pointer p-2 rounded-full transition-colors duration-300 hover:bg-secondary"
+          className="scroll-to-top fixed bottom-20 right-30 left-10 z-50 text-white font-bold cursor-pointer p-2 rounded-full transition-colors duration-300 hover:bg-secondary"
           onClick={scrollToTop}
         >
-          Scroll to Top
+          <img src={scroll} alt="" className="w-10" />
         </button>
       )}
     </div>
