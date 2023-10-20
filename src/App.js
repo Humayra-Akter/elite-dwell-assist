@@ -34,6 +34,7 @@ import OvenBill from "./Components/Services/ApplianceRepair/OvenBill";
 import DriverDashboard from "./Components/DriverDashboard/DriverDashboard";
 import Admin from "./Components/Shared/Admin";
 import CustomerInformation from "./Components/AdminDashboard/CustomerInformation";
+import MaidBookings from "./Components/CustomerDashboard/MaidBookings";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -96,7 +97,8 @@ function App() {
           <Route
             path="createPostForMaid"
             element={<CreatePostForMaid />}
-          ></Route>
+          ></Route>{" "}
+          <Route path="bookingsForMaid" element={<MaidBookings />}></Route>
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />
         <Route path="/babysitter" element={<Babysitter />} />

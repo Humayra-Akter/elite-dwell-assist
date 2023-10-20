@@ -117,8 +117,8 @@ const CustomerNotification = () => {
                       Maid Details:
                     </h2>{" "}
                     <p className="text-sm pb-1 text-blue-900 font-bold">
-                      <span className="underline">Name:</span>{" "}
-                      {selectedMaids[notification._id].name}
+                      <span className="underline">Address:</span>{" "}
+                      {selectedMaids[notification._id].address}
                     </p>
                     <p className="text-sm pb-1 text-blue-900 font-bold">
                       <span className="underline">Email:</span>

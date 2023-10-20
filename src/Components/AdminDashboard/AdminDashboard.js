@@ -93,7 +93,7 @@ const AdminDashboard = () => {
                 </span>
               </Link>
             </li>{" "}
-            {/* <li>
+            <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
                 to="/adminDashboard/maid"
@@ -125,7 +125,7 @@ const AdminDashboard = () => {
                   Babysitter Information
                 </span>
               </Link>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>

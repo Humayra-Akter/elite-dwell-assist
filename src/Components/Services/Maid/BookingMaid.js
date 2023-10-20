@@ -193,7 +193,6 @@ const BookingMaid = ({ bookMaid, user }) => {
                     </strong>{" "}
                     <p className="capitalize"> {gender}</p>
                   </p>{" "}
-                  
                 </div>
               </div>
               <div class="flex items-end justify-end">
