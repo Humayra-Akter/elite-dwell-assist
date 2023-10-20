@@ -4,6 +4,7 @@ import frwrd from "../../images/forward.png";
 import rewrd from "../../images/rewind.png";
 import ban1 from "../../images/notification.png";
 import ban2 from "../../images/job-search.png";
+import ban3 from "../../images/booking.svg";
 import ban4 from "../../images/avatar.png";
 
 const CustomerDashboard = () => {
@@ -88,7 +89,7 @@ const CustomerDashboard = () => {
                 to="/customerDashboard/bookingsForMaid"
               >
                 <span className="flex gap-4">
-                  <img className="w-6" src={ban2} alt="" />
+                  <img className="w-6" src={ban3} alt="" />
                   Maid Bookings
                 </span>
               </Link>

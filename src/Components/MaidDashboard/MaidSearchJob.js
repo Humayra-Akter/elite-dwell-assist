@@ -40,7 +40,9 @@ const MaidSearchJob = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data) {
-            toast.success(`Request sent to ${booking.userName}`);
+            toast.success(`Request sent to ${booking.userName}`, {
+              position: toast.POSITION.TOP_CENTER,
+            });
             setSelectedJobId(booking);
           }
         })

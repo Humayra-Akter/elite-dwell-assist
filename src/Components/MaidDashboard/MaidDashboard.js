@@ -8,20 +8,25 @@ import ban2 from "../../images/job-search.png";
 
 const MaidDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [selectedLink, setSelectedLink] = useState("");
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleLinkClick = (link) => {
+    setSelectedLink(link);
+  };
+
   return (
     <div>
       <div className={`drawer ${isSidebarOpen ? "lg:drawer-open" : ""}`}>
-        <input id="maid-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content p-11">
+        <input id="maid-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content p-11">
           <Outlet />
           <label
-            for="maid-drawer"
-            class="btn btn-sm absolute top-0 right-0 mt-2 drawer-button lg:hidden"
+            htmlFor="maid-drawer"
+            className="btn btn-sm absolute top-0 right-0 mt-2 drawer-button lg:hidden"
           >
             Open drawer
           </label>
@@ -41,20 +46,22 @@ const MaidDashboard = () => {
             </button>
           )}
         </div>
-        <div class="drawer-side">
+        <div className="drawer-side">
           <label
-            for="maid-drawer"
+            htmlFor="maid-drawer"
             aria-label="close sidebar"
-            class="drawer-overlay"
+            className="drawer-overlay"
           ></label>
-          <ul class="menu p-4 w-60 min-h-full bg-sky-50 text-base-content">
+          <ul className="menu p-4 w-60 min-h-full bg-sky-50 text-base-content">
             {/* <!-- Sidebar content here --> */}
-
             <ul className="mt-20">
               <li>
                 <Link
-                  className="text-primary mt-3 text-base font-bold hover:text-black"
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "profile" ? "text-white bg-primary" : ""
+                  }`}
                   to="/maidDashboard"
+                  onClick={() => handleLinkClick("profile")}
                 >
                   <span className="flex gap-4">
                     <img className="w-6" src={ban4} alt="" />
@@ -64,8 +71,13 @@ const MaidDashboard = () => {
               </li>{" "}
               <li>
                 <Link
-                  className="text-primary mt-3 text-base font-bold hover:text-black"
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "notification"
+                      ? "text-white bg-primary"
+                      : ""
+                  }`}
                   to="/maidDashboard/maidNotification"
+                  onClick={() => handleLinkClick("notification")}
                 >
                   <span className="flex gap-4">
                     <img className="w-6" src={ban1} alt="" />
@@ -75,8 +87,11 @@ const MaidDashboard = () => {
               </li>
               <li>
                 <Link
-                  className="text-primary mt-3 text-base font-bold hover:text-black"
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "searchJob" ? "text-white bg-primary" : ""
+                  }`}
                   to="/maidDashboard/searchJob"
+                  onClick={() => handleLinkClick("searchJob")}
                 >
                   <span className="flex gap-4">
                     <img className="w-6" src={ban2} alt="" />

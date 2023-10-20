@@ -128,7 +128,6 @@ const CustomerNotification = () => {
                       <span className="underline">Contact:</span>
                       {selectedMaids[notification._id].contact}
                     </p>
-                    {/* Display other maid details as needed */}
                   </div>
                 )}
 
