@@ -27,7 +27,9 @@ const MaidBookings = () => {
   }, [user]);
   return (
     <div>
-      <h2 className="text-3xl text-primary font-bold">My Bookings</h2>
+      <h2 className="text-3xl text-primary font-bold">
+        My Bookings for House-Helper
+      </h2>
       <table className="border-collapse w-full mt-12">
         <thead>
           <tr>

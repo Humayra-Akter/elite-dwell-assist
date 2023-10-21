@@ -6,12 +6,20 @@ import ban1 from "../../images/notification.png";
 import ban2 from "../../images/job-search.png";
 import ban3 from "../../images/booking.svg";
 import ban4 from "../../images/avatar.png";
+import ban5 from "../../images/icons/maid.png";
+import ban6 from "../../images/icons/driver.png";
+import ban7 from "../../images/icons/motherhood.png";
 
 const CustomerDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isBookingsOpen, setIsBookingsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleBookings = () => {
+    setIsBookingsOpen(!isBookingsOpen);
   };
 
   return (
@@ -84,15 +92,61 @@ const CustomerDashboard = () => {
               </Link>
             </li>
             <li>
-              <Link
-                className="text-primary mt-3 text-base font-bold hover:text-black"
-                to="/customerDashboard/bookingsForMaid"
-              >
-                <span className="flex gap-4">
-                  <img className="w-6" src={ban3} alt="" />
-                  Maid Bookings
-                </span>
-              </Link>
+              <div className="relative group">
+                <input
+                  type="checkbox"
+                  id="bookingsDropdown"
+                  className="hidden input-sm"
+                />
+                <label
+                  htmlFor="bookingsDropdown"
+                  onClick={toggleBookings}
+                  className="text-primary mt-3 text-base font-bold hover:text-black"
+                >
+                  <span className="flex gap-4">
+                    <img className="w-6" src={ban3} alt="" />
+                    Bookings
+                    <span className="ml-2">{isBookingsOpen ? "▼" : "▶"}</span>
+                  </span>
+                </label>
+                {isBookingsOpen && (
+                  <ul className="bg-sky-50 p-2 border rounded border-gray-300 absolute top-16 left-0">
+                    <li>
+                      <Link
+                        to="/customerDashboard/bookingsForMaid"
+                        className="text-primary text-base font-bold hover:text-black"
+                      >
+                        <span className="flex gap-4">
+                          <img className="w-6" src={ban5} alt="" />
+                          Maid Bookings
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/customerDashboard/bookingsForDriver"
+                        className="text-primary mt-3 text-base font-bold hover:text-black"
+                      >
+                        <span className="flex gap-4">
+                          <img className="w-6" src={ban6} alt="" />
+                          Driver Bookings
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/customerDashboard/bookingsForBabysitter"
+                        className="text-primary mt-3 text-base font-bold hover:text-black"
+                      >
+                        <span className="flex gap-4">
+                          <img className="w-6" src={ban7} alt="" />
+                          Babysitter Bookings
+                        </span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </div>
             </li>
           </ul>
         </div>

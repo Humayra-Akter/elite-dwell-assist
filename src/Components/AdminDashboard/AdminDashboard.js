@@ -81,6 +81,17 @@ const AdminDashboard = () => {
                   Maid Per Day Bookings
                 </span>
               </Link>
+            </li>{" "}
+            <li>
+              <Link
+                className="text-primary mt-3 text-base font-bold hover:text-black"
+                to="/adminDashboard/acknowledgedMaidBookings"
+              >
+                <span className="flex gap-4">
+                  <img className="w-6" src={ban1} alt="" />
+                  Acknowledged Bookings
+                </span>
+              </Link>
             </li>
             <li>
               <Link

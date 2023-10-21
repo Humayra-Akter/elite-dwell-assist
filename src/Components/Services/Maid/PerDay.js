@@ -8,7 +8,7 @@ import banner2 from "../../../images/maid/2.jpeg";
 import banner3 from "../../../images/maid/3.jpeg";
 import banner4 from "../../../images/maid/4.jpg";
 import Footer from "../../Shared/Footer";
-import { format } from "date-fns";
+import { format, isBefore } from "date-fns";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
@@ -41,7 +41,12 @@ const PerDay = () => {
   };
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date);
+    const today = new Date(); // Get today's date
+    if (isBefore(date, today)) {
+      toast.error("You cannot select a date earlier than today.");
+    } else {
+      setSelectedDate(date);
+    }
   };
 
   const handleTimeSlotSelect = (timeSlot) => {

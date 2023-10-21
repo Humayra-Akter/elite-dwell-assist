@@ -35,6 +35,7 @@ import DriverDashboard from "./Components/DriverDashboard/DriverDashboard";
 import Admin from "./Components/Shared/Admin";
 import CustomerInformation from "./Components/AdminDashboard/CustomerInformation";
 import MaidBookings from "./Components/CustomerDashboard/MaidBookings";
+import AcknowledgedMaidBookings from "./Components/AdminDashboard/AcknowledgedMaidBookings";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -75,6 +76,10 @@ function App() {
           <Route
             path="adminMaidPerDayBookings"
             element={<AdminMaidPerDayBookings />}
+          ></Route>
+          <Route
+            path="acknowledgedMaidBookings"
+            element={<AcknowledgedMaidBookings />}
           ></Route>
           <Route path="adminCreate" element={<AdminCreate />}></Route>
           <Route path="customer" element={<CustomerInformation />}></Route>
