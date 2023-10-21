@@ -56,7 +56,7 @@ const TVBill = () => {
       updatedServices.push({ name: "TV Mounting", count: mountingCount });
     }
     setSelectedServices(updatedServices);
-    setIsBookButtonDisabled(updatedServices.length > 1);
+    setIsBookButtonDisabled(selectedServices.length === 0);
   };
 
   const handleDateSelect = (date) => {

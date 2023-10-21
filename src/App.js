@@ -36,6 +36,10 @@ import Admin from "./Components/Shared/Admin";
 import CustomerInformation from "./Components/AdminDashboard/CustomerInformation";
 import MaidBookings from "./Components/CustomerDashboard/MaidBookings";
 import AcknowledgedMaidBookings from "./Components/AdminDashboard/AcknowledgedMaidBookings";
+import TvBookings from "./Components/AdminDashboard/TvBookings";
+import WmBookings from "./Components/AdminDashboard/WmBookings";
+import RfBookings from "./Components/AdminDashboard/RfBookings";
+import OvenBookings from "./Components/AdminDashboard/OvenBookings";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -61,11 +65,7 @@ function App() {
         </div>
       )}
       <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-         
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -88,6 +88,10 @@ function App() {
           ></Route>
           <Route path="adminCreate" element={<AdminCreate />}></Route>
           <Route path="customer" element={<CustomerInformation />}></Route>
+          <Route path="television" element={<TvBookings />}></Route>
+          <Route path="washing-machine" element={<WmBookings />}></Route>
+          <Route path="refrigerator" element={<RfBookings />}></Route>
+          <Route path="oven" element={<OvenBookings />}></Route>
         </Route>
         <Route path="/driverDashboard" element={<DriverDashboard />}></Route>
         {/* maid  */}

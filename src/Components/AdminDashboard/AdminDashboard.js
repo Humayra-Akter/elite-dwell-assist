@@ -10,9 +10,13 @@ import ban4 from "../../images/dashboard.png";
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isApplianceOpen, setIsApplianceOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+  const toggleAppliance = () => {
+    setIsApplianceOpen(!isApplianceOpen);
   };
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -52,7 +56,7 @@ const AdminDashboard = () => {
             aria-label="close sidebar"
             class="drawer-overlay"
           ></label>
-          <ul class="menu pl-4 pt-16 w-72 min-h-full bg-sky-50 text-base-content">
+          <ul class="menu pl-4 pt-16 w-96 min-h-full bg-sky-50 text-base-content">
             <li>
               <Link
                 className="text-primary text-base font-bold hover:text-black"
@@ -146,6 +150,56 @@ const AdminDashboard = () => {
                         className="text-primary text-base font-bold hover-text-black"
                       >
                         Babysitter Information
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </li>
+            <li>
+              <button
+                onClick={toggleAppliance}
+                className="text-primary mt-3 text-base font-bold hover:text-black"
+              >
+                <span className="flex gap-4">
+                  <img className="w-6" src={ban3} alt="" />
+                  Appliance Repair Bookings
+                  <span className="ml-2">{isApplianceOpen ? "▼" : "▶"}</span>
+                </span>
+              </button>
+              {isApplianceOpen && (
+                <div className="dropdown-content">
+                  <ul>
+                    <li>
+                      <Link
+                        to="/adminDashboard/television"
+                        className="text-primary text-base font-bold hover:text-black"
+                      >
+                        Television Information
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/adminDashboard/washing-machine"
+                        className="text-primary text-base font-bold hover-text-black"
+                      >
+                        Washing-machine Information
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/adminDashboard/refrigerator"
+                        className="text-primary text-base font-bold hover-text-black"
+                      >
+                        Refrigerator Information
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/adminDashboard/oven"
+                        className="text-primary text-base font-bold hover-text-black"
+                      >
+                        Oven Information
                       </Link>
                     </li>
                   </ul>
