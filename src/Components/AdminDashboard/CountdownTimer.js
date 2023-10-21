@@ -18,6 +18,12 @@ const CountdownTimer = ({ selectedDate }) => {
     const now = new Date();
     const targetDate = new Date(selectedDate);
     const timeDiff = targetDate - now;
+
+    // Check if the selected date has passed
+    if (timeDiff <= 0) {
+      return "Done";
+    }
+
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     const hours = Math.floor(
       (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -28,7 +34,10 @@ const CountdownTimer = ({ selectedDate }) => {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
 
-  return <span>{timeRemaining}</span>;
+  // Apply a CSS class to style the text in green
+  const textClass = timeRemaining === "Done" ? "text-green-700 font-bold" : "";
+
+  return <span className={textClass}>{timeRemaining}</span>;
 };
 
 export default CountdownTimer;

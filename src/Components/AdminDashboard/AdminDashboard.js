@@ -9,7 +9,11 @@ import ban4 from "../../images/dashboard.png";
 
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -94,48 +98,59 @@ const AdminDashboard = () => {
               </Link>
             </li>
             <li>
-              <Link
+              <button
+                onClick={toggleDropdown}
                 className="text-primary mt-3 text-base font-bold hover:text-black"
-                to="/adminDashboard/customer"
               >
                 <span className="flex gap-4">
                   <img className="w-6" src={ban3} alt="" />
-                  Customer Information
+                  Information
+                  <span className="ml-2">{isDropdownOpen ? "▼" : "▶"}</span>
+                  <i
+                    className={`ml-2 fas ${
+                      isDropdownOpen ? "fa-caret-up" : "fa-caret-down"
+                    }`}
+                  ></i>
                 </span>
-              </Link>
-            </li>{" "}
-            <li>
-              <Link
-                className="text-primary mt-3 text-base font-bold hover:text-black"
-                to="/adminDashboard/maid"
-              >
-                <span className="flex gap-4">
-                  <img className="w-6" src={ban1} alt="" />
-                  Maid Information
-                </span>
-              </Link>
-            </li>{" "}
-            <li>
-              <Link
-                className="text-primary mt-3 text-base font-bold hover:text-black"
-                to="/adminDashboard/driver"
-              >
-                <span className="flex gap-4">
-                  <img className="w-6" src={ban1} alt="" />
-                  Driver Information
-                </span>
-              </Link>
-            </li>{" "}
-            <li>
-              <Link
-                className="text-primary mt-3 text-base font-bold hover:text-black"
-                to="/adminDashboard/babysitter"
-              >
-                <span className="flex gap-4">
-                  <img className="w-6" src={ban1} alt="" />
-                  Babysitter Information
-                </span>
-              </Link>
+              </button>
+              {isDropdownOpen && (
+                <div className="dropdown-content">
+                  <ul>
+                    <li>
+                      <Link
+                        to="/adminDashboard/customer"
+                        className="text-primary text-base font-bold hover:text-black"
+                      >
+                        Customer Information
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/adminDashboard/maid"
+                        className="text-primary text-base font-bold hover-text-black"
+                      >
+                        Maid Information
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/adminDashboard/driver"
+                        className="text-primary text-base font-bold hover-text-black"
+                      >
+                        Driver Information
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/adminDashboard/babysitter"
+                        className="text-primary text-base font-bold hover-text-black"
+                      >
+                        Babysitter Information
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </li>
           </ul>
         </div>

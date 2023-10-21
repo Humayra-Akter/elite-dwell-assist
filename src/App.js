@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Navbar from "./Components/Shared/Navbar";
 import Login from "./Components/Login/Login";
@@ -61,7 +61,11 @@ function App() {
         </div>
       )}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home />}
+         
+        />
         <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -71,6 +75,7 @@ function App() {
           element={<CustomerRegistrationForm />}
         />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
+        {/* admin */}
         <Route path="/adminDashboard" element={<AdminDashboard />}>
           <Route index element={<AdminProfile />}></Route>
           <Route
@@ -85,6 +90,7 @@ function App() {
           <Route path="customer" element={<CustomerInformation />}></Route>
         </Route>
         <Route path="/driverDashboard" element={<DriverDashboard />}></Route>
+        {/* maid  */}
         <Route path="/maidDashboard" element={<MaidDashboard />}>
           <Route index element={<MaidProfile />}></Route>
           <Route
@@ -93,6 +99,7 @@ function App() {
           ></Route>
           <Route path="searchJob" element={<MaidSearchJob />}></Route>
         </Route>
+        {/* customer  */}
         <Route path="/customerDashboard" element={<CustomerDashboard />}>
           <Route index element={<CustomerProfile />}></Route>
           <Route
