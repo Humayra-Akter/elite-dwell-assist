@@ -6,17 +6,17 @@ import img1 from "../../images/icons/maid.png";
 import img2 from "../../images/icons/motherhood.png";
 import img3 from "../../images/icons/driver.png";
 import Footer from "../Shared/Footer";
+import RoleCard from "./RoleCard";
 
 const Register = () => {
   const [selectedRole, setSelectedRole] = useState(null);
-  const [screenSize, setScreenSize] = useState(""); // Track screen size
+  const [screenSize, setScreenSize] = useState("");
 
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
   };
 
   useEffect(() => {
-    // Add event listener to detect window resizing
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setScreenSize("large");
@@ -27,11 +27,10 @@ const Register = () => {
       }
     };
 
-    handleResize(); // Initial screen size detection
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
-      // Clean up the event listener when the component unmounts
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -99,56 +98,45 @@ const Register = () => {
         </div>
       ) : (
         // Medium and Small Screen Layout
-        <div className="pt-16 flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-semibold mb-4">Register Now</h1>
-          <p className="text-lg mb-4">Choose your role:</p>
-          <div className="grid sm:grid-cols-3 gap-4">
-            <RoleCard
-              role="maid"
-              icon={img1}
-              label="Maid"
-              selectedRole={selectedRole}
-              handleRoleSelect={handleRoleSelect}
-            />
-            <RoleCard
-              role="babysitter"
-              icon={img2}
-              label="Babysitter"
-              selectedRole={selectedRole}
-              handleRoleSelect={handleRoleSelect}
-            />
-            <RoleCard
-              role="driver"
-              icon={img3}
-              label="Driver"
-              selectedRole={selectedRole}
-              handleRoleSelect={handleRoleSelect}
-            />
+        <div>
+          <div className="pt-16 flex flex-col items-center justify-center">
+            <h1 className="text-4xl font-semibold mb-4">Register Now</h1>
+            <p className="text-lg mb-4">Choose your role:</p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <RoleCard
+                role="maid"
+                icon={img1}
+                label="Maid"
+                selectedRole={selectedRole}
+                handleRoleSelect={handleRoleSelect}
+              />
+              <RoleCard
+                role="babysitter"
+                icon={img2}
+                label="Babysitter"
+                selectedRole={selectedRole}
+                handleRoleSelect={handleRoleSelect}
+              />
+              <RoleCard
+                role="driver"
+                icon={img3}
+                label="Driver"
+                selectedRole={selectedRole}
+                handleRoleSelect={handleRoleSelect}
+              />
+            </div>
+          </div>
+          <div className="p-4 md:p-8">
+            {selectedRole === "maid" && <MaidRegistrationForm />}
+            {selectedRole === "driver" && <DriverRegistrationForm />}
+            {selectedRole === "babysitter" && <BabysitterRegistrationForm />}
           </div>
         </div>
       )}
-
-      <div className="p-4 md:p-8">
-        {selectedRole === "maid" && <MaidRegistrationForm />}
-        {selectedRole === "driver" && <DriverRegistrationForm />}
-        {selectedRole === "babysitter" && <BabysitterRegistrationForm />}
-      </div>
 
       <Footer />
     </div>
   );
 };
-
-const RoleCard = ({ role, icon, label, selectedRole, handleRoleSelect }) => (
-  <div
-    className={`cursor-pointer p-4 rounded-lg border-2 ${
-      selectedRole === role ? "bg-sky-300 text-black" : "text-center"
-    }`}
-    onClick={() => handleRoleSelect(role)}
-  >
-    <img className="w-8 mx-auto mb-2" src={icon} alt={label} />
-    {label}
-  </div>
-);
 
 export default Register;

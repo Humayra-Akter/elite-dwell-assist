@@ -29,7 +29,7 @@ const Banner = () => {
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            <img src={image} alt="" className="w-full lg:h-auto sm:max-h-80 " />
+            <img src={image} alt="" className="w-full lg:h-auto" />
           </div>
         ))}
       </div>
