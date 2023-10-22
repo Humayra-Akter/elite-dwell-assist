@@ -196,7 +196,8 @@ const AdminDashboard = () => {
                     </li>
                     <li>
                       <Link
-                        to="/adminDashboard/oven"
+                        to="/adminDashboard/oven
+                        "
                         className="text-primary text-base font-bold hover-text-black"
                       >
                         Oven Information

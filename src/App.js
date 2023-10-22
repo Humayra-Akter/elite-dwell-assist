@@ -36,10 +36,10 @@ import Admin from "./Components/Shared/Admin";
 import CustomerInformation from "./Components/AdminDashboard/CustomerInformation";
 import MaidBookings from "./Components/CustomerDashboard/MaidBookings";
 import AcknowledgedMaidBookings from "./Components/AdminDashboard/AcknowledgedMaidBookings";
-import TvBookings from "./Components/AdminDashboard/TvBookings";
-import WmBookings from "./Components/AdminDashboard/WmBookings";
-import RfBookings from "./Components/AdminDashboard/RfBookings";
-import OvenBookings from "./Components/AdminDashboard/OvenBookings";
+import TvBookings from "./Components/AdminDashboard/ApplianceBookings/TvBookings";
+import WmBookings from "./Components/AdminDashboard/ApplianceBookings/WmBookings";
+import RfBookings from "./Components/AdminDashboard/ApplianceBookings/RfBookings";
+import OvenBookings from "./Components/AdminDashboard/ApplianceBookings/OvenBookings";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
