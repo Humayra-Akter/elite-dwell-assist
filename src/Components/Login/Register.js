@@ -36,11 +36,7 @@ const Register = () => {
   }, []);
 
   return (
-    <div
-      className={`bg-slate-200 ${
-        screenSize === "large" ? "h-screen" : "min-h-screen"
-      }`}
-    >
+    <div className="bg-slate-200 ">
       {screenSize === "large" ? (
         // Large Screen Layout
         <div className="pb-12 pt-16 flex items-center justify-center">
