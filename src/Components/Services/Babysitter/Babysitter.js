@@ -7,11 +7,10 @@ const Babysitter = () => {
   const [bookBaby, setBookBaby] = useState([]);
 
   useEffect(() => {
-    fetch("service.json")
+    fetch("http://localhost:5000/babysitter")
       .then((res) => res.json())
       .then((data) => {
-        const babysitterData = data.babysitter;
-        setBabysitters(babysitterData);
+        setBabysitters(data);
       });
   }, []);
 
