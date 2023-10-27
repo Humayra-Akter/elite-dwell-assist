@@ -7,9 +7,6 @@ const MaidProfile = () => {
   const [loggedUser, setLoggedUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMaid, setUpdatedMaid] = useState({});
-  const [selectedSalary, setSelectedSalary] = useState(
-    updatedMaid.salaryPerTask || ""
-  );
   const locationOptions = [
     { label: "dhanmondi", value: "dhanmondi" },
     { label: "mirpur", value: "mirpur" },
@@ -33,6 +30,7 @@ const MaidProfile = () => {
     { label: "02.00 PM - 05.00 PM", value: "bikal" },
     { label: "05.00 PM - 08.00 PM", value: "raat" },
   ];
+
   const expertiseSalaries = {
     mopping: [1000, 1500, 1200],
     cooking: [2000, 1800, 2200],
@@ -87,27 +85,60 @@ const MaidProfile = () => {
   const handleInputChange = (e) => {
     const { name, value, type, checked, options, selectedIndex, multiple } =
       e.target;
-    if (type === "checkbox" && name === "location") {
-      const updatedLocation = [...updatedMaid?.location];
+
+    if (type === "checkbox" && name === "availability") {
+      const updatedAvailability = [...(updatedMaid.availability || [])];
+
       if (checked) {
-        updatedLocation.push(value);
+        updatedAvailability.push(value);
       } else {
-        const index = updatedLocation.indexOf(value);
+        const index = updatedAvailability.indexOf(value);
         if (index > -1) {
-          updatedLocation.splice(index, 1);
+          updatedAvailability.splice(index, 1);
         }
       }
+
       setUpdatedMaid({
         ...updatedMaid,
-        location: updatedLocation,
+        availability: updatedAvailability,
       });
-    } else if (type === "select-multiple" && name === "skills") {
-      const selectedSkills = Array.from(options)
-        .filter((option) => option.selected)
-        .map((option) => option.value);
+    } else if (type === "checkbox" && name === "location") {
+      const updatedLocations = [...(updatedMaid.location || [])];
+
+      if (checked) {
+        updatedLocations.push(value);
+      } else {
+        const index = updatedLocations.indexOf(value);
+        if (index > -1) {
+          updatedLocations.splice(index, 1);
+        }
+      }
+
       setUpdatedMaid({
         ...updatedMaid,
-        skills: selectedSkills,
+        location: updatedLocations,
+      });
+    } else if (type === "checkbox" && name === "skills") {
+      const updatedSkills = [...(updatedMaid.skills || [])];
+
+      if (checked) {
+        updatedSkills.push(value);
+      } else {
+        const index = updatedSkills.indexOf(value);
+        if (index > -1) {
+          updatedSkills.splice(index, 1);
+        }
+      }
+
+      setUpdatedMaid({
+        ...updatedMaid,
+        skills: updatedSkills,
+      });
+    } else if (name === "salaryPerTask") {
+      const selectedSalary = value;
+      setUpdatedMaid({
+        ...updatedMaid,
+        salaryPerTask: selectedSalary,
       });
     } else {
       setUpdatedMaid({
@@ -195,6 +226,20 @@ const MaidProfile = () => {
             ) : (
               updatedMaid.nid
             )}
+          </p>{" "}
+          <p className="text-gray-600">
+            <strong className="capitalize">Contact:</strong>{" "}
+            {isEditing ? (
+              <input
+                type="text"
+                name="contact"
+                value={updatedMaid.contact || ""}
+                onChange={handleInputChange}
+                className="input input-bordered text-gray-600"
+              />
+            ) : (
+              updatedMaid.contact
+            )}
           </p>
           <p className="text-gray-600">
             <strong className="capitalize">Experience: </strong>
@@ -214,27 +259,24 @@ const MaidProfile = () => {
           <p className="text-gray-600">
             <strong className="capitalize">Location: </strong>
             {isEditing ? (
-              <select
-                name="location"
-                value={updatedMaid.location || []} // Ensure it's an array
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-                multiple
-              >
+              <div>
                 {locationOptions.map((location) => (
-                  <option key={location.value} value={location.value}>
+                  <label key={location.value} className="block">
+                    <input
+                      type="checkbox"
+                      name="location"
+                      value={location.value}
+                      checked={(updatedMaid.location || []).includes(
+                        location.value
+                      )}
+                      onChange={handleInputChange}
+                    />{" "}
                     {location.label}
-                  </option>
+                  </label>
                 ))}
-              </select>
+              </div>
             ) : (
-              <span>
-                {Array.isArray(updatedMaid.location)
-                  ? updatedMaid?.location
-                  : typeof updatedMaid?.location === "string"
-                  ? updatedMaid.location
-                  : ""}
-              </span>
+              <span>{(updatedMaid.location || []).join(", ")}</span>
             )}
           </p>
         </div>
@@ -243,19 +285,22 @@ const MaidProfile = () => {
           <div className="col-span-2">
             <strong className="text-blue-800 underline">Skills</strong>
             {isEditing ? (
-              <select
-                name="skills"
-                value={updatedMaid.skills || []}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-                multiple
-              >
+              <div>
                 {expertiseOptions.map((expertise) => (
-                  <option key={expertise.value} value={expertise.value}>
+                  <label key={expertise.value} className="block">
+                    <input
+                      type="checkbox"
+                      name="skills"
+                      value={expertise.value}
+                      checked={(updatedMaid.skills || []).includes(
+                        expertise.value
+                      )}
+                      onChange={handleInputChange}
+                    />{" "}
                     {expertise.label}
-                  </option>
+                  </label>
                 ))}
-              </select>
+              </div>
             ) : updatedMaid.skills && updatedMaid.skills.length > 0 ? (
               updatedMaid.skills.join(", ")
             ) : (
@@ -266,30 +311,26 @@ const MaidProfile = () => {
             <p className="pt-2">
               <strong className="text-blue-800 underline">Availability:</strong>
               {isEditing ? (
-                <ul>
+                <div>
                   {availabilityOptions.map((option) => (
-                    <li key={option.value}>
-                      <label>
-                        {option.label}
-                        <input
-                          type="checkbox"
-                          name="availability"
-                          value={option.value}
-                          checked={(updatedMaid.availability || []).includes(
-                            option.value
-                          )}
-                          onChange={handleInputChange}
-                          className="ml-2"
-                        />
-                      </label>
-                    </li>
+                    <label key={option.value} className="block">
+                      <input
+                        type="checkbox"
+                        name="availability"
+                        value={option.value}
+                        checked={(updatedMaid.availability || []).includes(
+                          option.value
+                        )}
+                        onChange={handleInputChange}
+                      />{" "}
+                      {option.label}
+                    </label>
                   ))}
-                </ul>
+                </div>
               ) : (
                 <ul>
-                  {Array.isArray(loggedUser.availability) &&
-                  loggedUser.availability.length > 0 ? (
-                    loggedUser.availability.map((selectedOption, index) => (
+                  {(updatedMaid.availability || []).map(
+                    (selectedOption, index) => (
                       <li key={index}>
                         <strong>
                           {
@@ -299,34 +340,13 @@ const MaidProfile = () => {
                           }
                         </strong>
                       </li>
-                    ))
-                  ) : (
-                    <li>No availability selected.</li>
+                    )
                   )}
                 </ul>
               )}
             </p>
           </div>
         </div>
-        <p className="text-gray-600">
-          <strong className="capitalize">Salary per Task: </strong>
-          {isEditing ? (
-            <select
-              name="salaryPerTask"
-              value={selectedSalary}
-              onChange={(e) => setSelectedSalary(e.target.value)}
-              className="input input-bordered text-gray-600"
-            >
-              {Object.keys(expertiseSalaries).map((expertise) => (
-                <option key={expertise} value={expertise}>
-                  {expertise}
-                </option>
-              ))}
-            </select>
-          ) : (
-            selectedSalary
-          )}
-        </p>
         {isEditing ? (
           <div className="flex justify-end mt-4">
             <button

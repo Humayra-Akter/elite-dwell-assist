@@ -45,22 +45,25 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
                   .join(", ")
               : location}
           </p>
-          <p className="pt-2">
+          <p>
             <strong className="text-blue-800 underline">Availability:</strong>
             <ul>
-              {availability?.map((daySlot, index) => (
-                <li key={index}>
-                  <strong>
-                    {
-                      availabilityOptions.find(
-                        (option) => option.value === daySlot
-                      )?.label
-                    }
-                  </strong>
-                </li>
-              ))}
+              {Array.isArray(availability)
+                ? availability.map((daySlot, index) => (
+                    <li key={index}>
+                      <strong>
+                        {
+                          availabilityOptions.find(
+                            (option) => option.value === daySlot
+                          )?.label
+                        }
+                      </strong>
+                    </li>
+                  ))
+                : "Availability not specified"}
             </ul>
           </p>
+
           <div className="mt-4">
             <label
               htmlFor="booking-maid"
