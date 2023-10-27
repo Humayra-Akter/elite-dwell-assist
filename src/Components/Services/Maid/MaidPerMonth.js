@@ -4,7 +4,7 @@ import MaidPerMonthCard from "./MaidPerMonthCard";
 import Footer from "../../Shared/Footer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-import ScrollToTop from '../../Shared/ScrollToTop'
+import ScrollToTop from "../../Shared/ScrollToTop";
 
 const MaidPerMonth = ({
   selectedLocation,
@@ -26,38 +26,17 @@ const MaidPerMonth = ({
   const userRole = localStorage.getItem("userRole");
 
   const filteredMaids = maids.filter((maid) => {
-    const includesLocation = maid.location.includes(
-      selectedLocation.toLowerCase()
-    );
-    if (!selectedLocation) {
-      return true;
-    }
-    return includesLocation;
+    const includesLocation =
+      !selectedLocation ||
+      maid.location?.includes(selectedLocation.toLowerCase());
+    const includesTask =
+      !selectedTask || maid.skills?.includes(selectedTask.toLowerCase());
+    const includesAvailability =
+      !selectedAvailability ||
+      maid.availability?.includes(selectedAvailability.toLowerCase());
+
+    return includesLocation && includesTask && includesAvailability;
   });
-
-  // const filteredMaidsByTask = maids.filter((maid) => {
-  //   const includesTask = maid.task.includes(selectedTask.toLowerCase());
-  //   if (!selectedTask) {
-  //     return true;
-  //   }
-  //   return includesTask;
-  // });
-  // const filteredMaidsByAvailability = maids.filter((maid) => {
-  //   const includesAvailability =
-  //     maid.availability.includes(selectedAvailability);
-  //   if (!selectedAvailability) {
-  //     return true;
-  //   }
-  //   return includesAvailability;
-  // });
-
-  // const filteredMaids = [
-  //   ...new Set([
-  //     ...filteredMaidsByLocation,
-  //     ...filteredMaidsByTask,
-  //     ...filteredMaidsByAvailability,
-  //   ]),
-  // ];
 
   return (
     <div>

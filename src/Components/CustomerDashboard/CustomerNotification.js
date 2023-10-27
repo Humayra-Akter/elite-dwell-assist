@@ -28,9 +28,9 @@ const CustomerNotification = () => {
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
             setNotifications(data);
-            toast.success(
-              `Notifications for ${user?.displayName} from ${user?.email}`
-            );
+            // toast.success(
+            //   `Notifications for ${user?.displayName} from ${user?.email}`
+            // );
           } else {
             toast.warning(`No notifications for ${user?.displayName}`);
           }
