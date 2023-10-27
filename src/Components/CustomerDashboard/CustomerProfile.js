@@ -38,9 +38,18 @@ const CustomerProfile = () => {
   };
 
   const handleSaveChanges = () => {
-    console.log("Saving changes:", updatedUser);
-
-    setIsEditing(false);
+    fetch(`http://localhost:5000/customer/${loggedUser._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data); // Handle success or error
+        setIsEditing(false);
+      });
   };
 
   const handleInputChange = (e) => {
