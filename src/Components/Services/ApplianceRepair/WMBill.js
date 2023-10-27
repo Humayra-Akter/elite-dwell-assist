@@ -120,7 +120,7 @@ const WMBill = () => {
     };
 
     try {
-      await fetch("http://localhost:5001/perDayMaidBookings", {
+      await fetch("http://localhost:5000/perDayMaidBookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

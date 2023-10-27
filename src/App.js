@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Navbar from "./Components/Shared/Navbar";
 import Login from "./Components/Login/Login";
@@ -6,9 +6,8 @@ import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
 import Service from "./Components/Services/Service";
 import Babysitter from "./Components/Services/Babysitter/Babysitter";
-import DriverPerDay from "./Components/Services/Driver/DriverPerDay";
 import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Error from "./Components/Error/Error";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,6 +39,11 @@ import TvBookings from "./Components/AdminDashboard/ApplianceBookings/TvBookings
 import WmBookings from "./Components/AdminDashboard/ApplianceBookings/WmBookings";
 import RfBookings from "./Components/AdminDashboard/ApplianceBookings/RfBookings";
 import OvenBookings from "./Components/AdminDashboard/ApplianceBookings/OvenBookings";
+import DriverProfile from "./Components/DriverDashboard/DriverProfile";
+import DriverSearchJob from "./Components/DriverDashboard/DriverSearchJob";
+import DriverNotifications from "./Components/DriverDashboard/DriverNotifications";
+import DriverUpdate from "./Components/DriverDashboard/DriverUpdate";
+import DriverSearchSegment from "./Components/Services/Driver/DriverSearchSegment";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -75,6 +79,7 @@ function App() {
           element={<CustomerRegistrationForm />}
         />
         <Route path="/maidPerMonth" element={<MaidSearchSegment />} />
+        <Route path="/driverPerMonth" element={<DriverSearchSegment />} />
         {/* admin */}
         <Route path="/adminDashboard" element={<AdminDashboard />}>
           <Route index element={<AdminProfile />}></Route>
@@ -93,7 +98,6 @@ function App() {
           <Route path="refrigerator" element={<RfBookings />}></Route>
           <Route path="oven" element={<OvenBookings />}></Route>
         </Route>
-        <Route path="/driverDashboard" element={<DriverDashboard />}></Route>
         {/* maid  */}
         <Route path="/maidDashboard" element={<MaidDashboard />}>
           <Route index element={<MaidProfile />}></Route>
@@ -102,6 +106,16 @@ function App() {
             element={<MaidNotifications />}
           ></Route>
           <Route path="searchJob" element={<MaidSearchJob />}></Route>
+        </Route>
+        {/* driver*/}
+        <Route path="/driverDashboard" element={<DriverDashboard />}>
+          <Route index element={<DriverProfile />}></Route>
+          <Route
+            path="driverNotifications"
+            element={<DriverNotifications />}
+          ></Route>
+          <Route path="searchJob" element={<DriverSearchJob />}></Route>
+          <Route path="driverUpdate" element={<DriverUpdate />}></Route>
         </Route>
         {/* customer  */}
         <Route path="/customerDashboard" element={<CustomerDashboard />}>
@@ -118,8 +132,6 @@ function App() {
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />
         <Route path="/babysitter" element={<Babysitter />} />
-        <Route path="/driverPerDay" element={<DriverPerDay />} />
-        <Route path="/driverPerMonth" element={<DriverPerMonth />} />
         <Route path="/tvBill" element={<TVBill />} />
         <Route path="/rfBill" element={<RFBill />} />
         <Route path="/wmBill" element={<WMBill />} />

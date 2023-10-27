@@ -28,7 +28,6 @@ const DriverRegistrationForm = () => {
   const [selectedGender, setSelectedGender] = useState([]);
   const [selectedSalaries, setSelectedSalaries] = useState({});
   const [selectedLocation, setSelectedLocation] = useState([]);
-  const [selectedExpertise, setSelectedExpertise] = useState([]);
 
   const handleGender = (selected) => {
     setSelectedGender([selected[selected.length - 1]]);
@@ -52,6 +51,7 @@ const DriverRegistrationForm = () => {
       [vehicleType]: salary,
     }));
   };
+
   const handleExperienceChange = (selectedOptions) => {
     setSelectedExperience(selectedOptions);
   };
@@ -138,14 +138,9 @@ const DriverRegistrationForm = () => {
             education: data.education,
             location: selectedLocation.map((loc) => loc.value),
             nid: data.nid,
+            salary: data.salary,
             dob: data.dob,
             license: data.license,
-            vehicleType: selectedVehicleType.map(
-              (expertise) => expertise.value
-            ),
-            salary: selectedVehicleType.map(
-              (expertise) => selectedSalaries[expertise.value]
-            ),
             password: data.password,
           };
           const user = {
@@ -413,20 +408,6 @@ const DriverRegistrationForm = () => {
                 </label>
               </div>
               <div className="grid grid-cols-2 gap-3 pt-5">
-                {/*vehicleType*/}
-                <div className="form-control  w-full">
-                  <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-md">
-                      Vehicle Type
-                    </span>
-                  </label>
-                  <MultiSelect
-                    options={vehicleTypeOptions}
-                    value={selectedVehicleType}
-                    onChange={handleVehicleTypeChange}
-                    labelledBy="Select vehicleType"
-                  />
-                </div>
                 <div className="form-control w-full">
                   {selectedVehicleType.map((vehicleType) => (
                     <div key={vehicleType.value} className="py-2">
@@ -464,9 +445,9 @@ const DriverRegistrationForm = () => {
               </div>
 
               {/* Conditionally render the "availability" field for van/truck */}
-              {/* {selectedVehicleType.some((vehicleType) =>
+              {selectedVehicleType.some((vehicleType) =>
                 ["van", "truck"].includes(vehicleType.value)
-              )} */}
+              )}
               <div className="grid grid-cols-2 pt-5 gap-3">
                 {/* dob */}
                 <div className="form-control w-full">
@@ -599,32 +580,60 @@ const DriverRegistrationForm = () => {
                   </label>
                 </div>
               </div>
-              {/* Image upload field */}
-              <div className="form-control  w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    photo
-                  </span>
-                </label>
-                <input
-                  type="file"
-                  placeholder="Your image"
-                  name="image"
-                  className="input input-sm input-bordered w-full"
-                  {...register("image", {
-                    required: {
-                      value: true,
-                      message: "image is required",
-                    },
-                  })}
-                />
-                <label>
-                  {errors.image?.type === "required" && (
-                    <span className="text-red-500 text-xs mt-1">
-                      {errors.image.message}
+              <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* Image upload field */}
+                <div className="form-control  w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      photo
                     </span>
-                  )}
-                </label>
+                  </label>
+                  <input
+                    type="file"
+                    placeholder="Your image"
+                    name="image"
+                    className="input input-sm input-bordered w-full"
+                    {...register("image", {
+                      required: {
+                        value: true,
+                        message: "image is required",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.image?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.image.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                <div className="form-control  w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Salary
+                    </span>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Your salary"
+                    name="salary"
+                    className="input input-sm input-bordered w-full"
+                    {...register("salary", {
+                      required: {
+                        value: true,
+                        message: "Salary is required",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.salary?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.salary.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
               </div>
               {/* password field */}
               <div className="form-control w-full pb-11">

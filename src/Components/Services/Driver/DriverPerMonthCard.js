@@ -1,32 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import { Link } from "react-router-dom";
 
 const DriverPerMonthCard = ({ driver, setBookDriver }) => {
-  const { img, name, location, gender, salary } = driver;
+  const { img, name, location, salary } = driver;
+  console.log(driver);
+  const [bookedDrivers, setBookedDrivers] = useState([]);
+  const availabilityOptions = [
+    { label: "08.00 AM - 11.00 AM", value: "sokal" },
+    { label: "11.00 AM - 02.00 PM", value: "dupur" },
+    { label: "02.00 PM - 05.00 PM", value: "bikal" },
+    { label: "05.00 PM - 08.00 PM", value: "raat" },
+  ];
+  const [user, loading, error] = useAuthState(auth);
+
+  const handleKnowMoreClick = () => {
+    if (!bookedDrivers.includes(driver)) {
+      setBookedDrivers([...bookedDrivers, driver]);
+      setBookDriver(driver);
+    }
+  };
+
   return (
     <div>
-      <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
-        <figure class="px-10 pt-7">
-          <img src={img} alt="driver" class="rounded-xl h-52 w-52" />
-        </figure>
-        <div class="card-body items-center text-center">
-          <h2 class="card-title text-purple-900 font-bold">{name}</h2>
+      <div className="w-80 h-96 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">
+        <div>
+          <figure className="absolute top-3 left-3 right-0 h-full">
+            <img src={img} alt="Driver" className="h-32 w-32 rounded-full" />
+          </figure>
+          <div className="p-7 text-right text-black font-bold ">
+            <h2 className="text-xl font-bold">{name}</h2>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-right text-black">
           <p>
-            <strong>Location :</strong> {location}
+            <strong className="text-blue-800 underline">
+              Preferred Location:
+            </strong>
+            {Array.isArray(location)
+              ? location
+                  .map(
+                    (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                  )
+                  .join(", ")
+              : location}
           </p>
-          <p>
-            <strong>Gender :</strong> {gender}
+          <p className="pt-2">
+            <strong className="text-blue-800 underline">Salary :</strong>{" "}
+            {salary}
           </p>
-          <p>
-            <strong>Salary :</strong> {salary},
-          </p>
-          <div class="card-actions pt-5">
+          <div className="mt-4">
             <label
-              for="booking-driver"
-              onClick={() => setBookDriver(driver)}
-              class="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              htmlFor="booking-Driver"
+              onClick={handleKnowMoreClick}
+              className="px-4 btn-md mt-3 bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
             >
               Know More
             </label>
+
+            {user ? (
+              <p></p>
+            ) : (
+              <p>
+                <Link
+                  to="/login"
+                  className="text-red-500 text-xs font-bold rounded-full hover:bg-opacity-80 transition duration-300 px-2 btn-sm mt-1"
+                >
+                  Login for details
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       </div>
