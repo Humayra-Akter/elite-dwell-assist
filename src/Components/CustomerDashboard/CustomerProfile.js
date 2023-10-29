@@ -84,19 +84,10 @@ const CustomerProfile = () => {
         <ul className="mb-4">
           <li className="mb-2">
             <span className="text-md font-medium text-primary">Gender:</span>
-            {isEditing ? (
-              <input
-                type="text"
-                name="gender"
-                value={updatedUser.gender}
-                onChange={handleInputChange}
-                className="input input-bordered input-sm ml-4 font-bold capitalize"
-              />
-            ) : (
-              <span className="ml-4 font-bold capitalize">
-                {updatedUser.gender}
-              </span>
-            )}
+
+            <span className="ml-4 font-bold capitalize">
+              {updatedUser.gender}
+            </span>
           </li>
           <li className="mb-2">
             <span className="text-md font-medium text-primary">
@@ -159,60 +150,30 @@ const CustomerProfile = () => {
         </ul>
       </div>
 
-      {showChangePassword && (
-        <div>
-          <h3 className="text-xl text-primary font-semibold mb-3">
-            Change Password
-          </h3>
-          <input
-            type="password"
-            placeholder="New Password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            className="mb-3 p-2 border rounded-lg"
-          />
-          <button
-            onClick={handleChangePassword}
-            className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
-          >
-            Save Password
-          </button>
-        </div>
-      )}
-
-      <div className="flex justify-between mt-10">
-        <button
-          className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
-          onClick={handleToggleChangePassword}
-        >
-          {showChangePassword ? "Cancel" : "Change Password"}
-        </button>
-
-        <div className="text-center">
-          {isEditing ? (
-            <div>
-              <button
-                className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
-                onClick={handleSaveChanges}
-              >
-                Save Changes
-              </button>
-              <button
-                className="text-primary font-semibold px-6 py-2 ml-4"
-                onClick={handleCancelEdit}
-              >
-                Cancel
-              </button>
-            </div>
-          ) : (
+      <div className="text-center">
+        {isEditing ? (
+          <div>
             <button
               className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
-              onClick={handleEditClick}
+              onClick={handleSaveChanges}
             >
-              Edit Profile
+              Save Changes
             </button>
-          )}
-        </div>
+            <button
+              className="text-primary font-semibold px-6 py-2 ml-4"
+              onClick={handleCancelEdit}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <button
+            className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
+            onClick={handleEditClick}
+          >
+            Edit Profile
+          </button>
+        )}
       </div>
     </div>
   );

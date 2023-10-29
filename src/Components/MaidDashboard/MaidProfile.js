@@ -150,205 +150,10 @@ const MaidProfile = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <div className="flex justify-end">
-          <h1 className="text-center text-2xl text-primary mr-36 font-bold">
-            {isEditing ? (
-              <input
-                type="text"
-                name="name"
-                value={updatedMaid.name || ""}
-                onChange={handleInputChange}
-                className="input input-bordered font-bold text-primary"
-              />
-            ) : (
-              loggedUser.name
-            )}
-          </h1>
-          <img
-            src={loggedUser.img}
-            alt="user"
-            className="w-32 h-32 rounded-md"
-          />
-        </div>
-        <div className="col-span-2 mt-10">
-          <strong className="text-blue-800 underline">Profile Details</strong>
-          <p className="text-gray-600">
-            <strong className="capitalize">Gender: </strong>
-            {isEditing ? (
-              <input
-                type="text"
-                name="gender"
-                value={updatedMaid.gender || ""}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-              />
-            ) : (
-              updatedMaid.gender
-            )}{" "}
-            | Date of Birth:{" "}
-            {isEditing ? (
-              <input
-                type="text"
-                name="dob"
-                value={updatedMaid.dob || ""}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-              />
-            ) : (
-              updatedMaid.dob
-            )}
-          </p>
-          <p className="text-gray-600">
-            <strong className="capitalize">Address:</strong>{" "}
-            {isEditing ? (
-              <input
-                type="text"
-                name="address"
-                value={updatedMaid.address || ""}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-              />
-            ) : (
-              updatedMaid.address
-            )}
-          </p>
-          <p className="text-gray-600">
-            <strong className="capitalize">NID:</strong>{" "}
-            {isEditing ? (
-              <input
-                type="text"
-                name="nid"
-                value={updatedMaid.nid || ""}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-              />
-            ) : (
-              updatedMaid.nid
-            )}
-          </p>{" "}
-          <p className="text-gray-600">
-            <strong className="capitalize">Contact:</strong>{" "}
-            {isEditing ? (
-              <input
-                type="text"
-                name="contact"
-                value={updatedMaid.contact || ""}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-              />
-            ) : (
-              updatedMaid.contact
-            )}
-          </p>
-          <p className="text-gray-600">
-            <strong className="capitalize">Experience: </strong>
-            {isEditing ? (
-              <input
-                type="number"
-                name="experience"
-                value={updatedMaid.experience || ""}
-                onChange={handleInputChange}
-                className="input input-bordered text-gray-600"
-              />
-            ) : (
-              updatedMaid.experience
-            )}{" "}
-            years
-          </p>
-          <p className="text-gray-600">
-            <strong className="capitalize">Location: </strong>
-            {isEditing ? (
-              <div>
-                {locationOptions.map((location) => (
-                  <label key={location.value} className="block">
-                    <input
-                      type="checkbox"
-                      name="location"
-                      value={location.value}
-                      checked={(updatedMaid.location || []).includes(
-                        location.value
-                      )}
-                      onChange={handleInputChange}
-                    />{" "}
-                    {location.label}
-                  </label>
-                ))}
-              </div>
-            ) : (
-              <span>{(updatedMaid.location || []).join(", ")}</span>
-            )}
-          </p>
-        </div>
-        <hr className="my-4" />
-        <div className="grid lg:grid-cols-3 md:grid-cols-3 gap-5">
-          <div className="col-span-2">
-            <strong className="text-blue-800 underline">Skills</strong>
-            {isEditing ? (
-              <div>
-                {expertiseOptions.map((expertise) => (
-                  <label key={expertise.value} className="block">
-                    <input
-                      type="checkbox"
-                      name="skills"
-                      value={expertise.value}
-                      checked={(updatedMaid.skills || []).includes(
-                        expertise.value
-                      )}
-                      onChange={handleInputChange}
-                    />{" "}
-                    {expertise.label}
-                  </label>
-                ))}
-              </div>
-            ) : updatedMaid.skills && updatedMaid.skills.length > 0 ? (
-              updatedMaid.skills.join(", ")
-            ) : (
-              "No skills selected."
-            )}
-          </div>
-          <div>
-            <p className="pt-2">
-              <strong className="text-blue-800 underline">Availability:</strong>
-              {isEditing ? (
-                <div>
-                  {availabilityOptions.map((option) => (
-                    <label key={option.value} className="block">
-                      <input
-                        type="checkbox"
-                        name="availability"
-                        value={option.value}
-                        checked={(updatedMaid.availability || []).includes(
-                          option.value
-                        )}
-                        onChange={handleInputChange}
-                      />{" "}
-                      {option.label}
-                    </label>
-                  ))}
-                </div>
-              ) : (
-                <ul>
-                  {(updatedMaid.availability || []).map(
-                    (selectedOption, index) => (
-                      <li key={index}>
-                        <strong>
-                          {
-                            availabilityOptions.find(
-                              (option) => option.value === selectedOption
-                            )?.label
-                          }
-                        </strong>
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
-            </p>
-          </div>
-        </div>
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        {" "}
         {isEditing ? (
-          <div className="flex justify-end mt-4">
+          <div className="absolute top-20 right-11">
             <button
               className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
               onClick={handleSaveChanges}
@@ -363,13 +168,211 @@ const MaidProfile = () => {
             </button>
           </div>
         ) : (
-          <button
-            className="bg-primary text-white font-semibold px-6 py-2 rounded-lg mt-4"
-            onClick={handleEditClick}
-          >
-            Edit Profile
-          </button>
+          <div className="absolute top-11 right-36 ">
+            <button
+              className="bg-primary text-white font-semibold px-6 py-2 rounded-lg mt-6"
+              onClick={handleEditClick}
+            >
+              Edit Profile
+            </button>
+          </div>
         )}
+        {/* <div className="flex justify-between items-center mb-8"> */}
+        <h1 className="text-2xl text-primary text-center mb-8 font-bold">
+          Update Profile
+        </h1>
+        {/* <img
+            src={loggedUser.img}
+            alt="user"
+            className="w-32 h-32 rounded-md"
+          /> */}
+        {/* </div>{" "} */}
+        <strong className="text-primary text-xl underline">
+          {loggedUser.name}
+        </strong>
+        <div className="grid grid-cols-2 gap-16 ">
+          <div>
+            <p className="mt-2">
+              <strong className="capitalize"> Gender: </strong>
+              <span className="capitalize">{updatedMaid.gender}</span>
+            </p>{" "}
+            <p>
+              <strong className="capitalize">Date of Birth:</strong>{" "}
+              {updatedMaid.dob}
+            </p>{" "}
+            <p>
+              <strong className="capitalize">Email:</strong> {updatedMaid.email}
+            </p>
+            <strong className="capitalize">NID:</strong> {updatedMaid.nid}
+          </div>
+          {/* <div></div> */}
+          <div>
+            <p>
+              <strong className="capitalize">Address:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="address"
+                  value={updatedMaid.address || ""}
+                  onChange={handleInputChange}
+                  className="input input-bordered my-3 text-gray-600"
+                />
+              ) : (
+                updatedMaid.address
+              )}
+            </p>
+
+            <p>
+              <strong className="capitalize">Contact:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="contact"
+                  value={updatedMaid.contact || ""}
+                  onChange={handleInputChange}
+                  className="input input-bordered my-3 text-gray-600"
+                />
+              ) : (
+                updatedMaid.contact
+              )}
+            </p>
+            <p>
+              <strong className="capitalize">Experience:</strong>{" "}
+              {isEditing ? (
+                <input
+                  type="number"
+                  name="experience"
+                  value={updatedMaid.experience || ""}
+                  onChange={handleInputChange}
+                  className="input input-bordered my-3 text-gray-600"
+                />
+              ) : (
+                `${updatedMaid.experience} years`
+              )}
+            </p>
+          </div>
+        </div>
+        <hr className="my-6" />
+        <div className="grid lg:grid-cols-3 md:grid-cols-3 gap-5">
+          <div>
+            <p>
+              <strong className="text-primary underline">Location:</strong>
+              {isEditing ? (
+                <div className="mt-2 capitalize">
+                  <ul>
+                    {locationOptions.map((location) => (
+                      <li key={location.value}>
+                        <label className="block mb-1">
+                          <input
+                            type="checkbox"
+                            name="location"
+                            value={location.value}
+                            checked={(updatedMaid.location || []).includes(
+                              location.value
+                            )}
+                            onChange={handleInputChange}
+                          />{" "}
+                          {location.label}
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : Array.isArray(updatedMaid.location) &&
+                updatedMaid.location.length > 0 ? (
+                <span className="capitalize">
+                  <ul>
+                    {updatedMaid.location.map((loc) => (
+                      <li key={loc} className="capitalize">
+                        <strong>{loc}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                </span>
+              ) : (
+                "No locations selected."
+              )}
+            </p>
+          </div>
+          <div>
+            {" "}
+            <strong className="text-primary underline">Skills : </strong>
+            {isEditing ? (
+              <div className="mt-2 capitalize">
+                <ul>
+                  {expertiseOptions.map((expertise) => (
+                    <li key={expertise.value}>
+                      <label className="block mb-1 capitalize">
+                        <input
+                          type="checkbox"
+                          name="skills"
+                          value={expertise.value}
+                          checked={(updatedMaid.skills || []).includes(
+                            expertise.value
+                          )}
+                          onChange={handleInputChange}
+                        />{" "}
+                        {expertise.label}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : Array.isArray(updatedMaid.skills) &&
+              updatedMaid.skills.length > 0 ? (
+              <ul>
+                {updatedMaid.skills.map((skill) => (
+                  <li key={skill} className="capitalize">
+                    <strong>{skill}</strong>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              "No skills selected."
+            )}
+          </div>
+          <div>
+            <p>
+              <strong className="text-primary underline">Availability:</strong>
+              {isEditing ? (
+                <div className="mt-2">
+                  {availabilityOptions.map((option) => (
+                    <label key={option.value} className="block mb-1">
+                      <input
+                        type="checkbox"
+                        name="availability"
+                        value={option.value}
+                        checked={(Array.isArray(updatedMaid.availability)
+                          ? updatedMaid.availability
+                          : []
+                        ).includes(option.value)}
+                        onChange={handleInputChange}
+                      />{" "}
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              ) : Array.isArray(updatedMaid.availability) &&
+                updatedMaid.availability.length > 0 ? (
+                <ul>
+                  {updatedMaid.availability.map((selectedOption, index) => (
+                    <li key={index}>
+                      <strong>
+                        {
+                          availabilityOptions.find(
+                            (option) => option.value === selectedOption
+                          )?.label
+                        }
+                      </strong>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                "No availability selected."
+              )}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
