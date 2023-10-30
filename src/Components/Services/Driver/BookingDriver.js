@@ -27,7 +27,7 @@ const BookingDriver = ({ bookDriver, user }) => {
   const dispatch = useDispatch();
   const [notificationIdCounter, setNotificationIdCounter] = useState(1);
   const [gUser, loading, error] = useAuthState(auth);
- 
+
   // Function to close the success modal
   const closeSuccessModal = () => {
     setBookingSuccess(false);
@@ -112,14 +112,14 @@ const BookingDriver = ({ bookDriver, user }) => {
                 alt="Driver"
               />
               <h2 className="card-title">
-                <strong className="text-blue-900">{name}</strong> for your Car
+                <strong className="text-teal-900">{name}</strong> for your Car
               </h2>
             </figure>
             <div class="card-body relative top-16">
               <div className="grid grid-cols-2 gap-0">
                 <div>
                   <p className="pt-2">
-                    <strong className="text-blue-800 underline">
+                    <strong className="text-teal-800 underline">
                       Salary :
                     </strong>{" "}
                     {salary}
@@ -127,7 +127,7 @@ const BookingDriver = ({ bookDriver, user }) => {
                 </div>
                 <div>
                   <p>
-                    <strong className="text-blue-800 underline">
+                    <strong className="text-teal-800 underline">
                       Preferred Location:
                     </strong>
                     {Array.isArray(location)
@@ -140,23 +140,23 @@ const BookingDriver = ({ bookDriver, user }) => {
                       : location}
                   </p>
                   <p className="pt-2">
-                    <strong className="text-blue-800 underline">Age:</strong>{" "}
+                    <strong className="text-teal-800 underline">Age:</strong>{" "}
                     {calculateAge(dob)} years
                   </p>
                   <p className="pt-2">
-                    <strong className="text-blue-800 underline">
+                    <strong className="text-teal-800 underline">
                       Experience :
                     </strong>{" "}
                     {experience}
                   </p>
                   <p className="pt-2 flex">
-                    <strong className="text-blue-800 underline">
+                    <strong className="text-teal-800 underline">
                       Education :
                     </strong>{" "}
                     <p className="uppercase">{education}</p>
                   </p>
                   <p className="pt-2 flex">
-                    <strong className="text-blue-800 underline">
+                    <strong className="text-teal-800 underline">
                       Gender :
                     </strong>{" "}
                     <p className="capitalize"> {gender}</p>
@@ -167,7 +167,7 @@ const BookingDriver = ({ bookDriver, user }) => {
                 <button
                   htmlFor="booking-Driver"
                   onClick={handleBooking}
-                  className={`btn btn-sm text-white  font-bold w-1/4 btn-primary ${
+                  className={`btn btn-sm text-white  font-bold w-1/4 btn-secondary ${
                     bookingSuccess ? "disabled" : ""
                   }`}
                   disabled={bookingSuccess}
@@ -194,11 +194,11 @@ const BookingDriver = ({ bookDriver, user }) => {
           }}
         >
           <h1
-            className="text-2xl font-bold text-primary text-center py-2 px-7"
+            className="text-2xl font-bold text-secondary text-center py-2 px-7"
             style={{ fontFamily: "arial" }}
           >
             Booking sent to{" "}
-            <span className="text-2xl italic uppercase font-black text-primary text-center pl-2 py-5">
+            <span className="text-2xl italic uppercase font-black text-secondary text-center pl-2 py-5">
               {bookDriver.name}
             </span>
             !
@@ -206,8 +206,8 @@ const BookingDriver = ({ bookDriver, user }) => {
 
           <button
             onClick={closeSuccessModal}
-            className="btn btn-sm text-xs w-1/4 ml-32 mt-10 border-blue-500
-              text-white font-bold bg-primary"
+            className="btn btn-sm text-xs w-1/4 ml-32 mt-10 border-teal-500
+              text-white font-bold bg-secondary"
           >
             Close
           </button>

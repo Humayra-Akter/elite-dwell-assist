@@ -23,7 +23,7 @@ const DriverSearchSegment = () => {
         <div class="drawer-content flex flex-col items-center justify-center">
           <label
             htmlFor="Driver-month-drawer"
-            class="btn btn-primary btn-sm absolute top-0 right-0 mt-2  drawer-button lg:hidden"
+            class="btn btn-secondary btn-sm absolute top-0 right-0 mt-2  drawer-button lg:hidden"
           >
             Open Search Option
           </label>

@@ -44,6 +44,7 @@ import DriverSearchJob from "./Components/DriverDashboard/DriverSearchJob";
 import DriverNotifications from "./Components/DriverDashboard/DriverNotifications";
 import DriverUpdate from "./Components/DriverDashboard/DriverUpdate";
 import DriverSearchSegment from "./Components/Services/Driver/DriverSearchSegment";
+import DriverPost from "./Components/CustomerDashboard/DriverPost";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -128,6 +129,7 @@ function App() {
             path="createPostForMaid"
             element={<CreatePostForMaid />}
           ></Route>{" "}
+          <Route path="createPostForDriver" element={<DriverPost />}></Route>{" "}
           <Route path="bookingsForMaid" element={<MaidBookings />}></Route>
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />

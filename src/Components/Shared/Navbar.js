@@ -27,6 +27,23 @@ const Navbar = ({ openAboutModal }) => {
   const handleServiceClick = (service) => {
     closeDropdowns();
   };
+  const getNavbarColorClass = (role) => {
+    switch (role) {
+      case "maid":
+        return "bg-indigo-700";
+      case "babysitter":
+        return "bg-pink-700";
+      case "admin":
+        return "bg-red-700";
+      case "customer":
+        return "bg-orange-700";
+      case "driver":
+        return "bg-teal-700";
+      default:
+        return "bg-primary"; // Default color
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("userRole");
     signOut(auth);
@@ -36,6 +53,11 @@ const Navbar = ({ openAboutModal }) => {
   const userRole = localStorage.getItem("userRole");
   return (
     <div className="bg-primary text-white font-bold ">
+     {/* <div
+       className={`bg-primary text-white font-bold ${getNavbarColorClass(
+        userRole
+     )}`}
+    > */}
       <div class="navbar sticky">
         <div className="navbar-start">
           <Link to={"/"}>

@@ -35,7 +35,7 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-4 text-right text-black">
           <p>
-            <strong className="text-blue-800 underline">
+            <strong className="text-teal-800 underline">
               Preferred Location:
             </strong>
             {Array.isArray(location)
@@ -47,14 +47,14 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
               : location}
           </p>
           <p className="pt-2">
-            <strong className="text-blue-800 underline">Salary :</strong>{" "}
+            <strong className="text-teal-800 underline">Salary :</strong>{" "}
             {salary}
           </p>
           <div className="mt-4">
             <label
               htmlFor="booking-Driver"
               onClick={handleKnowMoreClick}
-              className="px-4 btn-md mt-3 bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
+              className="px-4 btn-md mt-3 bg-secondary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
             >
               Know More
             </label>

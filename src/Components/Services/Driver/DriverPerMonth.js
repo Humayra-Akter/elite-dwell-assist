@@ -62,7 +62,7 @@ const DriverPerMonth = ({
   return (
     <div>
       <h1
-        className="text-3xl pt-12 text-center font-black text-primary  px-7"
+        className="text-3xl pt-12 text-center font-black text-teal-700  px-7"
         style={{ fontFamily: "arial" }}
       >
         Your Car's Best Friend
