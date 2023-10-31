@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 
 const DriverSearchJob = () => {
   const [dayBookings, setDayBookings] = useState([]);
+  const [user] = useAuthState(auth);
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/driverSearchPost")
@@ -11,12 +16,52 @@ const DriverSearchJob = () => {
       });
   }, []);
 
+  const handleBooking = (booking) => {
+    if (!booking.bookingSuccess) {
+      const updatedBooking = {
+        ...booking,
+        bookingSuccess: true,
+      };
+
+      const bookingData = {
+        driverName: user?.displayName,
+        driverEmail: user?.email,
+        customerEmail: booking.userEmail,
+        bookingInfo: updatedBooking,
+      };
+      document.getElementById(`button-${booking._id}`).disabled = true;
+      fetch("http://localhost:5000/customerBookingByDriver", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            toast.success(`Request sent to ${booking.userName}`, {
+              position: toast.POSITION.TOP_CENTER,
+            });
+            setSelectedJobId(booking);
+          }
+        })
+        .catch((error) => {
+          toast.error("Failed to create booking");
+        });
+    }
+  };
+
+  const job = dayBookings.includes(
+    (booking) => booking[0]?._id === selectedJobId?._id
+  );
+
   return (
     <div>
       <h2 className="text-xl pl-5 uppercase text-blue-900 font-bold">
         Search job
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {dayBookings.map((booking) => (
           <div
             key={booking._id}
@@ -29,8 +74,13 @@ const DriverSearchJob = () => {
                   {booking.userName}
                 </span>
               </p>{" "}
-              <button className="btn btn-sm rounded-full absolute w-1/8 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600">
-                Interested
+              <button
+                id={`button-${booking._id}`}
+                onClick={() => handleBooking(booking)}
+                className={`btn btn-sm rounded-full absolute w-1/8 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-green-600 w-1/4 btn-primary`}
+                disabled={selectedJobId === booking._id}
+              >
+                {selectedJobId === booking._id ? "Request Sent" : "Interested"}
               </button>
             </div>
             <div className="card-body">
@@ -62,6 +112,12 @@ const DriverSearchJob = () => {
                   {booking.additionalPreferences}
                 </span>
               </p>{" "}
+              <p className="font-medium">
+                Preferred Time Slot:{" "}
+                <span className="uppercase font-extrabold">
+                  {booking.timeSlot}
+                </span>
+              </p>
             </div>
           </div>
         ))}

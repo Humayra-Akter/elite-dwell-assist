@@ -13,7 +13,6 @@ const CreatePostForMaid = () => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [gender, setGender] = useState("");
   const [budget, setBudget] = useState("");
-  const userRole = localStorage.getItem("userRole");
   const [additionalPreferences, setAdditionalPreferences] = useState("");
   const {
     register,

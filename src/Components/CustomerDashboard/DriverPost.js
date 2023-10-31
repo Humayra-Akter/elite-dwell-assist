@@ -9,13 +9,11 @@ const DriverPost = () => {
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [selectedServices, setSelectedServices] = useState([]);
   const [budget, setBudget] = useState("");
-  const userRole = localStorage.getItem("userRole");
-  const [licenseType, setLicenseType] = useState("");
   const [vehicleModel, setVehicleModel] = useState("");
   const [experience, setExperience] = useState("");
-  const [availability, setAvailability] = useState("");
+  const [timeSlot, setTimeSlot] = useState("");
+  const [additionalPreferences, setAdditionalPreferences] = useState("");
 
   const {
     register,
@@ -23,13 +21,12 @@ const DriverPost = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-  const handleServiceChange = (e) => {
-    const service = e.target.value;
-    if (selectedServices.includes(service)) {
-      setSelectedServices(selectedServices.filter((item) => item !== service));
+  const handleTimeSlotChange = (e) => {
+    const selectedValue = e.target.value;
+    if (timeSlot.includes(selectedValue)) {
+      setTimeSlot(timeSlot.filter((item) => item !== selectedValue));
     } else {
-      setSelectedServices([...selectedServices, service]);
+      setTimeSlot([...timeSlot, selectedValue]);
     }
   };
 
@@ -41,15 +38,9 @@ const DriverPost = () => {
       address: data.address,
       budget: data.budget,
       additionalPreferences: data.additionalPreferences,
-      licenseType: data.licenseType,
-      vehicleType: data.vehicleType,
       vehicleModel: data.vehicleModel,
-      preferredLanguage: data.preferredLanguage,
       experience: data.experience,
-      availability: data.availability,
-      isBackgroundChecked: data.isBackgroundChecked,
-      isReferencesAvailable: data.isReferencesAvailable,
-      selectedServices,
+      timeSlot,
     };
     try {
       await fetch("http://localhost:5000/driverSearchPost", {
@@ -80,202 +71,198 @@ const DriverPost = () => {
         Find a Driver for Your Needs
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid lg:grid-cols-2 pt-5 gap-3">
-          <div>
-            <div className="bg-blue-100 p-4 rounded-md mt-3">
-              <div className="form-control w-full mb-3">
-                <label className="text-primary font-bold text-md">Email</label>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  value={user?.email}
-                  name="email"
-                  className="input input-sm input-bordered w-full"
-                  onChange={(e) => setEmail(e.target.value)}
-                  {...register("email", {
-                    required: {
-                      value: true,
-                      message: "Email is required",
-                    },
-                    pattern: {
-                      value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                      message: "Provide a valid email",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the left column as needed */}
+        <div className="grid grid-cols-3">
+          <div className=" p-4 rounded-md mt-3">
+            <div className="form-control w-full">
+              <label className="text-primary font-bold text-md">Email</label>
+              <input
+                type="email"
+                placeholder="Your email"
+                value={user?.email}
+                name="email"
+                className="input input-sm input-bordered w-full"
+                onChange={(e) => setEmail(e.target.value)}
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "Email is required",
+                  },
+                  pattern: {
+                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                    message: "Provide a valid email",
+                  },
+                })}
+              />
             </div>
-            <div className="bg-blue-100 p-4 rounded-md">
-              {/* Left Column - Blue Background */}
-              <div className="form-control w-full">
-                <label className="text-primary font-bold text-md">
-                  License Type
-                </label>
-                <select
-                  value={licenseType}
-                  onChange={(e) => setLicenseType(e.target.value)}
-                  className="input input-sm input-bordered w-full"
-                  {...register("licenseType", {
-                    required: {
-                      value: true,
-                      message: "License Type is required",
-                    },
-                  })}
-                >
-                  <option value="">Select License Type</option>
-                  <option value="Class A">Class A</option>
-                  <option value="Class B">Class B</option>
-                  <option value="Class C">Class C</option>
-                </select>
-              </div>
-              {/* Add more fields for the left column as needed */}
+            {/* Add more fields for the left column as needed */}
+          </div>
+          <div className="p-4 rounded-md">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text text-blue-700 font-bold text-md">
+                  Contact
+                </span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Contact number"
+                name="contact"
+                onChange={(e) => setContact(e.target.value)}
+                className="input input-sm input-bordered w-full"
+                {...register("contact", {
+                  required: {
+                    value: true,
+                    message: "Contact is required",
+                  },
+                  pattern: {
+                    value: /[0-9]*/,
+                    message: "Your Contact number should have digits only",
+                  },
+                  minLength: {
+                    value: 11,
+                    message: "Provide a valid contact",
+                  },
+                  maxLength: {
+                    value: 11,
+                    message: "Provide a valid contact",
+                  },
+                })}
+              />
             </div>
-            <div className="bg-blue-100 p-4 rounded-md">
-              {/* Left Column - Blue Background */}
-              <div className="form-control w-full">
-                <label className="text-primary font-bold text-md">
-                  Vehicle Model
-                </label>
-                <input
-                  type="text"
-                  placeholder="Vehicle Model (e.g., Toyota Camry)"
-                  name="vehicleModel"
-                  className="input input-sm input-bordered w-full"
-                  onChange={(e) => setVehicleModel(e.target.value)}
-                  {...register("vehicleModel", {
-                    required: {
-                      value: true,
-                      message: "Vehicle Model is required",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the left column as needed */}
+            {/* Add more fields for the right column as needed */}
+          </div>{" "}
+          <div className="p-4 rounded-md mt-3">
+            {/* Right Column - White Background */}
+            <div className="form-control w-full">
+              <label className="text-primary font-bold text-md">Address</label>
+              <input
+                type="text"
+                placeholder="Address"
+                name="address"
+                className="input input-sm input-bordered w-full"
+                onChange={(e) => setAddress(e.target.value)}
+                {...register("address", {
+                  required: {
+                    value: true,
+                    message: "Addresse is required",
+                  },
+                })}
+              />
             </div>
-            <div className="bg-blue-100 p-4 rounded-md">
-              {/* Left Column - Blue Background */}
-              <div className="form-control w-full mb-3">
-                <label className="text-primary font-bold text-md">
-                  Experience (Years)
-                </label>
-                <input
-                  type="number"
-                  placeholder="Years of Experience"
-                  name="experience"
-                  className="input input-sm input-bordered w-full"
-                  onChange={(e) => setExperience(e.target.value)}
-                  {...register("experience", {
-                    required: {
-                      value: true,
-                      message: "Experience is required",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the left column as needed */}
+            {/* Add more fields for the right column as needed */}
+          </div>
+        </div>
+        <div className="grid grid-cols-2">
+          <div className=" p-4 rounded-md">
+            {/* Left Column - Blue Background */}
+            <div className="form-control w-full">
+              <label className="text-primary font-bold text-md">
+                Vehicle Model
+              </label>
+              <input
+                type="text"
+                placeholder="Vehicle Model (e.g., Toyota Camry)"
+                name="vehicleModel"
+                className="input input-sm input-bordered w-full"
+                onChange={(e) => setVehicleModel(e.target.value)}
+                {...register("vehicleModel", {
+                  required: {
+                    value: true,
+                    message: "Vehicle Model is required",
+                  },
+                })}
+              />
+            </div>
+            {/* Add more fields for the left column as needed */}
+          </div>
+          <div className=" p-4 rounded-md">
+            {/* Left Column - Blue Background */}
+            <div className="form-control w-full mb-3">
+              <label className="text-primary font-bold text-md">
+                Experience (Years)
+              </label>
+              <input
+                type="number"
+                placeholder="Years of Experience"
+                name="experience"
+                className="input input-sm input-bordered w-full"
+                onChange={(e) => setExperience(e.target.value)}
+                {...register("experience", {
+                  required: {
+                    value: true,
+                    message: "Experience is required",
+                  },
+                })}
+              />
+            </div>
+            {/* Add more fields for the left column as needed */}
+          </div>{" "}
+        </div>{" "}
+        <div className="grid grid-cols-3">
+          <div className="p-4 rounded-md">
+            <div className="form-control w-full">
+              <label className="text-primary font-bold text-md">
+                Time Slot
+              </label>
+              <select
+                value={timeSlot}
+                onChange={handleTimeSlotChange}
+                className="input input-sm input-bordered w-full"
+              >
+                <option value="">Select Time Slot</option>
+                <option value="08.00 AM - 11.00 AM">08.00 AM - 11.00 AM</option>
+                <option value="11.00 AM - 02.00 PM">11.00 AM - 02.00 PM</option>
+                <option value="02.00 PM - 05.00 PM">
+                  {" "}
+                  02.00 PM - 05.00 PM
+                </option>
+                <option value="05.00 PM - 08.00 PM">05.00 PM - 08.00 PM</option>
+              </select>
             </div>
           </div>
-
-          <div>
-            <div className="bg-white p-4 rounded-md">
-              <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Contact
+          <div className="p-4 rounded-md">
+            <div className="form-control w-full">
+              <label className="text-primary font-bold text-md">Budget</label>
+              <input
+                type="number"
+                placeholder="Your Preferred Budget"
+                name="budget"
+                className="input input-sm input-bordered w-full"
+                onChange={(e) => setBudget(e.target.value)}
+                {...register("budget", {
+                  required: {
+                    value: true,
+                    message: "Budget is required",
+                  },
+                })}
+              />
+            </div>
+          </div>
+          <div className="p-4 rounded-md">
+            <div className="form-control w-full">
+              <label className="text-primary font-bold text-md">
+                Additional Preferences
+              </label>
+              <input
+                type="text"
+                placeholder="Your Additional Preferences, if no, then write N/A"
+                name="additionalPreferences"
+                className="input input-sm input-bordered w-full"
+                onChange={(e) => setAdditionalPreferences(e.target.value)}
+                {...register("additionalPreferences", {
+                  required: {
+                    value: true,
+                    message: "additionalPreferences is required",
+                  },
+                })}
+              />
+              <label>
+                {errors.additionalPreferences?.type === "required" && (
+                  <span className="text-red-500 text-xs mt-1">
+                    {errors.additionalPreferences.message}
                   </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Contact number"
-                  name="contact"
-                  onChange={(e) => setContact(e.target.value)}
-                  className="input input-sm input-bordered w-full"
-                  {...register("contact", {
-                    required: {
-                      value: true,
-                      message: "Contact is required",
-                    },
-                    pattern: {
-                      value: /[0-9]*/,
-                      message: "Your Contact number should have digits only",
-                    },
-                    minLength: {
-                      value: 11,
-                      message: "Provide a valid contact",
-                    },
-                    maxLength: {
-                      value: 11,
-                      message: "Provide a valid contact",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the right column as needed */}
-            </div>
-            <div className="bg-white p-4 rounded-md">
-              {/* Right Column - White Background */}
-              <div className="form-control w-full">
-                <label className="text-primary font-bold text-md">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  placeholder="Address"
-                  name="address"
-                  className="input input-sm input-bordered w-full"
-                  onChange={(e) => setAddress(e.target.value)}
-                  {...register("address", {
-                    required: {
-                      value: true,
-                      message: "Addresse is required",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the right column as needed */}
-            </div>
-            <div className="bg-white p-4 rounded-md">
-              {/* Right Column - White Background */}
-              <div className="form-control w-full">
-                <label className="text-primary font-bold text-md">
-                  Availability
-                </label>
-                <input
-                  type="text"
-                  placeholder="Availability (e.g., Weekdays, Weekends)"
-                  name="availability"
-                  className="input input-sm input-bordered w-full"
-                  onChange={(e) => setAvailability(e.target.value)}
-                  {...register("availability", {
-                    required: {
-                      value: true,
-                      message: "Availability is required",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the right column as needed */}
-            </div>
-            <div className="bg-white p-4 rounded-md">
-              {/* Left Column - Blue Background */}
-              <div className="form-control w-full">
-                <label className="text-primary font-bold text-md">Budget</label>
-                <input
-                  type="number"
-                  placeholder="Your Preferred Budget"
-                  name="budget"
-                  className="input input-sm input-bordered w-full"
-                  onChange={(e) => setBudget(e.target.value)}
-                  {...register("budget", {
-                    required: {
-                      value: true,
-                      message: "Budget is required",
-                    },
-                  })}
-                />
-              </div>
-              {/* Add more fields for the left column as needed */}
+                )}
+              </label>
             </div>
           </div>
         </div>

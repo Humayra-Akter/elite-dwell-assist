@@ -1,85 +1,131 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet, Route } from "react-router-dom";
-import DriverProfile from "./DriverProfile";
-import DriverNotifications from "./DriverNotifications";
-import DriverSearchJob from "./DriverSearchJob";
+import frwrd from "../../images/forward.png";
+import rewrd from "../../images/rewind.png";
+import ban4 from "../../images/avatar.png";
+import ban1 from "../../images/notification.png";
+import ban2 from "../../images/job-search.png";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const DriverDashboard = () => {
+  const [user] = useAuthState(auth);
+  const [loggedUser, setLoggedUser] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [selectedLink, setSelectedLink] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:5000/driver?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.length > 0) {
+            const matchingUser = data.find(
+              (userData) => userData.email === user.email
+            );
+            if (matchingUser) {
+              setLoggedUser(matchingUser);
+            }
+          }
+        });
+    }
+  }, [user]);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleLinkClick = (link) => {
+    setSelectedLink(link);
+  };
+
   return (
     <div>
-      <div class="drawer lg:drawer-open">
-        <input id="maid-drawer" type="checkbox" class="drawer-toggle" />
+      <div className={`drawer ${isSidebarOpen ? "lg:drawer-open" : ""}`}>
+        <input id="driver-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content p-11">
           <Outlet />
           <label
-            for="maid-drawer"
+            for="driver-drawer"
             class="btn btn-primary drawer-button lg:hidden"
           >
             Open drawer
           </label>
+          {isSidebarOpen ? (
+            <button
+              className="btn absolute rounded-full top-2 left-2 z-10 btn-transparent btn-sm"
+              onClick={toggleSidebar}
+            >
+              <img className="w-4" src={rewrd} alt="" />
+            </button>
+          ) : (
+            <button
+              className="btn absolute top-0 rounded-full left-0 btn-secondary btn-sm"
+              onClick={toggleSidebar}
+            >
+              <img className="w-4" src={frwrd} alt="" />
+            </button>
+          )}
         </div>
         <div class="drawer-side">
           <label
-            for="maid-drawer"
+            for="driver-drawer"
             aria-label="close sidebar"
             class="drawer-overlay"
           ></label>
-          <ul class="menu p-5 w-80 min-h-full bg-indigo-800 text-base-content">
+          <ul className="menu p-4 w-80 min-h-full bg-sky-50 text-base-content">
             {/* <!-- Sidebar content here --> */}
 
-            <ul className="mt-20">
+            <ul className="mt-16">
+              <img
+                src={loggedUser.img}
+                alt="user"
+                className="w-32 h-32 rounded-full mx-auto"
+              />
               <li>
+                {" "}
                 <Link
-                  className="text-slate-400 mt-3 text-xl font-extrabold hover:text-black"
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "profile" ? "text-white bg-primary" : ""
+                  }`}
                   to="/driverDashboard"
+                  onClick={() => handleLinkClick("profile")}
                 >
-                  <img
-                    className="relative w-5 h-5 bg-slate-600"
-                    alt=""
-                    src="/book.svg"
-                  />
-                  Profile
-                  <img
-                    className="relative w-[7px] h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/small-arrow-2.svg"
-                  />
+                  <span className="flex gap-4">
+                    <img className="w-6" src={ban4} alt="" />
+                    Profile
+                  </span>
                 </Link>
               </li>
               <li>
+                {" "}
                 <Link
-                  className="text-slate-400 mt-3 text-xl font-extrabold hover:text-black"
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "notification"
+                      ? "text-white bg-primary"
+                      : ""
+                  }`}
                   to="/driverDashboard/DriverNotifications"
+                  onClick={() => handleLinkClick("notification")}
                 >
-                  <img
-                    className="relative w-5 h-5 bg-slate-600"
-                    alt=""
-                    src="/usersthreed.svg"
-                  />
-                  Notification
-                  <img
-                    className="relative w-[7px] h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/small-arrow-2.svg"
-                  />
+                  <span className="flex gap-4">
+                    <img className="w-6" src={ban1} alt="" />
+                    Notification
+                  </span>
                 </Link>
               </li>
               <li>
+                {" "}
                 <Link
-                  className="text-slate-400 mt-3 text-xl font-extrabold hover:text-black"
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "searchJob" ? "text-white bg-primary" : ""
+                  }`}
                   to="/driverDashboard/searchJob"
+                  onClick={() => handleLinkClick("searchJob")}
                 >
-                  <img
-                    className="relative w-5 h-5 bg-slate-600"
-                    alt=""
-                    src="/search.svg"
-                  />
-                  Search Job
-                  <img
-                    className="relative w-[7px] h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/small-arrow-2.svg"
-                  />
+                  <span className="flex gap-4">
+                    <img className="w-6" src={ban2} alt="" />
+                    Search Job
+                  </span>
                 </Link>
               </li>
             </ul>
