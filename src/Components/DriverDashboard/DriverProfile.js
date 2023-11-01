@@ -50,17 +50,17 @@ const DriverProfile = () => {
     <div className=" w-full h-full text-left text-2xl text-darkslategray-100 font-montserrat">
       <div className="absolute top-[100.98px] left-[calc(50%_-_397.33px)] w-[727.46px] h-[159.8px]">
         <div className="absolute top-[70.4px] left-[calc(50%_-_177.07px)] w-[220.09px] h-[27.37px]">
-          <div className="absolute top-[0px] left-[calc(50%_-_150.04px)] inline-block w-[220.09px] h-[27.37px]">
+          <div className="absolute top-[0px] capitalize left-[calc(50%_-_150.04px)] inline-block w-[220.09px] h-[27.37px]">
             {loggedUser.role}
           </div>
         </div>
         <div className="absolute top-[95.94px] left-[calc(50%_+_182.43px)] w-[181.3px] h-[63.86px] overflow-hidden flex flex-row items-center justify-start">
           <button
-            className="cursor-pointer hover:text-black bg-indigo-600 [border:none] py-2 px-0 bg-mediumpurple rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[170px] h-11 overflow-hidden shrink-0 flex flex-row items-center justify-center box-border"
+            className="cursor-pointer hover:text-black bg-primary [border:none] py-2 px-0 bg-mediumpurple rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[170px] h-11 overflow-hidden shrink-0 flex flex-row items-center justify-center box-border"
             id="edit"
           >
             <Link to="/driverDashboard/driverUpdate">
-              <b className="relative text-base leading-[50%] inline-block font-montserrat text-peak-white text-center w-16 h-6 shrink-0">
+              <b className="relative text-white inline-block text-center w-16 h-6 shrink-0">
                 Edit
               </b>
             </Link>
@@ -93,16 +93,11 @@ const DriverProfile = () => {
             Education
           </b>
         </div>
-        <div className="absolute top-[2px] left-[524px] w-[174px] h-[31px] text-left">
-          <b className="absolute top-[7px] left-[0px] inline-block w-[148px]">
-            Upload Document
-          </b>
-        </div>
       </div>
       <div className="absolute top-[694px] left-[calc(50%_-_404px)] w-[726px] h-[47px] overflow-hidden text-center text-sm text-peak-primary">
         <div className="absolute top-[4px] left-[calc(50%_-_366px)] bg-darkslateblue w-[729px] h-[33px]">
           <div className="absolute top-[8px] left-[53px] w-[136px] h-[17px]">
-            <div className="absolute top-[0px] left-[0px] font-medium inline-block w-[136px]">
+            <div className="absolute top-[0px] left-[0px] font-medium uppercase inline-block w-[136px]">
               {loggedUser?.education}
             </div>
           </div>
@@ -113,7 +108,7 @@ const DriverProfile = () => {
         </div>
       </div>
       <div className="absolute top-[327px] left-[calc(50%_-_399px)] w-[704px] h-[275px] overflow-hidden text-base text-black">
-        <div className="absolute top-[128px] left-[77px] inline-block w-[323px] h-[23px]">
+        <div className="absolute capitalize top-[128px] left-[77px] inline-block w-[323px] h-[23px]">
           {loggedUser?.gender}
         </div>
         <div className="absolute top-[154px] left-[117px] inline-block w-[323px] h-[23px]">
@@ -129,9 +124,9 @@ const DriverProfile = () => {
           {loggedUser?.nid}
         </div>
         <div className="absolute top-[249px] left-[70px] inline-block w-[323px] h-[23px]">
-          {loggedUser?.salary}
+          {loggedUser?.salary} tk
         </div>
-        <div className="absolute top-[106px] left-[90px] inline-block w-[323px] h-[23px]">
+        <div className="absolute top-[106px] left-[90px] capitalize inline-block w-[323px] h-[23px]">
           {loggedUser?.location}
         </div>
         <div className="absolute top-[79px] left-[4px] font-semibold inline-block w-[97px] h-[17px] text-darkslategray-100">
@@ -173,9 +168,9 @@ const DriverProfile = () => {
           {loggedUser?.email}
         </div>
         <div className="absolute top-[31px] left-[70px] inline-block w-[323px] h-[23px]">
-          {loggedUser?.phone}
+          {loggedUser?.contact}
         </div>
-        <div className="absolute top-[55px] left-[79px] inline-block w-[323px] h-[23px]">
+        <div className="absolute top-[55px] left-[79px] capitalize inline-block w-[323px] h-[23px]">
           {loggedUser?.address}
         </div>
         <div className="absolute top-[80px] left-[106px] inline-block w-[323px] h-[23px]">

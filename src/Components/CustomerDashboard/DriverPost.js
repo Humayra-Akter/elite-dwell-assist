@@ -198,8 +198,8 @@ const DriverPost = () => {
             {/* Add more fields for the left column as needed */}
           </div>{" "}
         </div>{" "}
-        <div className="grid grid-cols-3">
-          <div className="p-4 rounded-md">
+        <div className="grid grid-cols-2">
+          {/* <div className="p-4 rounded-md">
             <div className="form-control w-full">
               <label className="text-primary font-bold text-md">
                 Time Slot
@@ -219,7 +219,7 @@ const DriverPost = () => {
                 <option value="05.00 PM - 08.00 PM">05.00 PM - 08.00 PM</option>
               </select>
             </div>
-          </div>
+          </div> */}
           <div className="p-4 rounded-md">
             <div className="form-control w-full">
               <label className="text-primary font-bold text-md">Budget</label>

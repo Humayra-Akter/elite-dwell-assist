@@ -15,7 +15,7 @@ const DriverSearchJob = () => {
         setDayBookings(data);
       });
   }, []);
-
+  console.log(dayBookings);
   const handleBooking = (booking) => {
     if (!booking.bookingSuccess) {
       const updatedBooking = {
@@ -61,7 +61,7 @@ const DriverSearchJob = () => {
       <h2 className="text-xl pl-5 uppercase text-blue-900 font-bold">
         Search job
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {dayBookings.map((booking) => (
           <div
             key={booking._id}
@@ -69,7 +69,7 @@ const DriverSearchJob = () => {
           >
             <div className="card-title pt-7 pb-5 bg-blue-50">
               <p className="font-sm ml-6">
-                Request from:
+                Request from:{" "}
                 <span className="uppercase text-primary font-bold">
                   {booking.userName}
                 </span>
@@ -103,7 +103,13 @@ const DriverSearchJob = () => {
               <p className="font-medium">
                 Budget:{" "}
                 <span className="uppercase text-primary font-extrabold">
-                  {booking.budget}
+                  {booking.budget} tk
+                </span>
+              </p>{" "}
+              <p className="font-medium">
+                Experience :{" "}
+                <span className="uppercase text-primary font-extrabold">
+                  {booking.experience} years
                 </span>
               </p>
               <p className="font-medium">
@@ -111,13 +117,19 @@ const DriverSearchJob = () => {
                 <span className="uppercase font-extrabold">
                   {booking.additionalPreferences}
                 </span>
-              </p>{" "}
+              </p>
               <p className="font-medium">
+                Car Brand :{" "}
+                <span className="uppercase font-extrabold">
+                  {booking.vehicleModel}
+                </span>
+              </p>{" "}
+              {/* <p className="font-medium">
                 Preferred Time Slot:{" "}
                 <span className="uppercase font-extrabold">
                   {booking.timeSlot}
                 </span>
-              </p>
+              </p> */}
             </div>
           </div>
         ))}

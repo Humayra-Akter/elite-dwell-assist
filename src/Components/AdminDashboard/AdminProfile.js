@@ -43,6 +43,13 @@ const AdminProfile = () => {
         setMaids(data);
       });
   }, []);
+  useEffect(() => {
+    fetch("http://localhost:5000/driver")
+      .then((res) => res.json())
+      .then((data) => {
+        setDrivers(data);
+      });
+  }, []);
 
   return (
     <div>
@@ -70,7 +77,7 @@ const AdminProfile = () => {
         <div className="card bg-yellow-600 text-primary-content">
           <div className="card-body">
             <h2 className="card-title">Driver</h2>
-            <p className="font-bold">Total : </p>
+            <p className="font-bold">Total : {drivers.length} </p>
           </div>
         </div>
       </div>

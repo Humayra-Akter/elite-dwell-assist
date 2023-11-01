@@ -8,11 +8,13 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
+import Loading from "../Shared/Loading";
 
 const DriverRegistrationForm = () => {
   //   const [selectedRole, setSelectedRole] = useState("");
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -59,6 +61,10 @@ const DriverRegistrationForm = () => {
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
   };
+
+  if (loading) {
+    return Loading;
+  }
 
   const locationOptions = [
     {
@@ -193,6 +199,7 @@ const DriverRegistrationForm = () => {
 
             <form onSubmit={handleSubmit(handleAddDriver)}>
               <div className="grid grid-cols-2 pt-5 gap-3">
+                {/* name  */}
                 <div className="form-control  w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
@@ -346,7 +353,8 @@ const DriverRegistrationForm = () => {
                 {/* Gender field */}
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      {" "}
                       Gender
                     </span>
                   </label>
@@ -361,7 +369,8 @@ const DriverRegistrationForm = () => {
                 {/* Experience dropdown */}
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-blue-700 font-bold text-sm">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      {" "}
                       Experience
                     </span>
                   </label>
@@ -380,7 +389,8 @@ const DriverRegistrationForm = () => {
                 {/* Education field */}
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text text-left text-blue-700 font-bold text-xs">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      {" "}
                       Education
                     </span>
                   </label>
@@ -398,16 +408,16 @@ const DriverRegistrationForm = () => {
                     <option value="ssc">SSC pass</option>
                     <option value="jsc">JSC pass</option>
                   </select>
+                  <label>
+                    {errors.education?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.education.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
-                <label>
-                  {errors.education?.type === "required" && (
-                    <span className="text-red-500 text-xs mt-1">
-                      {errors.education.message}
-                    </span>
-                  )}
-                </label>
               </div>
-              <div className="grid grid-cols-2 gap-3 pt-5">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="form-control w-full">
                   {selectedVehicleType.map((vehicleType) => (
                     <div key={vehicleType.value} className="py-2">
@@ -491,6 +501,7 @@ const DriverRegistrationForm = () => {
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
+                      {" "}
                       Location
                     </span>
                   </label>
@@ -510,7 +521,8 @@ const DriverRegistrationForm = () => {
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      NID_no
+                      {" "}
+                      NID No
                     </span>
                   </label>
                   <input
@@ -547,6 +559,7 @@ const DriverRegistrationForm = () => {
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
+                      {" "}
                       Driving license no
                     </span>
                   </label>
@@ -585,7 +598,8 @@ const DriverRegistrationForm = () => {
                 <div className="form-control  w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
-                      photo
+                      {" "}
+                      Photo
                     </span>
                   </label>
                   <input
@@ -611,6 +625,7 @@ const DriverRegistrationForm = () => {
                 <div className="form-control  w-full">
                   <label className="label">
                     <span className="label-text text-blue-700 font-bold text-md">
+                      {" "}
                       Salary
                     </span>
                   </label>
@@ -635,41 +650,79 @@ const DriverRegistrationForm = () => {
                   </label>
                 </div>
               </div>
-              {/* password field */}
-              <div className="form-control w-full pb-11">
-                <label className="label">
-                  <span className="label-text text-blue-700 font-bold text-md">
-                    Password
-                  </span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  className="input input-sm input-bordered w-full "
-                  {...register("password", {
-                    required: {
-                      value: true,
-                      message: "password is required",
-                    },
-                    minLength: {
-                      value: 6,
-                      message: "Must be 6 characters longer",
-                    },
-                  })}
-                />
-                <label>
-                  {errors.password?.type === "required" && (
-                    <span className="text-red-500 text-xs mt-1">
-                      {errors.password.message}
+              <div className="grid lg:grid-cols-2 pt-5 gap-3">
+                {/* Password field */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text text-primary font-bold text-md">
+                      New Password
                     </span>
-                  )}
-                  {errors.password?.type === "minLength" && (
-                    <span className="text-red-500 text-xs mt-1">
-                      {errors.password.message}
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    className="input input-sm input-bordered w-full"
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is required",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Must be 6 characters or longer",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.password?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.password.message}
+                      </span>
+                    )}
+                    {errors.password?.type === "minLength" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.password.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+
+                {/* Confirm Password field */}
+                <div className="form-control w-full pb-11">
+                  <label className="label">
+                    <span className="label-text text-primary font-bold text-md">
+                      Confirm Password
                     </span>
-                  )}
-                </label>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    name="confirmPassword"
+                    className="input input-sm input-bordered w-full"
+                    {...register("confirmPassword", {
+                      required: {
+                        value: true,
+                        message: "Password confirmation is required",
+                      },
+                      validate: (value) =>
+                        value === getValues("password") ||
+                        "Passwords do not match", // Check if it matches the "password" field
+                    })}
+                  />
+                  <label>
+                    {errors.confirmPassword?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.confirmPassword.message}
+                      </span>
+                    )}
+                    {errors.confirmPassword?.type === "validate" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.confirmPassword.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
               </div>
               {signInError}
               <input
@@ -677,7 +730,6 @@ const DriverRegistrationForm = () => {
                 value="register"
                 type="submit"
               />
-              {loading && <div>Loading...</div>}
             </form>
             <p className="text-center">
               <small className="font-semibold">

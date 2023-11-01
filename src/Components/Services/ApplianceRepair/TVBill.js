@@ -189,7 +189,7 @@ const TVBill = () => {
           </div>
           <div className="pt-6">
             <div>
-              <div className="card w-full bg-transparent border-2 rounded-3xl border-blue-100 text-primary">
+              <div className="card w-full bg-transparent border-2 ml-3 rounded-3xl border-gray-100 text-primary">
                 <div className="card-body">
                   <h2 className="card-title">Address</h2>
                   <p>Expert will arrive at the address given below</p>
@@ -387,7 +387,7 @@ const TVBill = () => {
             </div>
           </div>
         </div>
-        <div className="absolute right-28 w-96 text-center text-base">
+        <div className="absolute right-24 w-96 text-center text-base">
           {/* tv power supply problem */}
           <div className="absolute top-[180.88px] left-[27.5px] w-[376px] h-[137px]">
             <div className=" box-border w-96 h-36 border-2 border-gray-200" />
