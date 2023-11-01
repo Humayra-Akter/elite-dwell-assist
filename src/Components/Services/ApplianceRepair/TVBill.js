@@ -144,13 +144,18 @@ const TVBill = () => {
   };
 
   return (
-    <div>
+    <div >
       <h1
         className="text-3xl pt-12 text-center font-black text-primary  px-7"
         style={{ fontFamily: "arial" }}
       >
         Your Home-Our Expertise
       </h1>
+      {userRole !== "customer" && (
+          <p className="text-red-500 text-xs text-center mt-1">
+            You do not have permission to access this page.
+          </p>
+        )}
       <div className="bg-white p-4 mt-7 mx-96 rounded-lg shadow-md mb-4">
         <p className="text-lg text-center text-black font-semibold">
           {displaySelectedInfo()}
@@ -158,9 +163,9 @@ const TVBill = () => {
       </div>
       <div className="flex pb-32">
         <div className="grid grid-cols-2">
-          <div className="ml-10">
+          <div className="ml-12 ">
             <div className="time-slot-container pt-20">
-              <strong className="text-lg mx-5 font-bold text-center text-primary">
+              <strong className="text-lg mx-16 font-bold text-center text-primary">
                 Select a Time Slot :
               </strong>
               <select
@@ -174,10 +179,10 @@ const TVBill = () => {
                 <option value="evening">Evening</option>
               </select>
               <div>
-                <h1 className="text-lg font-bold text-primary mx-5 pt-14 text-left">
+                <h1 className="text-lg font-bold text-primary mx-16 pt-14 text-left">
                   Select a Date
                 </h1>
-                <div className="calendar-container">
+                <div className="mx-10 calendar-container">
                   <DayPicker
                     selected={selectedDate}
                     onDayClick={handleDateSelect}
@@ -187,9 +192,16 @@ const TVBill = () => {
               </div>
             </div>
           </div>
-          <div className="pt-6">
+
+
+
+
+
+
+
+          <div className=" mx-5 pt-6" >
             <div>
-              <div className="card w-full bg-transparent border-2 ml-3 rounded-3xl border-gray-100 text-primary">
+              <div className="card w-full bg-transparent border-4 rounded-3xl border-blue-200 text-blue-800">
                 <div className="card-body">
                   <h2 className="card-title">Address</h2>
                   <p>Expert will arrive at the address given below</p>
@@ -387,10 +399,11 @@ const TVBill = () => {
             </div>
           </div>
         </div>
-        <div className="absolute right-24 w-96 text-center text-base">
+        <div className="absolute  right-28 w-96 text-center text-base">
+          
           {/* tv power supply problem */}
-          <div className="absolute top-[180.88px] left-[27.5px] w-[376px] h-[137px]">
-            <div className=" box-border w-96 h-36 border-2 border-gray-200" />
+          <div className="absolute top-[185px] left-[27.5px] w-[376px] h-[137px]">
+            <div className=" box-border w-96 h-36 border-2 border-gray-300" />
             {/* taka icon */}
             <img
               className="absolute top-4 right-4 w-8 h-8 "
@@ -406,12 +419,23 @@ const TVBill = () => {
                 handleServiceSelect("TV Power Supply Problem");
               }}
             >
-              <img
-                className="absolute h-5 w-5 top-[25%] right-2 max-w-full max-h-full"
-                alt=""
-                src="/rectangle-41.svg"
-              />
-            </button>
+             <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/rectangle-41.svg"
+                  />
+                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+                </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -459,7 +483,7 @@ const TVBill = () => {
 
           {/* TV Mounting */}
           <div className="absolute top-[333px] left-[27px] w-[376px] h-[137px]">
-            <div className=" box-border w-96 h-36 border-2 border-gray-200" />
+            <div className=" box-border w-96 h-36 border-2 border-gray-300" />
             {/* taka icon */}
             <img
               className="absolute top-4 right-4 w-8 h-8 "
@@ -475,12 +499,23 @@ const TVBill = () => {
                 setMountingCount(0);
               }}
             >
-              <img
-                className="absolute h-5 w-5 top-[25%] right-2 max-w-full max-h-full"
-                alt=""
-                src="/rectangle-41.svg"
-              />
-            </button>
+             <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/rectangle-41.svg"
+                  />
+                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+                  </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -526,8 +561,8 @@ const TVBill = () => {
           </div>
 
           {/* TV Sound Problem */}
-          <div className="absolute top-[29px] left-[27px] w-[376px] h-[137px]">
-            <div className=" box-border w-96 h-36 border-2 border-gray-200" />
+          <div className="absolute top-[35px] left-[27px] w-[376px] h-[137px]">
+            <div className=" box-border w-96 h-36 border-2 border-gray-300" />
             {/* taka icon */}
             <img
               className="absolute top-4 right-4 w-8 h-8 "
@@ -535,7 +570,7 @@ const TVBill = () => {
               src="/tablercurrencytaka2.svg"
             />
             {/* trash button */}
-            <button
+            {/* <button
               className="cursor-pointer absolute top-20 right-4 w-6 h-6"
               id="cancel_button"
               onClick={() => {
@@ -548,7 +583,33 @@ const TVBill = () => {
                 alt=""
                 src="/rectangle-41.svg"
               />
-            </button>
+            </button> */}
+
+            <button
+                  className="cursor-pointer p-0 bg-[transparent] absolute top-[80px] left-[333px] box-border w-6 h-6 border-[1px] border-solid border-white"
+                  id="cancel_button"
+                  onClick={() => {
+                    handleServiceSelect("TV Sound Problem");
+                    setSoundProblemCount(0);
+                  }}
+                >
+                  <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/rectangle-41.svg"
+                  />
+                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+                </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -593,14 +654,14 @@ const TVBill = () => {
             />
           </div>
           <img
-            className="absolute top-[calc(50%_-_358px)] right-[373px] w-[45px] h-[42px]"
+            className="absolute top-[calc(50%_-_25px)] right-[320px] w-[45px] h-[42px]"
             alt=""
             src="/setting-fill.svg"
           />
 
           {/* tv display */}
           <div className="absolute top-[485px] left-[27px] w-[376px] h-[137px]">
-            <div className=" box-border w-96 h-36 border-2 border-gray-200" />
+            <div className=" box-border w-96 h-36 border-2 border-gray-300" />
             {/* taka icon */}
             <img
               className="absolute top-4 right-4 w-8 h-8 "
@@ -616,12 +677,23 @@ const TVBill = () => {
                 setDisplayCount(0);
               }}
             >
-              <img
-                className="absolute h-5 w-5 top-[25%] right-2 max-w-full max-h-full"
-                alt=""
-                src="/rectangle-41.svg"
-              />
-            </button>
+             <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/vector-8.svg"
+                  />
+                  <img
+                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src="/rectangle-41.svg"
+                  />
+                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+                 </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -679,7 +751,7 @@ const TVBill = () => {
           <div className="absolute top-[643.88px] left-[384.5px] text-lg font-semibold text-right">
             tk
           </div>
-          <div className="text-left ml-8 pb-7 text-xl font-medium">
+          <div className="text-left ml-16  text-xl font-medium">
             Services
           </div>
         </div>
