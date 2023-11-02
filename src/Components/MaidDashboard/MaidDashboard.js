@@ -80,6 +80,7 @@ const MaidDashboard = () => {
                 alt="user"
                 className="w-32 h-32 rounded-full mx-auto"
               />
+              <hr />
               <li>
                 <Link
                   className={`text-primary mt-3 text-base font-bold hover:text-black ${
@@ -94,6 +95,7 @@ const MaidDashboard = () => {
                   </span>
                 </Link>
               </li>{" "}
+              <hr />
               <li>
                 <Link
                   className={`text-primary mt-3 text-base font-bold hover:text-black ${
@@ -110,6 +112,7 @@ const MaidDashboard = () => {
                   </span>
                 </Link>
               </li>
+              <hr />
               <li>
                 <Link
                   className={`text-primary mt-3 text-base font-bold hover:text-black ${
@@ -124,6 +127,7 @@ const MaidDashboard = () => {
                   </span>
                 </Link>
               </li>
+              <hr />
             </ul>
           </ul>
         </div>

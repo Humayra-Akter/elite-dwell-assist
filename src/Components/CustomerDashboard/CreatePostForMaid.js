@@ -48,7 +48,9 @@ const CreatePostForMaid = () => {
       budget: data.budget,
       additionalPreferences: data.additionalPreferences,
       timeSlot,
+      selectedServices,
     };
+    console.log(bookingData);
     try {
       await fetch("http://localhost:5000/maidSearchPost", {
         method: "POST",

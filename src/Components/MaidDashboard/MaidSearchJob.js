@@ -15,7 +15,7 @@ const MaidSearchJob = () => {
         setDayBookings(data);
       });
   }, []);
-
+  console.log(dayBookings);
   const handleBooking = (booking) => {
     if (!booking.bookingSuccess) {
       const updatedBooking = {
@@ -116,6 +116,12 @@ const MaidSearchJob = () => {
                 Preferred Time Slot:{" "}
                 <span className="uppercase font-extrabold">
                   {booking.timeSlot}
+                </span>
+              </p>
+              <p className="font-medium">
+                Offered Services :{" "}
+                <span className="uppercase font-extrabold">
+                  {booking?.selectedServices}
                 </span>
               </p>
             </div>
