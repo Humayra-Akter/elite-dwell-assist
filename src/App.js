@@ -45,6 +45,11 @@ import DriverNotifications from "./Components/DriverDashboard/DriverNotification
 import DriverUpdate from "./Components/DriverDashboard/DriverUpdate";
 import DriverSearchSegment from "./Components/Services/Driver/DriverSearchSegment";
 import DriverPost from "./Components/CustomerDashboard/DriverPost";
+import BabysitterDashboard from "./Components/BabysitterDashboard/BabysitterDashboard";
+import BabysitterProfile from "./Components/BabysitterDashboard/BabysitterProfile";
+import BabysitterNotifications from "./Components/BabysitterDashboard/BabysitterNotifications";
+import BabysitterSearchJob from "./Components/BabysitterDashboard/BabysitterSearchJob";
+import CreatePostForBabysitter from "./Components/CustomerDashboard/CreatePostForBabysitter";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -108,6 +113,18 @@ function App() {
           ></Route>
           <Route path="searchJob" element={<MaidSearchJob />}></Route>
         </Route>
+        {/* babysitter  */}
+        <Route path="/babysitterDashboard" element={<BabysitterDashboard />}>
+          <Route index element={<BabysitterProfile />}></Route>
+          <Route
+            path="babysitterNotification"
+            element={<BabysitterNotifications />}
+          ></Route>
+          <Route
+            path="babysitterSearchJob"
+            element={<BabysitterSearchJob />}
+          ></Route>
+        </Route>
         {/* driver*/}
         <Route path="/driverDashboard" element={<DriverDashboard />}>
           <Route index element={<DriverProfile />}></Route>
@@ -130,6 +147,10 @@ function App() {
             element={<CreatePostForMaid />}
           ></Route>{" "}
           <Route path="createPostForDriver" element={<DriverPost />}></Route>{" "}
+          <Route
+            path="createPostForBabysitter"
+            element={<CreatePostForBabysitter />}
+          ></Route>{" "}
           <Route path="bookingsForMaid" element={<MaidBookings />}></Route>
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />

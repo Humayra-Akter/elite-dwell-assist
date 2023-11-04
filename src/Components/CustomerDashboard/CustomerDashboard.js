@@ -103,6 +103,17 @@ const CustomerDashboard = () => {
               </Link>
             </li>
             <li>
+              <Link
+                className="text-primary mt-3 text-base font-bold hover:text-black"
+                to="/customerDashboard/createPostForBabysitter"
+              >
+                <span className="flex gap-4">
+                  <img className="w-6" src={ban2} alt="" />
+                  Create Post For Babysitter
+                </span>
+              </Link>
+            </li>
+            <li>
               <div className="relative group">
                 <input
                   type="checkbox"

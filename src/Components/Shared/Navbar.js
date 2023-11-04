@@ -53,7 +53,7 @@ const Navbar = ({ openAboutModal }) => {
   const userRole = localStorage.getItem("userRole");
   return (
     <div className="bg-primary text-white font-bold ">
-     {/* <div
+      {/* <div
        className={`bg-primary text-white font-bold ${getNavbarColorClass(
         userRole
      )}`}
@@ -144,6 +144,16 @@ const Navbar = ({ openAboutModal }) => {
           {/* maid dashboard */}
           {userRole === "maid" ? (
             <Link to="/maidDashboard">
+              <button className="text-white font-bold hover:text-black pr-7 ">
+                <div class="indicator">Dashboard</div>
+              </button>
+            </Link>
+          ) : (
+            <></>
+          )}
+          {/* babysitter dashboard */}
+          {userRole === "babysitter" ? (
+            <Link to="/babysitterDashboard">
               <button className="text-white font-bold hover:text-black pr-7 ">
                 <div class="indicator">Dashboard</div>
               </button>
