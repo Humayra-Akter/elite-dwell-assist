@@ -157,7 +157,6 @@ const DriverRegistrationForm = () => {
             dob: data.dob,
             password: data.password,
           };
-          // save driver information to the database
           fetch("http://localhost:5000/driver", {
             method: "POST",
             headers: {

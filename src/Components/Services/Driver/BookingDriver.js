@@ -8,18 +8,13 @@ import auth from "../../../firebase.init";
 
 const BookingDriver = ({ bookDriver, user }) => {
   const {
-    id,
     img,
-    email,
     name,
-    phone,
     experience,
-    availability,
     location,
     gender,
-    address,
     education,
-    task,
+    license,
     dob,
     salary,
   } = bookDriver;
@@ -96,8 +91,8 @@ const BookingDriver = ({ bookDriver, user }) => {
   return (
     <div className=" bg-transparent">
       <input type="checkbox" id="booking-Driver" class="modal-toggle" />
-      <div class="modal ">
-        <div class="modal-box max-w-2xl w-screen">
+      <div class="modal">
+        <div class="modal-box h-96 max-w-xl w-screen">
           <label
             for="booking-Driver"
             class="btn btn-sm btn-circle btn-ghost bg-red-500 absolute right-2 top-2"
@@ -112,62 +107,72 @@ const BookingDriver = ({ bookDriver, user }) => {
                 alt="Driver"
               />
               <h2 className="card-title">
-                <strong className="text-teal-900">{name}</strong> for your Car
+                <strong className="text-indigo-900">{name}</strong> for your Car
               </h2>
             </figure>
             <div class="card-body relative top-16">
-              <div className="grid grid-cols-2 gap-0">
-                <div>
+              <div className="flex">
+                <div className="w-1/2 pr-4">
                   <p className="pt-2">
-                    <strong className="text-teal-800 underline">
+                    <strong className="text-indigo-800 underline">
                       Salary :
                     </strong>{" "}
                     {salary}
                   </p>
-                </div>
-                <div>
                   <p>
-                    <strong className="text-teal-800 underline">
+                    <strong className="text-indigo-800 underline">
                       Preferred Location:
-                    </strong>
-                    {Array.isArray(location)
-                      ? location
-                          .map(
-                            (loc) =>
-                              loc.trim()[0].toUpperCase() + loc.trim().slice(1)
-                          )
-                          .join(", ")
-                      : location}
+                    </strong>{" "}
+                    <ul>
+                      {Array.isArray(location) ? (
+                        location.map((loc, index) => (
+                          <li key={index}>
+                            {loc.trim()[0].toUpperCase() + loc.trim().slice(1)}
+                          </li>
+                        ))
+                      ) : (
+                        <li>{location}</li>
+                      )}
+                    </ul>
                   </p>
+
                   <p className="pt-2">
-                    <strong className="text-teal-800 underline">Age:</strong>{" "}
+                    <strong className="text-indigo-800 underline">Age:</strong>{" "}
                     {calculateAge(dob)} years
                   </p>
+                </div>
+                <div className="w-1/2 pl-4">
                   <p className="pt-2">
-                    <strong className="text-teal-800 underline">
+                    <strong className="text-indigo-800 underline">
                       Experience :
                     </strong>{" "}
                     {experience}
                   </p>
-                  <p className="pt-2 flex">
-                    <strong className="text-teal-800 underline">
+                  <p className="pt-2">
+                    <strong className="text-indigo-800 underline">
+                      Driving license no :
+                    </strong>{" "}
+                    {license}
+                  </p>
+                  <p className="pt-2">
+                    <strong className="text-indigo-800 underline">
                       Education :
                     </strong>{" "}
-                    <p className="uppercase">{education}</p>
+                    <span className="uppercase">{education}</span>
                   </p>
-                  <p className="pt-2 flex">
-                    <strong className="text-teal-800 underline">
+                  <p className="pt-2">
+                    <strong className="text-indigo-800 underline">
                       Gender :
                     </strong>{" "}
-                    <p className="capitalize"> {gender}</p>
-                  </p>{" "}
+                    <span className="capitalize"> {gender}</span>
+                  </p>
                 </div>
               </div>
               <div class="flex items-end justify-end">
                 <button
                   htmlFor="booking-Driver"
                   onClick={handleBooking}
-                  className={`btn btn-sm text-white  font-bold w-1/4 btn-secondary ${
+                  className={`btn btn-sm text-white font-bold w-1/4 btn-secondary ${
                     bookingSuccess ? "disabled" : ""
                   }`}
                   disabled={bookingSuccess}
@@ -206,8 +211,8 @@ const BookingDriver = ({ bookDriver, user }) => {
 
           <button
             onClick={closeSuccessModal}
-            className="btn btn-sm text-xs w-1/4 ml-32 mt-10 border-teal-500
-              text-white font-bold bg-secondary"
+            className="btn btn-sm text-xs w-1/4 ml-32 mt-10 border-indigo-500
+          text-white font-bold bg-secondary"
           >
             Close
           </button>

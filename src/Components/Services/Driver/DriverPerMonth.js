@@ -6,11 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import ScrollToTop from "../../Shared/ScrollToTop";
 
-const DriverPerMonth = ({
-  selectedLocation,
-  selectedTask,
-  selectedAvailability,
-}) => {
+const DriverPerMonth = ({ selectedLocation, selectedSalary }) => {
   const [drivers, setDrivers] = useState([]);
   const [bookDriver, setBookDriver] = useState([]);
   const [user] = useAuthState(auth);
@@ -25,44 +21,23 @@ const DriverPerMonth = ({
 
   const userRole = localStorage.getItem("userRole");
 
-  const filteredDrivers = drivers.filter((Driver) => {
-    const includesLocation = Driver.location.includes(
+  const filteredDrivers = drivers.filter((driver) => {
+    const includesLocation = driver.location.includes(
       selectedLocation.toLowerCase()
     );
+    const isSalarySelected = driver.salary >= selectedSalary;
+
     if (!selectedLocation) {
-      return true;
+      return isSalarySelected;
     }
-    return includesLocation;
+
+    return includesLocation && isSalarySelected;
   });
-
-  // const filteredDriversByTask = Drivers.filter((Driver) => {
-  //   const includesTask = Driver.task.includes(selectedTask.toLowerCase());
-  //   if (!selectedTask) {
-  //     return true;
-  //   }
-  //   return includesTask;
-  // });
-  // const filteredDriversByAvailability = Drivers.filter((Driver) => {
-  //   const includesAvailability =
-  //     Driver.availability.includes(selectedAvailability);
-  //   if (!selectedAvailability) {
-  //     return true;
-  //   }
-  //   return includesAvailability;
-  // });
-
-  // const filteredDrivers = [
-  //   ...new Set([
-  //     ...filteredDriversByLocation,
-  //     ...filteredDriversByTask,
-  //     ...filteredDriversByAvailability,
-  //   ]),
-  // ];
 
   return (
     <div>
       <h1
-        className="text-3xl pt-12 text-center font-black text-teal-700  px-7"
+        className="text-3xl pt-12 text-center font-black text-primary px-7"
         style={{ fontFamily: "arial" }}
       >
         Your Car's Best Friend

@@ -24,7 +24,7 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
 
   return (
     <div>
-      <div className="w-80 h-96 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">
+      <div className="w-80 h-72 rounded-3xl border-2 pb-[16.67%] text-black relative bg-slate-100 m-4 hover:scale-105 cursor-grab transition-all duration-300 ease-in-out">
         <div>
           <figure className="absolute top-3 left-3 right-0 h-full">
             <img src={img} alt="Driver" className="h-32 w-32 rounded-full" />
@@ -33,9 +33,9 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
             <h2 className="text-xl font-bold">{name}</h2>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-4 text-right text-black">
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-black">
           <p>
-            <strong className="text-teal-800 underline">
+            <strong className="text-indigo-800 underline">
               Preferred Location:
             </strong>
             {Array.isArray(location)
@@ -47,7 +47,7 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
               : location}
           </p>
           <p className="pt-2">
-            <strong className="text-teal-800 underline">Salary :</strong>{" "}
+            <strong className="text-indigo-800 underline">Salary :</strong>{" "}
             {salary}
           </p>
           <div className="mt-4">
