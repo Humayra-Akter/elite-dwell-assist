@@ -31,7 +31,6 @@ import RFBill from "./Components/Services/ApplianceRepair/RFBill";
 import WMBill from "./Components/Services/ApplianceRepair/WMBill";
 import OvenBill from "./Components/Services/ApplianceRepair/OvenBill";
 import DriverDashboard from "./Components/DriverDashboard/DriverDashboard";
-import Admin from "./Components/Shared/Admin";
 import CustomerInformation from "./Components/AdminDashboard/CustomerInformation";
 import MaidBookings from "./Components/CustomerDashboard/MaidBookings";
 import AcknowledgedMaidBookings from "./Components/AdminDashboard/AcknowledgedMaidBookings";
@@ -50,6 +49,7 @@ import BabysitterProfile from "./Components/BabysitterDashboard/BabysitterProfil
 import BabysitterNotifications from "./Components/BabysitterDashboard/BabysitterNotifications";
 import BabysitterSearchJob from "./Components/BabysitterDashboard/BabysitterSearchJob";
 import CreatePostForBabysitter from "./Components/CustomerDashboard/CreatePostForBabysitter";
+import Loginhomepagemodified from "./Components/Shared/Loginhomepagemodified";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -76,7 +76,10 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route
+          path="/Loginhomepagemodified"
+          element={<Loginhomepagemodified />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/service" element={<Service />} />

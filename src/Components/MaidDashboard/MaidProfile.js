@@ -177,7 +177,7 @@ const MaidProfile = () => {
           </div>
         )}
         <h1 className="text-2xl text-primary text-center mb-8 font-bold">
-          Update Profile
+          {isEditing ? "Update Profile" : "Profile"}
         </h1>
         <strong className="text-primary text-xl underline">
           {loggedUser.name}
