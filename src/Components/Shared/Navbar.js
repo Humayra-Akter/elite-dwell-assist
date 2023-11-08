@@ -64,70 +64,58 @@ const Navbar = ({ openAboutModal }) => {
             <img className="ml-10 rounded-full w-16" src={logo} alt="" />
           </Link>
         </div>
+
         <div class="navbar-end pr-10">
           {/* Services */}
           <div className="relative inline-block text-right">
             <button
               onClick={toggleServiceDropdown}
-              className="text-white font-bold hover:text-black pr-7 "
+              className="text-white font-bold hover:text-black pr-7"
             >
               Services
             </button>
             {isServiceDropdownOpen && (
-              <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="origin-top-right absolute right-0 mt-2 w-36  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div
-                    className="py-1"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="options-menu"
-                  >
-                    <Link to="/maidPerDay">
-                      <button
-                        onClick={() => handleServiceClick("Service 1")}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                        role="menuitem"
-                      >
-                        Maid Per Day
-                      </button>
-                    </Link>
-                    <Link to="/maidPerMonth">
-                      <button
-                        onClick={() => handleServiceClick("Service 2")}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                        role="menuitem"
-                      >
-                        Maid Per Month
-                      </button>
-                    </Link>{" "}
-                    <Link to="/babysitter">
-                      <button
-                        onClick={() => handleServiceClick("Service 3")}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary  w-full text-left"
-                        role="menuitem"
-                      >
-                        Babysitter
-                      </button>
-                    </Link>{" "}
-                    {/* <Link to="/driverPerDay">
-                      <button
-                        onClick={() => handleServiceClick("Service 4")}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                        role="menuitem"
-                      >
-                        Vehicle Service
-                      </button>
-                    </Link> */}
-                    <Link to="/driverPerMonth">
-                      <button
-                        onClick={() => handleServiceClick("Service 5")}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
-                        role="menuitem"
-                      >
-                        Driver
-                      </button>
-                    </Link>
-                  </div>
+              <div
+                className="origin-top-right absolute right-0 mt-2 w-48 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                onClick={closeDropdowns}
+              >
+                <div
+                  className="py-1"
+                  role="menu"
+                  aria-labelledby="options-menu"
+                >
+                  <Link to="/maidPerDay">
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      Maid Per Day
+                    </button>
+                  </Link>
+                  <Link to="/maidPerMonth">
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      Maid Per Month
+                    </button>
+                  </Link>
+                  <Link to="/babysitter">
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      Babysitter
+                    </button>
+                  </Link>
+                  <Link to="/driverPerMonth">
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
+                      role="menuitem"
+                    >
+                      Driver
+                    </button>
+                  </Link>
                 </div>
               </div>
             )}
