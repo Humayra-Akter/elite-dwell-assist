@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import trash from "../../images/trash.svg";
 import { toast } from "react-toastify";
 
-const MaidRow = ({ booking, availabilityOptions, maidId, userEmail }) => {
+const MaidRow = ({ booking, maidId, userEmail }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
@@ -99,13 +99,15 @@ const MaidRow = ({ booking, availabilityOptions, maidId, userEmail }) => {
       <td className="capitalize">{booking.maidName}</td>
       <td>{booking.maidEmail}</td>
       <td>
-        <ul>
-          {booking.availability?.map((daySlot, index) => (
-            <li key={index}>
-              <strong>{availabilityOptions[daySlot]}</strong>
-            </li>
-          ))}
-        </ul>
+        {booking?.task && Array.isArray(booking.task) && (
+          <ul>
+            {booking.task?.map((service, index) => (
+              <li className="capitalize text-left font-semibold" key={index}>
+                {service}
+              </li>
+            ))}
+          </ul>
+        )}
       </td>
       <td>
         {booking?.createdDate

@@ -37,18 +37,19 @@ const DriverPerMonth = ({ selectedLocation, selectedSalary }) => {
   return (
     <div>
       <h1
-        className="text-3xl pt-12 text-center font-black text-primary px-7"
+        className="text-3xl pt-12 text-center font-black text-primary  px-7"
         style={{ fontFamily: "arial" }}
       >
         Your Car's Best Friend
       </h1>
-      {/* General Drivers */}
+      {userRole !== "customer" ? (
+        <p className="text-red-500 text-xs text-center mt-1">
+          You do not have permission to access this page. Please login first.
+        </p>
+      ) : (
+        <></>
+      )}
       <div>
-        {userRole !== "customer" && (
-          <p className="text-red-500 text-xs text-center mt-1">
-            You do not have permission to access this page.
-          </p>
-        )}
         <ScrollToTop />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 p-11">
           {filteredDrivers.map((driver) => (

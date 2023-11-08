@@ -118,12 +118,20 @@ const MaidSearchJob = () => {
                   {booking.timeSlot}
                 </span>
               </p>
-              <p className="font-medium">
-                Offered Services :{" "}
-                <span className="uppercase font-extrabold">
-                  {booking?.selectedServices}
-                </span>
-              </p>
+              <p className="font-medium">Offered Services:</p>
+              {booking?.selectedServices &&
+                Array.isArray(booking.selectedServices) && (
+                  <ul>
+                    {booking.selectedServices.map((service, index) => (
+                      <li
+                        style={{ textAlign: "center", fontWeight: "bold" }}
+                        key={index}
+                      >
+                        {service}
+                      </li>
+                    ))}
+                  </ul>
+                )}
             </div>
           </div>
         ))}

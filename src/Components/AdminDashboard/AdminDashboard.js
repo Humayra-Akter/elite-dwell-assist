@@ -15,48 +15,33 @@ const AdminDashboard = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   const toggleAppliance = () => {
     setIsApplianceOpen(!isApplianceOpen);
   };
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
     <div>
-      <div className={`drawer ${isSidebarOpen ? "lg:drawer-open" : ""}`}>
-        <input id="admin-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content p-11">
+      <div
+        className={`admin-sidebar ${
+          isSidebarOpen ? "lg:admin-sidebar-open" : ""
+        }`}
+      >
+        <div className={`w-3/4 p-11 absolute left-96`}>
           <Outlet />
           <label
-            for="admin-drawer"
-            class="btn btn-sm absolute top-0 right-0 mt-2 drawer-button lg:hidden"
+            htmlFor="admin-drawer"
+            className="btn btn-sm absolute top-0 right-0 mt-2 admin-sidebar-button lg:hidden"
           >
-            Open drawer
-          </label>{" "}
-          {isSidebarOpen ? (
-            <button
-              className="btn absolute rounded-full top-2 left-2 z-10 btn-secondary btn-sm"
-              onClick={toggleSidebar}
-            >
-              <img className="w-4" src={rewrd} alt="" />
-            </button>
-          ) : (
-            <button
-              className="btn absolute top-0 rounded-full left-0 btn-secondary btn-sm"
-              onClick={toggleSidebar}
-            >
-              <img className="w-4" src={frwrd} alt="" />
-            </button>
-          )}
+            Open sidebar
+          </label>
         </div>
-        <div class="drawer-side">
-          <label
-            for="admin-drawer"
-            aria-label="close sidebar"
-            class="drawer-overlay"
-          ></label>
-          <ul class="menu pl-4 pt-16 w-96 min-h-full bg-sky-50 text-base-content">
+        <div className="admin-sidebar-content">
+          <ul className="menu pl-4 pt-16 w-96  fixed top-20 min-h-full bg-sky-50 text-base-content">
             <li>
               <Link
                 className="text-primary text-base font-bold hover:text-black"

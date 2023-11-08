@@ -24,13 +24,12 @@ const MaidPerMonth = ({
   }, []);
 
   const userRole = localStorage.getItem("userRole");
-
   const filteredMaids = maids.filter((maid) => {
     const includesLocation =
       !selectedLocation ||
       maid.location?.includes(selectedLocation.toLowerCase());
     const includesTask =
-      !selectedTask || maid.skills?.includes(selectedTask.toLowerCase());
+      !selectedTask || maid.task?.includes(selectedTask.toLowerCase());
     const includesAvailability =
       !selectedAvailability ||
       maid.availability?.includes(selectedAvailability.toLowerCase());
@@ -44,15 +43,16 @@ const MaidPerMonth = ({
         className="text-3xl pt-12 text-center font-black text-primary  px-7"
         style={{ fontFamily: "arial" }}
       >
-        Your Home's Best Friend
+        Your Home-Our Expertise
       </h1>
-      {/* General Maids */}
+      {userRole !== "customer" ? (
+        <p className="text-red-500 text-xs text-center mt-1">
+          You do not have permission to access this page. Please login first.
+        </p>
+      ) : (
+        <></>
+      )}
       <div>
-        {userRole !== "customer" && (
-          <p className="text-red-500 text-xs text-center mt-1">
-            You do not have permission to access this page.
-          </p>
-        )}
         <ScrollToTop />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 p-11">
           {filteredMaids.map((maid) => (
@@ -65,17 +65,6 @@ const MaidPerMonth = ({
           ))}
         </div>
       </div>
-      {/* <div className="divider"></div> */}
-      {/* <div className="grid grid-cols-3 gap-5 p-11">
-        {maids.map((maid) => (
-          <MaidPerMonthCard
-            key={maid.id}
-            maid={maid}
-            setBookMaid={setBookMaid}
-            user={user}
-          ></MaidPerMonthCard>
-        ))}
-      </div> */}
       {userRole === "customer" ? (
         bookMaid && <BookingMaid bookMaid={bookMaid}></BookingMaid>
       ) : (

@@ -152,7 +152,7 @@ const MaidProfile = () => {
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
         {isEditing ? (
-          <div className="absolute top-20 right-11">
+          <div className="absolute top-36 right-11">
             <button
               className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
               onClick={handleSaveChanges}
@@ -167,7 +167,7 @@ const MaidProfile = () => {
             </button>
           </div>
         ) : (
-          <div className="absolute top-11 right-36 ">
+          <div className="absolute top-32 right-36 ">
             <button
               className="bg-primary text-white font-semibold px-6 py-2 rounded-lg mt-6"
               onClick={handleEditClick}

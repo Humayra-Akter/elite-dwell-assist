@@ -64,6 +64,7 @@ const BookingMaid = ({ bookMaid, user }) => {
         maidEmail: bookMaid.email,
         customerEmail: gUser?.email || "",
         availability: bookMaid.availability,
+        task: bookMaid.task,
       };
       console.log(bookMaid);
 
@@ -76,7 +77,6 @@ const BookingMaid = ({ bookMaid, user }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.success);
           if (data.message === "Booking created successfully") {
             toast.success(`Booking created successfully for ${bookMaid.name}`);
           }

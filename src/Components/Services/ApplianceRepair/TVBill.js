@@ -7,8 +7,145 @@ import Footer from "../../Shared/Footer";
 import { format, subDays } from "date-fns";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 const TVBill = () => {
+  const [house, setHouse] = useState("");
+  const [road, setRoad] = useState("");
+  const [block, setBlock] = useState("");
+  const [sector, setSector] = useState("");
+  const pdfGenerate = () => {
+    const pdf = new jsPDF();
+    let yPos = 20;
+
+    // Add blue bars at the top and bottom
+    pdf.setDrawColor(52, 152, 219); // Set the draw color to blue
+    pdf.setLineWidth(2); // Set the line width to 2
+    pdf.line(10, 10, 200, 10); // Top blue bar
+    pdf.line(10, 287, 200, 287); // Bottom blue bar
+
+    // Add the image
+    const imgData = "./logo.png";
+    const imgWidth = 30;
+    const imgHeight = 25;
+    const imgx = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
+    pdf.addImage(imgData, "PNG", imgx, yPos, imgWidth, imgHeight);
+    yPos += imgHeight + 10;
+
+    // Set the title and subtitle
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor("#4285F4"); // Set text color to blue
+    pdf.setFontSize(26);
+    pdf.text("Elite Dwell Assist", 105, yPos, null, null, "center");
+    pdf.setFontSize(18);
+    pdf.setTextColor("#707070"); // Set text color to grey
+    yPos += 10;
+    pdf.text("Service Bill", 105, yPos, null, null, "center");
+    pdf.setFont("helvetica", "normal");
+    yPos += 10;
+
+    // Add date and time
+    pdf.setFontSize(14);
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor("#4285F4"); // Set text color to blue
+    pdf.text(15, yPos, "Booking Date and Time");
+    pdf.setFont("helvetica", "normal");
+    yPos += 10;
+    const now = new Date();
+    const date = `Date: ${now.toLocaleDateString()}`;
+    const time = `Time: ${now.toLocaleTimeString()}`;
+    pdf.setFontSize(14);
+    pdf.setTextColor("#707070"); // Set text color to grey
+    pdf.text(15, yPos, date);
+    yPos += 10;
+    pdf.text(15, yPos, time);
+    yPos += 10;
+
+    // Add user information
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor("#4285F4"); // Set text color to blue
+    pdf.text(15, yPos, "User Information");
+    pdf.setFont("helvetica", "normal");
+    yPos += 10;
+    pdf.setTextColor("#707070"); // Set text color to grey
+    pdf.text(15, yPos, `Name: ${user?.displayName}`);
+    pdf.text(156, yPos, `Block: ${block}`);
+    yPos += 10;
+    pdf.text(15, yPos, `Email: ${user?.email}`);
+    pdf.text(156, yPos, `Sector: ${sector}`);
+    yPos += 10;
+    pdf.text(15, yPos, `House: ${house}`);
+    pdf.text(156, yPos, `Area: ${area}`);
+    yPos += 10;
+    pdf.text(15, yPos, `Road: ${road}`);
+    yPos += 10;
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor("#4285F4"); // Set text color to blue
+    pdf.text(15, yPos, "Time and Date");
+    pdf.setFont("helvetica", "normal");
+    yPos += 10;
+    pdf.setTextColor("#707070");
+    pdf.text(15, yPos, `Visiting Time: ${selectedTimeSlot}`);
+    yPos += 10;
+    pdf.text(15, yPos, `Visiting Date: ${selectedDate}`);
+    yPos += 10;
+
+    // Create table
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor("#4285F4"); // Set text color to blue
+    pdf.text(15, yPos, "Selected Services");
+    pdf.setFont("helvetica", "normal");
+    yPos += 10;
+
+    const tableColumn = ["Selected Services", "Price", "Quantity"];
+    const tableRows = [
+      ["TV Sound Problem", "1000", soundProblemCount.toString()],
+      ["TV Power Supply Servicing", "1000", powerSupplyProblemCount.toString()],
+      ["TV Mounting", "1000", mountingCount.toString()],
+      ["TV Display Servicing", "1000", displayCount.toString()],
+    ];
+
+    pdf.autoTable({
+      startY: yPos,
+      head: [tableColumn],
+      body: tableRows,
+      styles: {
+        fontSize: 14, // Adjust the font size as needed
+      },
+    });
+
+    yPos = pdf.lastAutoTable.finalY + 10;
+
+    // Calculate the total bill
+    const totalBill = total;
+    const formattedTotal = totalBill.toLocaleString();
+
+    // Define the rectangle for the total bill
+    const rectWidth = 60;
+    const rectHeight = 10;
+    const rectX = 135;
+    const rectY = yPos;
+    const rectColor = [52, 152, 219]; // Blue color
+
+    // Draw the rectangle with a blue border
+    pdf.setDrawColor(rectColor[0], rectColor[1], rectColor[2]);
+    pdf.setLineWidth(0.5);
+    pdf.rect(rectX, rectY, rectWidth, rectHeight);
+
+    // Add the "Total Bill" text and value
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor(rectColor[0], rectColor[1], rectColor[2]);
+    pdf.text("Total Bill:", rectX + 2, rectY + 6);
+    pdf.text(formattedTotal + " TK", rectX + rectWidth - 30, rectY + 6);
+
+    // Adjust the y position
+    yPos += 20;
+
+    // Save the PDF
+    pdf.save("slip.pdf");
+  };
   const [soundProblemCount, setSoundProblemCount] = useState(0);
   const [powerSupplyProblemCount, setPowerSupplyProblemCount] = useState(0);
   const [mountingCount, setMountingCount] = useState(0);
@@ -144,7 +281,7 @@ const TVBill = () => {
   };
 
   return (
-    <div >
+    <div>
       <h1
         className="text-3xl pt-12 text-center font-black text-primary  px-7"
         style={{ fontFamily: "arial" }}
@@ -152,10 +289,10 @@ const TVBill = () => {
         Your Home-Our Expertise
       </h1>
       {userRole !== "customer" && (
-          <p className="text-red-500 text-xs text-center mt-1">
-            You do not have permission to access this page.
-          </p>
-        )}
+        <p className="text-red-500 text-xs text-center mt-1">
+          You do not have permission to access this page.
+        </p>
+      )}
       <div className="bg-white p-4 mt-7 mx-96 rounded-lg shadow-md mb-4">
         <p className="text-lg text-center text-black font-semibold">
           {displaySelectedInfo()}
@@ -193,13 +330,7 @@ const TVBill = () => {
             </div>
           </div>
 
-
-
-
-
-
-
-          <div className=" mx-5 pt-6" >
+          <div className=" mx-5 pt-6">
             <div>
               <div className="card w-full bg-transparent border-4 rounded-3xl border-blue-200 text-blue-800">
                 <div className="card-body">
@@ -256,6 +387,7 @@ const TVBill = () => {
                             message: "House is required",
                           },
                         })}
+                        onChange={(e) => setHouse(e.target.value)}
                       />
                       <label>
                         {errors.house?.type === "required" && (
@@ -284,6 +416,7 @@ const TVBill = () => {
                               message: "Road no is required",
                             },
                           })}
+                          onChange={(e) => setRoad(e.target.value)}
                         />
                         <label>
                           {errors.road?.type === "required" && (
@@ -310,6 +443,7 @@ const TVBill = () => {
                               message: "Block is required",
                             },
                           })}
+                          onChange={(e) => setBlock(e.target.value)}
                         />
                         <label>
                           {errors.block?.type === "required" && (
@@ -338,6 +472,7 @@ const TVBill = () => {
                               message: "Sector is required",
                             },
                           })}
+                          onChange={(e) => setSector(e.target.value)}
                         />
                         <label>
                           {errors.sector?.type === "required" && (
@@ -400,7 +535,6 @@ const TVBill = () => {
           </div>
         </div>
         <div className="absolute  right-28 w-96 text-center text-base">
-          
           {/* tv power supply problem */}
           <div className="absolute top-[185px] left-[27.5px] w-[376px] h-[137px]">
             <div className=" box-border w-96 h-36 border-2 border-gray-300" />
@@ -419,23 +553,23 @@ const TVBill = () => {
                 handleServiceSelect("TV Power Supply Problem");
               }}
             >
-             <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/rectangle-41.svg"
-                  />
-                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
-                </button>
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/rectangle-41.svg"
+              />
+              <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+            </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -499,23 +633,23 @@ const TVBill = () => {
                 setMountingCount(0);
               }}
             >
-             <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/rectangle-41.svg"
-                  />
-                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
-                  </button>
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/rectangle-41.svg"
+              />
+              <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+            </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -586,30 +720,30 @@ const TVBill = () => {
             </button> */}
 
             <button
-                  className="cursor-pointer p-0 bg-[transparent] absolute top-[80px] left-[333px] box-border w-6 h-6 border-[1px] border-solid border-white"
-                  id="cancel_button"
-                  onClick={() => {
-                    handleServiceSelect("TV Sound Problem");
-                    setSoundProblemCount(0);
-                  }}
-                >
-                  <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/rectangle-41.svg"
-                  />
-                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
-                </button>
+              className="cursor-pointer p-0 bg-[transparent] absolute top-[80px] left-[333px] box-border w-6 h-6 border-[1px] border-solid border-white"
+              id="cancel_button"
+              onClick={() => {
+                handleServiceSelect("TV Sound Problem");
+                setSoundProblemCount(0);
+              }}
+            >
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/rectangle-41.svg"
+              />
+              <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+            </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -677,23 +811,23 @@ const TVBill = () => {
                 setDisplayCount(0);
               }}
             >
-             <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/vector-8.svg"
-                  />
-                  <img
-                    className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src="/rectangle-41.svg"
-                  />
-                  <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
-                 </button>
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[54.17%] bottom-[33.33%] left-[37.5%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[20.83%] w-[8.33%] top-[45.83%] right-[37.5%] bottom-[33.33%] left-[54.17%] rounded-sm max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/vector-8.svg"
+              />
+              <img
+                className="absolute h-[62.5%] w-[79.17%] top-[25%] right-[8.33%] bottom-[12.5%] left-[12.5%] max-w-full overflow-hidden max-h-full"
+                alt=""
+                src="/rectangle-41.svg"
+              />
+              <div className="absolute h-[12.5%] w-3/12 top-[8.33%] right-[20.83%] bottom-[79.17%] left-[54.17%] rounded-[50%] box-border [transform:_rotate(180deg)] [transform-origin:0_0] border-[2px] border-solid border-line-icon" />
+            </button>
             {/* 1000 er div */}
             <div className="absolute top-5 right-14 font-bold text-gray-400">
               1000
@@ -747,13 +881,17 @@ const TVBill = () => {
                 </div>
               </div>
             </div>
+            <button
+              className="absolute top-[calc(50%_-_-30px)] right-[-20px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={pdfGenerate}
+            >
+              Download Slip
+            </button>
           </div>
           <div className="absolute top-[643.88px] left-[384.5px] text-lg font-semibold text-right">
             tk
           </div>
-          <div className="text-left ml-16  text-xl font-medium">
-            Services
-          </div>
+          <div className="text-left ml-16  text-xl font-medium">Services</div>
         </div>
       </div>
       <Footer />

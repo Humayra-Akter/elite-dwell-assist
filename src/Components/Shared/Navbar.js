@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Notification from "./Notification";
 import { signOut } from "firebase/auth";
 
 const Navbar = ({ openAboutModal }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const serviceDropdownRef = useRef(null);
   useEffect(() => {
     setTimeout(() => {
       // window.location.reload();
@@ -50,6 +48,8 @@ const Navbar = ({ openAboutModal }) => {
     navigate("/");
   };
 
+
+
   const userRole = localStorage.getItem("userRole");
   return (
     <div className="bg-primary text-white font-bold ">
@@ -69,6 +69,7 @@ const Navbar = ({ openAboutModal }) => {
           {/* Services */}
           <div className="relative inline-block text-right">
             <button
+              style={{ zIndex: 1000 }}
               onClick={toggleServiceDropdown}
               className="text-white font-bold hover:text-black pr-7"
             >
