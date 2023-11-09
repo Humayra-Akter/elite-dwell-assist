@@ -34,8 +34,8 @@ const Reviews = () => {
       });
   }, []);
 
-  // Filter reviews by the logged-in user's email
-  const filteredReviews = reviews.includes(
+  // Filter reviews by the logged-in user's maidId
+  const filteredReviews = reviews.filter(
     (review) => review.maidId === maidInfo
   );
 
