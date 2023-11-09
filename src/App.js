@@ -50,6 +50,7 @@ import BabysitterNotifications from "./Components/BabysitterDashboard/Babysitter
 import BabysitterSearchJob from "./Components/BabysitterDashboard/BabysitterSearchJob";
 import CreatePostForBabysitter from "./Components/CustomerDashboard/CreatePostForBabysitter";
 import Loginhomepagemodified from "./Components/Shared/Loginhomepagemodified";
+import Reviews from "./Components/MaidDashboard/Reviews";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -115,6 +116,7 @@ function App() {
             element={<MaidNotifications />}
           ></Route>
           <Route path="searchJob" element={<MaidSearchJob />}></Route>
+          <Route path="maidReview" element={<Reviews />}></Route>
         </Route>
         {/* babysitter  */}
         <Route path="/babysitterDashboard" element={<BabysitterDashboard />}>

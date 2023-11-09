@@ -21,7 +21,6 @@ const OvenBookings = () => {
     return hoursRemaining;
   };
 
-
   return (
     <div>
       <h2 className="text-3xl text-blue-900 font-bold mb-6">
@@ -33,17 +32,24 @@ const OvenBookings = () => {
             key={booking._id}
             className="bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
           >
-           <div className="p-2 bg-blue-200" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-  <p className="text-lg font-bold">
-    Booking from:{" "}
-    <span className="uppercase font-bold text-primary">
-      {booking.userName}
-    </span>
-  </p>
-  <button className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full">
-    Acknowledge
-  </button>
-</div>
+            <div
+              className="p-2 bg-blue-200"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <p className="text-lg font-bold">
+                Booking from:{" "}
+                <span className="uppercase font-bold text-primary">
+                  {booking.userName}
+                </span>
+              </p>
+              <button className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full">
+                Acknowledge
+              </button>
+            </div>
 
             <div className="p-4">
               <h2 className="text-lg font-medium">
@@ -79,24 +85,22 @@ const OvenBookings = () => {
                 </span>
               </p>
               <div className="text-lg font-medium">
-  Selected Services:{" "}
-  <span>
-    {booking.selectedServices.map((service, index) => (
-      <span key={index} className="font-bold">
-        {service.name}
-        {index < booking.selectedServices.length - 1 ? ', ' : ''}
-      </span>
-    ))}
-  </span>
-</div>
+                Selected Services:{" "}
+                <span>
+                  {booking.selectedServices.map((service, index) => (
+                    <span key={index} className="font-bold">
+                      {service.name}
+                      {index < booking.selectedServices.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+                </span>
+              </div>
               <p className="text-lg font-medium">
                 Address:{" "}
-                
                 <span className="font-semibold text-primary capitalize">
                   {`${booking.address.house} ,Road ${booking.address.road}, Block ${booking.address.block},Sector ${booking.address.sector}, ${booking.address.area}`}
                 </span>
               </p>
-             
             </div>
           </div>
         ))}
