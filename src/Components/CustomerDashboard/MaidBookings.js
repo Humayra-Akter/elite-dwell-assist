@@ -68,7 +68,7 @@ const MaidBookings = () => {
               <th className="text-left text-primary underline w-1/6">
                 Created Time
               </th>
-              <th className="text-left text-primary underline w-1/8">Delete</th>
+              {/* <th className="text-left text-primary underline w-1/8">Delete</th> */}
               <th className="text-left text-primary underline w-1/4">Review</th>
             </tr>
           </thead>

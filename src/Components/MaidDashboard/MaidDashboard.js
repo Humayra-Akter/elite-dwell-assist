@@ -37,8 +37,8 @@ const MaidDashboard = () => {
   return (
     <div>
       <div className="flex">
-        <div className="w-1/5 h-screen bg-sky-50 text-base-content">
-          <ul className="menu p-4">
+        <div className="w-1/5 h-screen top-0 fixed text-base-content">
+          <ul className="menu p-4 mt-24">
             <img
               src={loggedUser.img}
               alt="user"
@@ -93,7 +93,7 @@ const MaidDashboard = () => {
             <li>
               <Link
                 className={`text-primary mt-3 text-base font-bold hover:text-black ${
-                  selectedLink === "searchJob" ? "text-white bg-primary" : ""
+                  selectedLink === "maidReview" ? "text-white bg-primary" : ""
                 }`}
                 to="/maidDashboard/maidReview"
                 onClick={() => handleLinkClick("maidReview")}
@@ -106,7 +106,7 @@ const MaidDashboard = () => {
             </li>
           </ul>
         </div>
-        <div className="w-4/5 p-11">
+        <div className="w-4/5 ml-80 p-5">
           <Outlet />
         </div>
       </div>

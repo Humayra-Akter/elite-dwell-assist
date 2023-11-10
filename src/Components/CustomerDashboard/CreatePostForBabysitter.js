@@ -69,32 +69,15 @@ const CreatePostForBabysitter = () => {
   ];
 
   const handlePreferredLocationsChange = (e) => {
-    const location = e.target.value;
-    if (preferredLocations.includes(location)) {
-      setPreferredLocations(
-        preferredLocations.filter((item) => item !== location)
-      );
-    } else {
-      setPreferredLocations([...preferredLocations, location]);
-    }
+    setPreferredLocations(e.target.value);
   };
 
   const handleAvailabilityChange = (e) => {
-    const day = e.target.value;
-    if (availability.includes(day)) {
-      setAvailability(availability.filter((item) => item !== day));
-    } else {
-      setAvailability([...availability, day]);
-    }
+    setAvailability(e.target.value);
   };
 
   const handleGenderChange = (e) => {
-    const value = e.target.value;
-    if (gender.includes(value)) {
-      setGender(gender.filter((item) => item !== value));
-    } else {
-      setGender([...gender, value]);
-    }
+    setGender(e.target.value);
   };
 
   const handleSpecialSkillsChange = (e) => {
@@ -405,8 +388,8 @@ const CreatePostForBabysitter = () => {
         <div className="grid lg:grid-cols-3 pt-5 gap-3"></div>
         <div className="flex items-end justify-end">
           <input
-            className="btn mt-5 btn-sm text-xs w-1/4 border-blue-500 text-white font-bold bg-primary"
-            value="Create Babysitter Profile"
+            className="btn mt-5 btn-sm text-xs w-1/4 border-blue-500 text-white font-bold bg-primary uppercase"
+            value="Request for a Babysitter"
             type="submit"
           />
         </div>

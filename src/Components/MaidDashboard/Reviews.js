@@ -6,7 +6,6 @@ const Reviews = () => {
   const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [maids, setMaids] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -25,7 +24,6 @@ const Reviews = () => {
     }
   }, [user]);
 
-  const maidInfo = loggedUser._id;
   useEffect(() => {
     fetch("http://localhost:5000/reviews")
       .then((res) => res.json())
@@ -34,43 +32,50 @@ const Reviews = () => {
       });
   }, []);
 
-  // Filter reviews by the logged-in user's maidId
-  const filteredReviews = reviews.filter(
-    (review) => review.maidId === maidInfo
-  );
+  useEffect(() => {
+    if (loggedUser._id) {
+      fetch(`http://localhost:5000/reviews?maidId=${loggedUser._id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setReviews(data);
+        });
+    }
+  }, [loggedUser._id]);
+
+  console.log(reviews);
 
   return (
     <div className="reviews-container">
       <h2 className="text-3xl text-primary font-bold">My Reviews</h2>
       <div className="reviews">
-        {filteredReviews.map((review) => (
-          <div
-            key={review._id}
-            className="review-card bg-white p-4 rounded shadow-md my-4"
-          >
-            <p className="maid-email font-bold">
-              Maid Email: {review.maidEmail}
-            </p>
-            <div className="rating flex items-center">
-              <p>Rating: {review.rating}</p>
-              <div className="stars ml-2">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <span
-                    key={index}
-                    className={`star ${
-                      index < review.rating
-                        ? "text-yellow-400"
-                        : "text-gray-300"
-                    }`}
-                  >
-                    ★
-                  </span>
-                ))}
+        {reviews
+          .filter((review) => review.maidId === loggedUser._id)
+          .map((review) => (
+            <div
+              key={review._id}
+              className="review-card bg-white p-4 rounded shadow-md my-4"
+            >
+              <p className="font-bold">Customer Email: {review?.userEmail}</p>
+              <div className="rating flex items-center">
+                <p>Rating: {review.rating}</p>
+                <div className="stars ml-2">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <span
+                      key={index}
+                      className={`star ${
+                        index < review.rating
+                          ? "text-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
               </div>
+              <p className="review-text">Review Text: {review.reviewText}</p>
             </div>
-            <p className="review-text">Review Text: {review.reviewText}</p>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

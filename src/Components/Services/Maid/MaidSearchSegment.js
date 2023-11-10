@@ -20,10 +20,10 @@ const MaidSearchSegment = () => {
 
   return (
     <div className="flex">
-      <div className="search-options">
+      <div className="search-options border-r pr-80">
         <div className="search-form">
           <div className="search-options-content">
-            <ul className="menu p-4 w-80 h-screen fixed top-20 bg-slate-100 text-base-content">
+            <ul className="menu p-4 w-80 h-screen fixed top-20 text-base-content">
               <div className="search-options-section">
                 <p className="mt-14 mb-3 text-primary font-bold text-lg">
                   Search by location
@@ -81,7 +81,8 @@ const MaidSearchSegment = () => {
           </div>
         </div>
       </div>
-      <div className="ml-80">
+
+      <div>
         <MaidPerMonth
           selectedLocation={selectedLocation}
           selectedTask={selectedTask}

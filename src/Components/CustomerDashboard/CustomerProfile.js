@@ -74,9 +74,31 @@ const CustomerProfile = () => {
       <div className="text-center">
         <h2 className="text-3xl text-primary font-bold">{loggedUser?.name}</h2>
       </div>
-
-      <hr className="my-4" />
-
+      <div className="text-right">
+        {isEditing ? (
+          <div>
+            <button
+              className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
+              onClick={handleSaveChanges}
+            >
+              Save Changes
+            </button>
+            <button
+              className="text-primary font-semibold px-6 py-2 ml-4"
+              onClick={handleCancelEdit}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <button
+            className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
+            onClick={handleEditClick}
+          >
+            Edit Profile
+          </button>
+        )}
+      </div>
       <div>
         <h3 className="text-xl text-primary underline font-semibold mb-3">
           Personal Information
@@ -148,32 +170,6 @@ const CustomerProfile = () => {
             )}
           </li>
         </ul>
-      </div>
-
-      <div className="text-center">
-        {isEditing ? (
-          <div>
-            <button
-              className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
-              onClick={handleSaveChanges}
-            >
-              Save Changes
-            </button>
-            <button
-              className="text-primary font-semibold px-6 py-2 ml-4"
-              onClick={handleCancelEdit}
-            >
-              Cancel
-            </button>
-          </div>
-        ) : (
-          <button
-            className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
-            onClick={handleEditClick}
-          >
-            Edit Profile
-          </button>
-        )}
       </div>
     </div>
   );

@@ -114,14 +114,14 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
           ? new Date(booking?.createdDate).toLocaleString()
           : "Invalid Date"}
       </td>
-      <td>
+      {/* <td>
         <img
           onClick={deleteBooking}
           className="w-6 cursor-pointer"
           src={trash}
           alt=""
         />
-      </td>
+      </td> */}
       <td>
         {Array.from({ length: 5 }).map((_, index) => (
           <span

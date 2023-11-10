@@ -61,7 +61,7 @@ const MaidSearchJob = () => {
       <h2 className="text-xl pl-5 uppercase text-blue-900 font-bold">
         Search job
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {dayBookings.map((booking) => (
           <div
             key={booking._id}
@@ -118,20 +118,15 @@ const MaidSearchJob = () => {
                   {booking.timeSlot}
                 </span>
               </p>
-              <p className="font-medium">Offered Services:</p>
-              {booking?.selectedServices &&
-                Array.isArray(booking.selectedServices) && (
-                  <ul>
-                    {booking.selectedServices.map((service, index) => (
-                      <li
-                        style={{ textAlign: "center", fontWeight: "bold" }}
-                        key={index}
-                      >
-                        {service}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              <p className="font-medium">
+                Offered Services:{" "}
+                {booking?.selectedServices &&
+                  Array.isArray(booking.selectedServices) && (
+                    <span style={{ textAlign: "left", fontWeight: "bold" }}>
+                      {booking.selectedServices.join(", ")}
+                    </span>
+                  )}
+              </p>
             </div>
           </div>
         ))}

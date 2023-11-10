@@ -41,7 +41,7 @@ const AdminDashboard = () => {
           </label>
         </div>
         <div className="admin-sidebar-content">
-          <ul className="menu pl-4 pt-16 w-96  fixed top-20 min-h-full bg-sky-50 text-base-content">
+          <ul className="menu pl-4 pt-16 w-96 fixed top-20 min-h-full bg-sky-50 text-base-content">
             <li>
               <Link
                 className="text-primary text-base font-bold hover:text-black"

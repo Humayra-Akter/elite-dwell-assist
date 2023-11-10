@@ -54,7 +54,6 @@ const Login = () => {
     const matchingUser = loggedUser.find(
       (sysUser) => sysUser.email === data.email && sysUser.role === data.role
     );
-    console.log(data);
     if (matchingUser) {
       signInWithEmailAndPassword(data.email, data.password);
       localStorage.setItem("userRole", data.role);
