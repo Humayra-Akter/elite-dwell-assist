@@ -42,6 +42,7 @@ const MaidBookings = () => {
   const filteredBookings = bookings.filter(
     (booking) => booking.customerEmail === user.email
   );
+  console.log(filteredBookings);
 
   return (
     <div>
@@ -77,9 +78,7 @@ const MaidBookings = () => {
               <MaidRow
                 key={booking._id}
                 booking={booking}
-                maidId={booking._id}
                 userEmail={user.email}
-                loggedUser={loggedUser}
               />
             ))}
           </tbody>

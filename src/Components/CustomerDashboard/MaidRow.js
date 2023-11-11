@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const MaidRow = ({ booking, maidId, userEmail }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-
+  console.log(maidId);
   useEffect(() => {
     checkIfUserHasAlreadyReviewed(userEmail, maidId);
   }, [userEmail, maidId]);
@@ -71,7 +71,7 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
           rating,
           reviewText,
         };
-
+        console.log(review);
         try {
           fetch("http://localhost:5000/reviews", {
             method: "POST",

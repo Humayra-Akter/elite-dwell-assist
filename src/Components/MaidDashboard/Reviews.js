@@ -4,14 +4,18 @@ import auth from "../../firebase.init";
 
 const Reviews = () => {
   const [user] = useAuthState(auth);
-  const [loggedUser, setLoggedUser] = useState([]);
+  const [loggedUser, setLoggedUser] = useState(null);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    if (user) {
-      fetch(`http://localhost:5000/maid?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => {
+    const fetchUser = async () => {
+      if (user) {
+        try {
+          const response = await fetch(
+            `http://localhost:5000/maid?email=${user.email}`
+          );
+          const data = await response.json();
+
           if (data.length > 0) {
             const matchingUser = data.find(
               (userData) => userData.email === user.email
@@ -20,36 +24,46 @@ const Reviews = () => {
               setLoggedUser(matchingUser);
             }
           }
-        });
-    }
+        } catch (error) {
+          console.error("Error fetching user:", error);
+        }
+      }
+    };
+    fetchUser();
   }, [user]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-      });
-  }, []);
+    const fetchReviews = async () => {
+      if (loggedUser && loggedUser._id) {
+        try {
+          const response = await fetch(
+            `http://localhost:5000/reviews/${loggedUser._id}`
+          );
+          const data = await response.json();
 
-  useEffect(() => {
-    if (loggedUser._id) {
-      fetch(`http://localhost:5000/reviews?maidId=${loggedUser._id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setReviews(data);
-        });
-    }
-  }, [loggedUser._id]);
+          // Check if data is an array
+          if (Array.isArray(data)) {
+            setReviews(
+              data.filter((review) => review.maidId === loggedUser._id)
+            );
+          } else {
+            console.error("Invalid data received:", data);
+          }
+        } catch (error) {
+          console.error("Error fetching reviews:", error);
+        }
+      }
+    };
+    fetchReviews();
+  }, [loggedUser]);
 
   console.log(reviews);
-
   return (
     <div className="reviews-container">
       <h2 className="text-3xl text-primary font-bold">My Reviews</h2>
       <div className="reviews">
         {reviews
-          .filter((review) => review.maidId === loggedUser._id)
+          .filter((review) => review.maidId === loggedUser?._id)
           .map((review) => (
             <div
               key={review._id}
