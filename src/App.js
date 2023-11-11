@@ -51,6 +51,9 @@ import BabysitterSearchJob from "./Components/BabysitterDashboard/BabysitterSear
 import CreatePostForBabysitter from "./Components/CustomerDashboard/CreatePostForBabysitter";
 import Loginhomepagemodified from "./Components/Shared/Loginhomepagemodified";
 import Reviews from "./Components/MaidDashboard/Reviews";
+import MaidInformation from "./Components/AdminDashboard/MaidInformation";
+import DriverInformation from "./Components/AdminDashboard/DriverInformation";
+import BabysitterInformation from "./Components/AdminDashboard/BabysitterInformation";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -103,6 +106,9 @@ function App() {
           ></Route>
           <Route path="adminCreate" element={<AdminCreate />}></Route>
           <Route path="customer" element={<CustomerInformation />}></Route>
+          <Route path="maid" element={<MaidInformation />}></Route>
+          <Route path="driver" element={<DriverInformation />}></Route>
+          <Route path="babysitter" element={<BabysitterInformation />}></Route>
           <Route path="television" element={<TvBookings />}></Route>
           <Route path="washing-machine" element={<WmBookings />}></Route>
           <Route path="refrigerator" element={<RfBookings />}></Route>

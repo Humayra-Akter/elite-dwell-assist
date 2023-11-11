@@ -3,7 +3,7 @@ import up from "../../images/up-arrow-svgrepo-com.svg";
 import down from "../../images/down-arrow-svgrepo-com.svg";
 import MaidRow from "./MaidRow";
 
-const MaidInformation = () => {
+const BabysitterInformation = () => {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -11,7 +11,7 @@ const MaidInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/maid")
+    fetch("http://localhost:5000/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -197,4 +197,4 @@ const MaidInformation = () => {
   );
 };
 
-export default MaidInformation;
+export default BabysitterInformation;

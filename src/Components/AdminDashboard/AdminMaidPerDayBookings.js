@@ -37,7 +37,10 @@ const AdminMaidPerDayBookings = () => {
         setDayBookings((prevBookings) =>
           prevBookings.filter((b) => b._id !== booking._id)
         );
-        setAcknowledgedBookings([...acknowledgedBookings, booking]);
+        setAcknowledgedBookings((prevAcknowledgedBookings) => [
+          ...prevAcknowledgedBookings,
+          booking,
+        ]);
         toast.success("Booking acknowledged and removed", {
           position: toast.POSITION.TOP_CENTER,
         });
