@@ -24,7 +24,6 @@ const AdminMaidPerDayBookings = () => {
       toast.info("This booking has already been acknowledged.");
       return;
     }
-
     fetch("http://localhost:5000/acknowledgeBooking", {
       method: "POST",
       headers: {
@@ -41,7 +40,7 @@ const AdminMaidPerDayBookings = () => {
           ...prevAcknowledgedBookings,
           booking,
         ]);
-        toast.success("Booking acknowledged and removed", {
+        toast.success("Booking acknowledged", {
           position: toast.POSITION.TOP_CENTER,
         });
       })

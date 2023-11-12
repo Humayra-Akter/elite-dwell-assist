@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const AdminProfile = () => {
   const [user] = useAuthState(auth);
@@ -9,6 +19,7 @@ const AdminProfile = () => {
   const [drivers, setDrivers] = useState([]);
   const [babysitters, setBabysitters] = useState([]);
   const [loggedUser, setLoggedUser] = useState([]);
+  const [combinedData, setCombinedData] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -28,11 +39,29 @@ const AdminProfile = () => {
     }
   }, [user]);
 
+  const parseCreationTime = (timeString) => {
+    const creationTime = new Date(timeString);
+    return isNaN(creationTime) ? new Date("2023-11-01") : creationTime;
+  };
+
+  const aggregateData = (data, category) => {
+    const aggregatedData = {};
+    data.forEach((entry) => {
+      const date = parseCreationTime(entry.createdAt).toLocaleDateString();
+      if (!aggregatedData[date]) {
+        aggregatedData[date] = { date, [category.toLowerCase()]: 1 };
+      } else {
+        aggregatedData[date][category.toLowerCase()] += 1;
+      }
+    });
+    return Object.values(aggregatedData);
+  };
+
   useEffect(() => {
     fetch("http://localhost:5000/customer")
       .then((res) => res.json())
       .then((data) => {
-        setCustomers(data);
+        setCustomers(aggregateData(data, "Customer"));
       });
   }, []);
 
@@ -40,7 +69,7 @@ const AdminProfile = () => {
     fetch("http://localhost:5000/babysitter")
       .then((res) => res.json())
       .then((data) => {
-        setBabysitters(data);
+        setBabysitters(aggregateData(data, "Babysitter"));
       });
   }, []);
 
@@ -48,7 +77,7 @@ const AdminProfile = () => {
     fetch("http://localhost:5000/maid")
       .then((res) => res.json())
       .then((data) => {
-        setMaids(data);
+        setMaids(aggregateData(data, "Maid"));
       });
   }, []);
 
@@ -56,9 +85,14 @@ const AdminProfile = () => {
     fetch("http://localhost:5000/driver")
       .then((res) => res.json())
       .then((data) => {
-        setDrivers(data);
+        setDrivers(aggregateData(data, "Driver"));
       });
   }, []);
+
+  useEffect(() => {
+    const mergedData = customers.concat(babysitters, maids, drivers);
+    setCombinedData(mergedData);
+  }, [customers, babysitters, maids, drivers]);
 
   return (
     <div>
@@ -90,6 +124,48 @@ const AdminProfile = () => {
           </div>
         </div>
       </div>
+      {/* <div className="card bg-indigo-50 text-primary-content">
+        <div className="card-body">
+          <h2 className="card-title">All Categories</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={combinedData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Area
+                type="monotone"
+                dataKey="customer"
+                stackId="1"
+                stroke="#8884d8"
+                fill="#8884d8"
+              />
+              <Area
+                type="monotone"
+                dataKey="maid"
+                stackId="1"
+                stroke="#82ca9d"
+                fill="#82ca9d"
+              />
+              <Area
+                type="monotone"
+                dataKey="babysitter"
+                stackId="1"
+                stroke="#ffc658"
+                fill="#ffc658"
+              />
+              <Area
+                type="monotone"
+                dataKey="driver"
+                stackId="1"
+                stroke="#ff7300"
+                fill="#ff7300"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div> */}
     </div>
   );
 };

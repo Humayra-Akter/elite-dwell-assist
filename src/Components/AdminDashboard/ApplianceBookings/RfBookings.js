@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { AiFillClockCircle } from "react-icons/ai"; // Icon for clock
+import { AiFillClockCircle } from "react-icons/ai"; 
 
 const RfBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
@@ -21,6 +21,36 @@ const RfBookings = () => {
     return hoursRemaining;
   };
 
+  const acknowledgeBooking = (booking) => {
+    if (booking.acknowledged) {
+      toast.info("This booking has already been acknowledged.");
+      return;
+    }
+
+    fetch("http://localhost:5000/acknowledgeBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booking: { ...booking, acknowledgeBookingType: "Refrigerator Bill" },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDayBookings((prevBookings) =>
+          prevBookings.map((b) =>
+            b._id === booking._id ? { ...b, acknowledged: true } : b
+          )
+        );
+        toast.success("TV Booking acknowledged", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((error) => {
+        console.error("Error acknowledging TV booking:", error);
+      });
+  };
 
   return (
     <div>
@@ -33,17 +63,27 @@ const RfBookings = () => {
             key={booking._id}
             className="bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
           >
-           <div className="p-2 bg-blue-200" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-  <p className="text-lg font-bold">
-    Booking from:{" "}
-    <span className="uppercase font-bold text-primary">
-      {booking.userName}
-    </span>
-  </p>
-  <button className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full">
-    Acknowledge
-  </button>
-</div>
+            <div
+              className="p-2 bg-blue-200"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <p className="text-lg font-bold">
+                Booking from:{" "}
+                <span className="uppercase font-bold text-primary">
+                  {booking.userName}
+                </span>
+              </p>
+              <button
+                onClick={() => acknowledgeBooking(booking)}
+                className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full"
+              >
+                Acknowledge
+              </button>
+            </div>
 
             <div className="p-4">
               <h2 className="text-lg font-medium">
@@ -54,7 +94,7 @@ const RfBookings = () => {
                 <p className="text-lg font-medium">
                   Selected Date:{" "}
                   <span className="font-bold text-primary">
-                    {/* {new Date(booking.selectedDate).toLocaleString("en-US", {
+                    {new Date(booking.selectedDate).toLocaleString("en-US", {
                       hour: "numeric",
                       minute: "numeric",
                       second: "numeric",
@@ -66,10 +106,9 @@ const RfBookings = () => {
                           booking.selectedDate
                         )} hours remaining`
                       : "less than an hour remaining"}
-                    ) */}
-                    {booking.selectedDate.slice(0, 10)}
+                    ){booking.selectedDate.slice(0, 10)}
                   </span>
-                  {/* <AiFillClockCircle className="inline-block text-primary text-lg ml-1" /> */}
+                  <AiFillClockCircle className="inline-block text-primary text-lg ml-1" />
                 </p>
               )}
               <p className="text-lg font-medium">
@@ -79,24 +118,22 @@ const RfBookings = () => {
                 </span>
               </p>
               <div className="text-lg font-medium">
-  Selected Services:{" "}
-  <span>
-    {booking.selectedServices.map((service, index) => (
-      <span key={index} className="font-bold">
-        {service.name}
-        {index < booking.selectedServices.length - 1 ? ', ' : ''}
-      </span>
-    ))}
-  </span>
-</div>
+                Selected Services:{" "}
+                <span>
+                  {booking.selectedServices.map((service, index) => (
+                    <span key={index} className="font-bold">
+                      {service.name}
+                      {index < booking.selectedServices.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+                </span>
+              </div>
               <p className="text-lg font-medium">
                 Address:{" "}
-                
                 <span className="font-semibold text-primary capitalize">
                   {`${booking.address.house} ,Road ${booking.address.road}, Block ${booking.address.block},Sector ${booking.address.sector}, ${booking.address.area}`}
                 </span>
               </p>
-             
             </div>
           </div>
         ))}

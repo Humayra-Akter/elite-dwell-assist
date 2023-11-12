@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { AiFillClockCircle } from "react-icons/ai"; // Icon for clock
+import { AiFillClockCircle } from "react-icons/ai";
 
 const TvBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
@@ -19,6 +19,37 @@ const TvBookings = () => {
     const timeDifference = targetDate - currentTime;
     const hoursRemaining = Math.floor(timeDifference / (1000 * 60 * 60));
     return hoursRemaining;
+  };
+
+  const acknowledgeBooking = (booking) => {
+    if (booking.acknowledged) {
+      toast.info("This booking has already been acknowledged.");
+      return;
+    }
+
+    fetch("http://localhost:5000/acknowledgeBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booking: { ...booking, acknowledgeBookingType: "Television vBill" },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDayBookings((prevBookings) =>
+          prevBookings.map((b) =>
+            b._id === booking._id ? { ...b, acknowledged: true } : b
+          )
+        );
+        toast.success("TV Booking acknowledged", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((error) => {
+        console.error("Error acknowledging TV booking:", error);
+      });
   };
 
   return (
@@ -46,7 +77,10 @@ const TvBookings = () => {
                   {booking.userName}
                 </span>
               </p>
-              <button className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full">
+              <button
+                onClick={() => acknowledgeBooking(booking)}
+                className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full"
+              >
                 Acknowledge
               </button>
             </div>
@@ -72,10 +106,9 @@ const TvBookings = () => {
                           booking.selectedDate
                         )} hours remaining`
                       : "less than an hour remaining"}
-                    ) 
-                    {booking.selectedDate.slice(0, 10)}
+                    ){booking.selectedDate.slice(0, 10)}
                   </span>
-                  <AiFillClockCircle className="inline-block text-primary text-lg ml-1" /> 
+                  <AiFillClockCircle className="inline-block text-primary text-lg ml-1" />
                 </p>
               )}
               <p className="text-lg font-medium">

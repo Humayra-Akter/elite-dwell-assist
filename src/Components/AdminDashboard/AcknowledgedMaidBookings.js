@@ -64,6 +64,9 @@ const AcknowledgedMaidBookings = () => {
               </th>
               <th className="uppercase underline text-lg text-primary font-extrabold text-left">
                 Area
+              </th>
+              <th className="uppercase underline text-lg text-primary font-extrabold text-left">
+                BookingType
               </th>{" "}
               <th className="uppercase underline text-lg text-primary font-extrabold text-left w-1/5">
                 Time left

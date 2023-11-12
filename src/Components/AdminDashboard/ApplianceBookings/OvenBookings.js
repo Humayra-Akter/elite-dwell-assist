@@ -21,6 +21,37 @@ const OvenBookings = () => {
     return hoursRemaining;
   };
 
+  const acknowledgeBooking = (booking) => {
+    if (booking.acknowledged) {
+      toast.info("This booking has already been acknowledged.");
+      return;
+    }
+
+    fetch("http://localhost:5000/acknowledgeBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booking: { ...booking, acknowledgeBookingType: "Oven Bill" },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDayBookings((prevBookings) =>
+          prevBookings.map((b) =>
+            b._id === booking._id ? { ...b, acknowledged: true } : b
+          )
+        );
+        toast.success("TV Booking acknowledged", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((error) => {
+        console.error("Error acknowledging TV booking:", error);
+      });
+  };
+
   return (
     <div>
       <h2 className="text-3xl text-blue-900 font-bold mb-6">
@@ -46,7 +77,10 @@ const OvenBookings = () => {
                   {booking.userName}
                 </span>
               </p>
-              <button className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full">
+              <button
+                onClick={() => acknowledgeBooking(booking)}
+                className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full"
+              >
                 Acknowledge
               </button>
             </div>

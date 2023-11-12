@@ -10,8 +10,19 @@ const AcknowledgedMaidBookingsRow = ({ user }) => {
         {new Date(user?.selectedDate).toLocaleDateString()}
       </td>
       <td className="text-md">{user?.selectedTimeSlot}</td>
-      <td className="text-md">{user?.selectedServices.join(", ")}</td>
-      <td className="text-md capitalize">{user?.address.area}</td>{" "}
+      <td className="text-md">
+        {user?.selectedServices.map((service, index) => (
+          <div key={index}>
+            {typeof service === "string"
+              ? service
+              : `${service.name} (${service.count})`}
+          </div>
+        ))}
+      </td>
+      <td className="text-md capitalize">{user?.address.area}</td>
+      <td className="text-md capitalize">
+        {user?.acknowledgeBookingType || "Maid Per Day"}
+      </td>
       <td className="text-lg">
         <CountdownTimer selectedDate={user?.selectedDate} />
       </td>
