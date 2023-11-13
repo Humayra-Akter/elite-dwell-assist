@@ -28,6 +28,7 @@ const MaidSearchJob = () => {
         maidEmail: user?.email,
         customerEmail: booking.userEmail,
         bookingInfo: updatedBooking,
+        bookingFrom: "Maid",
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
       fetch("http://localhost:5000/customerBooked", {

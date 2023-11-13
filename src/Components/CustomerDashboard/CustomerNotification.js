@@ -6,9 +6,15 @@ import Loading from "../Shared/Loading";
 
 const CustomerNotification = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [notifications, setNotifications] = useState([]);
+  const [maidNotifications, setMaidNotifications] = useState([]);
+  const [driverNotifications, setDriverNotifications] = useState([]);
+  const [babysitterNotifications, setBabysitterNotifications] = useState([]);
   const [bookingId, setBookingId] = useState("");
+  const [bookingDriverId, setBookingDriverId] = useState("");
+  const [bookingBabysitterId, setBookingBabysitterId] = useState("");
   const [selectedMaids, setSelectedMaids] = useState({});
+  const [selectedDrivers, setSelectedDrivers] = useState({});
+  const [selectedBabysitters, setSelectedBabysitters] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:5000/customerBooked")
@@ -21,13 +27,81 @@ const CustomerNotification = () => {
   }, []);
 
   useEffect(() => {
+    fetch("http://localhost:5000/customerBookingByDriver")
+      .then((res) => res.json())
+      .then((data) => {
+        data.map((item) => {
+          setBookingDriverId(item._id);
+        });
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/customerBookingByBabysitter")
+      .then((res) => res.json())
+      .then((data) => {
+        data.map((item) => {
+          setBookingBabysitterId(item._id);
+        });
+      });
+  }, []);
+
+  console.log(bookingId, bookingDriverId, bookingBabysitterId);
+
+  useEffect(() => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(`http://localhost:5000/customerBooked/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
-            setNotifications(data);
+            setMaidNotifications(data);
+            // toast.success(
+            //   `Notifications for ${user?.displayName} from ${user?.email}`
+            // );
+          } else {
+            toast.warning(`No notifications for ${user?.displayName}`);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching notifications:", error);
+        });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const loggedInMaidEmail = user?.email;
+      fetch(
+        `http://localhost:5000/customerBookingByDriver/${loggedInMaidEmail}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data) && data.length > 0) {
+            setDriverNotifications(data);
+            // toast.success(
+            //   `Notifications for ${user?.displayName} from ${user?.email}`
+            // );
+          } else {
+            toast.warning(`No notifications for ${user?.displayName}`);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching notifications:", error);
+        });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const loggedInMaidEmail = user?.email;
+      fetch(
+        `http://localhost:5000/customerBookingByBabysitter/${loggedInMaidEmail}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data) && data.length > 0) {
+            setBabysitterNotifications(data);
             // toast.success(
             //   `Notifications for ${user?.displayName} from ${user?.email}`
             // );
@@ -55,40 +129,55 @@ const CustomerNotification = () => {
       });
   };
 
-  const clearNotification = (notificationId) => {
-    const updatedNotifications = notifications.filter(
-      (notification) => notification._id !== notificationId
-    );
-    setNotifications(updatedNotifications);
-    toast.success("Notification cleared successfully");
-  };
-
-  const acceptRequest = (notificationId, maidEmail) => {
-    console.log("accepted", notificationId, maidEmail);
-
-    fetch(`/accept-request/${notificationId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ maidEmail }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          const updatedNotifications = notifications.filter(
-            (notification) => notification._id !== notificationId
-          );
-          setNotifications(updatedNotifications);
-        } else {
-          console.error("Failed to accept the request");
-        }
+  const fetchDriverDetails = (driverEmail, notificationId) => {
+    fetch(`http://localhost:5000/driver/${driverEmail}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSelectedDrivers((prevSelectedDrivers) => ({
+          ...prevSelectedDrivers,
+          [notificationId]: data,
+        }));
       })
       .catch((error) => {
-        console.error("Error accepting the request:", error);
+        console.error("Error fetching driver details:", error);
       });
   };
 
-  console.log(selectedMaids);
+  const fetchBabysitterDetails = (babysitterEmail, notificationId) => {
+    fetch(`http://localhost:5000/babysitter/${babysitterEmail}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSelectedBabysitters((prevSelectedBabysitters) => ({
+          ...prevSelectedBabysitters,
+          [notificationId]: data,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching babysitter details:", error);
+      });
+  };
+
+  const clearNotification = (notificationId, bookingFrom) => {
+    let updatedNotifications;
+    if (bookingFrom === "Maid") {
+      updatedNotifications = maidNotifications.filter(
+        (notification) => notification._id !== notificationId
+      );
+      setMaidNotifications(updatedNotifications);
+    } else if (bookingFrom === "Driver") {
+      updatedNotifications = driverNotifications.filter(
+        (notification) => notification._id !== notificationId
+      );
+      setDriverNotifications(updatedNotifications);
+    } else if (bookingFrom === "Babysitter") {
+      updatedNotifications = babysitterNotifications.filter(
+        (notification) => notification._id !== notificationId
+      );
+      setBabysitterNotifications(updatedNotifications);
+    }
+
+    toast.success("Notification cleared successfully");
+  };
 
   if (loading) {
     return <Loading />;
@@ -99,22 +188,31 @@ const CustomerNotification = () => {
   }
   return (
     <div>
-      {notifications.length > 0 ? (
-        notifications.map((notification) => (
+      {maidNotifications.length > 0 ||
+      driverNotifications.length > 0 ||
+      babysitterNotifications.length > 0 ? (
+        // Display notifications from all types
+        [
+          ...maidNotifications,
+          ...driverNotifications,
+          ...babysitterNotifications,
+        ].map((notification) => (
           <div key={notification._id} className="my-4">
             <div className="card w-full my-4 border-2 shadow-xl transform transition-transform hover:scale-95 hover:bg-gradient-to-t from-blue-100 to-blue-50 hover:shadow-lg">
               <div className="card-body">
                 <h2 className="text-md font-bold">
                   Interested person:
                   <span className="text-lg text-blue-900 font-bold">
-                    {notification?.maidName}
+                    {notification?.maidName ||
+                      notification?.driverName ||
+                      notification?.babysitterName}
                   </span>
                 </h2>
 
                 {selectedMaids[notification._id] && (
                   <div className="maid-details">
                     <h2 className="text-md font-bold text-primary mb-3">
-                      Maid Details:
+                      {notification?.bookingFrom} Details:
                     </h2>{" "}
                     <p className="text-sm pb-1 text-blue-900 font-bold">
                       <span className="underline">Address:</span>{" "}
@@ -132,7 +230,12 @@ const CustomerNotification = () => {
                 )}
 
                 <button
-                  onClick={() => clearNotification(notification._id)}
+                  onClick={() =>
+                    clearNotification(
+                      notification._id,
+                      notification.bookingFrom
+                    )
+                  }
                   className="btn btn-sm rounded-full absolute w-1/8 top-0 right-5 my-7 text-xs border-blue-500 text-white font-bold bg-red-600"
                 >
                   Clear Notification
@@ -140,7 +243,24 @@ const CustomerNotification = () => {
 
                 <button
                   onClick={() => {
-                    fetchMaidDetails(notification.maidEmail, notification._id);
+                    if (notification?.bookingFrom === "Maid") {
+                      fetchMaidDetails(
+                        notification?.maidEmail,
+                        notification._id
+                      );
+                    } else if (notification?.bookingFrom === "Driver") {
+                      fetchDriverDetails(
+                        notification?.driverEmail,
+                        notification._id
+                      );
+                    } else if (notification?.bookingFrom === "Babysitter") {
+                      fetchBabysitterDetails(
+                        notification?.babysitterEmail,
+                        notification._id
+                      );
+                    } else {
+                      console.error("Invalid notification type");
+                    }
                   }}
                   className="btn btn-sm rounded-full absolute w-1/8 top-0 right-48 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
                 >

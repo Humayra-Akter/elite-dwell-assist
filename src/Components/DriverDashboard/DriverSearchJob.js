@@ -28,6 +28,7 @@ const DriverSearchJob = () => {
         driverEmail: user?.email,
         customerEmail: booking.userEmail,
         bookingInfo: updatedBooking,
+        bookingFrom: "Driver",
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
       fetch("http://localhost:5000/customerBookingByDriver", {

@@ -54,6 +54,8 @@ import Reviews from "./Components/MaidDashboard/Reviews";
 import MaidInformation from "./Components/AdminDashboard/MaidInformation";
 import DriverInformation from "./Components/AdminDashboard/DriverInformation";
 import BabysitterInformation from "./Components/AdminDashboard/BabysitterInformation";
+import DriverBookings from "./Components/CustomerDashboard/DriverBookings";
+import BabysitterBookings from "./Components/CustomerDashboard/BabysitterBookings";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -163,6 +165,11 @@ function App() {
             element={<CreatePostForBabysitter />}
           ></Route>{" "}
           <Route path="bookingsForMaid" element={<MaidBookings />}></Route>
+          <Route path="bookingsForDriver" element={<DriverBookings />}></Route>
+          <Route
+            path="bookingsForBabysitter"
+            element={<BabysitterBookings />}
+          ></Route>
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />
         <Route path="/babysitter" element={<Babysitter />} />

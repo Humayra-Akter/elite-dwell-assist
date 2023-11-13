@@ -103,6 +103,24 @@ const BabysitterProfile = () => {
         ...updatedBabysitter,
         availability: updatedAvailability,
       });
+    } else if (type === "checkbox" && name === "qualifications") {
+      const updatedQualifications = [
+        ...(updatedBabysitter.qualifications || []),
+      ];
+
+      if (checked) {
+        updatedQualifications.push(value);
+      } else {
+        const index = updatedQualifications.indexOf(value);
+        if (index > -1) {
+          updatedQualifications.splice(index, 1);
+        }
+      }
+
+      setUpdatedBabysitter({
+        ...updatedBabysitter,
+        qualifications: updatedQualifications,
+      });
     } else if (type === "checkbox" && name === "location") {
       const updatedLocations = [...(updatedBabysitter.location || [])];
 
@@ -118,6 +136,22 @@ const BabysitterProfile = () => {
       setUpdatedBabysitter({
         ...updatedBabysitter,
         location: updatedLocations,
+      });
+    } else if (type === "checkbox" && name === "specialSkills") {
+      const updatedSkills = [...(updatedBabysitter.specialSkills || [])];
+
+      if (checked) {
+        updatedSkills.push(value);
+      } else {
+        const index = updatedSkills.indexOf(value);
+        if (index > -1) {
+          updatedSkills.splice(index, 1);
+        }
+      }
+
+      setUpdatedBabysitter({
+        ...updatedBabysitter,
+        specialSkills: updatedSkills,
       });
     } else if (name === "expectedSalary") {
       const selectedSalary = value;
@@ -325,7 +359,7 @@ const BabysitterProfile = () => {
                         <label className="block mb-1 capitalize">
                           <input
                             type="checkbox"
-                            name="qualifications"
+                            name="qualifications" // Make sure this matches the state property name
                             value={qualification.value}
                             checked={(
                               updatedBabysitter.qualifications || []
