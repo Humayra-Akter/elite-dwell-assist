@@ -61,11 +61,11 @@ const DriverSearchJob = () => {
       <h2 className="text-xl pl-5 uppercase text-blue-900 font-bold">
         Search job
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {dayBookings.map((booking) => (
           <div
             key={booking._id}
-            className="card border-2 my-6 shadow-xl transform transition-transform hover:scale-95 hover:bg-gradient-to-t from-blue-200 to-blue-50 hover:shadow-lg"
+            className="card border-2 my-6 shadow-xl transform transition-transform hover:scale-95 hover:shadow-lg"
           >
             <div className="card-title pt-7 pb-5 bg-blue-50">
               <p className="font-sm ml-6">

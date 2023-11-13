@@ -9,6 +9,7 @@ import {
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
 import Loading from "../Shared/Loading";
+import Select from "react-select";
 
 const DriverRegistrationForm = () => {
   //   const [selectedRole, setSelectedRole] = useState("");
@@ -30,10 +31,6 @@ const DriverRegistrationForm = () => {
   const [selectedGender, setSelectedGender] = useState([]);
   const [selectedSalaries, setSelectedSalaries] = useState({});
   const [selectedLocation, setSelectedLocation] = useState([]);
-
-  const handleGender = (selected) => {
-    setSelectedGender([selected[selected.length - 1]]);
-  };
 
   const handleVehicleTypeChange = (selectedOptions) => {
     setSelectedVehicleType(selectedOptions);
@@ -57,6 +54,9 @@ const DriverRegistrationForm = () => {
   const handleExperienceChange = (selectedOptions) => {
     setSelectedExperience(selectedOptions);
   };
+  const handleGender = (selected) => {
+    setSelectedGender(selected);
+  };
 
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
@@ -68,16 +68,16 @@ const DriverRegistrationForm = () => {
 
   const locationOptions = [
     {
-      label: "dhanmondi",
+      label: "Dhanmondi",
       value: "dhanmondi",
     },
-    { label: "mirpur", value: "mirpur" },
-    { label: "savar", value: "savar" },
-    { label: "uttora", value: "uttora" },
-    { label: "gulshan", value: "gulshan" },
-    { label: "mohammadpur", value: "mohammadpur" },
-    { label: "banani", value: "banani" },
-    { label: "motijheel", value: "motijheel" },
+    { label: "Mirpur", value: "mirpur" },
+    { label: "Savar", value: "savar" },
+    { label: "Uttora", value: "uttora" },
+    { label: "Gulshan", value: "gulshan" },
+    { label: "Mohammadpur", value: "mohammadpur" },
+    { label: "Banani", value: "banani" },
+    { label: "Motijheel", value: "motijheel" },
   ];
 
   const genderOptions = [
@@ -139,8 +139,8 @@ const DriverRegistrationForm = () => {
             img: imgData.data.url,
             address: data.address,
             contact: data.contact,
-            gender: selectedGender[0]?.value,
-            experience: selectedExperience[0]?.value,
+            gender: selectedGender ? selectedGender.value : null,
+            experience: selectedExperience ? selectedExperience.value : null,
             education: data.education,
             location: selectedLocation.map((loc) => loc.value),
             nid: data.nid,
@@ -357,11 +357,12 @@ const DriverRegistrationForm = () => {
                       Gender
                     </span>
                   </label>
-                  <MultiSelect
-                    options={genderOptions}
+                  <Select
                     value={selectedGender}
+                    options={genderOptions}
                     onChange={handleGender}
-                    labelledBy={"Select"}
+                    isSearchable={false}
+                    placeholder="Select Gender"
                   />
                 </div>
 
@@ -373,15 +374,12 @@ const DriverRegistrationForm = () => {
                       Experience
                     </span>
                   </label>
-                  <MultiSelect
-                    name="experience"
+                  <Select
                     options={experienceOptions}
                     value={selectedExperience}
                     onChange={handleExperienceChange}
-                    labelledBy={"Select"}
-                    overrideStrings={{
-                      selectSomeItems: "Select experiences",
-                    }}
+                    isSearchable={false}
+                    placeholder="Select experiences"
                   />
                 </div>
 

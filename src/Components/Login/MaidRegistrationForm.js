@@ -12,6 +12,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import Select from "react-select";
 
 const MaidRegistrationForm = () => {
   const {
@@ -80,11 +81,13 @@ const MaidRegistrationForm = () => {
     setSelectedExperience(selectedOptions);
   };
   const handleGender = (selected) => {
-    setSelectedGender([selected[selected.length - 1]]);
+    setSelectedGender(selected);
   };
+
   const handleLocation = (selectedOptions) => {
     setSelectedLocation(selectedOptions);
   };
+
   const handleAvailability = (selectedOptions) => {
     setSelectedAvailability(selectedOptions);
   };
@@ -103,6 +106,7 @@ const MaidRegistrationForm = () => {
     { label: "Female", value: "female" },
     { label: "Other", value: "other" },
   ];
+
   const availabilityOptions = [
     { label: "08.00 AM - 11.00 AM", value: "sokal" },
     { label: "11.00 AM - 02.00 PM", value: "dupur" },
@@ -174,8 +178,8 @@ const MaidRegistrationForm = () => {
             img: imgData.data.url,
             address: data.address,
             contact: data.contact,
-            gender: selectedGender[0]?.value,
-            experience: selectedExperience[0]?.value,
+            gender: selectedGender ? selectedGender.value : null,
+            experience: selectedExperience ? selectedExperience.value : null,
             education: data.education,
             availability: selectedAvailability.map((avail) => avail.value),
             location: selectedLocation.map((loc) => loc.value),
@@ -395,14 +399,14 @@ const MaidRegistrationForm = () => {
                       Gender/{bengaliLabels.gender}
                     </span>
                   </label>
-                  <MultiSelect
-                    options={genderOptions}
+                  <Select
                     value={selectedGender}
+                    options={genderOptions}
                     onChange={handleGender}
-                    labelledBy={"Select"}
+                    isSearchable={false}
+                    placeholder="Select Gender"
                   />
                 </div>
-
                 {/* Experience dropdown */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -410,15 +414,12 @@ const MaidRegistrationForm = () => {
                       Experience/{bengaliLabels.experience}
                     </span>
                   </label>
-                  <MultiSelect
-                    name="experience"
+                  <Select
                     options={experienceOptions}
                     value={selectedExperience}
                     onChange={handleExperienceChange}
-                    labelledBy={"Select"}
-                    overrideStrings={{
-                      selectSomeItems: "Select experiences",
-                    }}
+                    isSearchable={false}
+                    placeholder="Select experiences"
                   />
                 </div>
 

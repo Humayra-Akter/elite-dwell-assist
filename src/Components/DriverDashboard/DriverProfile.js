@@ -50,21 +50,16 @@ const DriverProfile = () => {
     <div className=" w-full h-full text-left text-2xl text-darkslategray-100 font-montserrat">
       <div className="absolute top-[100.98px] left-[calc(50%_-_397.33px)] w-[727.46px] h-[159.8px]">
         <div className="absolute top-[70.4px] left-[calc(50%_-_177.07px)] w-[220.09px] h-[27.37px]">
-          <div className="absolute top-[0px] capitalize left-[calc(50%_-_150.04px)] inline-block w-[220.09px] h-[27.37px]">
+          {/* <div className="absolute top-[0px] capitalize left-[calc(50%_-_150.04px)] inline-block w-[220.09px] h-[27.37px]">
             {loggedUser.role}
-          </div>
+          </div> */}
         </div>
-        <div className="absolute top-[95.94px] left-[calc(50%_+_182.43px)] w-[181.3px] h-[63.86px] overflow-hidden flex flex-row items-center justify-start">
-          <button
-            className="cursor-pointer hover:text-black bg-primary [border:none] py-2 px-0 bg-mediumpurple rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[170px] h-11 overflow-hidden shrink-0 flex flex-row items-center justify-center box-border"
-            id="edit"
-          >
-            <Link to="/driverDashboard/driverUpdate">
-              <b className="relative text-white inline-block text-center w-16 h-6 shrink-0">
-                Edit
-              </b>
-            </Link>
-          </button>
+        <div className=" flex flex-row items-center justify-end">
+          <Link to="/driverDashboard/driverUpdate">
+            <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
+              Edit
+            </button>
+          </Link>
         </div>
         <img
           className="absolute top-[30.75px] w-[129.12px] h-[123.7px] object-cover"
@@ -82,31 +77,7 @@ const DriverProfile = () => {
       <b className="absolute top-[73px] left-[calc(50%_-_400px)] inline-block w-[216px] h-[27px]">
         {loggedUser?.name}
       </b>
-      <div className="absolute top-[322px] left-[calc(50%_-_404px)] bg-peak-primary box-border w-[726px] h-[545px] border-[1px] border-solid border-lightgray" />
-      <b className="absolute top-[627px] left-[calc(50%_-_395px)] text-[18px] [text-decoration:underline] flex text-slateblue items-center w-[244px] h-[25px]">
-        Education Qualifications:
-      </b>
-      <div className="absolute top-[616.5px] left-[calc(50%_-_404.5px)] box-border w-[727px] h-px border-t-[1px] border-solid border-lightgray" />
-      <div className="absolute top-[656px] left-[calc(50%_-_404px)] bg-darkslateblue w-[726px] h-8 text-center text-sm text-peak-primary">
-        <div className="absolute top-[9px] left-[66px] w-[100px] h-[17px]">
-          <b className="absolute top-[0px] left-[0px] inline-block w-[108px]">
-            Education
-          </b>
-        </div>
-      </div>
-      <div className="absolute top-[694px] left-[calc(50%_-_404px)] w-[726px] h-[47px] overflow-hidden text-center text-sm text-peak-primary">
-        <div className="absolute top-[4px] left-[calc(50%_-_366px)] bg-darkslateblue w-[729px] h-[33px]">
-          <div className="absolute top-[8px] left-[53px] w-[136px] h-[17px]">
-            <div className="absolute top-[0px] left-[0px] font-medium uppercase inline-block w-[136px]">
-              {loggedUser?.education}
-            </div>
-          </div>
-          <button
-            className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[3px] left-[580px] w-[35px] h-[27px] bg-cover bg-no-repeat bg-[top]"
-            id="image_edu"
-          />
-        </div>
-      </div>
+
       <div className="absolute top-[327px] left-[calc(50%_-_399px)] w-[704px] h-[275px] overflow-hidden text-base text-black">
         <div className="absolute capitalize top-[128px] left-[77px] inline-block w-[323px] h-[23px]">
           {loggedUser?.gender}
