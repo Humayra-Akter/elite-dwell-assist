@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 
-const Reviews = () => {
+const DriverReview = () => {
   const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -12,7 +12,7 @@ const Reviews = () => {
       if (user) {
         try {
           const response = await fetch(
-            `http://localhost:5000/maid?email=${user.email}`
+            `http://localhost:5000/driver?email=${user.email}`
           );
           const data = await response.json();
 
@@ -39,9 +39,7 @@ const Reviews = () => {
           const response = await fetch(`http://localhost:5000/reviews`);
           const data = await response.json();
 
-          // Check if data is an array
           if (Array.isArray(data)) {
-            // Filter reviews based on matching user's email in info field
             const userReviews = data.filter(
               (review) => review.info === loggedUser.email
             );
@@ -94,4 +92,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default DriverReview;

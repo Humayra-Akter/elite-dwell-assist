@@ -76,7 +76,7 @@ const MaidBookings = () => {
                 key={booking._id}
                 booking={booking}
                 userEmail={user.email}
-                maidId={booking.maidId}
+                maidEmail={booking.maidEmail}
               />
             ))}
           </tbody>

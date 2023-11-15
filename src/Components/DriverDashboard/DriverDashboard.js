@@ -72,7 +72,7 @@ const DriverDashboard = () => {
             aria-label="close sidebar"
             class="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-sky-50 text-base-content">
+          <ul className="menu p-4 w-80 min-h-full bg-indigo-50 text-base-content">
             {/* <!-- Sidebar content here --> */}
 
             <ul className="mt-16">
@@ -96,6 +96,7 @@ const DriverDashboard = () => {
                   </span>
                 </Link>
               </li>
+              <hr />
               <li>
                 {" "}
                 <Link
@@ -113,8 +114,8 @@ const DriverDashboard = () => {
                   </span>
                 </Link>
               </li>
+              <hr />
               <li>
-                {" "}
                 <Link
                   className={`text-primary mt-3 text-base font-bold hover:text-black ${
                     selectedLink === "searchJob" ? "text-white bg-primary" : ""
@@ -125,6 +126,21 @@ const DriverDashboard = () => {
                   <span className="flex gap-4">
                     <img className="w-6" src={ban2} alt="" />
                     Search Job
+                  </span>
+                </Link>
+              </li>
+              <hr />
+              <li>
+                <Link
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "maidReview" ? "text-white bg-primary" : ""
+                  }`}
+                  to="/driverDashboard/driverReview"
+                  onClick={() => handleLinkClick("reviews")}
+                >
+                  <span className="flex gap-4">
+                    <img className="w-6" src={ban2} alt="" />
+                    Reviews
                   </span>
                 </Link>
               </li>

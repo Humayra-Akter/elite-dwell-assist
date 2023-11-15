@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const MaidRow = ({ booking, maidId, userEmail }) => {
+const MaidRow = ({ booking, maidEmail, userEmail }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
   
   useEffect(() => {
-    checkIfUserHasAlreadyReviewed(userEmail, maidId);
-  }, [userEmail, maidId]);
+    checkIfUserHasAlreadyReviewed(userEmail, maidEmail);
+  }, [userEmail, maidEmail]);
 
   const handleRatingClick = (value) => {
     setRating(value);
@@ -32,10 +32,10 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
   const info = booking.maidEmail;
   const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
-  const checkIfUserHasAlreadyReviewed = async (userEmail, maidId) => {
+  const checkIfUserHasAlreadyReviewed = async (userEmail, maidEmail) => {
     const userReviews = await getUserReviews(userEmail);
     const alreadyReviewed = userReviews.some(
-      (review) => review.maidId === maidId
+      (review) => review.maidEmail === maidEmail
     );
     setHasAlreadyReviewed(alreadyReviewed);
   };
@@ -47,7 +47,7 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
       } else {
         const review = {
           userEmail,
-          maidId,
+          maidEmail,
           rating,
           reviewText,
           info,
@@ -67,7 +67,7 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
               toast.success("Thanks for your review.", {
                 position: toast.POSITION.TOP_CENTER,
               });
-              checkIfUserHasAlreadyReviewed(userEmail, maidId);
+              checkIfUserHasAlreadyReviewed(userEmail, maidEmail);
             });
         } catch (error) {
           console.error("Error submitting review:", error);

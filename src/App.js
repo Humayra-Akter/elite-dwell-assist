@@ -56,6 +56,7 @@ import DriverInformation from "./Components/AdminDashboard/DriverInformation";
 import BabysitterInformation from "./Components/AdminDashboard/BabysitterInformation";
 import DriverBookings from "./Components/CustomerDashboard/DriverBookings";
 import BabysitterBookings from "./Components/CustomerDashboard/BabysitterBookings";
+import DriverReview from "./Components/DriverDashboard/DriverReview";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -147,6 +148,7 @@ function App() {
           ></Route>
           <Route path="searchJob" element={<DriverSearchJob />}></Route>
           <Route path="driverUpdate" element={<DriverUpdate />}></Route>
+          <Route path="driverReview" element={<DriverReview />}></Route>
         </Route>
         {/* customer  */}
         <Route path="/customerDashboard" element={<CustomerDashboard />}>
