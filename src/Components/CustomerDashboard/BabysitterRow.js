@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const BabysitterRow = ({ booking, babysitterId, userEmail }) => {
+const BabysitterRow = ({ booking, babysitterEmail, userEmail }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-  console.log(babysitterId);
+
   useEffect(() => {
-    checkIfUserHasAlreadyReviewed(userEmail, babysitterId);
-  }, [userEmail, babysitterId]);
+    checkIfUserHasAlreadyReviewed(userEmail, babysitterEmail);
+  }, [userEmail, babysitterEmail]);
 
   const handleRatingClick = (value) => {
     setRating(value);
@@ -29,13 +29,13 @@ const BabysitterRow = ({ booking, babysitterId, userEmail }) => {
       return [];
     }
   };
-
+  const info = booking.babysitterEmail;
   const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
-  const checkIfUserHasAlreadyReviewed = async (userEmail, babysitterId) => {
+  const checkIfUserHasAlreadyReviewed = async (userEmail, babysitterEmail) => {
     const userReviews = await getUserReviews(userEmail);
     const alreadyReviewed = userReviews.some(
-      (review) => review.babysitterId === babysitterId
+      (review) => review.babysitterEmail === babysitterEmail
     );
     setHasAlreadyReviewed(alreadyReviewed);
   };
@@ -47,11 +47,12 @@ const BabysitterRow = ({ booking, babysitterId, userEmail }) => {
       } else {
         const review = {
           userEmail,
-          babysitterId,
+          babysitterEmail,
           rating,
           reviewText,
+          info,
+          reviewType: "babysitter",
         };
-        console.log(review);
         try {
           fetch("http://localhost:5000/reviews", {
             method: "POST",
@@ -65,7 +66,7 @@ const BabysitterRow = ({ booking, babysitterId, userEmail }) => {
               toast.success("Thanks for your review.", {
                 position: toast.POSITION.TOP_CENTER,
               });
-              checkIfUserHasAlreadyReviewed(userEmail, babysitterId);
+              checkIfUserHasAlreadyReviewed(userEmail, babysitterEmail);
             });
         } catch (error) {
           console.error("Error submitting review:", error);

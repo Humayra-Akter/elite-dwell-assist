@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const DriverRow = ({ booking, driverId, userEmail }) => {
+const DriverRow = ({ booking, driverEmail, userEmail }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-  console.log(driverId);
+
   useEffect(() => {
-    checkIfUserHasAlreadyReviewed(userEmail, driverId);
-  }, [userEmail, driverId]);
+    checkIfUserHasAlreadyReviewedDriver(userEmail, driverEmail);
+  }, [userEmail, driverEmail]);
 
   const handleRatingClick = (value) => {
     setRating(value);
   };
-
+  const info = booking.driverEmail;
   const getUserReviews = async (userEmail) => {
     try {
       const response = await fetch(
@@ -30,28 +30,30 @@ const DriverRow = ({ booking, driverId, userEmail }) => {
     }
   };
 
-  const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
+  const [hasAlreadyReviewedDriver, setHasAlreadyReviewedDriver] =
+    useState(false);
 
-  const checkIfUserHasAlreadyReviewed = async (userEmail, driverId) => {
+  const checkIfUserHasAlreadyReviewedDriver = async (userEmail, driverEmail) => {
     const userReviews = await getUserReviews(userEmail);
     const alreadyReviewed = userReviews.some(
-      (review) => review.driverId === driverId
+      (review) => review.info === driverEmail
     );
-    setHasAlreadyReviewed(alreadyReviewed);
+    setHasAlreadyReviewedDriver(alreadyReviewed);
   };
 
   const submitReview = async () => {
     if (rating > 0 && reviewText) {
-      if (hasAlreadyReviewed) {
-        toast.error("You have already reviewed this maid.");
+      if (hasAlreadyReviewedDriver) {
+        toast.error("You have already reviewed this driver.");
       } else {
         const review = {
           userEmail,
-          driverId,
+          driverEmail,
           rating,
           reviewText,
+          info,
+          reviewType: "driver",
         };
-        console.log(review);
         try {
           fetch("http://localhost:5000/reviews", {
             method: "POST",
@@ -65,7 +67,7 @@ const DriverRow = ({ booking, driverId, userEmail }) => {
               toast.success("Thanks for your review.", {
                 position: toast.POSITION.TOP_CENTER,
               });
-              checkIfUserHasAlreadyReviewed(userEmail, driverId);
+              checkIfUserHasAlreadyReviewedDriver(userEmail, driverEmail);
             });
         } catch (error) {
           console.error("Error submitting review:", error);

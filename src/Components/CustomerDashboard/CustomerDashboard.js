@@ -56,8 +56,7 @@ const CustomerDashboard = () => {
             aria-label="close sidebar"
             class="drawer-overlay"
           ></label>
-          <ul class="menu pl-4 pt-10 w-80 min-h-full bg-sky-50 text-base-content">
-            {/* <!-- Sidebar content here --> */}
+          <ul class="menu pl-4 pt-10 w-80 min-h-full bg-indigo-50 text-base-content">
             <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
@@ -69,6 +68,7 @@ const CustomerDashboard = () => {
                 </span>
               </Link>
             </li>
+            <hr />
             <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
@@ -79,7 +79,8 @@ const CustomerDashboard = () => {
                   Notification
                 </span>
               </Link>
-            </li>
+            </li>{" "}
+            <hr />
             <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
@@ -91,6 +92,7 @@ const CustomerDashboard = () => {
                 </span>
               </Link>
             </li>{" "}
+            <hr />
             <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
@@ -101,7 +103,8 @@ const CustomerDashboard = () => {
                   Create Post For Driver
                 </span>
               </Link>
-            </li>
+            </li>{" "}
+            <hr />
             <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
@@ -112,7 +115,8 @@ const CustomerDashboard = () => {
                   Create Post For Babysitter
                 </span>
               </Link>
-            </li>
+            </li>{" "}
+            <hr />
             <li>
               <div className="relative group">
                 <input
@@ -143,7 +147,8 @@ const CustomerDashboard = () => {
                           Maid Bookings
                         </span>
                       </Link>
-                    </li>
+                    </li>{" "}
+                    <hr />
                     <li>
                       <Link
                         to="/customerDashboard/bookingsForDriver"
@@ -154,7 +159,8 @@ const CustomerDashboard = () => {
                           Driver Bookings
                         </span>
                       </Link>
-                    </li>
+                    </li>{" "}
+                    <hr />
                     <li>
                       <Link
                         to="/customerDashboard/bookingsForBabysitter"

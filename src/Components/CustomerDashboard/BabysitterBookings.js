@@ -78,6 +78,7 @@ const BabysitterBookings = () => {
                 key={booking._id}
                 booking={booking}
                 userEmail={user.email}
+                babysitterEmail={booking.babysitterEmail}
               />
             ))}
           </tbody>

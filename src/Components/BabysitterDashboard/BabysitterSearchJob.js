@@ -24,8 +24,8 @@ const BabysitterSearchJob = () => {
       };
 
       const bookingData = {
-        driverName: user?.displayName,
-        driverEmail: user?.email,
+        babysitterName: user?.displayName,
+        babysitterEmail: user?.email,
         customerEmail: booking.userEmail,
         bookingInfo: updatedBooking,
         bookingFrom: "Babysitter",

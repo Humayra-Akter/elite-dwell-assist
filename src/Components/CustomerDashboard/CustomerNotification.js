@@ -46,8 +46,6 @@ const CustomerNotification = () => {
       });
   }, []);
 
-  console.log(bookingId, bookingDriverId, bookingBabysitterId);
-
   useEffect(() => {
     if (user) {
       const loggedInMaidEmail = user?.email;
@@ -56,11 +54,8 @@ const CustomerNotification = () => {
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
             setMaidNotifications(data);
-            // toast.success(
-            //   `Notifications for ${user?.displayName} from ${user?.email}`
-            // );
           } else {
-            toast.warning(`No notifications for ${user?.displayName}`);
+            console.log(`No notifications for ${user?.displayName}`);
           }
         })
         .catch((error) => {
@@ -79,11 +74,8 @@ const CustomerNotification = () => {
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
             setDriverNotifications(data);
-            // toast.success(
-            //   `Notifications for ${user?.displayName} from ${user?.email}`
-            // );
           } else {
-            toast.warning(`No notifications for ${user?.displayName}`);
+            console.log(`No notifications for ${user?.displayName}`);
           }
         })
         .catch((error) => {
@@ -102,11 +94,8 @@ const CustomerNotification = () => {
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
             setBabysitterNotifications(data);
-            // toast.success(
-            //   `Notifications for ${user?.displayName} from ${user?.email}`
-            // );
           } else {
-            toast.warning(`No notifications for ${user?.displayName}`);
+            console.log(`No notifications for ${user?.displayName}`);
           }
         })
         .catch((error) => {
@@ -186,12 +175,15 @@ const CustomerNotification = () => {
     toast.error("Authentication error:", error);
     return <div>Error: {error.message}</div>;
   }
+
+  console.log(maidNotifications);
+  console.log(driverNotifications);
+  console.log(babysitterNotifications);
   return (
     <div>
       {maidNotifications.length > 0 ||
       driverNotifications.length > 0 ||
       babysitterNotifications.length > 0 ? (
-        // Display notifications from all types
         [
           ...maidNotifications,
           ...driverNotifications,
@@ -201,7 +193,10 @@ const CustomerNotification = () => {
             <div className="card w-full my-4 border-2 shadow-xl transform transition-transform hover:scale-95 hover:bg-gradient-to-t from-blue-100 to-blue-50 hover:shadow-lg">
               <div className="card-body">
                 <h2 className="text-md font-bold">
-                  Interested person:
+                  <span className="text-md text-primary font-bold">
+                    {notification?.bookingFrom}{" "}
+                  </span>{" "}
+                  Interested person:{" "}
                   <span className="text-lg text-blue-900 font-bold">
                     {notification?.maidName ||
                       notification?.driverName ||
@@ -209,25 +204,72 @@ const CustomerNotification = () => {
                   </span>
                 </h2>
 
-                {selectedMaids[notification._id] && (
-                  <div className="maid-details">
-                    <h2 className="text-md font-bold text-primary mb-3">
-                      {notification?.bookingFrom} Details:
-                    </h2>{" "}
-                    <p className="text-sm pb-1 text-blue-900 font-bold">
-                      <span className="underline">Address:</span>{" "}
-                      {selectedMaids[notification._id].address}
-                    </p>
-                    <p className="text-sm pb-1 text-blue-900 font-bold">
-                      <span className="underline">Email:</span>
-                      {selectedMaids[notification._id].email}
-                    </p>
-                    <p className="text-sm pb-1 text-blue-900 font-bold">
-                      <span className="underline">Contact:</span>
-                      {selectedMaids[notification._id].contact}
-                    </p>
-                  </div>
-                )}
+                {notification.bookingFrom === "Maid" &&
+                  selectedMaids[notification._id] && (
+                    <div className="maid-details">
+                      <h2 className="text-md font-bold text-primary mb-3">
+                        {notification?.bookingFrom} Details:
+                      </h2>{" "}
+                      <p className="text-sm pb-1 text-blue-900 font-bold">
+                        <span className="underline">Address:</span>{" "}
+                        {selectedMaids[notification._id].address}
+                      </p>
+                      <p className="text-sm pb-1 text-blue-900 font-bold">
+                        <span className="underline">Email:</span>
+                        {selectedMaids[notification._id].email}
+                      </p>
+                      <p className="text-sm pb-1 text-blue-900 font-bold">
+                        <span className="underline">Contact:</span>
+                        {selectedMaids[notification._id].contact}
+                      </p>
+                    </div>
+                  )}
+
+                {notification.bookingFrom === "Driver" &&
+                  selectedDrivers[notification._id] && (
+                    <div className="driver-details">
+                      <div className="maid-details">
+                        <h2 className="text-md font-bold text-primary mb-3">
+                          {notification?.bookingFrom} Details:
+                        </h2>{" "}
+                        <p className="text-sm pb-1 text-blue-900 font-bold">
+                          <span className="underline">Address:</span>{" "}
+                          {selectedDrivers[notification._id].address}
+                        </p>
+                        <p className="text-sm pb-1 text-blue-900 font-bold">
+                          <span className="underline">Email:</span>
+                          {selectedDrivers[notification._id].email}
+                        </p>
+                        <p className="text-sm pb-1 text-blue-900 font-bold">
+                          <span className="underline">Contact:</span>
+                          {selectedDrivers[notification._id].contact}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                {notification.bookingFrom === "Babysitter" &&
+                  selectedBabysitters[notification._id] && (
+                    <div className="babysitter-details">
+                      <div className="maid-details">
+                        <h2 className="text-md font-bold text-primary mb-3">
+                          {notification?.bookingFrom} Details:
+                        </h2>{" "}
+                        <p className="text-sm pb-1 text-blue-900 font-bold">
+                          <span className="underline">Address:</span>{" "}
+                          {selectedBabysitters[notification._id].address}
+                        </p>
+                        <p className="text-sm pb-1 text-blue-900 font-bold">
+                          <span className="underline">Email:</span>
+                          {selectedBabysitters[notification._id].email}
+                        </p>
+                        <p className="text-sm pb-1 text-blue-900 font-bold">
+                          <span className="underline">Contact:</span>
+                          {selectedBabysitters[notification._id].contact}
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
                 <button
                   onClick={() =>
@@ -240,32 +282,52 @@ const CustomerNotification = () => {
                 >
                   Clear Notification
                 </button>
-
-                <button
-                  onClick={() => {
-                    if (notification?.bookingFrom === "Maid") {
+                {notification?.bookingFrom === "Maid" ? (
+                  <button
+                    onClick={() =>
                       fetchMaidDetails(
                         notification?.maidEmail,
-                        notification._id
-                      );
-                    } else if (notification?.bookingFrom === "Driver") {
+                        notification?._id
+                      )
+                    }
+                    className="btn btn-sm rounded-full absolute w-1/8 top-0 right-48 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
+                  >
+                    View Details
+                  </button>
+                ) : (
+                  <></>
+                )}
+                {notification?.bookingFrom === "Driver" ? (
+                  <button
+                    onClick={() =>
                       fetchDriverDetails(
                         notification?.driverEmail,
-                        notification._id
-                      );
-                    } else if (notification?.bookingFrom === "Babysitter") {
+                        notification?._id
+                      )
+                    }
+                    className="btn btn-sm rounded-full absolute w-1/8 top-0 right-48 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
+                  >
+                    View Details
+                  </button>
+                ) : (
+                  <></>
+                )}
+
+                {notification?.bookingFrom === "Babysitter" ? (
+                  <button
+                    onClick={() =>
                       fetchBabysitterDetails(
                         notification?.babysitterEmail,
-                        notification._id
-                      );
-                    } else {
-                      console.error("Invalid notification type");
+                        notification?._id
+                      )
                     }
-                  }}
-                  className="btn btn-sm rounded-full absolute w-1/8 top-0 right-48 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
-                >
-                  View Details
-                </button>
+                    className="btn btn-sm rounded-full absolute w-1/8 top-0 right-48 my-7 text-xs border-blue-500 text-white font-bold bg-green-600"
+                  >
+                    View Details
+                  </button>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>

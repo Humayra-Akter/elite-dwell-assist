@@ -38,11 +38,9 @@ const MaidBookings = () => {
     }
   }, [user]);
 
-  // Filter bookings to display only if the logged user's email matches the customerEmail
   const filteredBookings = bookings.filter(
     (booking) => booking.customerEmail === user.email
   );
-  console.log(filteredBookings);
 
   return (
     <div>
@@ -69,7 +67,6 @@ const MaidBookings = () => {
               <th className="text-left text-primary underline w-1/6">
                 Created Time
               </th>
-              {/* <th className="text-left text-primary underline w-1/8">Delete</th> */}
               <th className="text-left text-primary underline w-1/4">Review</th>
             </tr>
           </thead>
@@ -79,6 +76,7 @@ const MaidBookings = () => {
                 key={booking._id}
                 booking={booking}
                 userEmail={user.email}
+                maidId={booking.maidId}
               />
             ))}
           </tbody>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import trash from "../../images/trash.svg";
 import { toast } from "react-toastify";
 
 const MaidRow = ({ booking, maidId, userEmail }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-  console.log(maidId);
+  
   useEffect(() => {
     checkIfUserHasAlreadyReviewed(userEmail, maidId);
   }, [userEmail, maidId]);
@@ -30,7 +29,7 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
       return [];
     }
   };
-
+  const info = booking.maidEmail;
   const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
   const checkIfUserHasAlreadyReviewed = async (userEmail, maidId) => {
@@ -39,25 +38,6 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
       (review) => review.maidId === maidId
     );
     setHasAlreadyReviewed(alreadyReviewed);
-  };
-
-  const deleteBooking = () => {
-    if (window.confirm("Are you sure you want to delete this booking?")) {
-      fetch(`http://localhost:5000/bookings/${booking._id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (response.ok) {
-            toast.success("Booking deleted successfully");
-          } else {
-            throw new Error("Failed to delete booking");
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting booking:", error);
-          toast.error("Error deleting booking");
-        });
-    }
   };
 
   const submitReview = async () => {
@@ -70,6 +50,8 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
           maidId,
           rating,
           reviewText,
+          info,
+          reviewType: "maid",
         };
         console.log(review);
         try {
@@ -114,14 +96,6 @@ const MaidRow = ({ booking, maidId, userEmail }) => {
           ? new Date(booking?.createdDate).toLocaleString()
           : "Invalid Date"}
       </td>
-      {/* <td>
-        <img
-          onClick={deleteBooking}
-          className="w-6 cursor-pointer"
-          src={trash}
-          alt=""
-        />
-      </td> */}
       <td>
         {Array.from({ length: 5 }).map((_, index) => (
           <span

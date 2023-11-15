@@ -15,7 +15,7 @@ const DriverBookings = () => {
         .then((data) => {
           if (data.length > 0) {
             const matchingUser = data.find(
-              (userData) => userData.email === user.email
+              (userData) => userData?.email === user?.email
             );
             if (matchingUser) {
               setLoggedUser(matchingUser);
@@ -38,7 +38,6 @@ const DriverBookings = () => {
     }
   }, [user]);
 
-  // Filter bookings to display only if the logged user's email matches the customerEmail
   const filteredBookings = bookings.filter(
     (booking) => booking.customerEmail === user.email
   );
@@ -66,7 +65,6 @@ const DriverBookings = () => {
               <th className="text-left text-primary underline w-1/6">
                 Created Time
               </th>
-              {/* <th className="text-left text-primary underline w-1/8">Delete</th> */}
               <th className="text-left text-primary underline w-1/4">Review</th>
             </tr>
           </thead>
@@ -76,6 +74,7 @@ const DriverBookings = () => {
                 key={booking._id}
                 booking={booking}
                 userEmail={user.email}
+                driverEmail={booking.driverEmail}
               />
             ))}
           </tbody>
