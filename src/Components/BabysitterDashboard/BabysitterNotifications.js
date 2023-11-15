@@ -29,7 +29,6 @@ const BabysitterNotifications = () => {
       fetch(`http://localhost:5000/babysitterBookings/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log("Fetched Data:", data);
           if (Array.isArray(data) && data.length > 0) {
             setNotifications(data);
           } else {
@@ -55,7 +54,7 @@ const BabysitterNotifications = () => {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          setDetails(data[0]); // Assuming there's only one matching customer
+          setDetails(data[0]);
         } else {
           toast.warning("Customer details not found");
         }
@@ -116,9 +115,6 @@ const BabysitterNotifications = () => {
                 >
                   Clear Notifications
                 </button>
-                {/* <button className="btn btn-sm rounded-full absolute lg:w-1/5 top-9 right-5 my-3 text-xs border-blue-500 text-white font-bold bg-green-600">
-                  View details
-                </button> */}
               </div>
             </div>
           </div>

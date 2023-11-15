@@ -75,6 +75,7 @@ const MaidBookings = () => {
               <MaidRow
                 key={booking._id}
                 booking={booking}
+                index={index}
                 userEmail={user.email}
                 maidEmail={booking.maidEmail}
               />

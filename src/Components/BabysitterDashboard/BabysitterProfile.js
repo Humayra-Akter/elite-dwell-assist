@@ -166,7 +166,7 @@ const BabysitterProfile = () => {
       });
     }
   };
-
+  console.log(updatedBabysitter);
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -290,11 +290,11 @@ const BabysitterProfile = () => {
                     ))}
                   </ul>
                 </div>
-              ) : Array.isArray(updatedBabysitter.location) &&
-                updatedBabysitter.location.length > 0 ? (
+              ) : Array.isArray(updatedBabysitter.preferedLocation) &&
+                updatedBabysitter.preferedLocation.length > 0 ? (
                 <span className="capitalize">
                   <ul>
-                    {updatedBabysitter.location.map((loc) => (
+                    {updatedBabysitter.preferedLocation.map((loc) => (
                       <li key={loc} className="capitalize">
                         <strong>{loc}</strong>
                       </li>

@@ -102,14 +102,14 @@ const BabysitterRegistrationForm = () => {
   ];
 
   const locationOptions = [
-    { label: "dhanmondi", value: "dhanmondi" },
-    { label: "mirpur", value: "mirpur" },
-    { label: "savar", value: "savar" },
-    { label: "uttora", value: "uttora" },
-    { label: "gulshan", value: "gulshan" },
-    { label: "mohammadpur", value: "mohammadpur" },
-    { label: "banani", value: "banani" },
-    { label: "motijheel", value: "motijheel" },
+    { label: "Dhanmondi", value: "dhanmondi" },
+    { label: "Mirpur", value: "mirpur" },
+    { label: "Savar", value: "savar" },
+    { label: "Uttora", value: "uttora" },
+    { label: "Gulshan", value: "gulshan" },
+    { label: "Mohammadpur", value: "mohammadpur" },
+    { label: "Banani", value: "banani" },
+    { label: "Motijheel", value: "motijheel" },
   ];
 
   const availabilityOptions = [

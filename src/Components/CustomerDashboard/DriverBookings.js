@@ -74,6 +74,7 @@ const DriverBookings = () => {
                 key={booking._id}
                 booking={booking}
                 userEmail={user.email}
+                index={index}
                 driverEmail={booking.driverEmail}
               />
             ))}

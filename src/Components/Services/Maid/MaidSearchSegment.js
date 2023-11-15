@@ -31,7 +31,7 @@ const MaidSearchSegment = () => {
                 <select
                   value={selectedLocation}
                   onChange={handleLocationChange}
-                  className="select select-bordered select-primary w-full" // Added w-full to set the width to 100%
+                  className="select select-bordered select-primary w-full"
                 >
                   <option value="">Select Location</option>
                   <option value="Dhanmondi">Dhanmondi</option>
@@ -67,7 +67,7 @@ const MaidSearchSegment = () => {
                 <select
                   value={selectedTask}
                   onChange={handleTaskChange}
-                  className="select select-bordered select-primary w-full" // Added w-full to set the width to 100%
+                  className="select select-bordered select-primary w-full"
                 >
                   <option value="">Select Task</option>
                   <option value="mopping">Mopping</option>

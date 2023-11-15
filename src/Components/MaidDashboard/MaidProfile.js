@@ -309,10 +309,10 @@ const MaidProfile = () => {
                   ))}
                 </ul>
               </div>
-            ) : Array.isArray(updatedMaid.skills) &&
-              updatedMaid.skills.length > 0 ? (
+            ) : Array.isArray(updatedMaid.task) &&
+              updatedMaid.task.length > 0 ? (
               <ul>
-                {updatedMaid.skills.map((skill) => (
+                {updatedMaid.task.map((skill) => (
                   <li key={skill} className="capitalize">
                     <strong>{skill}</strong>
                   </li>

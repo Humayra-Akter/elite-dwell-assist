@@ -1,159 +1,264 @@
-import React from "react";
-import bg from "../../../images/bg.jpg";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import Modal from "react-modal";
+import { addNotification } from "../../../redux/slices/notificationsSlice";
+import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
-const BookingBabysitter = ({ bookBaby }) => {
+const BookingBabysitter = ({ bookBabysitter, user }) => {
   const {
+    id,
     img,
     name,
     experience,
     availability,
-    special_skills,
-    certifications,
-    languages_spoken,
     location,
     gender,
+    religion,
+    institute,
+    lastAchievedDegree,
     education,
+    qualification,
+    languageSkills,
+    specialSkills,
     dob,
-    age_group_preferences,
-    salary,
-  } = bookBaby;
+    expectedSalary,
+  } = bookBabysitter;
+
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const dispatch = useDispatch();
+  const [notificationIdCounter, setNotificationIdCounter] = useState(1);
+  const [gUser, loading, error] = useAuthState(auth);
+  const availabilityOptions = [
+    { label: "08.00 AM - 11.00 AM", value: "Morning" },
+    { label: "11.00 AM - 02.00 PM", value: "Afternoon" },
+    { label: "02.00 PM - 05.00 PM", value: "Evening" },
+    { label: "05.00 PM - 08.00 PM", value: "Night" },
+  ];
+
+  const closeSuccessModal = () => {
+    setBookingSuccess(false);
+  };
+
+  const handleBooking = () => {
+    if (!bookingSuccess) {
+      setBookingSuccess(true);
+
+      const bookingData = {
+        babysitterId: bookBabysitter.id,
+        customerName: gUser?.displayName || "",
+        babysitterName: bookBabysitter.name,
+        babysitterEmail: bookBabysitter.email,
+        customerEmail: gUser?.email || "",
+        availability: bookBabysitter.availability,
+        experience: bookBabysitter.experience,
+      };
+      console.log(bookBabysitter);
+
+      fetch("http://localhost:5000/babysitterBookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message === "Booking created successfully") {
+            toast.success(
+              `Booking created successfully for ${bookBabysitter.name}`
+            );
+          }
+        })
+        .catch((error) => {
+          toast.error("Failed to create booking");
+        });
+
+      const newNotification = {
+        id: notificationIdCounter,
+        message: `You have a new booking from ${bookBabysitter.name}`,
+      };
+      dispatch(addNotification(newNotification));
+      setNotificationIdCounter(notificationIdCounter + 1);
+    }
+  };
+
   return (
-    <div className=" bg-transparent">
-      <input type="checkbox" id="booking-babysitter" class="modal-toggle" />
-      <div class="modal ">
-        <div class="modal-box w-screen max-w-4xl">
+    <div className="bg-transparent">
+      <input type="checkbox" id="booking-babysitter" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box max-w-2xl h-full">
           <label
-            for="booking-babysitter"
-            class="btn btn-sm btn-circle btn-ghost bg-red-500 absolute right-2 top-2"
+            htmlFor="booking-babysitter"
+            className="btn btn-sm btn-circle btn-ghost bg-red-500 absolute right-2 top-2"
           >
             ✕
           </label>
-          <div class="card bg-transparent">
+          <div className="card bg-transparent">
             <figure>
-              <img
-                className="w-24 h-20 absolute top-0 left-5"
-                src={img}
-                alt="babysitter"
-              />
-            </figure>
-            <div class="card-body relative top-16">
-              <h2 class="card-title">
-                <strong className="text-blue-900">{name}</strong>for your baby
+              <h2 className="card-title">
+                <img
+                  className="w-40 h-40 rounded-full"
+                  src={img}
+                  alt="babysitter"
+                />
+                <strong className="text-primary">{name}</strong> for your Baby
               </h2>
-              <div className="grid grid-cols-2 gap-5">
+            </figure>
+            <div className="card-body relative top-8">
+              <div className="grid grid-cols-2 gap-1">
                 <div>
-                  <p class="pt-4">
-                    <strong className="text-blue-800 underline">
-                      Location :
-                    </strong>{" "}
-                    <br />
-                    {location}
+                  <p>
+                    <strong>Gender:</strong>{" "}
+                    <span className="capitalize">{gender}</span>
                   </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Availability:
-                    </strong>
-                    {availability ? (
-                      Array.isArray(availability) ? (
-                        <ul>
-                          {availability.map((daySlot) => (
-                            <li key={daySlot.day}>
-                              <strong>{daySlot.day}:</strong>{" "}
-                              {Array.isArray(daySlot.slots)
-                                ? daySlot.slots.join(", ")
-                                : "Slots data not available"}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p>Availability data is not in the expected format</p>
-                      )
+                  {religion ? (
+                    <p>
+                      <strong>Religion:</strong> {religion}
+                    </p>
+                  ) : (
+                    <p>
+                      <strong>Religion:</strong> Islam
+                    </p>
+                  )}
+                  <p>
+                    <strong>Date of Birth:</strong> {dob}
+                  </p>
+                  <p className="capitalize">
+                    <strong>Location:</strong>{" "}
+                    {location ? (
+                      <ul>
+                        {location.map((loc, index) => (
+                          <li key={index}>{loc}</li>
+                        ))}
+                      </ul>
                     ) : (
-                      <p>Availability data not available</p>
+                      "Not specified"
                     )}
                   </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Age group preferences :
-                    </strong>{" "}
-                    {age_group_preferences?.map((age_group_preference) => (
-                      <li value={age_group_preference}>
-                        {age_group_preference}
-                      </li>
-                    ))}
+                  <p>
+                    <strong>Availability:</strong>{" "}
+                    {availability ? (
+                      <ul>
+                        {availability.map((day, index) => (
+                          <li key={index}>{day}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "Not specified"
+                    )}
                   </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Salary :
-                    </strong>{" "}
-                    {salary}
+                  <p>
+                    <strong>Experience:</strong> {experience} years
                   </p>
+                  {lastAchievedDegree ? (
+                    <p>
+                      <strong>Last Achieved Degree:</strong>{" "}
+                      {lastAchievedDegree}
+                    </p>
+                  ) : (
+                    ""
+                  )}{" "}
                 </div>
                 <div>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Date of Birth :
-                    </strong>{" "}
-                    {dob}
+                  {institute ? (
+                    <p>
+                      <strong>Institute:</strong> {institute}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  <p>
+                    <strong>Qualifications:</strong>{" "}
+                    {qualification ? (
+                      <ul>
+                        {qualification.map((qual, index) => (
+                          <li key={index}>{qual}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "Not specified"
+                    )}
                   </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Certifications :
-                    </strong>{" "}
-                    {certifications?.map((certification) => (
-                      <li value={certification}>{certification}</li>
-                    ))}
+                  <p>
+                    <strong>Language Skills:</strong>{" "}
+                    {languageSkills ? (
+                      <ul>
+                        {languageSkills.map((lang, index) => (
+                          <li key={index}>{lang}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "Not specified"
+                    )}
                   </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Experience :
-                    </strong>
-                    {experience} months
+                  <p>
+                    <strong>Special Skills:</strong>{" "}
+                    {specialSkills ? (
+                      <ul>
+                        {specialSkills.map((skill, index) => (
+                          <li key={index}>{skill}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "Not specified"
+                    )}
                   </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Education :
-                    </strong>{" "}
-                    {education}
-                  </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Special skills :
-                    </strong>{" "}
-                    {special_skills?.map((special_skill) => (
-                      <li value={special_skill}>{special_skill}</li>
-                    ))}
-                  </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Special skills :
-                    </strong>{" "}
-                    {languages_spoken?.map((language_spoken) => (
-                      <li value={language_spoken}>{language_spoken}</li>
-                    ))}
-                  </p>
-                  <p class="pt-2">
-                    <strong className="text-blue-800 underline">
-                      Gender :
-                    </strong>{" "}
-                    {gender}
+                  <p>
+                    <strong>Expected Salary:</strong> {expectedSalary}
                   </p>
                 </div>
               </div>
-              <div class="justify-items-end">
-                <Link to="/">
-                  <label
-                    for="booking-babysitter"
-                    className="btn btn-sm text-xs w-1/3 border-blue-500 text-blue-800 font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
-                  >
-                    Recruit
-                  </label>
-                </Link>
+
+              <div className="flex items-end justify-end">
+                <button
+                  htmlFor="booking-babysitter"
+                  onClick={handleBooking}
+                  className={`btn btn-sm text-white font-bold w-1/4 btn-primary ${
+                    bookingSuccess ? "disabled" : ""
+                  }`}
+                  disabled={bookingSuccess}
+                >
+                  {bookingSuccess ? "Booked" : "Book"}
+                </button>
               </div>
             </div>
           </div>
         </div>
+        {/* Success Modal */}
+        <Modal
+          isOpen={bookingSuccess}
+          contentLabel="Success Modal"
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+            },
+            content: {
+              width: "400px",
+              height: "200px",
+              margin: "auto",
+            },
+          }}
+        >
+          <h1
+            className="text-2xl font-bold text-primary text-center py-2 px-7"
+            style={{ fontFamily: "arial" }}
+          >
+            Booking sent to{" "}
+            <span className="text-2xl italic uppercase font-black text-primary text-center pl-2 py-5">
+              {name}
+            </span>
+            !
+          </h1>
+
+          <button
+            onClick={closeSuccessModal}
+            className="btn btn-sm text-xs w-1/4 ml-32 mt-10 border-blue-500 text-white font-bold bg-primary"
+          >
+            Close
+          </button>
+        </Modal>
       </div>
     </div>
   );

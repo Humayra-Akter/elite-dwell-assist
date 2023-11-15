@@ -23,10 +23,12 @@ const BookingMaid = ({ bookMaid, user }) => {
     dob,
     salary,
   } = bookMaid;
+
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const dispatch = useDispatch();
   const [notificationIdCounter, setNotificationIdCounter] = useState(1);
   const [gUser, loading, error] = useAuthState(auth);
+
   const availabilityOptions = [
     { label: "08.00 AM - 11.00 AM", value: "sokal" },
     { label: "11.00 AM - 02.00 PM", value: "dupur" },
@@ -93,8 +95,6 @@ const BookingMaid = ({ bookMaid, user }) => {
       setNotificationIdCounter(notificationIdCounter + 1);
     }
   };
-
-  // const age = calculateAge(dob);
 
   return (
     <div className=" bg-transparent">

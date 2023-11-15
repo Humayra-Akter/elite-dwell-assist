@@ -5,7 +5,7 @@ import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
 import Service from "./Components/Services/Service";
-import Babysitter from "./Components/Services/Babysitter/Babysitter";
+
 import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
 import { useState } from "react";
 import Error from "./Components/Error/Error";
@@ -57,6 +57,7 @@ import BabysitterInformation from "./Components/AdminDashboard/BabysitterInforma
 import DriverBookings from "./Components/CustomerDashboard/DriverBookings";
 import BabysitterBookings from "./Components/CustomerDashboard/BabysitterBookings";
 import DriverReview from "./Components/DriverDashboard/DriverReview";
+import BabysitterSearch from "./Components/Services/Babysitter/BabysitterSearch";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -174,7 +175,7 @@ function App() {
           ></Route>
         </Route>
         <Route path="/maidPerDay" element={<PerDay />} />
-        <Route path="/babysitter" element={<Babysitter />} />
+        <Route path="/babysitter" element={<BabysitterSearch />} />
         <Route path="/tvBill" element={<TVBill />} />
         <Route path="/rfBill" element={<RFBill />} />
         <Route path="/wmBill" element={<WMBill />} />

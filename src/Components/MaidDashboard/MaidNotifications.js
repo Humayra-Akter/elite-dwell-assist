@@ -29,7 +29,6 @@ const MaidNotifications = () => {
       fetch(`http://localhost:5000/bookings/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log("Fetched Data:", data);
           if (Array.isArray(data) && data.length > 0) {
             setNotifications(data);
           } else {
@@ -116,9 +115,6 @@ const MaidNotifications = () => {
                 >
                   Clear Notifications
                 </button>
-                {/* <button className="btn btn-sm rounded-full absolute lg:w-1/5 top-9 right-5 my-3 text-xs border-blue-500 text-white font-bold bg-green-600">
-                  View details
-                </button> */}
               </div>
             </div>
           </div>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const MaidRow = ({ booking, maidEmail, userEmail }) => {
+const MaidRow = ({ booking, maidEmail, userEmail, index }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-  
+
   useEffect(() => {
     checkIfUserHasAlreadyReviewed(userEmail, maidEmail);
   }, [userEmail, maidEmail]);
@@ -76,8 +76,10 @@ const MaidRow = ({ booking, maidEmail, userEmail }) => {
     }
   };
 
+  const rowColorClass = index % 2 === 0 ? "bg-white" : "bg-indigo-50";
+
   return (
-    <tr>
+    <tr className={`${rowColorClass} text-center`}>
       <td className="capitalize">{booking.maidName}</td>
       <td>{booking.maidEmail}</td>
       <td>
@@ -114,7 +116,7 @@ const MaidRow = ({ booking, maidEmail, userEmail }) => {
           onChange={(e) => setReviewText(e.target.value)}
         />
         <button
-          className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+          className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary mb-5"
           onClick={submitReview}
         >
           Submit Review

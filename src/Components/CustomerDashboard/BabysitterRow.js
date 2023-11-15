@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const BabysitterRow = ({ booking, babysitterEmail, userEmail }) => {
+const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
@@ -75,8 +75,10 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail }) => {
     }
   };
 
+  const rowColorClass = index % 2 === 0 ? "bg-white" : "bg-indigo-50";
+
   return (
-    <tr>
+    <tr className={`${rowColorClass} text-center`}>
       <td className="capitalize">{booking?.babysitterName}</td>
       <td>{booking?.babysitterEmail}</td>
       <td>

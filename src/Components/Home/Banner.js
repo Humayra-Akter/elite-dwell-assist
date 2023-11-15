@@ -6,8 +6,11 @@ import { TypeAnimation } from "react-type-animation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Banner = () => {
+  const [user] = useAuthState(auth);
   const images = [banner1, banner2, banner3];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -66,18 +69,22 @@ const Banner = () => {
             provided to both customers and service providers.
           </li>
         </p>
-        <div className="grid grid-cols-2 gap-5">
-          <Link to="/customer-register">
-            <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
-              Register as Customer
-            </button>
-          </Link>
-          <Link to="/register">
-            <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
-              Register as Service Provider
-            </button>
-          </Link>
-        </div>
+        {user ? (
+          <></>
+        ) : (
+          <div className="grid grid-cols-2 gap-5">
+            <Link to="/customer-register">
+              <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
+                Register as Customer
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
+                Register as Service Provider
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

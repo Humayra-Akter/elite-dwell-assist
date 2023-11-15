@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const DriverRow = ({ booking, driverEmail, userEmail }) => {
+const DriverRow = ({ booking, driverEmail, userEmail, index }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
@@ -33,7 +33,10 @@ const DriverRow = ({ booking, driverEmail, userEmail }) => {
   const [hasAlreadyReviewedDriver, setHasAlreadyReviewedDriver] =
     useState(false);
 
-  const checkIfUserHasAlreadyReviewedDriver = async (userEmail, driverEmail) => {
+  const checkIfUserHasAlreadyReviewedDriver = async (
+    userEmail,
+    driverEmail
+  ) => {
     const userReviews = await getUserReviews(userEmail);
     const alreadyReviewed = userReviews.some(
       (review) => review.info === driverEmail
@@ -76,8 +79,10 @@ const DriverRow = ({ booking, driverEmail, userEmail }) => {
     }
   };
 
+  const rowColorClass = index % 2 === 0 ? "bg-white" : "bg-indigo-50";
+
   return (
-    <tr>
+    <tr className={`${rowColorClass} text-center`}>
       <td className="capitalize">{booking?.driverName}</td>
       <td>{booking?.driverEmail}</td>
       <td>

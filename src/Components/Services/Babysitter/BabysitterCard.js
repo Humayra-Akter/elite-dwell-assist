@@ -1,32 +1,123 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
+import auth from "../../../firebase.init";
 
-const BabysitterCard = ({ babysitter, setBookBaby }) => {
-  const { img, name, location, gender, salary } = babysitter;
+const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
+  const { img, name, location, availability, expectedSalary, workingHour } =
+    babysitter;
+  const [bookedBabysitters, setBookedBabysitters] = useState([]);
+  const [user, loading, error] = useAuthState(auth);
+
+  const availabilityOptions = [
+    { label: "08.00 AM - 11.00 AM", value: "Morning" },
+    { label: "11.00 AM - 02.00 PM", value: "Afternoon" },
+    { label: "02.00 PM - 05.00 PM", value: "Evening" },
+    { label: "05.00 PM - 08.00 PM", value: "Night" },
+  ];
+
+  const handleKnowMoreClick = () => {
+    if (!bookedBabysitters.includes(babysitter)) {
+      setBookedBabysitters([...bookedBabysitters, babysitter]);
+      setBookBabysitter(babysitter);
+    }
+  };
+
   return (
     <div>
-      <div class="card w-96 bg-transparent border-2 shadow-xl transform transition-transform hover:scale-105 hover:bg-gradient-to-t from-secondary to-accent hover:shadow-lg">
-        <figure class="px-10 pt-7">
-          <img src={img} alt="Babysitter" class="rounded-xl h-52 w-52" />
-        </figure>
-        <div class="card-body items-center text-center">
-          <h2 class="card-title text-purple-900 font-bold">{name}</h2>
-          <p>
-            <strong>Location :</strong> {location}
-          </p>
-          <p>
-            <strong>Gender :</strong> {gender}
-          </p>
-          <p>
-            <strong>Salary :</strong> {salary}
-          </p>
-          <div class="card-actions pt-5">
+      <div className="cursor-pointer w-[305px] max-w-sm h-96 rounded-xl border-2 pb-[2%] shadow-[0_3px_10px_rgb(0,0,0,0.2)]  relative bg-slate-100 m-4 hover:scale-105  transition-all duration-300 ease-in-out">
+        <div className="flex flex-col items-center p-4">
+          <img
+            src={img}
+            alt="Babysitter"
+            className="w-[104px] h-[104px] mb-3 object-cover rounded-full shadow-lg"
+          />
+          <h5 className="text-xl text-center text-[1.2rem] text-[#28252e] font-semibold overflow-hidden pb-1">
+            {name}
+          </h5>
+
+          <div className=" text-left text-[1.03rem] text-[#3b3939] overflow-hidden">
+            <text className="text-[#3b3939] font-medium">Area:&nbsp;</text>
+            {Array.isArray(location)
+              ? location.length <= 2
+                ? location
+                    .map(
+                      (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                    )
+                    .join(", ")
+                : `${location
+                    .slice(0, 2)
+                    .map(
+                      (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                    )
+                    .join(", ")} ...`
+              : "None"}
+          </div>
+          <div className=" text-left text-[1.03rem] text-[#3b3939] overflow-hidden">
+            <text className=" text-[#3b3939] font-medium">Availability: </text>
+            {/* {Array.isArray(availability)
+              ? availability.length <= 2
+                ? availability
+                    .map(
+                      (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                    )
+                    .join(", ")
+                : `${availability
+                    .slice(0, 2)
+                    .map(
+                      (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
+                    )
+                    .join(", ")} ...`
+              : "None"} */}
+
+            <ul>
+              {Array.isArray(availability)
+                ? availability.map((daySlot, index) => (
+                    <li key={index}>
+                      <strong>
+                        {
+                          availabilityOptions.find(
+                            (option) => option.value === daySlot
+                          )?.label
+                        }
+                      </strong>
+                    </li>
+                  ))
+                : "Availability not specified"}
+            </ul>
+          </div>
+
+          <div className=" text-left text-[1.03rem] text-[#3b3939] overflow-hidden">
+            <text className=" text-[#3b3939] font-medium">Salary: </text>
+            {expectedSalary ? expectedSalary : "None"}
+          </div>
+
+          <div className=" text-left text-[1.03rem] text-[#3b3939] overflow-hidden">
+            <text className=" text-[#3b3939] font-medium">Working Hour: </text>
+            {workingHour ? workingHour : "None"}
+          </div>
+
+          <div className="pt-2">
             <label
-              for="booking-babysitter"
-              onClick={() => setBookBaby(babysitter)}
-              class="btn btn-sm border-purple-500 text-purple-800 text-xs font-bold bg-gradient-to-r from-primary from-10% via-secondary via-30% to-90% to-accent"
+              htmlFor="booking-babysitter"
+              onClick={handleKnowMoreClick}
+              className="px-4 btn-md mt-3 bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
             >
               Know More
             </label>
+
+            {user ? (
+              <p></p>
+            ) : (
+              <p>
+                <Link
+                  to="/login"
+                  className="text-red-500 text-xs font-bold rounded-full hover:bg-opacity-80 transition duration-300 px-2 btn-sm mt-1"
+                >
+                  Login for details
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       </div>

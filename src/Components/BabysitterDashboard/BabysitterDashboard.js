@@ -71,7 +71,7 @@ const BabysitterDashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-60 min-h-full bg-sky-50 text-base-content">
+          <ul className="menu p-4 w-60 min-h-full bg-indigo-50 text-base-content">
             {/* <!-- Sidebar content here --> */}
 
             <ul className="mt-16">
