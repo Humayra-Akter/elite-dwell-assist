@@ -55,19 +55,21 @@ const MaidBookings = () => {
         <table className="border-collapse w-full mt-12">
           <thead>
             <tr>
-              <th className="text-left text-primary underline w-1/6">
+              <th className="text-center text-primary underline w-1/6">
                 Maid Name
               </th>
-              <th className="text-left text-primary underline w-1/6">
+              <th className="text-center text-primary underline w-1/6">
                 Maid Email
               </th>
-              <th className="text-left text-primary underline w-1/6">
+              <th className="text-center text-primary underline w-1/6">
                 Maid Task
               </th>
-              <th className="text-left text-primary underline w-1/6">
+              <th className="text-center text-primary underline w-1/6">
                 Created Time
               </th>
-              <th className="text-left text-primary underline w-1/4">Review</th>
+              <th className="text-center text-primary underline w-1/4">
+                Review
+              </th>
             </tr>
           </thead>
           <tbody>

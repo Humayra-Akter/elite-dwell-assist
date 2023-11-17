@@ -128,6 +128,20 @@ const BabysitterDashboard = () => {
                 </Link>
               </li>
               <hr />
+              <li>
+                <Link
+                  className={`text-primary mt-3 text-base font-bold hover:text-black ${
+                    selectedLink === "review" ? "text-white bg-primary" : ""
+                  }`}
+                  to="/babysitterDashboard/babysitterReview"
+                  onClick={() => handleLinkClick("review")}
+                >
+                  <span className="flex gap-4">
+                    <img className="w-6" src={ban2} alt="" />
+                    Review
+                  </span>
+                </Link>
+              </li>
             </ul>
           </ul>
         </div>

@@ -70,8 +70,6 @@ const MaidNotifications = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(details);
-
   return (
     <div>
       {notifications.length > 0 ? (

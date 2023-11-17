@@ -118,21 +118,21 @@ const MaidProfile = () => {
         ...updatedMaid,
         location: updatedLocations,
       });
-    } else if (type === "checkbox" && name === "skills") {
-      const updatedSkills = [...(updatedMaid.skills || [])];
+    } else if (type === "checkbox" && name === "tasks") {
+      const updatedtasks = [...(updatedMaid.tasks || [])];
 
       if (checked) {
-        updatedSkills.push(value);
+        updatedtasks.push(value);
       } else {
-        const index = updatedSkills.indexOf(value);
+        const index = updatedtasks.indexOf(value);
         if (index > -1) {
-          updatedSkills.splice(index, 1);
+          updatedtasks.splice(index, 1);
         }
       }
 
       setUpdatedMaid({
         ...updatedMaid,
-        skills: updatedSkills,
+        tasks: updatedtasks,
       });
     } else if (name === "salaryPerTask") {
       const selectedSalary = value;
@@ -287,7 +287,7 @@ const MaidProfile = () => {
           </div>
           <div>
             {" "}
-            <strong className="text-primary underline">Skills : </strong>
+            <strong className="text-primary underline">Tasks : </strong>
             {isEditing ? (
               <div className="mt-2 capitalize">
                 <ul>
@@ -296,9 +296,9 @@ const MaidProfile = () => {
                       <label className="block mb-1 capitalize">
                         <input
                           type="checkbox"
-                          name="skills"
+                          name="tasks"
                           value={expertise.value}
-                          checked={(updatedMaid.skills || []).includes(
+                          checked={(updatedMaid.tasks || []).includes(
                             expertise.value
                           )}
                           onChange={handleInputChange}
@@ -312,14 +312,14 @@ const MaidProfile = () => {
             ) : Array.isArray(updatedMaid.task) &&
               updatedMaid.task.length > 0 ? (
               <ul>
-                {updatedMaid.task.map((skill) => (
-                  <li key={skill} className="capitalize">
-                    <strong>{skill}</strong>
+                {updatedMaid.task.map((task) => (
+                  <li key={task} className="capitalize">
+                    <strong>{task}</strong>
                   </li>
                 ))}
               </ul>
             ) : (
-              "No skills selected."
+              "No tasks selected."
             )}
           </div>
           <div>

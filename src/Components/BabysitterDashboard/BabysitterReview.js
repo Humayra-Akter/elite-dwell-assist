@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 
-const Reviews = () => {
+const BabysitterReview = () => {
   const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -12,7 +12,7 @@ const Reviews = () => {
       if (user) {
         try {
           const response = await fetch(
-            `http://localhost:5000/maid?email=${user.email}`
+            `http://localhost:5000/babysitter?email=${user.email}`
           );
           const data = await response.json();
 
@@ -92,4 +92,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default BabysitterReview;

@@ -81,6 +81,7 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
     <tr className={`${rowColorClass} text-center`}>
       <td className="capitalize">{booking?.babysitterName}</td>
       <td>{booking?.babysitterEmail}</td>
+      <td>{booking?.createdDate}</td>
       <td>
         {Array.from({ length: 5 }).map((_, index) => (
           <span
@@ -99,7 +100,7 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
           onChange={(e) => setReviewText(e.target.value)}
         />
         <button
-          className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+          className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary mb-5"
           onClick={submitReview}
         >
           Submit Review

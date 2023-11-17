@@ -108,7 +108,7 @@ const DriverRow = ({ booking, driverEmail, userEmail, index }) => {
           onChange={(e) => setReviewText(e.target.value)}
         />
         <button
-          className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+          className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary mb-5"
           onClick={submitReview}
         >
           Submit Review

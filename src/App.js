@@ -58,6 +58,7 @@ import DriverBookings from "./Components/CustomerDashboard/DriverBookings";
 import BabysitterBookings from "./Components/CustomerDashboard/BabysitterBookings";
 import DriverReview from "./Components/DriverDashboard/DriverReview";
 import BabysitterSearch from "./Components/Services/Babysitter/BabysitterSearch";
+import BabysitterReview from "./Components/BabysitterDashboard/BabysitterReview";
 
 function App() {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
@@ -138,6 +139,10 @@ function App() {
           <Route
             path="babysitterSearchJob"
             element={<BabysitterSearchJob />}
+          ></Route>{" "}
+          <Route
+            path="babysitterReview"
+            element={<BabysitterReview />}
           ></Route>
         </Route>
         {/* driver*/}

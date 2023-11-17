@@ -10,10 +10,10 @@ const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
   const [user, loading, error] = useAuthState(auth);
 
   const availabilityOptions = [
-    { label: "08.00 AM - 11.00 AM", value: "Morning" },
-    { label: "11.00 AM - 02.00 PM", value: "Afternoon" },
-    { label: "02.00 PM - 05.00 PM", value: "Evening" },
-    { label: "05.00 PM - 08.00 PM", value: "Night" },
+    { label: "Morning", value: "Morning" },
+    { label: "Afternoon", value: "Afternoon" },
+    { label: "Evening", value: "Evening" },
+    { label: "Night", value: "Night" },
   ];
 
   const handleKnowMoreClick = () => {
