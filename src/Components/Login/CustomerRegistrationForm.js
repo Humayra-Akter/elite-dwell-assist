@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import banner4 from "../../images/bg.jpg";
-import { MultiSelect } from "react-multi-select-component";
+
 import { useForm } from "react-hook-form";
 import {
   useCreateUserWithEmailAndPassword,
@@ -11,6 +10,7 @@ import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 import { toast } from "react-toastify";
 import imggg from "../../images/login.jpg";
+import Select from "react-select";
 
 const CustomerRegistrationForm = () => {
   const [selectedGender, setSelectedGender] = useState([]);
@@ -24,6 +24,7 @@ const CustomerRegistrationForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
+  const imageStorageKey = "81a2b36646ff008b714220192e61707d";
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
 
@@ -42,63 +43,70 @@ const CustomerRegistrationForm = () => {
   }
 
   const handleAddCustomer = async (data) => {
-    console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({
-      displayName: data.name,
-      role: "customer",
-      address: data.address,
-      contact: data.contact,
-      password: data.password,
-      dob: data.dob,
-    });
-    const customer = {
-      name: data.name,
-      email: data.email,
-      role: "customer",
-      address: data.address,
-      contact: data.contact,
-      gender: selectedGender[0]?.value,
-      dob: data.dob,
-      password: data.password,
-    };
-    const user = {
-      name: data.name,
-      email: data.email,
-      role: "customer",
-      dob: data.dob,
-      password: data.password, // Add any other user-specific data you want to save
-    };
 
-    fetch("http://localhost:5000/customer", {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(customer),
+      body: formData,
     })
       .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        toast.success(`${data.name} thanks for your registration`);
-      });
-    fetch("http://localhost:5000/user", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        toast.success(`${data.name} welcome to Elite-Dwell-Assist`);
-      });
+      .then((imgData) => {
+        if (imgData.success) {
+          const customer = {
+            name: data.name,
+            email: data.email,
+            role: "customer",
+            address: data.address,
+            contact: data.contact,
+            gender: selectedGender ? selectedGender.value : null,
+            dob: data.dob,
+            password: data.password,
+            img: imgData.data.url,
+          };
+          const user = {
+            name: data.name,
+            email: data.email,
+            role: "customer",
+            dob: data.dob,
+            password: data.password,
+            img: imgData.data.url,
+          };
 
-    navigate("/maidPerMonth");
+          // save customer information to the database
+          fetch("http://localhost:5000/customer", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(customer),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success(`${data.name} thanks for your registration`);
+            });
+          fetch("http://localhost:5000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success(`${data.name} welcome to Elite-Dwell-Assist`);
+            });
+        }
+      });
+    navigate("/login");
   };
 
   const handleGender = (selected) => {
-    setSelectedGender([selected[selected.length - 1]]);
+    setSelectedGender(selected);
   };
 
   const genderOptions = [
@@ -110,7 +118,7 @@ const CustomerRegistrationForm = () => {
   return (
     <div className="bg-slate-100 pb-12 pt-16">
       <div className="mx-auto max-w-5xl">
-        <div className="card bg-transparent border-blue-300 border-4 shadow-xl">
+        <div className="card bg-transparent border-primary border-2 shadow-xl">
           <div className="flex">
             <div>
               <img className="h-full" src={imggg} alt="" />
@@ -275,17 +283,19 @@ const CustomerRegistrationForm = () => {
                 </div>
                 <div className="grid grid-cols-2 pt-5 gap-3">
                   {/* Gender field */}
+                  {/* Gender field */}
                   <div className="form-control w-full">
                     <label className="label">
                       <span className="label-text text-left text-blue-700 font-bold text-xs">
                         Gender
                       </span>
                     </label>
-                    <MultiSelect
-                      options={genderOptions}
+                    <Select
                       value={selectedGender}
+                      options={genderOptions}
                       onChange={handleGender}
-                      labelledBy={"Select"}
+                      isSearchable={false}
+                      placeholder="Select Gender"
                     />
                   </div>
                   {/* dob */}
@@ -325,6 +335,33 @@ const CustomerRegistrationForm = () => {
                       )}
                     </label>
                   </div>
+                </div>
+                {/* Image upload field */}
+                <div className="form-control  w-full">
+                  <label className="label">
+                    <span className="label-text text-blue-700 font-bold text-md">
+                      Photo
+                    </span>
+                  </label>
+                  <input
+                    type="file"
+                    placeholder="Your image"
+                    name="image"
+                    className="input input-sm input-bordered w-full"
+                    {...register("image", {
+                      required: {
+                        value: true,
+                        message: "image is required",
+                      },
+                    })}
+                  />
+                  <label>
+                    {errors.image?.type === "required" && (
+                      <span className="text-red-500 text-xs mt-1">
+                        {errors.image.message}
+                      </span>
+                    )}
+                  </label>
                 </div>
                 <div className="grid grid-cols-2 pt-5 gap-3">
                   {/* Password field */}
