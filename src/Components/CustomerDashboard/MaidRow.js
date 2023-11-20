@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 const MaidRow = ({ booking, maidEmail, userEmail, index }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
   useEffect(() => {
     checkIfUserHasAlreadyReviewed(userEmail, maidEmail);
@@ -13,11 +14,12 @@ const MaidRow = ({ booking, maidEmail, userEmail, index }) => {
     setRating(value);
   };
 
-  const getUserReviews = async (userEmail) => {
+  const getUserReviews = async (userEmail, reviewType) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/reviews?userEmail=${userEmail}`
+        `http://localhost:5000/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
       );
+
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -29,14 +31,12 @@ const MaidRow = ({ booking, maidEmail, userEmail, index }) => {
       return [];
     }
   };
+
   const info = booking.maidEmail;
-  const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
   const checkIfUserHasAlreadyReviewed = async (userEmail, maidEmail) => {
-    const userReviews = await getUserReviews(userEmail);
-    const alreadyReviewed = userReviews.some(
-      (review) => review.maidEmail === maidEmail
-    );
+    const userReviews = await getUserReviews(userEmail, maidEmail);
+    const alreadyReviewed = userReviews.length > 0;
     setHasAlreadyReviewed(alreadyReviewed);
   };
 

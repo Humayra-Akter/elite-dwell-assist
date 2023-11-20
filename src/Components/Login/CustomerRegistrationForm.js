@@ -49,7 +49,14 @@ const CustomerRegistrationForm = () => {
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
-
+    await updateProfile({
+      displayName: data.name,
+      role: "customer",
+      address: data.address,
+      contact: data.contact,
+      password: data.password,
+      dob: data.dob,
+    });
     fetch(url, {
       method: "POST",
       body: formData,
@@ -102,7 +109,7 @@ const CustomerRegistrationForm = () => {
             });
         }
       });
-    navigate("/login");
+    navigate("/");
   };
 
   const handleGender = (selected) => {

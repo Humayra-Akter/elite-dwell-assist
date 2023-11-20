@@ -26,7 +26,7 @@ const PerDay = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  console.log(user);
   const handleServiceSelect = (service) => {
     const updatedServices = [...selectedServices];
     const serviceIndex = updatedServices.indexOf(service);

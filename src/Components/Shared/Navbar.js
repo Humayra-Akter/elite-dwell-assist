@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
+import { use } from "i18next";
 
 const Navbar = ({ openAboutModal }) => {
   const [user] = useAuthState(auth);
@@ -13,7 +14,7 @@ const Navbar = ({ openAboutModal }) => {
       // window.location.reload();
     }, 10000);
   }, []);
-
+  console.log(user);
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
   const toggleServiceDropdown = () => {
@@ -47,8 +48,6 @@ const Navbar = ({ openAboutModal }) => {
     signOut(auth);
     navigate("/");
   };
-
-
 
   const userRole = localStorage.getItem("userRole");
   return (

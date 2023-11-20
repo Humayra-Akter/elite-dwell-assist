@@ -1,11 +1,24 @@
-/* eslint-disable react/jsx-no-undef */
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 const DriverProfile = () => {
   const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    gender: "",
+    phone: "",
+    expectedSalary: "",
+    location: "",
+    password: "",
+    reenterPassword: "",
+  });
+
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:5000/driver?email=${user.email}`)
@@ -17,49 +30,54 @@ const DriverProfile = () => {
             );
             if (matchingUser) {
               setLoggedUser(matchingUser);
+              setFormData(matchingUser);
             }
           }
         });
     }
-  }, [user]);
+  }, [user, isEditing]);
 
-  function calculateAge(birthDate) {
-    // Parse the birthDate string into a Date object
-    const birthDateObject = new Date(birthDate);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-    // Get the current date
-    const currentDate = new Date();
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
 
-    // Calculate the difference in years
-    const age = currentDate.getFullYear() - birthDateObject.getFullYear();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // Check if the birthday for this year has occurred or not
-    if (
-      currentDate.getMonth() < birthDateObject.getMonth() ||
-      (currentDate.getMonth() === birthDateObject.getMonth() &&
-        currentDate.getDate() < birthDateObject.getDate())
-    ) {
-      // If the birthday hasn't occurred this year yet, subtract 1 from the age
-      return age - 1;
-    } else {
-      return age;
+    try {
+      // Send a request to the server to update the user information
+      await axios.put(
+        `http://localhost:5000/driver/${loggedUser._id}`,
+        formData
+      );
+      // Handle success (e.g., show a success message)
+      setIsEditing(false);
+    } catch (error) {
+      // Handle error (e.g., show an error message)
     }
-  }
-  const age = calculateAge(loggedUser.dob);
+  };
+
   return (
-    <div className=" w-full h-full text-left text-2xl text-darkslategray-100 font-montserrat">
+    <div className="w-full h-full text-left text-2xl text-darkslategray-100 font-montserrat">
       <div className="absolute top-[100.98px] left-[calc(50%_-_397.33px)] w-[727.46px] h-[159.8px]">
-        <div className="absolute top-[70.4px] left-[calc(50%_-_177.07px)] w-[220.09px] h-[27.37px]">
-          {/* <div className="absolute top-[0px] capitalize left-[calc(50%_-_150.04px)] inline-block w-[220.09px] h-[27.37px]">
-            {loggedUser.role}
-          </div> */}
-        </div>
-        <div className=" flex flex-row items-center justify-end">
-          <Link to="/driverDashboard/driverUpdate">
-            <button className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary">
+        <div className="absolute top-[70.4px] left-[calc(50%_-_177.07px)] w-[220.09px] h-[27.37px]"></div>
+        <div className="flex flex-row items-center justify-end">
+          {!isEditing && (
+            <button
+              className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+              onClick={handleEdit}
+            >
               Edit
             </button>
-          </Link>
+          )}
         </div>
         <img
           className="absolute top-[30.75px] w-[129.12px] h-[123.7px] object-cover"
@@ -67,7 +85,8 @@ const DriverProfile = () => {
           alt=""
           src={loggedUser?.img}
         />
-      </div>
+      </div>{" "}
+      {/* Profile details */}
       <div className="relative w-[1440px] h-[1138px] hidden" />
       <div className="absolute top-[290.09px] left-[calc(50%_-_404.03px)] w-[167.35px] h-[22.88px] text-slateblue">
         <b className="absolute top-[-5px] left-[calc(50%_-_83.68px)] [text-decoration:underline] inline-block w-[167.35px] h-[22.88px]">
@@ -77,7 +96,6 @@ const DriverProfile = () => {
       <b className="absolute top-[73px] left-[calc(50%_-_400px)] inline-block w-[216px] h-[27px]">
         {loggedUser?.name}
       </b>
-
       <div className="absolute top-[327px] left-[calc(50%_-_399px)] w-[704px] h-[275px] overflow-hidden text-base text-black">
         <div className="absolute capitalize top-[128px] left-[77px] inline-block w-[323px] h-[23px]">
           {loggedUser?.gender}
@@ -86,7 +104,7 @@ const DriverProfile = () => {
           {loggedUser?.dob}
         </div>
         <div className="absolute top-[177px] left-[44px] inline-block w-[323px] h-[23px]">
-          {age} Years
+          Years
         </div>
         <div className="absolute top-[202px] left-[169px] inline-block w-[323px] h-[23px]">
           {loggedUser?.license}
@@ -148,6 +166,7 @@ const DriverProfile = () => {
           {loggedUser?.experience} Years
         </div>
       </div>
+     
     </div>
   );
 };
