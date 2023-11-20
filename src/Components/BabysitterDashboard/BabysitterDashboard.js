@@ -39,42 +39,9 @@ const BabysitterDashboard = () => {
 
   return (
     <div>
-      <div className={`drawer ${isSidebarOpen ? "lg:drawer-open" : ""}`}>
-        <input id="maid-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content p-11">
-          <Outlet />
-          <label
-            htmlFor="maid-drawer"
-            className="btn btn-sm absolute top-0 right-0 mt-2 drawer-button lg:hidden"
-          >
-            Open drawer
-          </label>
-          {isSidebarOpen ? (
-            <button
-              className="btn absolute rounded-full top-2 left-2 z-10 btn-transparent btn-sm"
-              onClick={toggleSidebar}
-            >
-              <img className="w-4" src={rewrd} alt="" />
-            </button>
-          ) : (
-            <button
-              className="btn absolute top-0 rounded-full left-0 btn-secondary btn-sm"
-              onClick={toggleSidebar}
-            >
-              <img className="w-4" src={frwrd} alt="" />
-            </button>
-          )}
-        </div>
-        <div className="drawer-side">
-          <label
-            htmlFor="maid-drawer"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu p-4 w-60 min-h-full bg-indigo-50 text-base-content">
-            {/* <!-- Sidebar content here --> */}
-
-            <ul className="mt-16">
+      <div className="flex">
+        <div className="w-1/5 h-screen text-base-content">
+          <ul className="menu p-4 mt-24">
               <img
                 src={loggedUser.img}
                 alt="user"
@@ -143,7 +110,9 @@ const BabysitterDashboard = () => {
                 </Link>
               </li>
             </ul>
-          </ul>
+        </div>
+        <div className="w-4/5 p-5">
+          <Outlet />
         </div>
       </div>
     </div>

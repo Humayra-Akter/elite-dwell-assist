@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { updatePassword } from "firebase/auth";
 
 const MaidProfile = () => {
   const [user] = useAuthState(auth);
@@ -147,6 +148,8 @@ const MaidProfile = () => {
       });
     }
   };
+
+  console.log(updatedMaid);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -312,7 +315,7 @@ const MaidProfile = () => {
             ) : Array.isArray(updatedMaid.task) &&
               updatedMaid.task.length > 0 ? (
               <ul>
-                {updatedMaid.task.map((task) => (
+                {updatedMaid.tasks.map((task) => (
                   <li key={task} className="capitalize">
                     <strong>{task}</strong>
                   </li>

@@ -171,7 +171,7 @@ const BabysitterProfile = () => {
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
         {isEditing ? (
-          <div className="absolute top-20 right-11">
+          <div className="absolute top-36 right-24">
             <button
               className="bg-primary text-white font-semibold px-6 py-2 rounded-lg"
               onClick={handleSaveChanges}
@@ -186,7 +186,7 @@ const BabysitterProfile = () => {
             </button>
           </div>
         ) : (
-          <div className="absolute top-11 right-36">
+          <div className="absolute top-32 right-28 ">
             <button
               className="bg-primary text-white font-semibold px-6 py-2 rounded-lg mt-6"
               onClick={handleEditClick}
@@ -196,7 +196,7 @@ const BabysitterProfile = () => {
           </div>
         )}
         <h1 className="text-2xl text-primary text-center mb-8 font-bold">
-          Update Profile
+          {isEditing ? "Update Profile" : "Profile"}
         </h1>
         <strong className="text-primary text-xl capitalize underline">
           {loggedUser.name}
@@ -266,7 +266,6 @@ const BabysitterProfile = () => {
         <hr className="my-6" />
         <div className="grid lg:grid-cols-3 md:grid-cols-3 gap-5">
           <div>
-            {" "}
             <p>
               <strong className="text-primary underline">Location:</strong>
               {isEditing ? (
@@ -290,11 +289,11 @@ const BabysitterProfile = () => {
                     ))}
                   </ul>
                 </div>
-              ) : Array.isArray(updatedBabysitter.preferedLocation) &&
-                updatedBabysitter.preferedLocation.length > 0 ? (
+              ) : Array.isArray(updatedBabysitter.location) &&
+                updatedBabysitter.location.length > 0 ? (
                 <span className="capitalize">
                   <ul>
-                    {updatedBabysitter.preferedLocation.map((loc) => (
+                    {updatedBabysitter.location.map((loc) => (
                       <li key={loc} className="capitalize">
                         <strong>{loc}</strong>
                       </li>

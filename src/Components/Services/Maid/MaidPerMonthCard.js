@@ -88,7 +88,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
                 Average Rating:
               </strong>{" "}
               <span className="text-lg text-yellow-700 font-bold">
-                {averageRating}
+                {averageRating.toFixed(2)}
               </span>
             </p>
           )}
