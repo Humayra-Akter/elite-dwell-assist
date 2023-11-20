@@ -1,18 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { Link } from "react-router-dom";
 
 const MaidPerMonthCard = ({ maid, setBookMaid }) => {
-  const { img, name, task, location, gender, availability, salary } = maid;
+  const { img, name, location, availability, averageRating, email } = maid;
   const [bookedMaids, setBookedMaids] = useState([]);
+  const [user] = useAuthState(auth);
+
   const availabilityOptions = [
     { label: "08.00 AM - 11.00 AM", value: "sokal" },
     { label: "11.00 AM - 02.00 PM", value: "dupur" },
     { label: "02.00 PM - 05.00 PM", value: "bikal" },
     { label: "05.00 PM - 08.00 PM", value: "raat" },
   ];
-  const [user, loading, error] = useAuthState(auth);
+  useEffect(() => {
+    const fetchAverageRating = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/averageRating/${email}`
+        );
+        const data = await response.json();
+
+        // if (data && data.averageRating) {
+        //   setAverageRating(data.averageRating);
+        // }
+      } catch (error) {
+        console.error("Error fetching average rating:", error);
+      }
+    };
+
+    fetchAverageRating();
+  }, [email]);
 
   const handleKnowMoreClick = () => {
     if (!bookedMaids.includes(maid)) {
@@ -63,7 +82,16 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
                 : "Availability not specified"}
             </ul>
           </p>
-
+          {averageRating > 0 && (
+            <p className="mt-2">
+              <strong className="text-blue-800 underline">
+                Average Rating:
+              </strong>{" "}
+              <span className="text-lg text-yellow-700 font-bold">
+                {averageRating}
+              </span>
+            </p>
+          )}
           <div className="mt-4">
             <label
               htmlFor="booking-maid"
