@@ -9,15 +9,20 @@ const DriverRow = ({ booking, driverEmail, userEmail, index }) => {
     checkIfUserHasAlreadyReviewedDriver(userEmail, driverEmail);
   }, [userEmail, driverEmail]);
 
+  const [hasAlreadyReviewedDriver, setHasAlreadyReviewedDriver] =
+    useState(false);
+
   const handleRatingClick = (value) => {
     setRating(value);
   };
   const info = booking.driverEmail;
-  const getUserReviews = async (userEmail) => {
+
+  const getUserReviews = async (userEmail, reviewType) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/reviews?userEmail=${userEmail}`
+        `http://localhost:5000/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
       );
+
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -29,20 +34,11 @@ const DriverRow = ({ booking, driverEmail, userEmail, index }) => {
       return [];
     }
   };
-
-  const [hasAlreadyReviewedDriver, setHasAlreadyReviewedDriver] =
-    useState(false);
-
-  const checkIfUserHasAlreadyReviewedDriver = async (
-    userEmail,
-    driverEmail
-  ) => {
-    const userReviews = await getUserReviews(userEmail);
-    const alreadyReviewed = userReviews.some(
-      (review) => review.info === driverEmail
-    );
-    setHasAlreadyReviewedDriver(alreadyReviewed);
-  };
+   const checkIfUserHasAlreadyReviewedDriver = async (userEmail, driverEmail) => {
+     const userReviews = await getUserReviews(userEmail, driverEmail);
+     const alreadyReviewed = userReviews.length > 0;
+     setHasAlreadyReviewedDriver(alreadyReviewed);
+   };
 
   const submitReview = async () => {
     if (rating > 0 && reviewText) {

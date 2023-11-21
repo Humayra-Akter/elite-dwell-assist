@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import BabysitterPerMonth from "./BabysitterPerMonth";
 
-const BabysitterSearch = () => {
+const BabysitterSearchSegment = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState("");
   const [selectedSalary, setSelectedSalary] = useState("");
@@ -10,7 +10,6 @@ const BabysitterSearch = () => {
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
   };
-
   const handleAvailabilityChange = (e) => {
     setSelectedAvailability(e.target.value);
   };
@@ -22,14 +21,15 @@ const BabysitterSearch = () => {
   return (
     <div>
       <div className="grid lg:grid-cols-3 pt-5 gap-24 pl-48 pr-48 pb-6 ">
+        {/* <div> */}
         <div className="form-control w-full h-full">
           <select
             value={selectedLocation}
             onChange={handleLocationChange}
             placeholder="Select Location"
-            className="cursor-pointer h-12 w-full resize-x overflow-auto will-change-transform    rounded-md    hover:bg-indigo-300/70 md:active:bg-indigo-500/90 focus:bg-indigo-300/70      hover:ring hover:ring-violet-300 focus:ring focus:ring-violet-300      border-2 border-indigo-500       focus:outline-none       shadow-lg shadow-indigo-300 hover:shadow-none     text-lg text-indigo-800/90 text-center md:focus:text-left  font-semibold "
+            className="cursor-pointer h-12 w-full resize-x overflow-auto will-change-transform    rounded-md    hover:bg-indigo-300/50 md:active:bg-indigo-500/50 focus:bg-indigo-300/50      hover:ring hover:ring-violet-300 focus:ring focus:ring-violet-300      border-2 border-indigo-500       focus:outline-none       shadow-lg shadow-indigo-300 hover:shadow-none     text-lg text-indigo-800/90 text-center md:focus:text-left  font-semibold "
           >
-            <option className="text-center" value="">
+            <option value="" disabled selected hidden>
               --Select Location--
             </option>
             <option value="Dhanmondi">Dhanmondi</option>
@@ -46,7 +46,7 @@ const BabysitterSearch = () => {
           <select
             value={selectedAvailability}
             onChange={handleAvailabilityChange}
-            className="cursor-pointer h-12 w-full   rounded-md    hover:bg-indigo-300/70 md:active:bg-indigo-500/90 focus:bg-indigo-300/70      hover:ring hover:ring-violet-300 focus:ring focus:ring-violet-300      border-2 border-indigo-500       focus:outline-none       shadow-lg shadow-indigo-300 hover:shadow-none     text-lg text-indigo-800/90 text-center md:focus:text-left  font-semibold "
+            className="cursor-pointer h-12 w-full   rounded-md    hover:bg-indigo-300/50 md:active:bg-indigo-500/50 focus:bg-indigo-300/50      hover:ring hover:ring-violet-300 focus:ring focus:ring-violet-300      border-2 border-indigo-500       focus:outline-none       shadow-lg shadow-indigo-300 hover:shadow-none     text-lg text-indigo-800/90 text-center md:focus:text-left  font-semibold "
           >
             <option value="" disabled selected hidden>
               --Select Availability--
@@ -61,9 +61,9 @@ const BabysitterSearch = () => {
           <select
             value={selectedSalary}
             onChange={handleSalaryChange}
-            className="cursor-pointer h-12 w-full   rounded-md    hover:bg-indigo-300/70 md:active:bg-indigo-500/90 focus:bg-indigo-300/70      hover:ring hover:ring-violet-300 focus:ring focus:ring-violet-300      border-2 border-indigo-500       focus:outline-none       shadow-lg shadow-indigo-300 hover:shadow-none     text-lg text-indigo-800/90 text-center md:focus:text-left  font-semibold "
+            className="cursor-pointer h-12 w-full   rounded-md    hover:bg-indigo-300/50 md:active:bg-indigo-500/50 focus:bg-indigo-300/50      hover:ring hover:ring-violet-300 focus:ring focus:ring-violet-300      border-2 border-indigo-500       focus:outline-none       shadow-lg shadow-indigo-300 hover:shadow-none     text-lg text-indigo-800/90 text-center md:focus:text-left  font-semibold "
           >
-            <option value="0" disabled selected hidden>
+            <option value="" disabled selected hidden>
               --Select Salary(BDT)--
             </option>
             <option value="1">5k</option>
@@ -73,6 +73,14 @@ const BabysitterSearch = () => {
             <option value="5">20-25K</option>
             <option value="6">25-30K</option>
             <option value="7">30K and above</option>
+
+            {/* <option value="5000">5k</option>
+            <option value="10000">5-10K</option>
+            <option value="15000">10-15K</option>
+            <option value="20000">15-20K</option>
+            <option value="25000">20-25K</option>
+            <option value="30000">25-30K</option>
+            <option value="35000">30K and above</option> */}
           </select>
         </div>
       </div>
@@ -89,4 +97,4 @@ const BabysitterSearch = () => {
   );
 };
 
-export default BabysitterSearch;
+export default BabysitterSearchSegment;

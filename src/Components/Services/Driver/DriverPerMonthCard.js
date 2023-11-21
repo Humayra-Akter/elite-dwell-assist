@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { Link } from "react-router-dom";
 
 const DriverPerMonthCard = ({ driver, setBookDriver }) => {
-  const { img, name, location, salary } = driver;
-  console.log(driver);
+  const { img, name, location, salary, averageRating, email } = driver;
   const [bookedDrivers, setBookedDrivers] = useState([]);
-  const availabilityOptions = [
-    { label: "08.00 AM - 11.00 AM", value: "sokal" },
-    { label: "11.00 AM - 02.00 PM", value: "dupur" },
-    { label: "02.00 PM - 05.00 PM", value: "bikal" },
-    { label: "05.00 PM - 08.00 PM", value: "raat" },
-  ];
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
+  console.log(email);
+
+  useEffect(() => {
+    const fetchAverageRating = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/averageRatingDriver/${email}`
+        );
+        const data = await response.json();
+        // Use the average rating data as needed
+      } catch (error) {
+        console.error("Error fetching average rating:", error);
+      }
+    };
+
+    fetchAverageRating();
+  }, [email]);
 
   const handleKnowMoreClick = () => {
     if (!bookedDrivers.includes(driver)) {
@@ -50,6 +60,16 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
             <strong className="text-indigo-800 underline">Salary :</strong>{" "}
             {salary}
           </p>
+          {averageRating > 0 && (
+            <p className="pt-2">
+              <strong className="text-indigo-800 underline">
+                Average Rating:
+              </strong>{" "}
+              <span className="text-lg text-yellow-700 font-bold">
+                {averageRating.toFixed(2)}
+              </span>
+            </p>
+          )}
           <div className="mt-4">
             <label
               htmlFor="booking-Driver"

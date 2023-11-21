@@ -25,20 +25,21 @@ const BabysitterPerMonth = ({
 
   const userRole = localStorage.getItem("userRole");
 
-  console.log(babysitters);
   const filteredBabysitters = babysitters.filter((babysitter) => {
+    // location check
     const includesLocation =
       !selectedLocation ||
       babysitter.location?.includes(selectedLocation.toLowerCase());
+    // availability check
     const includesAvailability =
       !selectedAvailability ||
-      babysitter.availability?.includes(selectedAvailability.toLowerCase());
-
-    const salaryRange = parseInt(selectedSalary);
-    const rangeL = (salaryRange - 1) * 5;
-    const rangeR = salaryRange < 7 ? salaryRange * 5 : 999999;
+      babysitter.availability?.includes(selectedAvailability);
+    // salary check
+    const salaryRange = parseInt(selectedSalary,10);
+    const rangeL = (salaryRange - 1) * 5000;
+    const rangeR = salaryRange < 7 ? salaryRange * 5000 : 999999;
     const includesSalary =
-      !salaryRange ||
+      selectedSalary==="" ||
       (rangeL <= babysitter.expectedSalary &&
         babysitter.expectedSalary <= rangeR);
     return includesLocation && includesSalary && includesAvailability;
@@ -52,27 +53,35 @@ const BabysitterPerMonth = ({
       >
         Your Child's Best Friend
       </h1>
-      {userRole !== "customer" ? (
-        <p className="text-red-500 text-xs text-center mt-1">
-          You do not have permission to access this page. Please login first.
-        </p>
-      ) : (
-        <></>
-      )}
-
+      {/* General Babysitters */}
       <div>
+        {userRole !== "customer" && (
+          <p className="text-red-500 text-xs text-center mt-1">
+            You do not have permission to access this page.
+          </p>
+        )}
         <ScrollToTop />
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-5 p-11">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-2 pl-14 pr-14 pt-8">
           {filteredBabysitters.map((babysitter) => (
             <BabysitterCard
               key={babysitter.id}
               babysitter={babysitter}
               setBookBabysitter={setBookBabysitter}
-              user={user}
             ></BabysitterCard>
           ))}
         </div>
       </div>
+      {/* <div className="divider"></div> */}
+      {/* <div className="grid grid-cols-3 gap-5 p-11">
+        {Babysitters.map((Babysitter) => (
+          <BabysitterCard
+            key={Babysitter.id}
+            Babysitter={Babysitter}
+            setBookBabysitter={setBookBabysitter}
+            user={user}
+          ></BabysitterCard>
+        ))}
+      </div> */}
 
       {userRole === "customer" ? (
         bookBabysitter && (

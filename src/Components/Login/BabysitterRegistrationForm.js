@@ -554,7 +554,7 @@ const BabysitterRegistrationForm = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="eg: 10,000"
+                    placeholder="eg: 10000"
                     name="expectedSalary"
                     className="input input-sm input-bordered w-full h-[37.7px] rounded "
                     {...register("expectedSalary")}

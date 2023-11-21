@@ -84,80 +84,23 @@ const BabysitterProfile = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked, options, selectedIndex, multiple } =
-      e.target;
+    const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox" && name === "availability") {
-      const updatedAvailability = [...(updatedBabysitter.availability || [])];
+    if (type === "checkbox") {
+      const updatedValues = [...(updatedBabysitter[name] || [])];
 
       if (checked) {
-        updatedAvailability.push(value);
+        updatedValues.push(value);
       } else {
-        const index = updatedAvailability.indexOf(value);
+        const index = updatedValues.indexOf(value);
         if (index > -1) {
-          updatedAvailability.splice(index, 1);
+          updatedValues.splice(index, 1);
         }
       }
 
       setUpdatedBabysitter({
         ...updatedBabysitter,
-        availability: updatedAvailability,
-      });
-    } else if (type === "checkbox" && name === "qualifications") {
-      const updatedQualifications = [
-        ...(updatedBabysitter.qualifications || []),
-      ];
-
-      if (checked) {
-        updatedQualifications.push(value);
-      } else {
-        const index = updatedQualifications.indexOf(value);
-        if (index > -1) {
-          updatedQualifications.splice(index, 1);
-        }
-      }
-
-      setUpdatedBabysitter({
-        ...updatedBabysitter,
-        qualifications: updatedQualifications,
-      });
-    } else if (type === "checkbox" && name === "location") {
-      const updatedLocations = [...(updatedBabysitter.location || [])];
-
-      if (checked) {
-        updatedLocations.push(value);
-      } else {
-        const index = updatedLocations.indexOf(value);
-        if (index > -1) {
-          updatedLocations.splice(index, 1);
-        }
-      }
-
-      setUpdatedBabysitter({
-        ...updatedBabysitter,
-        location: updatedLocations,
-      });
-    } else if (type === "checkbox" && name === "specialSkills") {
-      const updatedSkills = [...(updatedBabysitter.specialSkills || [])];
-
-      if (checked) {
-        updatedSkills.push(value);
-      } else {
-        const index = updatedSkills.indexOf(value);
-        if (index > -1) {
-          updatedSkills.splice(index, 1);
-        }
-      }
-
-      setUpdatedBabysitter({
-        ...updatedBabysitter,
-        specialSkills: updatedSkills,
-      });
-    } else if (name === "expectedSalary") {
-      const selectedSalary = value;
-      setUpdatedBabysitter({
-        ...updatedBabysitter,
-        expectedSalary: selectedSalary,
+        [name]: updatedValues,
       });
     } else {
       setUpdatedBabysitter({
@@ -166,6 +109,7 @@ const BabysitterProfile = () => {
       });
     }
   };
+
   console.log(updatedBabysitter);
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -267,7 +211,9 @@ const BabysitterProfile = () => {
         <div className="grid lg:grid-cols-3 md:grid-cols-3 gap-5">
           <div>
             <p>
-              <strong className="text-primary underline">Location:</strong>
+              <strong className="text-primary underline">
+                Preferred Location:
+              </strong>
               {isEditing ? (
                 <div className="mt-2 capitalize">
                   <ul>
@@ -276,10 +222,10 @@ const BabysitterProfile = () => {
                         <label className="block mb-1">
                           <input
                             type="checkbox"
-                            name="location"
+                            name="preferedLocation"
                             value={location.value}
                             checked={(
-                              updatedBabysitter.location || []
+                              updatedBabysitter.preferedLocation || []
                             ).includes(location.value)}
                             onChange={handleInputChange}
                           />{" "}
@@ -289,11 +235,11 @@ const BabysitterProfile = () => {
                     ))}
                   </ul>
                 </div>
-              ) : Array.isArray(updatedBabysitter.location) &&
-                updatedBabysitter.location.length > 0 ? (
+              ) : Array.isArray(updatedBabysitter.preferedLocation) &&
+                updatedBabysitter.preferedLocation.length > 0 ? (
                 <span className="capitalize">
                   <ul>
-                    {updatedBabysitter.location.map((loc) => (
+                    {updatedBabysitter.preferedLocation.map((loc) => (
                       <li key={loc} className="capitalize">
                         <strong>{loc}</strong>
                       </li>

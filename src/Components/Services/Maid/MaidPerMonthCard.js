@@ -21,10 +21,6 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
           `http://localhost:5000/averageRating/${email}`
         );
         const data = await response.json();
-
-        // if (data && data.averageRating) {
-        //   setAverageRating(data.averageRating);
-        // }
       } catch (error) {
         console.error("Error fetching average rating:", error);
       }

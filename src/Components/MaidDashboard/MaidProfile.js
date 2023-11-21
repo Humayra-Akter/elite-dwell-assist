@@ -84,56 +84,28 @@ const MaidProfile = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked, options, selectedIndex, multiple } =
-      e.target;
+    const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox" && name === "availability") {
-      const updatedAvailability = [...(updatedMaid.availability || [])];
+    if (
+      type === "checkbox" &&
+      (name === "availability" || name === "location" || name === "tasks")
+    ) {
+      const updatedTasks = Array.isArray(updatedMaid.tasks)
+        ? [...updatedMaid.tasks]
+        : [];
 
       if (checked) {
-        updatedAvailability.push(value);
+        updatedTasks.push(value);
       } else {
-        const index = updatedAvailability.indexOf(value);
+        const index = updatedTasks.indexOf(value);
         if (index > -1) {
-          updatedAvailability.splice(index, 1);
+          updatedTasks.splice(index, 1);
         }
       }
 
       setUpdatedMaid({
         ...updatedMaid,
-        availability: updatedAvailability,
-      });
-    } else if (type === "checkbox" && name === "location") {
-      const updatedLocations = [...(updatedMaid.location || [])];
-
-      if (checked) {
-        updatedLocations.push(value);
-      } else {
-        const index = updatedLocations.indexOf(value);
-        if (index > -1) {
-          updatedLocations.splice(index, 1);
-        }
-      }
-
-      setUpdatedMaid({
-        ...updatedMaid,
-        location: updatedLocations,
-      });
-    } else if (type === "checkbox" && name === "tasks") {
-      const updatedtasks = [...(updatedMaid.tasks || [])];
-
-      if (checked) {
-        updatedtasks.push(value);
-      } else {
-        const index = updatedtasks.indexOf(value);
-        if (index > -1) {
-          updatedtasks.splice(index, 1);
-        }
-      }
-
-      setUpdatedMaid({
-        ...updatedMaid,
-        tasks: updatedtasks,
+        [name]: updatedTasks,
       });
     } else if (name === "salaryPerTask") {
       const selectedSalary = value;
@@ -312,8 +284,8 @@ const MaidProfile = () => {
                   ))}
                 </ul>
               </div>
-            ) : Array.isArray(updatedMaid.task) &&
-              updatedMaid.task.length > 0 ? (
+            ) : Array.isArray(updatedMaid.tasks) &&
+              updatedMaid.tasks.length > 0 ? (
               <ul>
                 {updatedMaid.tasks.map((task) => (
                   <li key={task} className="capitalize">

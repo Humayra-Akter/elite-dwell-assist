@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
   useEffect(() => {
     checkIfUserHasAlreadyReviewed(userEmail, babysitterEmail);
@@ -13,37 +14,36 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
     setRating(value);
   };
 
-  const getUserReviews = async (userEmail) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/reviews?userEmail=${userEmail}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      } else {
-        throw new Error("Failed to fetch user reviews");
-      }
-    } catch (error) {
-      console.error("Error fetching user reviews:", error);
-      return [];
-    }
-  };
+   const getUserReviews = async (userEmail, reviewType) => {
+     try {
+       const response = await fetch(
+         `http://localhost:5000/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
+       );
+
+       if (response.ok) {
+         const data = await response.json();
+         return data;
+       } else {
+         throw new Error("Failed to fetch user reviews");
+       }
+     } catch (error) {
+       console.error("Error fetching user reviews:", error);
+       return [];
+     }
+   };
+
   const info = booking.babysitterEmail;
-  const [hasAlreadyReviewed, setHasAlreadyReviewed] = useState(false);
 
   const checkIfUserHasAlreadyReviewed = async (userEmail, babysitterEmail) => {
-    const userReviews = await getUserReviews(userEmail);
-    const alreadyReviewed = userReviews.some(
-      (review) => review.babysitterEmail === babysitterEmail
-    );
+    const userReviews = await getUserReviews(userEmail, babysitterEmail);
+    const alreadyReviewed = userReviews.length > 0;
     setHasAlreadyReviewed(alreadyReviewed);
   };
 
   const submitReview = async () => {
     if (rating > 0 && reviewText) {
       if (hasAlreadyReviewed) {
-        toast.error("You have already reviewed this maid.");
+        toast.error("You have already reviewed this babysitter.");
       } else {
         const review = {
           userEmail,

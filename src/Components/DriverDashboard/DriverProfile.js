@@ -72,7 +72,7 @@ const DriverProfile = () => {
         <div className="flex flex-row items-center justify-end">
           {!isEditing && (
             <button
-              className="btn btn-sm text-xs w-full border-blue-500 text-white font-bold bg-primary"
+              className="btn btn-sm text-xs w-20 border-blue-500 text-white font-bold bg-primary"
               onClick={handleEdit}
             >
               Edit
@@ -166,7 +166,6 @@ const DriverProfile = () => {
           {loggedUser?.experience} Years
         </div>
       </div>
-     
     </div>
   );
 };
