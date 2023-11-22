@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import frwrd from "../../images/forward.png";
-import rewrd from "../../images/rewind.png";
 import ban1 from "../../images/notification.png";
 import ban2 from "../../images/job-search.png";
 import ban3 from "../../images/booking.svg";
@@ -9,54 +7,46 @@ import ban4 from "../../images/avatar.png";
 import ban5 from "../../images/icons/maid.png";
 import ban6 from "../../images/icons/driver.png";
 import ban7 from "../../images/icons/motherhood.png";
+import auth from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const CustomerDashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const [user] = useAuthState(auth);
+  const [loggedUser, setLoggedUser] = useState({});
 
   const toggleBookings = () => {
     setIsBookingsOpen(!isBookingsOpen);
   };
 
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:5000/customer?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.length > 0) {
+            const matchingUser = data.find(
+              (userData) => userData.email === user.email
+            );
+            if (matchingUser) {
+              setLoggedUser(matchingUser);
+            }
+          }
+        });
+    }
+  }, [user]);
+
   return (
     <div>
-      <div className={`drawer ${isSidebarOpen ? "lg:drawer-open" : ""}`}>
-        <input id="customer-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content p-11">
-          <Outlet />
-          <label
-            for="customer-drawer"
-            class="btn btn-sm absolute top-0 right-0 drawer-button lg:hidden"
-          >
-            See menu
-          </label>
-          {isSidebarOpen ? (
-            <button
-              className="btn absolute rounded-full top-2 left-2 z-10 btn-secondary btn-sm"
-              onClick={toggleSidebar}
-            >
-              <img className="w-4" src={rewrd} alt="" />
-            </button>
-          ) : (
-            <button
-              className="btn absolute top-0 rounded-full left-0 btn-secondary btn-sm"
-              onClick={toggleSidebar}
-            >
-              <img className="w-4" src={frwrd} alt="" />
-            </button>
-          )}
-        </div>
-        <div class="drawer-side">
-          <label
-            for="customer-drawer"
-            aria-label="close sidebar"
-            class="drawer-overlay"
-          ></label>
-          <ul class="menu pl-4 pt-10 w-80 min-h-full bg-indigo-50 text-base-content">
+      <div className="flex">
+        <div className="w-1/4 h-screen text-base-content">
+          <ul className="menu p-4 mt-16">
+            <img
+              src={loggedUser.img}
+              alt="user"
+              className="w-32 h-32 rounded-full mb-4 mx-auto"
+            />
+            <hr />
             <li>
               <Link
                 className="text-primary mt-3 text-base font-bold hover:text-black"
@@ -177,6 +167,9 @@ const CustomerDashboard = () => {
               </div>
             </li>
           </ul>
+        </div>
+        <div className="w-3/4 p-5">
+          <Outlet />
         </div>
       </div>
     </div>

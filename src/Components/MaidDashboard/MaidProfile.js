@@ -32,14 +32,6 @@ const MaidProfile = () => {
     { label: "05.00 PM - 08.00 PM", value: "raat" },
   ];
 
-  const expertiseSalaries = {
-    mopping: [1000, 1500, 1200],
-    cooking: [2000, 1800, 2200],
-    cloth_washing: [1500, 1400, 1600],
-    sweeping: [500, 600, 550],
-    dish_washing: [1500, 1600, 1550],
-  };
-
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:5000/maid?email=${user.email}`)
@@ -86,32 +78,21 @@ const MaidProfile = () => {
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (
-      type === "checkbox" &&
-      (name === "availability" || name === "location" || name === "tasks")
-    ) {
-      const updatedTasks = Array.isArray(updatedMaid.tasks)
-        ? [...updatedMaid.tasks]
-        : [];
+    if (type === "checkbox") {
+      const updatedValues = [...(updatedMaid[name] || [])];
 
       if (checked) {
-        updatedTasks.push(value);
+        updatedValues.push(value);
       } else {
-        const index = updatedTasks.indexOf(value);
+        const index = updatedValues.indexOf(value);
         if (index > -1) {
-          updatedTasks.splice(index, 1);
+          updatedValues.splice(index, 1);
         }
       }
 
       setUpdatedMaid({
         ...updatedMaid,
-        [name]: updatedTasks,
-      });
-    } else if (name === "salaryPerTask") {
-      const selectedSalary = value;
-      setUpdatedMaid({
-        ...updatedMaid,
-        salaryPerTask: selectedSalary,
+        [name]: updatedValues,
       });
     } else {
       setUpdatedMaid({
@@ -120,8 +101,6 @@ const MaidProfile = () => {
       });
     }
   };
-
-  console.log(updatedMaid);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -246,15 +225,13 @@ const MaidProfile = () => {
                 </div>
               ) : Array.isArray(updatedMaid.location) &&
                 updatedMaid.location.length > 0 ? (
-                <span className="capitalize">
-                  <ul>
-                    {updatedMaid.location.map((loc) => (
-                      <li key={loc} className="capitalize">
-                        <strong>{loc}</strong>
-                      </li>
-                    ))}
-                  </ul>
-                </span>
+                <ul>
+                  {updatedMaid.location.map((loc) => (
+                    <li key={loc} className="capitalize">
+                      <strong>{loc}</strong>
+                    </li>
+                  ))}
+                </ul>
               ) : (
                 "No locations selected."
               )}
@@ -262,7 +239,7 @@ const MaidProfile = () => {
           </div>
           <div>
             {" "}
-            <strong className="text-primary underline">Tasks : </strong>
+            <strong className="text-primary underline">task : </strong>
             {isEditing ? (
               <div className="mt-2 capitalize">
                 <ul>
@@ -271,9 +248,9 @@ const MaidProfile = () => {
                       <label className="block mb-1 capitalize">
                         <input
                           type="checkbox"
-                          name="tasks"
+                          name="task"
                           value={expertise.value}
-                          checked={(updatedMaid.tasks || []).includes(
+                          checked={(updatedMaid.task || []).includes(
                             expertise.value
                           )}
                           onChange={handleInputChange}
@@ -284,17 +261,17 @@ const MaidProfile = () => {
                   ))}
                 </ul>
               </div>
-            ) : Array.isArray(updatedMaid.tasks) &&
-              updatedMaid.tasks.length > 0 ? (
+            ) : Array.isArray(updatedMaid.task) &&
+              updatedMaid.task.length > 0 ? (
               <ul>
-                {updatedMaid.tasks.map((task) => (
+                {updatedMaid.task.map((task) => (
                   <li key={task} className="capitalize">
                     <strong>{task}</strong>
                   </li>
                 ))}
               </ul>
             ) : (
-              "No tasks selected."
+              "No task selected."
             )}
           </div>
           <div>
@@ -308,10 +285,9 @@ const MaidProfile = () => {
                         type="checkbox"
                         name="availability"
                         value={option.value}
-                        checked={(Array.isArray(updatedMaid.availability)
-                          ? updatedMaid.availability
-                          : []
-                        ).includes(option.value)}
+                        checked={(updatedMaid.availability || []).includes(
+                          option.value
+                        )}
                         onChange={handleInputChange}
                       />{" "}
                       {option.label}

@@ -46,7 +46,7 @@ const DriverBookings = () => {
   return (
     <div>
       <h2 className="text-3xl text-primary font-bold">
-        My Bookings for House-Helper
+        My Bookings for Car-Driver
       </h2>
       {filteredBookings.length === 0 ? (
         <p className="text-red-600 pt-7">

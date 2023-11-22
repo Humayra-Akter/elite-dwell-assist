@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import frwrd from "../../images/forward.png";
-import rewrd from "../../images/rewind.png";
 import ban4 from "../../images/avatar.png";
 import ban1 from "../../images/notification.png";
 import ban2 from "../../images/job-search.png";
