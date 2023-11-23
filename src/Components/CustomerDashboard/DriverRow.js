@@ -34,11 +34,14 @@ const DriverRow = ({ booking, driverEmail, userEmail, index }) => {
       return [];
     }
   };
-   const checkIfUserHasAlreadyReviewedDriver = async (userEmail, driverEmail) => {
-     const userReviews = await getUserReviews(userEmail, driverEmail);
-     const alreadyReviewed = userReviews.length > 0;
-     setHasAlreadyReviewedDriver(alreadyReviewed);
-   };
+  const checkIfUserHasAlreadyReviewedDriver = async (
+    userEmail,
+    driverEmail
+  ) => {
+    const userReviews = await getUserReviews(userEmail, driverEmail);
+    const alreadyReviewed = userReviews.length > 0;
+    setHasAlreadyReviewedDriver(alreadyReviewed);
+  };
 
   const submitReview = async () => {
     if (rating > 0 && reviewText) {

@@ -239,7 +239,7 @@ const MaidProfile = () => {
           </div>
           <div>
             {" "}
-            <strong className="text-primary underline">task : </strong>
+            <strong className="text-primary underline">Task : </strong>
             {isEditing ? (
               <div className="mt-2 capitalize">
                 <ul>

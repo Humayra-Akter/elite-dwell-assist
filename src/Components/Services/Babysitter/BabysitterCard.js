@@ -41,7 +41,7 @@ const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
 
   return (
     <div>
-      <div className="cursor-pointer w-[290px] max-w-sm h-fit rounded-xl border-2 pb-[2%] shadow-[0_3px_10px_rgb(0,0,0,0.2)]  relative bg-slate-100 m-4 hover:scale-105  transition-all duration-300 ease-in-out">
+      <div className="cursor-pointer w-[290px] max-w-sm h-96 rounded-xl border-2 pb-[2%] shadow-[0_3px_10px_rgb(0,0,0,0.2)]  relative bg-slate-100 m-4 hover:scale-105  transition-all duration-300 ease-in-out">
         <div className="flex flex-col items-center p-4">
           <img
             src={img}

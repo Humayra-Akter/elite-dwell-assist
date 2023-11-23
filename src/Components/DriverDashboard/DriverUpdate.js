@@ -1,4 +1,5 @@
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -18,238 +19,278 @@ const DriverUpdate = () => {
             );
             if (matchingUser) {
               setLoggedUser(matchingUser);
+              setUpdatedDriver({
+                email: matchingUser.email,
+                password: "",
+                experience: matchingUser.experience.toString(),
+                salary: matchingUser.salary.toString(),
+                gender: matchingUser.gender,
+                location: matchingUser.location,
+                contact: matchingUser.contact,
+              });
             }
           }
         });
     }
   }, [user]);
 
-  const [formData, setFormData] = useState({
-    name: "",
+  const [updatedDriver, setUpdatedDriver] = useState({
     email: "",
-    gender: "",
-    phone: "",
-    expectedSalary: "",
-    location: "",
     password: "",
-    reenterPassword: "",
+    experience: "",
+    salary: "",
+    gender: "",
+    location: [],
+    contact: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name, value, type, checked } = e.target;
+
+    if (name === "location") {
+      // Handle location checkboxes
+      setUpdatedDriver((prevData) => ({
+        ...prevData,
+        location: checked
+          ? [...prevData.location, value]
+          : prevData.location.filter((loc) => loc !== value),
+      }));
+    } else {
+      // Handle other input fields
+      const fieldValue = type === "checkbox" ? checked : value;
+      setUpdatedDriver((prevData) => ({
+        ...prevData,
+        [name]: fieldValue,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(updatedDriver);
+
     try {
-      // Send a request to the server to update the user information
-      await axios.post("http://localhost:5000/driver", formData);
-      // Handle success (e.g., show a success message)
+      fetch(`http://localhost:5000/driver/${loggedUser._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedDriver),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data); // Handle success or error
+        });
     } catch (error) {
       // Handle error (e.g., show an error message)
     }
   };
+  const handleCancelClick = () => {
+    // Implement logic to handle cancel button click
+    // For example, redirecting to the driver profile page
+    // Example using React Router: history.push('/driver-profile');
+  };
 
   return (
-    <div className="rounded-2xl bg-peak-primary w-full h-[1269px] overflow-hidden text-left text-base text-darkslategray-300 font-montserrat">
-      <div className="w-[1440px] h-[1138px] hidden" />
-      <div className="absolute top-[0px] left-[0px] bg-mediumpurple w-[276px] h-[1269px]" />
-      <div className="absolute top-[79px] left-[calc(50%_-_355px)] w-[285.42px] h-[198.3px] text-center text-2xl font-lato">
-        <b className="absolute top-[0px] left-[calc(50%_-_142.71px)] leading-[20px] flex items-left justify-center w-[173px]">
-          Update Profile
+    <div className="relative rounded-3xl bg-peak-primary w-full h-[1074px] overflow-hidden text-left text-base text-darkslategray-100 font-montserrat">
+      <div className="relative w-[1440px] h-[1138px] hidden" />
+      <div className="absolute top-[1px] left-[7px] w-[1333px] h-[943px]">
+        <b className="absolute top-[386px] left-[calc(50%_-_658.5px)] inline-block w-[121px]">
+          Email Address
         </b>
-        <img
-          className="absolute top-[31.74px] left-[calc(50%_-_137.45px)] w-[163px]"
-          alt=""
-          src="/vector-76.svg"
+        <input
+          className="bg-peak-primary absolute top-[415px] left-[calc(50%_-_661.5px)] rounded-lg box-border w-[339px] h-10 border-[1px] border-solid border-lightgray-100"
+          name="email"
+          placeholder=" e.g. abc@google.com"
+          type="text"
+          onChange={handleChange}
         />
-        <div className="absolute top-[93.7px] left-[3px] w-[282.42px] h-[104.6px] text-left text-xl font-montserrat">
-          <img
-            className="absolute top-[-8px] left-[-8px] w-[129.53px] h-[128.59px] object-cover"
-            id="driver_image"
-            alt=""
-            src={loggedUser.img}
-          />
-          <b className="absolute top-[8.3px] left-[calc(50%_-_.02px)] inline-block w-[159.23px]">
+
+        <b className="absolute top-[571px] left-[576px] inline-block w-[84px] h-[23px]">
+          Location
+        </b>
+        <b className="absolute top-[658px] left-[7px] inline-block w-40 h-7">
+          Experience(Years)
+        </b>
+        <input
+          className="bg-peak-primary absolute top-[599px] left-[4px] rounded-lg box-border w-[342px] h-11 border-[1px] border-solid border-lightgray-100"
+          name="salary"
+          placeholder=" enter expected salary"
+          type="text"
+          onChange={handleChange}
+        />
+        <div className="absolute top-[153.7px] left-[-110px] w-[278.4px] h-[104.6px] overflow-hidden text-xl">
+          <b className="absolute top-[8.3px] left-[calc(50%_-_20px)] inline-block w-[159.2px]">
             {loggedUser.name}
           </b>
-          <div className="absolute top-[40.3px] left-[calc(50%_-_.02px)] inline-block w-[158.22px]">
+          <div className="absolute top-[40.3px] left-[calc(50%_-_20px)] inline-block w-[158.2px]">
             {loggedUser.role}
           </div>
         </div>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group absolute top-[378px] left-[calc(50%_-_352px)] w-[497px] h-48">
-          <b className="absolute top-[0px] left-[calc(50%_-_246.5px)] inline-block w-[121px]">
-            Name
-          </b>
-          <input
-            className="bg-peak-primary absolute top-[36px] left-[calc(50%_-_248.5px)] rounded-lg box-border w-[497px] h-[52px] border-[1px] border-solid border-lightgray-100"
-            name="name_input"
-            placeholder=" e.g. Imran Khan"
-            type="text"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <b className="absolute top-[104px] left-[calc(50%_-_248.5px)] inline-block w-[121px]">
-            Email Address
-          </b>
-          <input
-            className="bg-peak-primary absolute top-[140px] left-[calc(50%_-_248.5px)] rounded-lg box-border w-[497px] h-[52px] border-[1px] border-solid border-lightgray-100"
-            name="email_input"
-            placeholder=" e.g. abc@google.com"
-            type="text"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form group absolute top-[378px] left-[calc(50%_+_182px)] w-[501.83px] h-[282px] ">
-          <b className="absolute top-[112px] left-[calc(50%_-_250.91px)] inline-block w-[181px]">
-            Gender
-          </b>
-          <b className="absolute top-[0px] left-[calc(50%_-_250.91px)] inline-block w-[132.27px]">
+        <div className="absolute top-[309px] left-[8px] w-[748px] h-5 overflow-hidden flex flex-row items-start justify-start gap-[435px]">
+          <b className="relative inline-block w-[132px] h-2.5 shrink-0">
             Phone Number
           </b>
-          <input
-            className="bg-peak-primary absolute top-[36px] left-[calc(50%_-_250.91px)] rounded-lg box-border w-[501.83px] h-[52px] border-[1px] border-solid border-lightgray-100"
-            name="phone_input"
-            placeholder=" e.g. 01XXXXXXXXX"
-            type="text"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-          <div className="absolute top-[254px] left-[calc(50%_-_221.92px)] w-[28.27px] h-7 overflow-hidden" />
+          <b className="relative inline-block w-[181px] shrink-0">Gender</b>
         </div>
-        <img
-          className="absolute top-[589.5px] right-[240.99px]"
-          alt=""
-          src="/vector-76.svg"
-        />
-        <div className="form-group absolute top-[613px] left-[calc(50%_-_350px)] w-[1038px] h-[89px]">
-          <div className="absolute top-[1px] left-[calc(50%_-_519px)] w-[495px] h-[88px] ">
-            <b className="absolute top-[0px] left-[calc(50%_-_247.5px)] inline-block w-[147.43px]">
-              New Password
-            </b>
-            <input
-              className="bg-peak-primary absolute top-[36px] left-[calc(50%_-_245.55px)] rounded-lg box-border w-[493.05px] h-[52px] border-[1px] border-solid border-lightgray-100"
-              name="new_pass"
-              placeholder=" Enter new password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="absolute top-[0px] left-[calc(50%_+_13px)] w-[506px] h-[88px] ">
-            <b className="absolute top-[0px] left-[calc(50%_-_250.96px)] inline-block w-[203.42px]">
-              Confirm New Password
-            </b>
-            <input
-              className="bg-peak-primary absolute top-[36px] left-[calc(50%_-_253px)] rounded-lg box-border w-[506px] h-[52px] border-[1px] border-solid border-lightgray-100"
-              name="confirm_pass"
-              placeholder=" Retype the password"
-              type="password"
-              value={formData.reenterPassoword}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <button
-          className="cursor-pointer py-2 px-0 bg-peak-primary hover:bg-black absolute top-[868px] left-[calc(50%_+_273px)] rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border w-44 h-[59px] overflow-hidden flex flex-row items-center justify-center border-[1px] border-solid border-peak-primary"
-          id="cancel_button"
-          type="reset"
-        >
-          <b className="relative text-semibold leading-[150%]  font-montserrat text-darkslategray-300 text-center">
-            Cancel
-          </b>
-        </button>
-        <button
-          className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[213px] left-[calc(50%_-_106px)] w-[35px] h-[27px] bg-cover bg-no-repeat bg-[top]"
-          id="driver_image_input"
-          value={formData.img}
+        <input
+          className="bg-peak-primary absolute bottom-[568px] left-[calc(50%_-_661.5px)] rounded-lg box-border w-[339px] h-10 border-[1px] border-solid border-lightgray-100"
+          name="contact"
+          placeholder=" e.g. 01XXXXXXXXX"
+          type="text"
           onChange={handleChange}
         />
         <select
-          className="absolute top-[calc(50%_-_160.5px)] left-[calc(50%_+_182px)] bg-peak-primary shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[199px] h-[37px] overflow-hidden"
+          className="absolute top-[336.5px] left-[579px] rounded-md [background:linear-gradient(#fffdfd,_#fffdfd),_#fff] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25),_0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[199px] h-[37px] flex flex-row items-center justify-end pt-2.5 px-[8.83319091796875px] pb-[9px] box-border gap-[50px]"
           required={true}
-          id="select_gender_slot"
-          value={formData.gender}
+          name="gender"
           onChange={handleChange}
         >
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Others">Others</option>
         </select>
-        <div className="absolute top-[833px] left-[calc(50%_-_352px)] w-[870px] h-[93px] overflow-hidden">
-          <b className="absolute top-[9px] left-[0px] inline-block w-[84px] h-[23px]">
-            Location
-          </b>
-          <select
-            className="absolute top-[calc(50%_-_6.5px)] left-[calc(50%_-_435px)] bg-peak-primary shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[199px] h-[37px] overflow-hidden"
-            id="select_location_slot"
-            value={formData.location}
-            onChange={handleChange}
+        <b className="absolute top-[482px] left-[calc(50%_-_660.5px)] inline-block w-[147.4px]">
+          New Password
+        </b>
+        <b className="absolute top-[482px] left-[calc(50%_-_92.1px)] inline-block w-[203.4px]">
+          Confirm New Password
+        </b>
+        <div className="absolute top-[553px] left-[calc(50%_-_105.5px)] w-[28.3px] h-7" />
+        <input
+          className="bg-peak-primary absolute top-[512px] left-[calc(50%_-_663.5px)] rounded-lg box-border w-[341px] h-[41px] border-[1px] border-solid border-lightgray-100"
+          name="password"
+          placeholder=" enter new password"
+          type="password"
+          onChange={handleChange}
+        />
+        <b className="absolute top-[386px] left-[calc(50%_-_84.5px)] inline-block w-[147.4px]">
+          Lisence no.
+        </b>
+        <input
+          className="bg-peak-primary absolute top-[414px] left-[calc(50%_-_87.5px)] rounded-lg box-border w-[341px] h-[41px] border-[1px] border-solid border-lightgray-100"
+          name="lisence"
+          placeholder=" enter lisence no."
+          type="text"
+          onChange={handleChange}
+        />
+        <input
+          className="bg-peak-primary absolute top-[515px] left-[calc(50%_-_91.5px)] rounded-lg box-border w-[356px] h-[38px] border-[1px] border-solid border-lightgray-100"
+          name="password"
+          placeholder=" retype the password"
+          type="password"
+        />
+        <b className="absolute top-[569px] left-[7px] inline-block w-[203px] h-[18px]">
+          Expected Salary (Taka)
+        </b>
+        <input
+          className="[border:none] font-montserrat text-mini bg-gray absolute top-[690px] left-[9px] rounded-md shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[199px] h-[37px] overflow-hidden flex flex-row items-center justify-end pt-2.5 px-2.5 pb-[9px] box-border"
+          placeholder=" enter years"
+          type="text"
+          name="experience"
+          onChange={handleChange}
+        />
+        <div className="absolute top-20 right-80 w-80 h-[59px] overflow-hidden flex flex-row items-center justify-start gap-10">
+          <button
+            className="cursor-pointer py-2 px-0 bg-primary rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border w-20 h-10 flex flex-row items-center justify-center border-[1px] border-solid border-black"
+            id="cancel_button"
+            onClick={handleCancelClick}
           >
-            <option value="Mirpur">Mirpur</option>
-            <option value="Uttara">Uttara</option>
-            <option value="Dhanmondi">Dhanmondi</option>
-            <option value="Gulshan">Gulshan</option>
-            <option value="Savar">Savar</option>
-            <option value="Mohammadpur">Mohammadpur</option>
-            <option value="Banani">Banani</option>
-            <option value="Motijheel">Motijheel</option>
-          </select>
-        </div>
-        <button
-          className="cursor-pointer py-2 px-0 bg-indigo-600 hover:bg-black absolute top-[868px] left-[calc(50%_+_473px)] rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border w-44 h-[59px] overflow-hidden flex flex-row items-center justify-center border-[1px] border-solid border-peak-primary"
-          id="Save_Changes_Button"
-          type="submit"
-          onChange={handleSubmit}
-        >
-          <div className="absolute top-[0px] left-[calc(50%_-_88px)] rounded-lg bg-mediumpurple shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-44 h-[59px]" />
-          <b className="absolute top-[18px] left-[calc(50%_-_65px)] text-base leading-[150%] inline-block font-montserrat text-white text-center w-[129px]">
-            Save Changes
-          </b>
-        </button>
-        <div className="absolute top-[722px] left-[calc(50%_-_369px)] w-[1057px] h-[111px] overflow-hidden">
-          <b className="absolute top-[12px] left-[553px] inline-block w-[203px] h-[18px]">
-            Expected Salary (Taka)
-          </b>
-          <b className="absolute top-[16px] left-[17px] inline-block w-[100px] h-7">
-            Experience
-          </b>
-          <select
-            className="absolute top-[calc(50%_-_8.5px)] left-[calc(50%_-_507.5px)] bg-peak-primary shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[199px] h-[37px] overflow-hidden"
-            id=" Select_location_slot"
-            value={formData.experience}
-            onChange={handleChange}
+            <Link
+              to="/driverDashboard"
+              className="cursor-pointer py-2 px-0 text-white rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border w-20 h-10 flex flex-row items-center justify-center border-[1px] border-solid border-black"
+            >
+              Cancel
+            </Link>
+          </button>
+          <button
+            className="cursor-pointer [border:none] bg-primary py-[17px] bg-mediumslateblue rounded-lg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-20 h-10 flex flex-col items-start justify-end box-border border-black"
+            id="Save_Changes_Button"
+            onClick={handleSubmit}
           >
-            <option value="1 year">1 year</option>
-            <option value="2 years">2 years</option>
-            <option value="3 years">3 years</option>
-            <option value="4 years">4 years</option>
-            <option value="5 years">5 years</option>
-            <option value="6 years">6 years</option>
-            <option value="7 years">7 years</option>
-            <option value="8 years">8 years</option>
-            <option value="9 years">9 years</option>
-            <option value="10 years">10 years</option>
-            <option value="More than 10 years">More than 10 years</option>
-          </select>
-          <input
-            className="bg-peak-primary absolute top-[47px] left-[551px] rounded-lg box-border w-[497px] h-[52px] border-[1px] border-solid border-lightgray-100"
-            name="expected_salary"
-            placeholder=" enter expected salary"
-            type="text"
-            value={formData.salary}
-            onChange={handleChange}
-          />
+            <b className="absolute text-base leading-[400%] inline-block text-white text-center w-20 h-10 border-black">
+              Save
+            </b>
+          </button>
         </div>
-      </form>
+        <b className="absolute top-20 left-[calc(50%_-_666.5px)] text-[24px] leading-[20px] flex font-lato text-center items-center justify-center w-[173px]">
+          Update Profile
+        </b>
+        <img
+          className="absolute top-[51.7px] left-[calc(50%_-_660.2px)] w-[143px] h-px"
+          alt=""
+          src="/vector-75.svg"
+        />
+        <div className="absolute top-[605px] left-[576px] text-mini text-black inline-block w-[140px] h-[18px]">
+          Motijheel
+        </div>
+        <div className="absolute top-[668px] left-[574px] text-mini text-black inline-block w-[140px] h-[18px]">
+          Savar
+        </div>
+        <div className="absolute top-[694px] left-[574px] text-mini text-black inline-block w-[140px] h-[18px]">
+          Uttora
+        </div>
+        <div className="absolute top-[605px] left-[826px] text-mini text-black inline-block w-[122px] h-[18px]">
+          Mohammadpur
+        </div>
+        <div className="absolute top-[637px] left-[826px] text-mini text-black inline-block w-[120px] h-4">
+          Banani
+        </div>
+        <div className="absolute top-[668px] left-[826px] text-mini text-black inline-block w-[120px] h-[18px]">
+          Gulshan
+        </div>
+        <div className="absolute top-[638px] left-[576px] text-mini text-black inline-block w-[141px] h-[18px]">{`Mirpur `}</div>
+        <input
+          className="absolute top-[609px] left-[728px] bg-gainsboro w-[17px] h-3"
+          id="Motijheel"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+        <input
+          className="absolute top-[609px] left-[965px] bg-gainsboro w-[17px] h-3"
+          id="Mohammadpur"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+        <input
+          className="absolute top-[671px] left-[965px] bg-gainsboro w-[17px] h-3"
+          id="Gulshan"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+        <input
+          className="absolute top-[639px] left-[965px] bg-gainsboro w-[17px] h-3"
+          id="Banani"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+        <input
+          className="absolute top-[697px] left-[728px] bg-gainsboro w-[17px] h-3"
+          id="Uttora"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+        <input
+          className="absolute top-[671px] left-[728px] bg-gainsboro w-[17px] h-3"
+          id="Savar"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+        <input
+          className="absolute top-[642px] left-[728px] bg-gainsboro w-[17px] h-3"
+          id="Mirpur"
+          type="checkbox"
+          name="location"
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 };

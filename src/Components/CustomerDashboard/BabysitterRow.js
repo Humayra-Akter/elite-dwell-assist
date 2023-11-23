@@ -14,23 +14,23 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
     setRating(value);
   };
 
-   const getUserReviews = async (userEmail, reviewType) => {
-     try {
-       const response = await fetch(
-         `http://localhost:5000/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
-       );
+  const getUserReviews = async (userEmail, reviewType) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
+      );
 
-       if (response.ok) {
-         const data = await response.json();
-         return data;
-       } else {
-         throw new Error("Failed to fetch user reviews");
-       }
-     } catch (error) {
-       console.error("Error fetching user reviews:", error);
-       return [];
-     }
-   };
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error("Failed to fetch user reviews");
+      }
+    } catch (error) {
+      console.error("Error fetching user reviews:", error);
+      return [];
+    }
+  };
 
   const info = booking.babysitterEmail;
 

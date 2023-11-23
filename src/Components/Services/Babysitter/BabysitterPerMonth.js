@@ -35,11 +35,11 @@ const BabysitterPerMonth = ({
       !selectedAvailability ||
       babysitter.availability?.includes(selectedAvailability);
     // salary check
-    const salaryRange = parseInt(selectedSalary,10);
+    const salaryRange = parseInt(selectedSalary, 10);
     const rangeL = (salaryRange - 1) * 5000;
     const rangeR = salaryRange < 7 ? salaryRange * 5000 : 999999;
     const includesSalary =
-      selectedSalary==="" ||
+      selectedSalary === "" ||
       (rangeL <= babysitter.expectedSalary &&
         babysitter.expectedSalary <= rangeR);
     return includesLocation && includesSalary && includesAvailability;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { AiFillClockCircle } from "react-icons/ai";
 
 const WMBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
@@ -94,21 +93,8 @@ const WMBookings = () => {
                 <p className="text-lg font-medium">
                   Selected Date:{" "}
                   <span className="font-bold text-primary">
-                    {new Date(booking.selectedDate).toLocaleString("en-US", {
-                      hour: "numeric",
-                      minute: "numeric",
-                      second: "numeric",
-                      hour12: false,
-                    })}{" "}
-                    (
-                    {calculateRemainingHours(booking.selectedDate) > 0
-                      ? `${calculateRemainingHours(
-                          booking.selectedDate
-                        )} hours remaining`
-                      : "less than an hour remaining"}
-                    ){booking.selectedDate.slice(0, 10)}
+                    {booking.selectedDate.slice(0, 10)}
                   </span>
-                  <AiFillClockCircle className="inline-block text-primary text-lg ml-1" />
                 </p>
               )}
               <p className="text-lg font-medium">

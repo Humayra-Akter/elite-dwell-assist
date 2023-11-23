@@ -79,20 +79,20 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
             </ul>
           </p>
           {averageRating > 0 && (
-            <p className="mt-2">
+            <p className="mt-1">
               <strong className="text-blue-800 underline">
                 Average Rating:
               </strong>{" "}
-              <span className="text-lg text-yellow-700 font-bold">
+              <span className="text-yellow-600 font-bold">
                 {averageRating.toFixed(2)}
               </span>
             </p>
           )}
-          <div className="mt-4">
+          <div className="mt-2">
             <label
               htmlFor="booking-maid"
               onClick={handleKnowMoreClick}
-              className="px-4 btn-md mt-3 bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
+              className="px-4 btn-md bg-primary text-white font-bold rounded-full hover:bg-opacity-80 transition duration-300"
             >
               Know More
             </label>
@@ -103,7 +103,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
               <p>
                 <Link
                   to="/login"
-                  className="text-red-500 text-xs font-bold rounded-full hover:bg-opacity-80 transition duration-300 px-2 btn-sm mt-1"
+                  className="text-red-500 text-xs font-bold rounded-full hover:bg-opacity-80 transition duration-300 px-2 btn-sm"
                 >
                   Login for details
                 </Link>

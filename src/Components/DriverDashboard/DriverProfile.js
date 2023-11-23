@@ -55,7 +55,7 @@ const DriverProfile = () => {
     try {
       // Send a request to the server to update the user information
       await axios.put(
-        `http://localhost:5000/driver/${loggedUser._id}`,
+        `http://localhost:5001/driver/${loggedUser._id}`,
         formData
       );
       // Handle success (e.g., show a success message)
@@ -64,6 +64,30 @@ const DriverProfile = () => {
       // Handle error (e.g., show an error message)
     }
   };
+
+  function calculateAge(birthDate) {
+    // Parse the birthDate string into a Date object
+    const birthDateObject = new Date(birthDate);
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Calculate the difference in years
+    const age = currentDate.getFullYear() - birthDateObject.getFullYear();
+
+    // Check if the birthday for this year has occurred or not
+    if (
+      currentDate.getMonth() < birthDateObject.getMonth() ||
+      (currentDate.getMonth() === birthDateObject.getMonth() &&
+        currentDate.getDate() < birthDateObject.getDate())
+    ) {
+      // If the birthday hasn't occurred this year yet, subtract 1 from the age
+      return age - 1;
+    } else {
+      return age;
+    }
+  }
+  const age = calculateAge(loggedUser.dob);
 
   return (
     <div className="w-full h-full text-left text-2xl text-darkslategray-100 font-montserrat">
@@ -75,7 +99,12 @@ const DriverProfile = () => {
               className="btn btn-sm text-xs w-20 border-blue-500 text-white font-bold bg-primary"
               onClick={handleEdit}
             >
-              Edit
+              <Link
+                to="/driverDashboard/driverUpdate"
+                className="btn btn-sm text-xs w-20 border-blue-500 text-white font-bold bg-primary"
+              >
+                Edit
+              </Link>
             </button>
           )}
         </div>
@@ -104,7 +133,7 @@ const DriverProfile = () => {
           {loggedUser?.dob}
         </div>
         <div className="absolute top-[177px] left-[44px] inline-block w-[323px] h-[23px]">
-          Years
+          {age} Years
         </div>
         <div className="absolute top-[202px] left-[169px] inline-block w-[323px] h-[23px]">
           {loggedUser?.license}
@@ -116,7 +145,7 @@ const DriverProfile = () => {
           {loggedUser?.salary} tk
         </div>
         <div className="absolute top-[106px] left-[90px] capitalize inline-block w-[323px] h-[23px]">
-          {loggedUser?.location}
+          {loggedUser?.location && loggedUser.location.join(", ")}
         </div>
         <div className="absolute top-[79px] left-[4px] font-semibold inline-block w-[97px] h-[17px] text-darkslategray-100">
           <span>Experience</span>
