@@ -91,7 +91,7 @@ const Navbar = ({ openAboutModal }) => {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
                       role="menuitem"
                     >
-                      Maid Per Day
+                      House-Keeper Per Day
                     </button>
                   </Link>
                   <Link to="/maidPerMonth">
@@ -99,7 +99,7 @@ const Navbar = ({ openAboutModal }) => {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary w-full text-left"
                       role="menuitem"
                     >
-                      Maid Per Month
+                      House-Keeper Per Month
                     </button>
                   </Link>
                   <Link to="/babysitter">

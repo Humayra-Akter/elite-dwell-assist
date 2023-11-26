@@ -43,7 +43,7 @@ const ServiceSegment = () => {
               <img src={banner1} alt="Babysitter" class="rounded-xl" />
             </figure>
             <div class="card-body items-center text-center">
-              <h2 class="card-title text-blue-900 font-bold">Maid</h2>
+              <h2 class="card-title text-blue-900 font-bold">House-Keeper</h2>
               <p>Your Home, Our Care: Where Cleanliness Meets Excellence!</p>
               <div class="card-actions pt-9">
                 <Link to="/maidPerMonth">
