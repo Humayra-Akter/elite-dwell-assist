@@ -5,7 +5,7 @@ const OvenBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/ovenBill")
+    fetch("https://spiffy-starlight-193780.netlify.app/ovenBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,7 +26,7 @@ const OvenBookings = () => {
       return;
     }
 
-    fetch("http://localhost:5000/acknowledgeBooking", {
+    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,10 +93,8 @@ const OvenBookings = () => {
                 <p className="text-lg font-medium">
                   Selected Date:{" "}
                   <span className="font-bold text-primary">
-                    
                     {booking.selectedDate.slice(0, 10)}
                   </span>
-                 
                 </p>
               )}
               <p className="text-lg font-medium">

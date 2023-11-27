@@ -12,7 +12,9 @@ const CustomerProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/customer?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/customer?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -38,13 +40,16 @@ const CustomerProfile = () => {
   };
 
   const handleSaveChanges = () => {
-    fetch(`http://localhost:5000/customer/${loggedUser._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedUser),
-    })
+    fetch(
+      `https://spiffy-starlight-193780.netlify.app/customer/${loggedUser._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data); // Handle success or error

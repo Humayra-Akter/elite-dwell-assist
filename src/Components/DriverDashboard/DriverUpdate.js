@@ -10,7 +10,9 @@ const DriverUpdate = () => {
   const [loggedUser, setLoggedUser] = useState([]);
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/driver?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/driver?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -71,13 +73,16 @@ const DriverUpdate = () => {
     console.log(updatedDriver);
 
     try {
-      fetch(`http://localhost:5000/driver/${loggedUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedDriver),
-      })
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/driver/${loggedUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedDriver),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data); // Handle success or error

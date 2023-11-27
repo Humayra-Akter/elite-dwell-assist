@@ -259,7 +259,7 @@ const RFBill = () => {
       },
     };
     try {
-      await fetch("http://localhost:5000/rfBill", {
+      await fetch("https://spiffy-starlight-193780.netlify.app/rfBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

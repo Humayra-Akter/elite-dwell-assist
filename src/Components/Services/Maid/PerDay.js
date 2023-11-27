@@ -116,13 +116,16 @@ const PerDay = () => {
     };
 
     try {
-      await fetch("http://localhost:5000/perDayMaidBookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      await fetch(
+        "https://spiffy-starlight-193780.netlify.app/perDayMaidBookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
         .then((res) => res.json())
         .then((result) => {
           notify();

@@ -263,7 +263,7 @@ const TVBill = () => {
       },
     };
     try {
-      await fetch("http://localhost:5000/tvBill", {
+      await fetch("https://spiffy-starlight-193780.netlify.app/tvBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

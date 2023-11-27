@@ -261,7 +261,7 @@ const OvenBill = () => {
       },
     };
     try {
-      await fetch("http://localhost:5000/ovenBill", {
+      await fetch("https://spiffy-starlight-193780.netlify.app/ovenBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -206,7 +206,7 @@ const BabysitterRegistrationForm = () => {
           // console.log("user",user);
 
           // save babysitter information to the database
-          fetch("http://localhost:5000/babysitter", {
+          fetch("https://spiffy-starlight-193780.netlify.app/babysitter", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -217,7 +217,7 @@ const BabysitterRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("http://localhost:5000/user", {
+          fetch("https://spiffy-starlight-193780.netlify.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

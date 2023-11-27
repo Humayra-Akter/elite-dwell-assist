@@ -13,7 +13,7 @@ const BabysitterReview = () => {
       if (user) {
         try {
           const response = await fetch(
-            `http://localhost:5000/babysitter?email=${user.email}`
+            `https://spiffy-starlight-193780.netlify.app/babysitter?email=${user.email}`
           );
           const data = await response.json();
 
@@ -37,7 +37,9 @@ const BabysitterReview = () => {
     const fetchReviews = async () => {
       if (loggedUser && loggedUser.email) {
         try {
-          const response = await fetch(`http://localhost:5000/review`);
+          const response = await fetch(
+            `https://spiffy-starlight-193780.netlify.app/review`
+          );
           const data = await response.json();
 
           if (Array.isArray(data)) {
@@ -57,16 +59,19 @@ const BabysitterReview = () => {
 
               // Post the average rating to the server
               try {
-                await fetch("http://localhost:5000/averageRatingBabysitter", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    babysitterEmail: loggedUser.email,
-                    averageRating: avgRating,
-                  }),
-                });
+                await fetch(
+                  "https://spiffy-starlight-193780.netlify.app/averageRatingBabysitter",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      babysitterEmail: loggedUser.email,
+                      averageRating: avgRating,
+                    }),
+                  }
+                );
               } catch (error) {
                 console.error("Error posting average rating:", error);
               }

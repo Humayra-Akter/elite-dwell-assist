@@ -9,7 +9,7 @@ const AcknowledgedMaidBookings = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/acknowledgeBooking")
+    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

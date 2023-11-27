@@ -15,7 +15,9 @@ const BabysitterDashboard = () => {
   const [selectedLink, setSelectedLink] = useState("");
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/babysitter?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/babysitter?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {

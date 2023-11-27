@@ -11,7 +11,7 @@ const BabysitterNotifications = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/babysitterBookings")
+    fetch("https://spiffy-starlight-193780.netlify.app/babysitterBookings")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -26,7 +26,9 @@ const BabysitterNotifications = () => {
       if (bookingId) {
         const loggedInMaidEmail = user?.email;
       }
-      fetch(`http://localhost:5000/babysitterBookings/${loggedInMaidEmail}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/babysitterBookings/${loggedInMaidEmail}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
@@ -50,7 +52,7 @@ const BabysitterNotifications = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/customer")
+    fetch("https://spiffy-starlight-193780.netlify.app/customer")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

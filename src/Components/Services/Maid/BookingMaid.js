@@ -70,7 +70,7 @@ const BookingMaid = ({ bookMaid, user }) => {
       };
       console.log(bookMaid);
 
-      fetch("http://localhost:5000/bookings", {
+      fetch("https://spiffy-starlight-193780.netlify.app/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -34,7 +34,9 @@ const MaidProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/maid?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/maid?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -61,13 +63,16 @@ const MaidProfile = () => {
 
   const handleSaveChanges = () => {
     // Send a PUT request to update the maid information
-    fetch(`http://localhost:5000/maid/${loggedUser._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedMaid),
-    })
+    fetch(
+      `https://spiffy-starlight-193780.netlify.app/maid/${loggedUser._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedMaid),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data); // Handle success or error

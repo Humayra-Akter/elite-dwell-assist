@@ -200,7 +200,7 @@ const MaidRegistrationForm = () => {
             password: data.password, // Add any other user-specific data you want to save
           };
           // save maid information to the database
-          fetch("http://localhost:5000/maid", {
+          fetch("https://spiffy-starlight-193780.netlify.app/maid", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -211,7 +211,7 @@ const MaidRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("http://localhost:5000/user", {
+          fetch("https://spiffy-starlight-193780.netlify.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

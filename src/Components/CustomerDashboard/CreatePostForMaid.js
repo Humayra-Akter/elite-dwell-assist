@@ -52,13 +52,16 @@ const CreatePostForMaid = () => {
     };
     console.log(bookingData);
     try {
-      await fetch("http://localhost:5000/maidSearchPost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      await fetch(
+        "https://spiffy-starlight-193780.netlify.app/maidSearchPost",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
         .then((res) => res.json())
         .then((result) => {
           toast.success("You have successfully posted your requirement");

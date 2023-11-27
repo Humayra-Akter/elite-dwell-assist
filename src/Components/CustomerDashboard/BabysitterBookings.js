@@ -10,7 +10,9 @@ const BabysitterBookings = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/customer?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/customer?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -28,7 +30,7 @@ const BabysitterBookings = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `http://localhost:5000/babysitterBookings?customerEmail=${user.email}`
+        `https://spiffy-starlight-193780.netlify.app/babysitterBookings?customerEmail=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

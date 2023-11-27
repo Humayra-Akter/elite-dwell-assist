@@ -11,7 +11,7 @@ const MaidInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/maid")
+    fetch("https://spiffy-starlight-193780.netlify.app/maid")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

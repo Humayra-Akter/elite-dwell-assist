@@ -13,7 +13,7 @@ const UserComparisonGraph = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/customer")
+    fetch("https://spiffy-starlight-193780.netlify.app/customer")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

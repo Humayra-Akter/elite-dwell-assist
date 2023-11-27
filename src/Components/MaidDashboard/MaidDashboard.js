@@ -13,7 +13,9 @@ const MaidDashboard = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/maid?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/maid?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {

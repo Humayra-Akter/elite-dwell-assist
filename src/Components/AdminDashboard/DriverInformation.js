@@ -11,7 +11,7 @@ const DriverInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/driver")
+    fetch("https://spiffy-starlight-193780.netlify.app/driver")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

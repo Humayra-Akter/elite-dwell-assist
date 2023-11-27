@@ -42,7 +42,9 @@ const BabysitterProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/babysitter?email=${user.email}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/babysitter?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -69,13 +71,16 @@ const BabysitterProfile = () => {
 
   const handleSaveChanges = () => {
     // Send a PUT request to update the babysitter information
-    fetch(`http://localhost:5000/babysitter/${loggedUser._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedBabysitter),
-    })
+    fetch(
+      `https://spiffy-starlight-193780.netlify.app/babysitter/${loggedUser._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedBabysitter),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data); // Handle success or error

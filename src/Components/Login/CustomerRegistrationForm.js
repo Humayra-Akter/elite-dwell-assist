@@ -85,7 +85,7 @@ const CustomerRegistrationForm = () => {
           };
 
           // save customer information to the database
-          fetch("http://localhost:5000/customer", {
+          fetch("https://spiffy-starlight-193780.netlify.app/customer", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -96,7 +96,7 @@ const CustomerRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("http://localhost:5000/user", {
+          fetch("https://spiffy-starlight-193780.netlify.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

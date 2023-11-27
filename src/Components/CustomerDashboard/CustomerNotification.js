@@ -17,7 +17,7 @@ const CustomerNotification = () => {
   const [selectedBabysitters, setSelectedBabysitters] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:5000/customerBooked")
+    fetch("https://spiffy-starlight-193780.netlify.app/customerBooked")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -27,7 +27,7 @@ const CustomerNotification = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/customerBookingByDriver")
+    fetch("https://spiffy-starlight-193780.netlify.app/customerBookingByDriver")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -37,7 +37,9 @@ const CustomerNotification = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/customerBookingByBabysitter")
+    fetch(
+      "https://spiffy-starlight-193780.netlify.app/customerBookingByBabysitter"
+    )
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -49,7 +51,9 @@ const CustomerNotification = () => {
   useEffect(() => {
     if (user) {
       const loggedInMaidEmail = user?.email;
-      fetch(`http://localhost:5000/customerBooked/${loggedInMaidEmail}`)
+      fetch(
+        `https://spiffy-starlight-193780.netlify.app/customerBooked/${loggedInMaidEmail}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
@@ -68,7 +72,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `http://localhost:5000/customerBookingByDriver/${loggedInMaidEmail}`
+        `https://spiffy-starlight-193780.netlify.app/customerBookingByDriver/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -88,7 +92,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `http://localhost:5000/customerBookingByBabysitter/${loggedInMaidEmail}`
+        `https://spiffy-starlight-193780.netlify.app/customerBookingByBabysitter/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -105,7 +109,7 @@ const CustomerNotification = () => {
   }, [user]);
 
   const fetchMaidDetails = (maidEmail, notificationId) => {
-    fetch(`http://localhost:5000/maid/${maidEmail}`)
+    fetch(`https://spiffy-starlight-193780.netlify.app/maid/${maidEmail}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedMaids((prevSelectedMaids) => ({
@@ -119,7 +123,7 @@ const CustomerNotification = () => {
   };
 
   const fetchDriverDetails = (driverEmail, notificationId) => {
-    fetch(`http://localhost:5000/driver/${driverEmail}`)
+    fetch(`https://spiffy-starlight-193780.netlify.app/driver/${driverEmail}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedDrivers((prevSelectedDrivers) => ({
@@ -133,7 +137,9 @@ const CustomerNotification = () => {
   };
 
   const fetchBabysitterDetails = (babysitterEmail, notificationId) => {
-    fetch(`http://localhost:5000/babysitter/${babysitterEmail}`)
+    fetch(
+      `https://spiffy-starlight-193780.netlify.app/babysitter/${babysitterEmail}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSelectedBabysitters((prevSelectedBabysitters) => ({

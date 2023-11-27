@@ -28,7 +28,7 @@ const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
     const fetchAverageRating = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/averageRatingBabysitter/${email}`
+          `https://spiffy-starlight-193780.netlify.app/averageRatingBabysitter/${email}`
         );
         const data = await response.json();
       } catch (error) {

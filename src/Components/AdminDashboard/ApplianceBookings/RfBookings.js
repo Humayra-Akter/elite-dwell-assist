@@ -5,7 +5,7 @@ const RfBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/rfBill")
+    fetch("https://spiffy-starlight-193780.netlify.app/rfBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,7 +26,7 @@ const RfBookings = () => {
       return;
     }
 
-    fetch("http://localhost:5000/acknowledgeBooking", {
+    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
