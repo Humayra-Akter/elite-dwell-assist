@@ -6,7 +6,7 @@ const TvBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/tvBill")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/tvBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);

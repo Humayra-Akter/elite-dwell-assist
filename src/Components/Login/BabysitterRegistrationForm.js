@@ -206,7 +206,7 @@ const BabysitterRegistrationForm = () => {
           // console.log("user",user);
 
           // save babysitter information to the database
-          fetch("https://spiffy-starlight-193780.netlify.app/babysitter", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/babysitter", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -217,7 +217,7 @@ const BabysitterRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("https://spiffy-starlight-193780.netlify.app/user", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

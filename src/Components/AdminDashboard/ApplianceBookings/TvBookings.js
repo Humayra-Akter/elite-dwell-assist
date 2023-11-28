@@ -5,7 +5,7 @@ const TvBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/tvBill")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/tvBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,15 +26,18 @@ const TvBookings = () => {
       return;
     }
 
-    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        booking: { ...booking, acknowledgeBookingType: "Television vBill" },
-      }),
-    })
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          booking: { ...booking, acknowledgeBookingType: "Television vBill" },
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setDayBookings((prevBookings) =>

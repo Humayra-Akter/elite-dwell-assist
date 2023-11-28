@@ -85,7 +85,7 @@ const CustomerRegistrationForm = () => {
           };
 
           // save customer information to the database
-          fetch("https://spiffy-starlight-193780.netlify.app/customer", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/customer", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -96,7 +96,7 @@ const CustomerRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("https://spiffy-starlight-193780.netlify.app/user", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

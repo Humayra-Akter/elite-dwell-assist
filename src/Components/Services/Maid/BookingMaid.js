@@ -70,7 +70,7 @@ const BookingMaid = ({ bookMaid, user }) => {
       };
       console.log(bookMaid);
 
-      fetch("https://spiffy-starlight-193780.netlify.app/bookings", {
+      fetch("https://elite-dwell-assist-serverr.onrender.com/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -17,7 +17,7 @@ const CustomerNotification = () => {
   const [selectedBabysitters, setSelectedBabysitters] = useState({});
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/customerBooked")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/customerBooked")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -27,7 +27,9 @@ const CustomerNotification = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/customerBookingByDriver")
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/customerBookingByDriver"
+    )
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -38,7 +40,7 @@ const CustomerNotification = () => {
 
   useEffect(() => {
     fetch(
-      "https://spiffy-starlight-193780.netlify.app/customerBookingByBabysitter"
+      "https://elite-dwell-assist-serverr.onrender.com/customerBookingByBabysitter"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -52,7 +54,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/customerBooked/${loggedInMaidEmail}`
+        `https://elite-dwell-assist-serverr.onrender.com/customerBooked/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -72,7 +74,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/customerBookingByDriver/${loggedInMaidEmail}`
+        `https://elite-dwell-assist-serverr.onrender.com/customerBookingByDriver/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -92,7 +94,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/customerBookingByBabysitter/${loggedInMaidEmail}`
+        `https://elite-dwell-assist-serverr.onrender.com/customerBookingByBabysitter/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -109,7 +111,7 @@ const CustomerNotification = () => {
   }, [user]);
 
   const fetchMaidDetails = (maidEmail, notificationId) => {
-    fetch(`https://spiffy-starlight-193780.netlify.app/maid/${maidEmail}`)
+    fetch(`https://elite-dwell-assist-serverr.onrender.com/maid/${maidEmail}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedMaids((prevSelectedMaids) => ({
@@ -123,7 +125,9 @@ const CustomerNotification = () => {
   };
 
   const fetchDriverDetails = (driverEmail, notificationId) => {
-    fetch(`https://spiffy-starlight-193780.netlify.app/driver/${driverEmail}`)
+    fetch(
+      `https://elite-dwell-assist-serverr.onrender.com/driver/${driverEmail}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSelectedDrivers((prevSelectedDrivers) => ({
@@ -138,7 +142,7 @@ const CustomerNotification = () => {
 
   const fetchBabysitterDetails = (babysitterEmail, notificationId) => {
     fetch(
-      `https://spiffy-starlight-193780.netlify.app/babysitter/${babysitterEmail}`
+      `https://elite-dwell-assist-serverr.onrender.com/babysitter/${babysitterEmail}`
     )
       .then((res) => res.json())
       .then((data) => {

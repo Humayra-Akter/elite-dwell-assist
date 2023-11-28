@@ -12,7 +12,7 @@ const DriverNotifications = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/driverbookings")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/driverbookings")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -28,7 +28,7 @@ const DriverNotifications = () => {
       }
       console.log(loggedInDriverEmail);
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/driverbookings/${loggedInDriverEmail}`
+        `https://elite-dwell-assist-serverr.onrender.com/driverbookings/${loggedInDriverEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -54,7 +54,7 @@ const DriverNotifications = () => {
   };
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/customer")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

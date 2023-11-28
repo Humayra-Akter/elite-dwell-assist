@@ -44,7 +44,7 @@ const DriverPost = () => {
     };
     try {
       await fetch(
-        "https://spiffy-starlight-193780.netlify.app/driverSearchPost",
+        "https://elite-dwell-assist-serverr.onrender.com/driverSearchPost",
         {
           method: "POST",
           headers: {

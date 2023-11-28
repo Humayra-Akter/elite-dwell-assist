@@ -9,7 +9,9 @@ const BabysitterSearchJob = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/babysitterSearchPost")
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/babysitterSearchPost"
+    )
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -32,7 +34,7 @@ const BabysitterSearchJob = () => {
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
       fetch(
-        "https://spiffy-starlight-193780.netlify.app/customerBookingByBabysitter",
+        "https://elite-dwell-assist-serverr.onrender.com/customerBookingByBabysitter",
         {
           method: "POST",
           headers: {

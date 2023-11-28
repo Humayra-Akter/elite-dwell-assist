@@ -261,7 +261,7 @@ const WMBill = () => {
       },
     };
     try {
-      await fetch("https://spiffy-starlight-193780.netlify.app/wmBill", {
+      await fetch("https://elite-dwell-assist-serverr.onrender.com/wmBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

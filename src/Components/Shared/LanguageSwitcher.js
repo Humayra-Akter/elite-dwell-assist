@@ -5,13 +5,13 @@ const LanguageSwitcher = () => {
     function googleTranslateElementInit() {
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: 'en',
-          includedLanguages: 'bn,en',
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+          pageLanguage: "en",
+          includedLanguages: "bn,en",
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
         },
-        'google_translate_element'
+        "google_translate_element"
       );
-      
+
       // Get the iframe and set its width and height
       // const translateElementIframe = document.querySelector('.goog-te-gadget-simple');
       // if (translateElementIframe) {
@@ -31,7 +31,7 @@ const LanguageSwitcher = () => {
       // VIpgJd-ZVi9od-xl07Ob-lTBxed
       // class="goog-te-gadget-icon"
     }
-    
+
     googleTranslateElementInit();
   }, []);
 

@@ -11,7 +11,7 @@ const DriverUpdate = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/driver?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/driver?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -74,7 +74,7 @@ const DriverUpdate = () => {
 
     try {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/driver/${loggedUser._id}`,
+        `https://elite-dwell-assist-serverr.onrender.com/driver/${loggedUser._id}`,
         {
           method: "PUT",
           headers: {

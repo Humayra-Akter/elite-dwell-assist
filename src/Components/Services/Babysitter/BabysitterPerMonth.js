@@ -16,7 +16,7 @@ const BabysitterPerMonth = ({
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/babysitter")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setBabysitters(data);

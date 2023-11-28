@@ -16,7 +16,7 @@ const MaidPerMonth = ({
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/maid")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/maid")
       .then((res) => res.json())
       .then((data) => {
         setMaids(data);

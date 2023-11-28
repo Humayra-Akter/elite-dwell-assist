@@ -5,7 +5,7 @@ const WMBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/wmBill")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/wmBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,15 +26,21 @@ const WMBookings = () => {
       return;
     }
 
-    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        booking: { ...booking, acknowledgeBookingType: "Washing Machine Bill" },
-      }),
-    })
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          booking: {
+            ...booking,
+            acknowledgeBookingType: "Washing Machine Bill",
+          },
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setDayBookings((prevBookings) =>

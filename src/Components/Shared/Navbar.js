@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
-import { use } from "i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = ({ openAboutModal }) => {
@@ -15,7 +14,6 @@ const Navbar = ({ openAboutModal }) => {
       // window.location.reload();
     }, 10000);
   }, []);
-  console.log(user);
   //service dropdown from 8-31
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
   const toggleServiceDropdown = () => {
@@ -66,7 +64,9 @@ const Navbar = ({ openAboutModal }) => {
         </div>
 
         <div class="navbar-end pr-10">
-        <div className="pr-10"><LanguageSwitcher/></div>
+          <div className="pr-10">
+            <LanguageSwitcher />
+          </div>
           {/* Services */}
           <div className="relative inline-block text-right">
             <button

@@ -117,7 +117,7 @@ const PerDay = () => {
 
     try {
       await fetch(
-        "https://spiffy-starlight-193780.netlify.app/perDayMaidBookings",
+        "https://elite-dwell-assist-serverr.onrender.com/perDayMaidBookings",
         {
           method: "POST",
           headers: {

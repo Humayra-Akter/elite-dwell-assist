@@ -11,7 +11,7 @@ const BabysitterInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/babysitter")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

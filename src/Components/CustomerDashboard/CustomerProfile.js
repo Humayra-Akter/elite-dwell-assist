@@ -13,7 +13,7 @@ const CustomerProfile = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/customer?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/customer?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -41,7 +41,7 @@ const CustomerProfile = () => {
 
   const handleSaveChanges = () => {
     fetch(
-      `https://spiffy-starlight-193780.netlify.app/customer/${loggedUser._id}`,
+      `https://elite-dwell-assist-serverr.onrender.com/customer/${loggedUser._id}`,
       {
         method: "PUT",
         headers: {

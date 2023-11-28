@@ -261,7 +261,7 @@ const OvenBill = () => {
       },
     };
     try {
-      await fetch("https://spiffy-starlight-193780.netlify.app/ovenBill", {
+      await fetch("https://elite-dwell-assist-serverr.onrender.com/ovenBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

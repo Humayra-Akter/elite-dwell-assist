@@ -57,7 +57,7 @@ const BookingDriver = ({ bookDriver, user }) => {
       };
       console.log(bookDriver);
 
-      fetch("https://spiffy-starlight-193780.netlify.app/driverBookings", {
+      fetch("https://elite-dwell-assist-serverr.onrender.com/driverBookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

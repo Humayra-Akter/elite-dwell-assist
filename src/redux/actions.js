@@ -4,7 +4,7 @@ import { setMaids, selectMaids, setSelectedLocation } from "./maidSlice";
 export const fetchMaids = () => async (dispatch) => {
   try {
     const response = await fetch(
-      "https://spiffy-starlight-193780.netlify.app/maid"
+      "https://elite-dwell-assist-serverr.onrender.com/maid"
     );
     const data = await response.json();
     dispatch(setMaids(data));

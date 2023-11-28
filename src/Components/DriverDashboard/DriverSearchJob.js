@@ -9,7 +9,7 @@ const DriverSearchJob = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/driverSearchPost")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/driverSearchPost")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -32,7 +32,7 @@ const DriverSearchJob = () => {
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
       fetch(
-        "https://spiffy-starlight-193780.netlify.app/customerBookingByDriver",
+        "https://elite-dwell-assist-serverr.onrender.com/customerBookingByDriver",
         {
           method: "POST",
           headers: {

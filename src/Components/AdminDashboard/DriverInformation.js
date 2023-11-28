@@ -11,7 +11,7 @@ const DriverInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/driver")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/driver")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

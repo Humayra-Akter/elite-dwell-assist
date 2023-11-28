@@ -13,7 +13,7 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
     const fetchAverageRating = async () => {
       try {
         const response = await fetch(
-          `https://spiffy-starlight-193780.netlify.app/averageRatingDriver/${email}`
+          `https://elite-dwell-assist-serverr.onrender.com/averageRatingDriver/${email}`
         );
         const data = await response.json();
         // Use the average rating data as needed

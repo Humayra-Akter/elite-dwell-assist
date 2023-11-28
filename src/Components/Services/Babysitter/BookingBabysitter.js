@@ -56,13 +56,16 @@ const BookingBabysitter = ({ bookBabysitter, user }) => {
       };
       console.log(bookBabysitter);
 
-      fetch("https://spiffy-starlight-193780.netlify.app/babysitterBookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      fetch(
+        "https://elite-dwell-assist-serverr.onrender.com/babysitterBookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.message === "Booking created successfully") {

@@ -16,7 +16,7 @@ const BabysitterDashboard = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/babysitter?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/babysitter?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

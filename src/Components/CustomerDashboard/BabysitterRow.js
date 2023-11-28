@@ -17,7 +17,7 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
   const getUserReviews = async (userEmail, reviewType) => {
     try {
       const response = await fetch(
-        `https://spiffy-starlight-193780.netlify.app/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
+        `https://elite-dwell-assist-serverr.onrender.com/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
       );
 
       if (response.ok) {
@@ -54,7 +54,7 @@ const BabysitterRow = ({ booking, babysitterEmail, userEmail, index }) => {
           reviewType: "babysitter",
         };
         try {
-          fetch("https://spiffy-starlight-193780.netlify.app/reviews", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/reviews", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

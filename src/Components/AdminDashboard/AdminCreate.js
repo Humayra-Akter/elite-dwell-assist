@@ -27,7 +27,7 @@ const AdminCreate = () => {
   const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/admin")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/admin")
       .then((res) => res.json())
       .then((data) => {
         setAdmins(data);
@@ -90,7 +90,7 @@ const AdminCreate = () => {
             password: data.password,
           };
           // save admin information to the database
-          fetch("https://spiffy-starlight-193780.netlify.app/admin", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/admin", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -101,7 +101,7 @@ const AdminCreate = () => {
             .then((result) => {
               toast.success(`${data.name} added as ADMIN`);
             });
-          fetch("https://spiffy-starlight-193780.netlify.app/user", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

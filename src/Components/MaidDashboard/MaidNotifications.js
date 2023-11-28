@@ -11,7 +11,7 @@ const MaidNotifications = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/bookings")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/bookings")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -27,7 +27,7 @@ const MaidNotifications = () => {
         const loggedInMaidEmail = user?.email;
       }
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/bookings/${loggedInMaidEmail}`
+        `https://elite-dwell-assist-serverr.onrender.com/bookings/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -52,7 +52,7 @@ const MaidNotifications = () => {
   };
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/customer")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

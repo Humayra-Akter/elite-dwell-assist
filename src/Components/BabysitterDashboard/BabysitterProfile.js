@@ -43,7 +43,7 @@ const BabysitterProfile = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/babysitter?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/babysitter?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -72,7 +72,7 @@ const BabysitterProfile = () => {
   const handleSaveChanges = () => {
     // Send a PUT request to update the babysitter information
     fetch(
-      `https://spiffy-starlight-193780.netlify.app/babysitter/${loggedUser._id}`,
+      `https://elite-dwell-assist-serverr.onrender.com/babysitter/${loggedUser._id}`,
       {
         method: "PUT",
         headers: {

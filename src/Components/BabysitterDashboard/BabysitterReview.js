@@ -13,7 +13,7 @@ const BabysitterReview = () => {
       if (user) {
         try {
           const response = await fetch(
-            `https://spiffy-starlight-193780.netlify.app/babysitter?email=${user.email}`
+            `https://elite-dwell-assist-serverr.onrender.com/babysitter?email=${user.email}`
           );
           const data = await response.json();
 
@@ -38,7 +38,7 @@ const BabysitterReview = () => {
       if (loggedUser && loggedUser.email) {
         try {
           const response = await fetch(
-            `https://spiffy-starlight-193780.netlify.app/review`
+            `https://elite-dwell-assist-serverr.onrender.com/review`
           );
           const data = await response.json();
 
@@ -60,7 +60,7 @@ const BabysitterReview = () => {
               // Post the average rating to the server
               try {
                 await fetch(
-                  "https://spiffy-starlight-193780.netlify.app/averageRatingBabysitter",
+                  "https://elite-dwell-assist-serverr.onrender.com/averageRatingBabysitter",
                   {
                     method: "POST",
                     headers: {

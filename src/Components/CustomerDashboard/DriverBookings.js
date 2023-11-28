@@ -11,7 +11,7 @@ const DriverBookings = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/customer?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/customer?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -30,7 +30,7 @@ const DriverBookings = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/driverBookings?customerEmail=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/driverBookings?customerEmail=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

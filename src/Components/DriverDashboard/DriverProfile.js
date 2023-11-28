@@ -22,7 +22,7 @@ const DriverProfile = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/driver?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/driver?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

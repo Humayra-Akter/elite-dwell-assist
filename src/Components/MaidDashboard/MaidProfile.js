@@ -35,7 +35,7 @@ const MaidProfile = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/maid?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/maid?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -64,7 +64,7 @@ const MaidProfile = () => {
   const handleSaveChanges = () => {
     // Send a PUT request to update the maid information
     fetch(
-      `https://spiffy-starlight-193780.netlify.app/maid/${loggedUser._id}`,
+      `https://elite-dwell-assist-serverr.onrender.com/maid/${loggedUser._id}`,
       {
         method: "PUT",
         headers: {

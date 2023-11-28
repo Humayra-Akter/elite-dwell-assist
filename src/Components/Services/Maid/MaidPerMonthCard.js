@@ -18,7 +18,7 @@ const MaidPerMonthCard = ({ maid, setBookMaid }) => {
     const fetchAverageRating = async () => {
       try {
         const response = await fetch(
-          `https://spiffy-starlight-193780.netlify.app/averageRating/${email}`
+          `https://elite-dwell-assist-serverr.onrender.com/averageRating/${email}`
         );
         const data = await response.json();
       } catch (error) {

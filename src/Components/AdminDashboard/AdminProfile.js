@@ -24,7 +24,7 @@ const AdminProfile = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://spiffy-starlight-193780.netlify.app/admin?email=${user.email}`
+        `https://elite-dwell-assist-serverr.onrender.com/admin?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -60,7 +60,7 @@ const AdminProfile = () => {
   };
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/customer")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
       .then((res) => res.json())
       .then((data) => {
         setCustomers(data);
@@ -68,7 +68,7 @@ const AdminProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/babysitter")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setBabysitters(data);
@@ -76,7 +76,7 @@ const AdminProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/maid")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/maid")
       .then((res) => res.json())
       .then((data) => {
         setMaids(data);
@@ -84,7 +84,7 @@ const AdminProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/driver")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/driver")
       .then((res) => res.json())
       .then((data) => {
         setDrivers(data);

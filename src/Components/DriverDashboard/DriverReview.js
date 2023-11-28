@@ -13,7 +13,7 @@ const DriverReview = () => {
       if (user) {
         try {
           const response = await fetch(
-            `https://spiffy-starlight-193780.netlify.app/driver?email=${user.email}`
+            `https://elite-dwell-assist-serverr.onrender.com/driver?email=${user.email}`
           );
           const data = await response.json();
 
@@ -38,7 +38,7 @@ const DriverReview = () => {
       if (loggedUser && loggedUser.email) {
         try {
           const response = await fetch(
-            `https://spiffy-starlight-193780.netlify.app/review`
+            `https://elite-dwell-assist-serverr.onrender.com/review`
           );
           const data = await response.json();
 
@@ -61,7 +61,7 @@ const DriverReview = () => {
               // Post the average rating to the server
               try {
                 await fetch(
-                  "https://spiffy-starlight-193780.netlify.app/averageRatingDriver",
+                  "https://elite-dwell-assist-serverr.onrender.com/averageRatingDriver",
                   {
                     method: "POST",
                     headers: {

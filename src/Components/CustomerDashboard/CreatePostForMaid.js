@@ -53,7 +53,7 @@ const CreatePostForMaid = () => {
     console.log(bookingData);
     try {
       await fetch(
-        "https://spiffy-starlight-193780.netlify.app/maidSearchPost",
+        "https://elite-dwell-assist-serverr.onrender.com/maidSearchPost",
         {
           method: "POST",
           headers: {

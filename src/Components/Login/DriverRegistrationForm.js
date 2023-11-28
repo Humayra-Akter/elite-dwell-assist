@@ -157,7 +157,7 @@ const DriverRegistrationForm = () => {
             dob: data.dob,
             password: data.password,
           };
-          fetch("https://spiffy-starlight-193780.netlify.app/driver", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/driver", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -168,7 +168,7 @@ const DriverRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("https://spiffy-starlight-193780.netlify.app/user", {
+          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

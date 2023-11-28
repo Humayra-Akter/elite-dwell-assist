@@ -23,7 +23,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/user")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/user")
       .then((res) => res.json())
       .then((data) => {
         setLoggedUser(data);

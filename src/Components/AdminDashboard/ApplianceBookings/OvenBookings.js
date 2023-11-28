@@ -5,7 +5,7 @@ const OvenBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/ovenBill")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/ovenBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,15 +26,18 @@ const OvenBookings = () => {
       return;
     }
 
-    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        booking: { ...booking, acknowledgeBookingType: "Oven Bill" },
-      }),
-    })
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          booking: { ...booking, acknowledgeBookingType: "Oven Bill" },
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setDayBookings((prevBookings) =>

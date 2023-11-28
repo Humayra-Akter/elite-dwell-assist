@@ -6,13 +6,15 @@ const AdminMaidPerDayBookings = () => {
   const [acknowledgedBookings, setAcknowledgedBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://spiffy-starlight-193780.netlify.app/perDayMaidBookings")
+    fetch("https://elite-dwell-assist-serverr.onrender.com/perDayMaidBookings")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
       });
 
-    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgedBookings")
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/acknowledgedBookings"
+    )
       .then((res) => res.json())
       .then((data) => {
         setAcknowledgedBookings(data);
@@ -24,13 +26,16 @@ const AdminMaidPerDayBookings = () => {
       toast.info("This booking has already been acknowledged.");
       return;
     }
-    fetch("https://spiffy-starlight-193780.netlify.app/acknowledgeBooking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ booking }),
-    })
+    fetch(
+      "https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ booking }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setDayBookings((prevBookings) =>
