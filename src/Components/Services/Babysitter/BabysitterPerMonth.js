@@ -29,7 +29,7 @@ const BabysitterPerMonth = ({
     // location check
     const includesLocation =
       !selectedLocation ||
-      babysitter.location?.includes(selectedLocation.toLowerCase());
+      babysitter.preferedLocation?.includes(selectedLocation.toLowerCase());
     // availability check
     const includesAvailability =
       !selectedAvailability ||

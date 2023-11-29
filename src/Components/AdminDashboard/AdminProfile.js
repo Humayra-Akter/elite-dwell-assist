@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import {
-  AreaChart,
-  Area,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
+  AreaChart,
+  Area,
 } from "recharts";
+import LineCharts from "./LineCharts";
 
 const AdminProfile = () => {
   const [user] = useAuthState(auth);
@@ -98,7 +101,9 @@ const AdminProfile = () => {
 
   return (
     <div>
-      <h2 className="text-3xl text-primary font-bold">{loggedUser?.name}</h2>
+      <h2 className="text-3xl mb-9 text-primary font-bold">
+        {loggedUser?.name}
+      </h2>
 
       <div className="grid lg:grid-cols-4 gap-4">
         <div className="card bg-primary text-primary-content">
@@ -126,6 +131,7 @@ const AdminProfile = () => {
           </div>
         </div>
       </div>
+      <LineCharts />
     </div>
   );
 };

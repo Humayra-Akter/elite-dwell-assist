@@ -13,13 +13,13 @@ const BookingBabysitter = ({ bookBabysitter, user }) => {
     name,
     experience,
     availability,
-    location,
+    preferedLocation,
     gender,
     religion,
     institute,
     lastAchievedDegree,
     education,
-    qualification,
+    qualifications,
     languageSkills,
     specialSkills,
     dob,
@@ -130,9 +130,9 @@ const BookingBabysitter = ({ bookBabysitter, user }) => {
                   </p>
                   <p className="capitalize">
                     <strong>Location:</strong>{" "}
-                    {location ? (
+                    {preferedLocation ? (
                       <ul>
-                        {location.map((loc, index) => (
+                        {preferedLocation.map((loc, index) => (
                           <li key={index}>{loc}</li>
                         ))}
                       </ul>
@@ -174,9 +174,9 @@ const BookingBabysitter = ({ bookBabysitter, user }) => {
                   )}
                   <p>
                     <strong>Qualifications:</strong>{" "}
-                    {qualification ? (
+                    {qualifications ? (
                       <ul>
-                        {qualification.map((qual, index) => (
+                        {qualifications.map((qual, index) => (
                           <li key={index}>{qual}</li>
                         ))}
                       </ul>

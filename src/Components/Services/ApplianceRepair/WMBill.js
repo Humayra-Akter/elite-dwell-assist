@@ -191,7 +191,7 @@ const WMBill = () => {
       });
     }
     setSelectedServices(updatedServices);
-    setIsBookButtonDisabled(selectedServices.length === 0);
+    setIsBookButtonDisabled(selectedServices.length < 0);
   };
 
   const handleDateSelect = (date) => {

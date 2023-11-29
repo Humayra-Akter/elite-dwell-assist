@@ -7,7 +7,7 @@ const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
   const {
     img,
     name,
-    location,
+    preferedLocation,
     availability,
     expectedSalary,
     workingHour,
@@ -53,14 +53,14 @@ const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
           </h5>
           <div className=" text-left text-[1.03rem] text-[#3b3939] overflow-hidden">
             <text className="text-[#3b3939] font-medium">Area:&nbsp;</text>
-            {Array.isArray(location)
-              ? location.length <= 2
-                ? location
+            {Array.isArray(preferedLocation)
+              ? preferedLocation.length <= 2
+                ? preferedLocation
                     .map(
                       (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)
                     )
                     .join(", ")
-                : `${location
+                : `${preferedLocation
                     .slice(0, 2)
                     .map(
                       (loc) => loc.trim()[0].toUpperCase() + loc.trim().slice(1)

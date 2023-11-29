@@ -191,7 +191,7 @@ const OvenBill = () => {
       updatedServices.push({ name: "Oven Repairing", count: ovenRepairing });
     }
     setSelectedServices(updatedServices);
-    setIsBookButtonDisabled(selectedServices.length === 0);
+    setIsBookButtonDisabled(selectedServices.length < 0);
   };
 
   const handleDateSelect = (date) => {
