@@ -261,7 +261,7 @@ const OvenBill = () => {
       },
     };
     try {
-      await fetch("https://elite-dwell-assist-serverr.onrender.com/ovenBill", {
+      await fetch("http://localhost:5000/ovenBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

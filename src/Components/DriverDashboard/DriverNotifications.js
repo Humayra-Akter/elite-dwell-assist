@@ -12,7 +12,7 @@ const DriverNotifications = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/driverbookings")
+    fetch("http://localhost:5000/driverbookings")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -27,9 +27,7 @@ const DriverNotifications = () => {
         const loggedInDriverEmail = user?.email;
       }
       console.log(loggedInDriverEmail);
-      fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/driverbookings/${loggedInDriverEmail}`
-      )
+      fetch(`http://localhost:5000/driverbookings/${loggedInDriverEmail}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
@@ -54,7 +52,7 @@ const DriverNotifications = () => {
   };
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
+    fetch("http://localhost:5000/customer")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

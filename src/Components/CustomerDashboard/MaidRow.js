@@ -17,7 +17,7 @@ const MaidRow = ({ booking, maidEmail, userEmail, index }) => {
   const getUserReviews = async (userEmail, reviewType) => {
     try {
       const response = await fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
+        `http://localhost:5000/reviews?userEmail=${userEmail}&reviewType=${reviewType}`
       );
 
       if (response.ok) {
@@ -55,7 +55,7 @@ const MaidRow = ({ booking, maidEmail, userEmail, index }) => {
         };
         console.log(review);
         try {
-          fetch("https://elite-dwell-assist-serverr.onrender.com/reviews", {
+          fetch("http://localhost:5000/reviews", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

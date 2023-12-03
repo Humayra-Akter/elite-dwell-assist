@@ -13,7 +13,7 @@ const UserComparisonGraph = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
+    fetch("http://localhost:5000/customer")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

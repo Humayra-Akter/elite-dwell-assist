@@ -13,7 +13,7 @@ const DriverPerMonthCard = ({ driver, setBookDriver }) => {
     const fetchAverageRating = async () => {
       try {
         const response = await fetch(
-          `https://elite-dwell-assist-serverr.onrender.com/averageRatingDriver/${email}`
+          `http://localhost:5000/averageRatingDriver/${email}`
         );
         const data = await response.json();
         // Use the average rating data as needed

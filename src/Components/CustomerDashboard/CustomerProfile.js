@@ -12,9 +12,7 @@ const CustomerProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/customer?email=${user.email}`
-      )
+      fetch(`http://localhost:5000/customer?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -40,16 +38,13 @@ const CustomerProfile = () => {
   };
 
   const handleSaveChanges = () => {
-    fetch(
-      `https://elite-dwell-assist-serverr.onrender.com/customer/${loggedUser._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedUser),
-      }
-    )
+    fetch(`http://localhost:5000/customer/${loggedUser._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUser),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data); // Handle success or error

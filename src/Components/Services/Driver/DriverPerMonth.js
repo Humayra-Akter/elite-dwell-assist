@@ -12,7 +12,7 @@ const DriverPerMonth = ({ selectedLocation, selectedSalary }) => {
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/driver")
+    fetch("http://localhost:5000/driver")
       .then((res) => res.json())
       .then((data) => {
         setDrivers(data);

@@ -116,16 +116,13 @@ const PerDay = () => {
     };
 
     try {
-      await fetch(
-        "https://elite-dwell-assist-serverr.onrender.com/perDayMaidBookings",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bookingData),
-        }
-      )
+      await fetch("http://localhost:5000/perDayMaidBookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
         .then((res) => res.json())
         .then((result) => {
           notify();

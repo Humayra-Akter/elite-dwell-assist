@@ -206,7 +206,7 @@ const BabysitterRegistrationForm = () => {
           // console.log("user",user);
 
           // save babysitter information to the database
-          fetch("https://elite-dwell-assist-serverr.onrender.com/babysitter", {
+          fetch("http://localhost:5000/babysitter", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -217,7 +217,7 @@ const BabysitterRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
+          fetch("http://localhost:5000/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

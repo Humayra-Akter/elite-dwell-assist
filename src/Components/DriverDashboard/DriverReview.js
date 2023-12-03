@@ -13,7 +13,7 @@ const DriverReview = () => {
       if (user) {
         try {
           const response = await fetch(
-            `https://elite-dwell-assist-serverr.onrender.com/driver?email=${user.email}`
+            `http://localhost:5000/driver?email=${user.email}`
           );
           const data = await response.json();
 
@@ -37,9 +37,7 @@ const DriverReview = () => {
     const fetchReviews = async () => {
       if (loggedUser && loggedUser.email) {
         try {
-          const response = await fetch(
-            `https://elite-dwell-assist-serverr.onrender.com/review`
-          );
+          const response = await fetch(`http://localhost:5000/review`);
           const data = await response.json();
 
           if (Array.isArray(data)) {
@@ -60,19 +58,16 @@ const DriverReview = () => {
 
               // Post the average rating to the server
               try {
-                await fetch(
-                  "https://elite-dwell-assist-serverr.onrender.com/averageRatingDriver",
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      driverEmail: loggedUser.email,
-                      averageRating: avgRating,
-                    }),
-                  }
-                );
+                await fetch("http://localhost:5000/averageRatingDriver", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    driverEmail: loggedUser.email,
+                    averageRating: avgRating,
+                  }),
+                });
               } catch (error) {
                 console.error("Error posting average rating:", error);
               }

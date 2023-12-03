@@ -11,7 +11,7 @@ const MaidInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/maid")
+    fetch("http://localhost:5000/maid")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

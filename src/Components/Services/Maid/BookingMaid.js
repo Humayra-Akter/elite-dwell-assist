@@ -70,7 +70,7 @@ const BookingMaid = ({ bookMaid, user }) => {
       };
       console.log(bookMaid);
 
-      fetch("https://elite-dwell-assist-serverr.onrender.com/bookings", {
+      fetch("http://localhost:5000/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

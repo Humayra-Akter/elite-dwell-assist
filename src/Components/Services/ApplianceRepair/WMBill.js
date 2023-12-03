@@ -261,7 +261,7 @@ const WMBill = () => {
       },
     };
     try {
-      await fetch("https://elite-dwell-assist-serverr.onrender.com/wmBill", {
+      await fetch("http://localhost:5000/wmBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

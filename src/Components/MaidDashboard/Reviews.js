@@ -13,7 +13,7 @@ const Reviews = () => {
       if (user) {
         try {
           const response = await fetch(
-            `https://elite-dwell-assist-serverr.onrender.com/maid?email=${user.email}`
+            `http://localhost:5000/maid?email=${user.email}`
           );
           const data = await response.json();
 
@@ -37,9 +37,7 @@ const Reviews = () => {
     const fetchReviews = async () => {
       if (loggedUser && loggedUser.email) {
         try {
-          const response = await fetch(
-            `https://elite-dwell-assist-serverr.onrender.com/review`
-          );
+          const response = await fetch(`http://localhost:5000/review`);
           const data = await response.json();
 
           if (Array.isArray(data)) {
@@ -60,19 +58,16 @@ const Reviews = () => {
 
               // Post the average rating to the server
               try {
-                await fetch(
-                  "https://elite-dwell-assist-serverr.onrender.com/averageRating",
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      maidEmail: loggedUser.email,
-                      averageRating: avgRating,
-                    }),
-                  }
-                );
+                await fetch("http://localhost:5000/averageRating", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    maidEmail: loggedUser.email,
+                    averageRating: avgRating,
+                  }),
+                });
               } catch (error) {
                 console.error("Error posting average rating:", error);
               }

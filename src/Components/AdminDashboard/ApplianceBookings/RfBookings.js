@@ -5,7 +5,7 @@ const RfBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/rfBill")
+    fetch("http://localhost:5000/rfBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,18 +26,15 @@ const RfBookings = () => {
       return;
     }
 
-    fetch(
-      "https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          booking: { ...booking, acknowledgeBookingType: "Refrigerator Bill" },
-        }),
-      }
-    )
+    fetch("http://localhost:5000/acknowledgeBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booking: { ...booking, acknowledgeBookingType: "Refrigerator Bill" },
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setDayBookings((prevBookings) =>

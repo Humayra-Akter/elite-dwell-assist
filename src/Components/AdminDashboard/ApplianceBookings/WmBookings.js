@@ -5,7 +5,7 @@ const WMBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/wmBill")
+    fetch("http://localhost:5000/wmBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,21 +26,18 @@ const WMBookings = () => {
       return;
     }
 
-    fetch(
-      "https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    fetch("http://localhost:5000/acknowledgeBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        booking: {
+          ...booking,
+          acknowledgeBookingType: "Washing Machine Bill",
         },
-        body: JSON.stringify({
-          booking: {
-            ...booking,
-            acknowledgeBookingType: "Washing Machine Bill",
-          },
-        }),
-      }
-    )
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setDayBookings((prevBookings) =>

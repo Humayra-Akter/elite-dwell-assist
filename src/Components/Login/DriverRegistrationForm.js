@@ -157,7 +157,7 @@ const DriverRegistrationForm = () => {
             dob: data.dob,
             password: data.password,
           };
-          fetch("https://elite-dwell-assist-serverr.onrender.com/driver", {
+          fetch("http://localhost:5000/driver", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -168,7 +168,7 @@ const DriverRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
+          fetch("http://localhost:5000/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

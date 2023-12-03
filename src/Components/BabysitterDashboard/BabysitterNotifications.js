@@ -11,7 +11,7 @@ const BabysitterNotifications = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/babysitterBookings")
+    fetch("http://localhost:5000/babysitterBookings")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -26,9 +26,7 @@ const BabysitterNotifications = () => {
       if (bookingId) {
         const loggedInMaidEmail = user?.email;
       }
-      fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/babysitterBookings/${loggedInMaidEmail}`
-      )
+      fetch(`http://localhost:5000/babysitterBookings/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
@@ -52,7 +50,7 @@ const BabysitterNotifications = () => {
   };
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
+    fetch("http://localhost:5000/customer")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

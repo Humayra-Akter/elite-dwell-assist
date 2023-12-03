@@ -263,7 +263,7 @@ const TVBill = () => {
       },
     };
     try {
-      await fetch("https://elite-dwell-assist-serverr.onrender.com/tvBill", {
+      await fetch("http://localhost:5000/tvBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

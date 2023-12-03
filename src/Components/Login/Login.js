@@ -23,7 +23,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/user")
+    fetch("http://localhost:5000/user")
       .then((res) => res.json())
       .then((data) => {
         setLoggedUser(data);

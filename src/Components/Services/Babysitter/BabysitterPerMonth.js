@@ -16,7 +16,7 @@ const BabysitterPerMonth = ({
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/babysitter")
+    fetch("http://localhost:5000/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setBabysitters(data);

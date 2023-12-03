@@ -9,7 +9,7 @@ const AcknowledgedMaidBookings = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/acknowledgeBooking")
+    fetch("http://localhost:5000/acknowledgeBooking")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

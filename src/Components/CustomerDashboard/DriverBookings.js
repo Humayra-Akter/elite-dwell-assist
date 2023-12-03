@@ -10,9 +10,7 @@ const DriverBookings = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/customer?email=${user.email}`
-      )
+      fetch(`http://localhost:5000/customer?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -29,9 +27,7 @@ const DriverBookings = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/driverBookings?customerEmail=${user.email}`
-      )
+      fetch(`http://localhost:5000/driverBookings?customerEmail=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setBookings(data);

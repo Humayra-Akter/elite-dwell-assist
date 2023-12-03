@@ -85,7 +85,7 @@ const CustomerRegistrationForm = () => {
           };
 
           // save customer information to the database
-          fetch("https://elite-dwell-assist-serverr.onrender.com/customer", {
+          fetch("http://localhost:5000/customer", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -96,7 +96,7 @@ const CustomerRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("https://elite-dwell-assist-serverr.onrender.com/user", {
+          fetch("http://localhost:5000/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -11,7 +11,7 @@ const MaidNotifications = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/bookings")
+    fetch("http://localhost:5000/bookings")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -26,9 +26,7 @@ const MaidNotifications = () => {
       if (bookingId) {
         const loggedInMaidEmail = user?.email;
       }
-      fetch(
-        `https://elite-dwell-assist-serverr.onrender.com/bookings/${loggedInMaidEmail}`
-      )
+      fetch(`http://localhost:5000/bookings/${loggedInMaidEmail}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
@@ -52,7 +50,7 @@ const MaidNotifications = () => {
   };
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-serverr.onrender.com/customer")
+    fetch("http://localhost:5000/customer")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
