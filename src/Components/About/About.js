@@ -33,16 +33,16 @@ const About = () => {
       </p>
       <ul className="pt-5">
         <li className="mb-2 text-xs font-bold text-right text-white">
-          HUMAYRA AKTER
+          202114026-HUMAYRA AKTER
         </li>
         <li className="mb-2 text-xs font-bold text-right text-white">
-          MAYESHA TASNIM
+          202114041-MAYESHA TASNIM
         </li>
         <li className="mb-2 text-xs font-bold text-right text-white">
-          MD.IMRAN-UL-HAQ
+          202114061-MD.IMRAN-UL-HAQ
         </li>
         <li className="mb-2 text-xs font-bold text-right text-white">
-          MD.SADIQUL ALAM
+          202114064-MD.SADIQUL ALAM
         </li>
       </ul>
     </div>
