@@ -231,7 +231,7 @@ const TVBill = () => {
         }
       );
     } else {
-      toast.error("Please fill out all required fields.");
+      console.error("Please fill out all required fields.");
     }
   };
 

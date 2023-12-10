@@ -219,17 +219,11 @@ const OvenBill = () => {
         ? `Services: ${selectedServices.join(", ")}`
         : "";
 
-      toast.success(
-        `Thanks for your order! Date: ${formattedDate}, Time Slot: ${selectedTimeSlot}, ${servicesText}`,
-        {
-          position: toast.POSITION.TOP_CENTER,
-          onClose: () => {
-            reset();
-          },
-        }
+      console.log(
+        "Thanks for your order! "
       );
     } else {
-      toast.error("Please fill out all required fields.");
+      console.error("Please fill out all required fields.");
     }
   };
 
