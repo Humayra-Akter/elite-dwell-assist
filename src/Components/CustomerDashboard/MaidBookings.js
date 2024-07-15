@@ -10,7 +10,9 @@ const MaidBookings = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/customer?email=${user.email}`)
+      fetch(
+        `https://elite-dwell-assist-server.onrender.com/customer?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -27,7 +29,9 @@ const MaidBookings = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/bookings?customerEmail=${user.email}`)
+      fetch(
+        `https://elite-dwell-assist-server.onrender.com/bookings?customerEmail=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setBookings(data);

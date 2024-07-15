@@ -43,13 +43,16 @@ const DriverPost = () => {
       timeSlot,
     };
     try {
-      await fetch("http://localhost:5000/driverSearchPost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      await fetch(
+        "https://elite-dwell-assist-server.onrender.com/driverSearchPost",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
         .then((res) => res.json())
         .then((result) => {
           toast.success(

@@ -11,7 +11,7 @@ const CustomerInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/customer")
+    fetch("https://elite-dwell-assist-server.onrender.com/customer")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

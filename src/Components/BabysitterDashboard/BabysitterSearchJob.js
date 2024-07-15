@@ -9,7 +9,7 @@ const BabysitterSearchJob = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/babysitterSearchPost")
+    fetch("https://elite-dwell-assist-server.onrender.com/babysitterSearchPost")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -31,13 +31,16 @@ const BabysitterSearchJob = () => {
         bookingFrom: "Babysitter",
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
-      fetch("http://localhost:5000/customerBookingByBabysitter", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      fetch(
+        "https://elite-dwell-assist-server.onrender.com/customerBookingByBabysitter",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data) {

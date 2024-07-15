@@ -16,7 +16,7 @@ const MaidPerMonth = ({
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("http://localhost:5000/maid")
+    fetch("https://elite-dwell-assist-server.onrender.com/maid")
       .then((res) => res.json())
       .then((data) => {
         setMaids(data);

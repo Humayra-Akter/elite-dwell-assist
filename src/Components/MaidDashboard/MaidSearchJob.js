@@ -9,7 +9,7 @@ const MaidSearchJob = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/maidSearchPost")
+    fetch("https://elite-dwell-assist-server.onrender.com/maidSearchPost")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -31,7 +31,7 @@ const MaidSearchJob = () => {
         bookingFrom: "Maid",
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
-      fetch("http://localhost:5000/customerBooked", {
+      fetch("https://elite-dwell-assist-server.onrender.com/customerBooked", {
         method: "POST",
         headers: {
           "content-type": "application/json",

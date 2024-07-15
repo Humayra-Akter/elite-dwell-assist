@@ -9,7 +9,7 @@ const DriverSearchJob = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/driverSearchPost")
+    fetch("https://elite-dwell-assist-server.onrender.com/driverSearchPost")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -31,13 +31,16 @@ const DriverSearchJob = () => {
         bookingFrom: "Driver",
       };
       document.getElementById(`button-${booking._id}`).disabled = true;
-      fetch("http://localhost:5000/customerBookingByDriver", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      fetch(
+        "https://elite-dwell-assist-server.onrender.com/customerBookingByDriver",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data) {

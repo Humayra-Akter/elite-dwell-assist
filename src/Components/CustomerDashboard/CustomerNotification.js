@@ -17,7 +17,7 @@ const CustomerNotification = () => {
   const [selectedBabysitters, setSelectedBabysitters] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:5000/customerBooked")
+    fetch("https://elite-dwell-assist-server.onrender.com/customerBooked")
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -27,7 +27,9 @@ const CustomerNotification = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/customerBookingByDriver")
+    fetch(
+      "https://elite-dwell-assist-server.onrender.com/customerBookingByDriver"
+    )
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -37,7 +39,9 @@ const CustomerNotification = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/customerBookingByBabysitter")
+    fetch(
+      "https://elite-dwell-assist-server.onrender.com/customerBookingByBabysitter"
+    )
       .then((res) => res.json())
       .then((data) => {
         data.map((item) => {
@@ -49,7 +53,9 @@ const CustomerNotification = () => {
   useEffect(() => {
     if (user) {
       const loggedInMaidEmail = user?.email;
-      fetch(`http://localhost:5000/customerBooked/${loggedInMaidEmail}`)
+      fetch(
+        `https://elite-dwell-assist-server.onrender.com/customerBooked/${loggedInMaidEmail}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data) && data.length > 0) {
@@ -68,7 +74,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `http://localhost:5000/customerBookingByDriver/${loggedInMaidEmail}`
+        `https://elite-dwell-assist-server.onrender.com/customerBookingByDriver/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -88,7 +94,7 @@ const CustomerNotification = () => {
     if (user) {
       const loggedInMaidEmail = user?.email;
       fetch(
-        `http://localhost:5000/customerBookingByBabysitter/${loggedInMaidEmail}`
+        `https://elite-dwell-assist-server.onrender.com/customerBookingByBabysitter/${loggedInMaidEmail}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -105,7 +111,7 @@ const CustomerNotification = () => {
   }, [user]);
 
   const fetchMaidDetails = (maidEmail, notificationId) => {
-    fetch(`http://localhost:5000/maid/${maidEmail}`)
+    fetch(`https://elite-dwell-assist-server.onrender.com/maid/${maidEmail}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedMaids((prevSelectedMaids) => ({
@@ -119,7 +125,9 @@ const CustomerNotification = () => {
   };
 
   const fetchDriverDetails = (driverEmail, notificationId) => {
-    fetch(`http://localhost:5000/driver/${driverEmail}`)
+    fetch(
+      `https://elite-dwell-assist-server.onrender.com/driver/${driverEmail}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSelectedDrivers((prevSelectedDrivers) => ({
@@ -133,7 +141,9 @@ const CustomerNotification = () => {
   };
 
   const fetchBabysitterDetails = (babysitterEmail, notificationId) => {
-    fetch(`http://localhost:5000/babysitter/${babysitterEmail}`)
+    fetch(
+      `https://elite-dwell-assist-server.onrender.com/babysitter/${babysitterEmail}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSelectedBabysitters((prevSelectedBabysitters) => ({

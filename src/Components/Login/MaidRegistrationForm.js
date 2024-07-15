@@ -200,7 +200,7 @@ const MaidRegistrationForm = () => {
             password: data.password, // Add any other user-specific data you want to save
           };
           // save maid information to the database
-          fetch("http://localhost:5000/maid", {
+          fetch("https://elite-dwell-assist-server.onrender.com/maid", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -211,7 +211,7 @@ const MaidRegistrationForm = () => {
             .then((result) => {
               toast.success(`${data.name} thanks for your registration`);
             });
-          fetch("http://localhost:5000/user", {
+          fetch("https://elite-dwell-assist-server.onrender.com/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

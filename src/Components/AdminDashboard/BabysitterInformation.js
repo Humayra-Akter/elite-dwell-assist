@@ -11,7 +11,7 @@ const BabysitterInformation = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
-    fetch("http://localhost:5000/babysitter")
+    fetch("https://elite-dwell-assist-server.onrender.com/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);

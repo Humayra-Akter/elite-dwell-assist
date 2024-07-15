@@ -5,8 +5,6 @@ import Login from "./Components/Login/Login";
 import About from "./Components/About/About";
 import Register from "./Components/Login/Register";
 import Service from "./Components/Services/Service";
-
-import DriverPerMonth from "./Components/Services/Driver/DriverPerMonth";
 import { useState } from "react";
 import Error from "./Components/Error/Error";
 import { ToastContainer } from "react-toastify";
@@ -140,10 +138,7 @@ function App() {
             path="babysitterSearchJob"
             element={<BabysitterSearchJob />}
           ></Route>{" "}
-          <Route
-            path="babysitterReview"
-            element={<BabysitterReview />}
-          ></Route>
+          <Route path="babysitterReview" element={<BabysitterReview />}></Route>
         </Route>
         {/* driver*/}
         <Route path="/driverDashboard" element={<DriverDashboard />}>

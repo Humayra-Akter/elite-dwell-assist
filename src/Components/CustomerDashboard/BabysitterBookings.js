@@ -10,7 +10,9 @@ const BabysitterBookings = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/customer?email=${user.email}`)
+      fetch(
+        `https://elite-dwell-assist-server.onrender.com/customer?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.length > 0) {
@@ -28,7 +30,7 @@ const BabysitterBookings = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `http://localhost:5000/babysitterBookings?customerEmail=${user.email}`
+        `https://elite-dwell-assist-server.onrender.com/babysitterBookings?customerEmail=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

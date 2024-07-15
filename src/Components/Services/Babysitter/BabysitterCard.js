@@ -28,7 +28,7 @@ const BabysitterCard = ({ babysitter, setBookBabysitter }) => {
     const fetchAverageRating = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/averageRatingBabysitter/${email}`
+          `https://elite-dwell-assist-server.onrender.com/averageRatingBabysitter/${email}`
         );
         const data = await response.json();
       } catch (error) {

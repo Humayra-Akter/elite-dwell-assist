@@ -26,7 +26,9 @@ const AdminProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/admin?email=${user.email}`)
+      fetch(
+        `https://elite-dwell-assist-server.onrender.com/admin?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(user);
@@ -61,7 +63,7 @@ const AdminProfile = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/customer")
+    fetch("https://elite-dwell-assist-server.onrender.com/customer")
       .then((res) => res.json())
       .then((data) => {
         setCustomers(data);
@@ -69,7 +71,7 @@ const AdminProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/babysitter")
+    fetch("https://elite-dwell-assist-server.onrender.com/babysitter")
       .then((res) => res.json())
       .then((data) => {
         setBabysitters(data);
@@ -77,7 +79,7 @@ const AdminProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/maid")
+    fetch("https://elite-dwell-assist-server.onrender.com/maid")
       .then((res) => res.json())
       .then((data) => {
         setMaids(data);
@@ -85,7 +87,7 @@ const AdminProfile = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/driver")
+    fetch("https://elite-dwell-assist-server.onrender.com/driver")
       .then((res) => res.json())
       .then((data) => {
         setDrivers(data);

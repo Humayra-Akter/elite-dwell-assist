@@ -57,7 +57,7 @@ const BookingDriver = ({ bookDriver, user }) => {
       };
       console.log(bookDriver);
 
-      fetch("http://localhost:5000/driverBookings", {
+      fetch("https://elite-dwell-assist-server.onrender.com/driverBookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

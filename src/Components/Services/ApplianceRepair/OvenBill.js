@@ -219,9 +219,7 @@ const OvenBill = () => {
         ? `Services: ${selectedServices.join(", ")}`
         : "";
 
-      console.log(
-        "Thanks for your order! "
-      );
+      console.log("Thanks for your order! ");
     } else {
       console.error("Please fill out all required fields.");
     }
@@ -255,7 +253,7 @@ const OvenBill = () => {
       },
     };
     try {
-      await fetch("http://localhost:5000/ovenBill", {
+      await fetch("https://elite-dwell-assist-server.onrender.com/ovenBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

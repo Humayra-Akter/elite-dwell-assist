@@ -6,7 +6,7 @@ const TvBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/tvBill")
+    fetch("https://elite-dwell-assist-server.onrender.com/tvBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);

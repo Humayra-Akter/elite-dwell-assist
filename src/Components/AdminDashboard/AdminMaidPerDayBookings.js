@@ -6,13 +6,13 @@ const AdminMaidPerDayBookings = () => {
   const [acknowledgedBookings, setAcknowledgedBookings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/perDayMaidBookings")
+    fetch("https://elite-dwell-assist-server.onrender.com/perDayMaidBookings")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
       });
 
-    fetch("http://localhost:5000/acknowledgedBookings")
+    fetch("https://elite-dwell-assist-server.onrender.com/acknowledgedBookings")
       .then((res) => res.json())
       .then((data) => {
         setAcknowledgedBookings(data);
@@ -24,7 +24,7 @@ const AdminMaidPerDayBookings = () => {
       toast.info("This booking has already been acknowledged.");
       return;
     }
-    fetch("http://localhost:5000/acknowledgeBooking", {
+    fetch("https://elite-dwell-assist-server.onrender.com/acknowledgeBooking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

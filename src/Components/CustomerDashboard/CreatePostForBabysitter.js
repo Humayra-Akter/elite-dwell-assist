@@ -106,13 +106,16 @@ const CreatePostForBabysitter = () => {
     };
     console.log(postDetails);
     try {
-      await fetch("http://localhost:5000/babysitterSearchPost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postDetails),
-      })
+      await fetch(
+        "https://elite-dwell-assist-server.onrender.com/babysitterSearchPost",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postDetails),
+        }
+      )
         .then((res) => res.json())
         .then((result) => {
           toast.success("You have successfully posted your babysitter profile");
