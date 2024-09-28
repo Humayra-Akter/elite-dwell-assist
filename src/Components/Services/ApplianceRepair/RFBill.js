@@ -259,7 +259,7 @@ const RFBill = () => {
       },
     };
     try {
-      await fetch("https://elite-dwell-assist-server.onrender.com/rfBill", {
+      await fetch("http://localhost:5000/rfBill", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,7 +5,7 @@ const RfBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-server.onrender.com/rfBill")
+    fetch("http://localhost:5000/rfBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,7 +26,7 @@ const RfBookings = () => {
       return;
     }
 
-    fetch("https://elite-dwell-assist-server.onrender.com/acknowledgeBooking", {
+    fetch("http://localhost:5000/acknowledgeBooking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

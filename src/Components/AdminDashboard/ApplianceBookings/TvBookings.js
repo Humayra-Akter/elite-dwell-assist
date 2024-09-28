@@ -5,7 +5,7 @@ const TvBookings = () => {
   const [dayBookings, setDayBookings] = useState([]);
 
   useEffect(() => {
-    fetch("https://elite-dwell-assist-server.onrender.com/tvBill")
+    fetch("http://localhost:5000/tvBill")
       .then((res) => res.json())
       .then((data) => {
         setDayBookings(data);
@@ -26,7 +26,7 @@ const TvBookings = () => {
       return;
     }
 
-    fetch("https://elite-dwell-assist-server.onrender.com/acknowledgeBooking", {
+    fetch("http://localhost:5000/acknowledgeBooking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
-import LanguageSwitcher from "./LanguageSwitcher";
+// import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = ({ openAboutModal }) => {
   const [user] = useAuthState(auth);
@@ -64,9 +64,9 @@ const Navbar = ({ openAboutModal }) => {
         </div>
 
         <div class="navbar-end pr-10">
-          <div className="pr-10">
+          {/* <div className="pr-10">
             <LanguageSwitcher />
-          </div>
+          </div> */}
           {/* Services */}
           <div className="relative inline-block text-right">
             <button
