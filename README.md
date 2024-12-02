@@ -32,6 +32,12 @@ Limitation->
  Verification and Background Checks
  Message and Communication
  Additional Services
+
+ ![shop-image](./src/images/elite-dwell-assist1.png)
+ ![shop-image](./src/images/elite-dwell-assist2.png)
+ ![shop-image](./src/images/elite-dwell-assist3.png)
+ ![shop-image](./src/images/elite-dwell-assist4.png)
+ 
  
  Future Work->
  Expanded Service Categories
